@@ -1,0 +1,97 @@
+{include file=header.html}
+<div id="page-credit">
+    {include file=curlocal.html}
+    <div class="w-shop clearfix">
+        <div class="col-sub w210">
+            {include file=left.html}
+        </div>
+        <div class="col-main ml10 w980">
+            <div class="search-goods goods-list-shop mb10 border">
+                <div class="title clearfix border-b">
+                    <h3 class="float-left">
+                        {$search_name|escape}
+                    </h3>
+                </div>
+                <ul class="content w-full clearfix">
+                    <!--{foreach from=$searched_goods item=sgoods name=fe_s}-->
+                    
+                    <li class="float-left">
+                        <dl>
+                            <dt class="border">
+                                <a href="{url app=goods&id=$sgoods.goods_id}" target="_blank">
+                                    <img src="{$sgoods.default_image}" />
+                                </a>
+                            </dt>
+                            <dd class="desc mt10">
+                                <a href="{url app=goods&id=$sgoods.goods_id}" target="_blank">
+                                    {$sgoods.goods_name|escape|truncate:50}
+                                </a>
+                            </dd>
+                            <dd class="mt10 J_GoodsEvaluation" data-score="{$sgoods.goods_evaluation}">
+                                <span>
+                                </span>
+                            </dd>
+                            <dd class="price mt10 w-full clearfix">
+                                <strong>
+                                    {$sgoods.price|price}
+                                </strong>
+                                <em>
+                                    <a href="{url app=goods&id=$sgoods.goods_id&act=saleslog}#module" target="_blank">
+                                        售出{$sgoods.sales}
+                                    </a>
+                                    &nbsp;|&nbsp;
+                                    <a href="{url app=goods&id=$sgoods.goods_id&act=comments}#module" target="_blank">
+                                        评论{$sgoods.comments}
+                                    </a>
+                                </em>
+                            </dd>
+                        </dl>
+                    </li>
+                    <!--{/foreach}-->
+                </ul>
+            </div>
+            {include file=page.bottom.html}
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{lib file=jquery.plugins/raty/jquery.raty.js}" charset="utf-8"></script>
+<script type="text/javascript">
+//<!CDATA[
+$(function(){
+	$('.J_GoodsEvaluation').each(function(index, element) {
+        $(this).raty({
+    		readOnly: true,
+            score: $(this).attr('data-score')
+		});
+    });
+	
+    $("select[ectype='order_by']").change(function(){
+        var params = location.search.substr(1).split('&');
+        var key    = 'order';
+        var value  = this.value;
+        var found  = false;
+        for (var i = 0; i < params.length; i++)
+        {
+            param = params[i];
+            arr   = param.split('=');
+            pKey  = arr[0];
+            if (pKey == 'page')
+            {
+                params[i] = 'page=1';
+            }
+            if (pKey == key)
+            {
+                params[i] = key + '=' + value;
+                found = true;
+            }
+        }
+        if (!found)
+        {
+            params.push(key + '=' + value);
+        }
+        location.assign(SITE_URL + '/index.php?' + params.join('&'));
+    });
+});
+//]]>
+</script>
+{include file=footer.html}

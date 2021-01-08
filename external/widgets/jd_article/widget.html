@@ -1,0 +1,51 @@
+<div class="tool_loginReg_box">
+	<a class="tool_login_pic index_login_pic" href="{url app=member&act=login&ret_url=$ret_url}">
+		<img src="themes/mall/jd/styles/default/css/images/touxiang.png" width="50" height="50">
+	</a>
+	<dl>
+		<dd style=" white-space:nowrap;">Hi，下午好！</dd>
+		<dt>欢迎光临壹点网工业品特卖网</dt>
+	</dl>
+	<div class="tool_loginReg_btn">
+		<div class="tool_loginBefore">
+			<a class="tool_login_btn" href="{url app=xunjia&act=index}">我要询价</a>
+			<a class="tool_reg_btn" href="{url app=supplier&act=index}" target="_blank">我要供货</a>
+		</div>
+	</div>
+	<div class="index_buyers_btn">
+		<ul class="index_buyers_ul">
+			<li><a href="{url app=apply}" target="_blank" class="keysstore"><em></em>一键开店</a></li>
+			<li><a href="{url app=aboutxun&act=index}" class="helpxunjia"><em></em>如何询价</a></li>
+			<li><a href="{url app=cooperation&act=index}" class="tool_shop"><em></em>服务流程</a></li>
+			<li><a href="{url app=helpcenter&act=index}" class="reading_shop"><em></em>帮助中心</a></li>
+		</ul>
+	</div>
+</div>
+<div class="article J_S{$widget_data.model_id}">
+	<ul class="tabs-nav hd">
+		<li>商城公告</li>
+		<li class="on">招商入驻</li>
+	</ul>
+	<div class="tabs-bd bd">
+		<div class="tabs-panel hidden">
+			<ul>
+				<!--{foreach from=$widget_data.article item=article name=fe_article}-->
+				<li><a href="{url app=article&act=view&article_id=$article.article_id}" target="_blank" title="{$article.title|escape}">{$article.title|escape|truncate:50}</a></li>
+				<!--{/foreach}-->
+			</ul>
+		</div>
+		<div class="tabs-panel">
+			<div class="clearfix center"> <a href={url app=member&act=register&ret_url=$ret_url}" target="_blank" class="store-join-btn">申请商家入驻<span>已提交申请可查看审核状态</span></a>
+				<a class="mt10 block" href="{url app=article&act=view&article_id=11}" target="_blank">商城入驻条款</a> </div>
+		</div>
+
+
+		<script type="text/javascript">
+			$(function() {
+				$(".J_S{$widget_data.model_id}").slide({
+					trigger: "click",
+					titOnClassName: "on"
+				});
+			});
+		</script>
+	</div>

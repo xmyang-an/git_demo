@@ -1,0 +1,97 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+	$('#fullfree_form').validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('li');
+            error_td.find('label').hide();
+            error_td.append(error);
+        },
+        success       : function(label){
+            label.remove();
+        },
+		submitHandler:function(form) {
+			if($('input[name="fullfree[fullamount]"]').val()=='' && $('input[name="fullfree[fullquantity]"]').val()=='') {
+				alert('{$lang.not_allempty}');
+				$(form).find('input[name="fullfree[fullamount]"]').focus();
+				$(form).find('input[type="text"]').addClass('error');
+				return;
+			}
+			else form.submit();
+		},
+        onkeyup: false,
+        rules : {
+            "fullfree[fullamount]" : {
+                number     : true,
+				min		   : 0.01
+            },
+            "fullfree[fullquantity]"  : {
+                 digits    : true
+            }
+        },
+        messages : {
+            "fullfree[fullamount]"  : {
+                number     : '{$lang.number_only}',
+                min : '{$lang.price_ge_0}'
+            },
+            "fullfree[fullquantity]" : {
+                digits  : '{$lang.digits_only}'
+            }
+        }
+    });
+});
+</script>
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool clearfix"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="promotool">
+              <div class="bundle bundle-list"> 
+                <!--{if $appAvailable neq 'TRUE'}-->
+                <div class="notice-word">
+                  <p>{$appAvailable.msg}</p>
+                </div>
+                <!--{else}-->
+                <div class="notice-word">
+                  <p class="yellow-big">{$lang.note_for_create}</p>
+                </div>
+                <div class="promotool-form fullfree">
+                  <form id="fullfree_form" method="post">
+                    <ul class="form">
+                      <li>
+                        <h3>{$lang.fullamount}</h3>
+                      </li>
+                      <li>
+                        <input type="text" name="fullfree[fullamount]" id="fullfree[fullamount]" class="input" value="{$fullfree.rules.fullamount}" />
+                        <span>{$lang.yuan}</span></li>
+                      <li>
+                        <h3>{$lang.fullquantity}</h3>
+                      </li>
+                      <li>
+                        <input type="text" name="fullfree[fullquantity]" id="fullfree[fullquantity]" class="input" value="{$fullfree.rules.fullquantity}" />
+                        <span>{$lang.jian}</span></li>
+                      <li>
+                        <h3>{$lang.launch}</h3>
+                      </li>
+                      <li>
+                        <label class="switch-checkbox-radio inline-block box-align-center J_SwtcherInput {if $fullfree.status || !$fullfree} checked{/if}" for="switcher"><span class="switcher-style block"></span></label>
+                        <input name="status" class="hidden" id="switcher" value="1" type="checkbox" {if $fullfree.status || !$fullfree} checked="checked" {/if}>
+                      </li>
+                      <li>
+                        <input type="submit" value="{$lang.submit}" class="submit" />
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+                <!--{/if}--> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

@@ -1,0 +1,58 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-buyer-order" class="buyer-order-body"> 
+    <!--TAB-->
+    <div class="listTab">
+      <div class="fixed-gap"></div>
+      <div class="fixed-bd bgf border-bottom">
+        <ul class="items webkit-box">
+          <li class="flex1 center"><a class="{if $smarty.get.type eq '' || $smarty.get.type eq 'all_orders'}active{/if}" href="{url app=my_refer&act=refer_order}">全部</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'pending'}active{/if}" href="{url app=my_refer&act=refer_order&type=pending}">待付款</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'accepted'}active{/if}" href="{url app=my_refer&act=refer_order&type=accepted}">待发货</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'shipped'}active{/if}" href="{url app=my_refer&act=refer_order&type=shipped}">待收货</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="clearfix J_InfiniteList">
+      <!--{if $orders}-->  
+      <!--{foreach from=$orders item=order}-->
+      <div class="list">
+        <div class="order-form mb10">
+          <h2 class="webkit-box">
+            <p class="name pl10 flex1"><i class="psmb-icon-font fs16">&#xe635;</i> {$order.buyer_name}</p>
+            <p class="status ml10 mr10"> <em>{$order.status|modifier:order_status}</em> </p>
+          </h2>
+          <div class="goods-list"> 
+          	<!--{foreach from=$order.order_goods item=goods name=fe_goods}-->
+            <!--订单商品循环-->
+            <div class="order-goods-list clearfix"> <a href="{1}" class="block webkit-box">
+              <div class="pic"><img src="{$goods.goods_image}"/></div>
+              <div class="txt flex1">
+                <p class="goods-name line-clamp-2">{$goods.goods_name}</p>
+                <!--{if $goods.specification}-->
+                <p class="attr mt5">{$goods.specification}</p>
+                <!--{/if}-->
+                <p class="attr mt5">{if $goods.reward}<span style="font-size:12px;background:#f60;color:#fff;padding:0 3px;">返利{$goods.reward|price}</span>{else}<span style="font-size:12px;background:#999;color:#fff;padding:0 3px;">无返利</span>{/if}</p>
+              </div>
+              <div class="qua-pri">
+                <p class="pri">{$goods.price}</p>
+                <p class="qua">x {$goods.quantity}</p>
+              </div>
+              </a> </div>
+            <!--订单商品循环结束--> 
+            <!--{/foreach}-->
+          </div>
+          <p class="align-right static"><em>合计<span class="ml5 mr5">{$order.order_amount|price}</span></em> </p>
+        </div>
+      </div>
+      <!--{/foreach}-->
+      <!--{else}-->
+       <div class="infinite-empty notice-empty"><i>&#xe715;</i>
+        	<p>{$lang.no_records}</p>
+      	</div>
+      <!--{/if}-->
+    </div>
+  </div>
+</div>
+{include file=page.bottom.html}
+{include file=footer.html}

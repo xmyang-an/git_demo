@@ -1,0 +1,90 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+    //var t = new EditableTable($('#seller_fullgift'));
+});
+</script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_select table"> 
+          <!--{if $appAvailable neq 'TRUE'}-->
+          <div class="notice-word">
+            <p>{$appAvailable.msg}</p>
+          </div>
+          <!--{else}-->
+          <table id="seller_fullgift"  server="{$site_url}/index.php?app=seller_fullgift&amp;act=ajax_col" >
+            <tr class="line_bold">
+              <th colspan="5"> <div class="search_div clearfix">
+                  <form id="seller_fullgift_form" method="get" class="float-left">
+                    <input type="hidden" name="app" value="seller_fullgift" />
+                    <input type="hidden" name="act" value="itemlist" />
+                    <input type="text" name="goods_name" value="{$smarty.get.goods_name|escape}" class="width_normal" />
+                    <input type="submit" class="btn" value="{$lang.soso}" />
+                    <!--{if $filtered}--> 
+                    <a class="detlink" href="{url app=seller_fullgift&act=itemlist}" style="display:inline-block">{$lang.cancel_query}</a> 
+                    <!--{/if}-->
+                  </form>
+                </div>
+              </th>
+            </tr>
+            <tr class="sep-row" height="20">
+              <td colspan="5"></td>
+            </tr>
+            <!--{if $goods_list}-->
+            <tr class="gray"  ectype="table_header">
+              <th width="60" class="align1"><input type="checkbox" id="all" class="checkall float-left mt5 mr5" /><label for="all">{$lang.checkall}</label></th>
+              <th width="210" coltype="editable" column="goods_name" checker="check_required" inputwidth="90%" title="{$lang.sort_order}" ><span>{$lang.title}</span></th>
+              <th width="100" class="cursor_pointer" coltype="editable" column="price" checker="check_number" inputwidth="50px" title="{$lang.sort_order}"><span ectype="order_by">{$lang.price}</span></th>
+              <th width="40" coltype="switchable" column="if_show" onclass="right_ico" offclass="wrong_ico" title="{$lang.sort_order}"  class="cursor_pointer"><span ectype="order_by">{$lang.if_show}</span></th>
+              <th width="70">{$lang.handle}</th>
+            </tr>
+
+            <!--{/if}--> 
+            <!--{foreach from=$goods_list item=goods name=_goods_f}-->
+            <tr class="sep-row">
+              <td colspan="5"></td>
+            </tr>
+            <tr class="line-hd">
+              <th colspan="5" align="left"> <p>
+                  <input id="checkbox_{$goods.goods_id}" type="checkbox" class="checkitem" value="{$goods.goods_id}" align="absmiddle" />
+                  <label for="checkbox_{$goods.goods_id}">{$lang.selected}</label>
+                </p>
+              </th>
+            </tr>
+            <tr class="line line-blue {if $smarty.foreach._goods_f.last}last_line{/if}" ectype="table_item" idvalue="{$goods.goods_id}">
+              <td width="60" class="align2 first"><a href="{url app=gift&id=$goods.goods_id}" target="_blank"><img src="{$site_url}/{$goods.default_image}" width="50" height="50" /></a></td>
+              <td width="110" class="align1"><p class="ware_text" style="width:250px;"><span class="color2" ectype="editobj">{$goods.goods_name|escape}</span></p></td>
+              <td width="60" class="align2"><span class="color2" ectype="editobj">{$goods.price}</span></td>
+              <td width="40" class="align2"><span style="margin-left:15px;" ectype="editobj" {if $goods.if_show}class="right_ico" status="on" class="wrong_ico" stauts="off"{/if}></span></td>
+              <td width="80" class="last"><a href="{url app=seller_fullgift&act=itemedit&id=$goods.goods_id&ret_page=$page_info.curr_page}" class="edit">{$lang.edit}</a> <a href="javascript:drop_confirm('{$lang.drop_confirm}', 'index.php?app=seller_fullgift&amp;act=itemdrop&id={$goods.goods_id}');" class="delete">{$lang.drop}</a></td>
+            </tr>
+            <!--{foreachelse}-->
+            <tr>
+              <td colspan="10"><div class="notice-word">
+                  <p>{$lang.$smarty.get.act}{$lang.no_records}</p>
+                </div></td>
+            </tr>
+            <!--{/foreach}--> 
+            <!--{if $goods_list}-->
+            <tr class="sep-row">
+              <td colspan="5"></td>
+            </tr>
+            <tr class="operations btion">
+              <th colspan="5"> <p class="position1 clearfix">
+                  <input type="checkbox" id="all2" class="checkall float-left mt5 mr5" />
+                  <span class="all"><label for="all2">{$lang.checkall}</label></span>
+                  <a href="javascript:void(0);" class="delete" ectype="batchbutton" uri="index.php?app=seller_fullgift&act=itemdrop" name="id" presubmit="confirm('{$lang.drop_confirm}')">{$lang.drop}</a> </p>
+                <div class="position2 clearfix"> {include file=member.page.bottom.html} </div>
+              </th>
+            </tr>
+            <!--{/if}-->
+          </table>
+          <!--{/if}--> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

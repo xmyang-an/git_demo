@@ -1,0 +1,27 @@
+<?php
+return array(
+	'distribution_manage' => '分销管理',
+	'enable_distribution' => '开启分销',
+	'distribution_note' => '分销佣金比率，例如10%',
+	'distribution_setting' => '分销设置',
+	'distribution_no_empty' => '分销比率不能为空',
+	'number_only' => '只能为数值',
+	'batch_edit' => '批量编辑',
+	'sgcategory' => '本店分类',
+	'soso' => '搜索',
+	'my_distributions' => '我的分销商',
+	'distribution_order' => '分销订单',
+	'setting_ok' => '设置成功',
+	'tel'		=> '电话号码',
+	'profit'	=> '分销佣金',
+	'orders'	=> '分销订单',
+	'add_time'	=> '加入时间',
+	'view'		=> '查看',
+	'setting_desc'	=> '店铺三级分销比率设置，若开启则按设置的比率分配分销利润。',
+	'distributioner' => '分销商',
+	'distribution_outlay' => '分销支出',
+	'closing_time' => '成交时间',
+	'rate_gt100' => '三级分销比率加总不能大于或等于100',
+	'distribution_profit' => '分销佣金',
+);
+?>

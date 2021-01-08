@@ -1,0 +1,89 @@
+{include file=member.header.html} 
+<script>
+$(function(){
+	$('.J_DropSlides').click(function(){
+		$.ajax({
+        	type:"GET",
+        	url:"index.php",
+        	data:'app=my_store&act=drop_slides&file_id='+$(this).attr('file_id'),
+        	dataType:"json",
+        	success:function(data){
+            	if(data.done){
+            		alert(data.msg);
+					window.location.reload();
+            	}
+            	else{
+                	alert(data.msg);
+            	}
+        	},
+        	error: function(){alert(lang.error);}
+    	});
+	});
+});
+</script>
+<style>
+.information .info table{ width :auto;}
+</style>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public">
+          <div class="information">
+            <form method="post" enctype="multipart/form-data" id="store_slides_form">
+              <div class="setup info shop">
+                <table style="width: 100%;">
+                  <tr>
+                    <th style="width:150px;">{$lang.store_slides_url}1{$lang.colon}(1920px * 510px)</th>
+                    <td style="width:250px;"><p class="td_block">
+                        <input type="file" class="text width_normal" name="store_slides_url_1" />
+                      </p></td>
+                    <td>{if $slides.store_slides_url_1}<img align="absMiddle" src="{$slides.store_slides_url_1}"  height="25"/> <a href="javascript:;" class="J_DropSlides" file_id='1'>{$lang.drop}</a>{/if}</td>
+                  </tr>
+                  <tr>
+                    <th class="width2">{$lang.store_slides_link}1{$lang.colon}</th>
+                    <td><p class="td_block">
+                        <input type="text" class="text width_normal" name="store_slides_link_1" value="{$slides.store_slides_link_1}" />
+                      </p></td>
+                  </tr>
+                  <tr>
+                    <th style="width:150px;">{$lang.store_slides_url}2{$lang.colon}(1920px * 510px)</th>
+                    <td><p class="td_block">
+                        <input type="file" class="text width_normal" name="store_slides_url_2" />
+                      </p></td>
+                    <td>{if $slides.store_slides_url_2}<img align="absMiddle" src="{$slides.store_slides_url_2}"  height="25"/> <a href="javascript:;" class="J_DropSlides" file_id='2'>{$lang.drop}</a>{/if}</td>
+                  </tr>
+                  <tr>
+                    <th class="width2">{$lang.store_slides_link}2{$lang.colon}</th>
+                    <td><p class="td_block">
+                        <input type="text" class="text width_normal" name="store_slides_link_2" value="{$slides.store_slides_link_2}"/>
+                      </p></td>
+                  </tr>
+                  <tr>
+                    <th style="width:150px;">{$lang.store_slides_url}3{$lang.colon}(1920px * 510px)</th>
+                    <td><p class="td_block">
+                        <input type="file" class="text width_normal" name="store_slides_url_3" />
+                      </p></td>
+                    <td>{if $slides.store_slides_url_3}<img align="absMiddle" src="{$slides.store_slides_url_3}"  height="25"/> <a href="javascript:;" class="J_DropSlides" file_id='3'>{$lang.drop}</a>{/if}</td>
+                  </tr>
+                  <tr>
+                    <th class="width2">{$lang.store_slides_link}3{$lang.colon}</th>
+                    <td><p class="td_block">
+                        <input type="text" class="text width_normal" name="store_slides_link_3" value="{$slides.store_slides_link_3}"/>
+                      </p></td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td><input type="submit" class="btn" value="{$lang.submit}" /></td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

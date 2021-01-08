@@ -1,0 +1,200 @@
+{include file="header.html"}
+<div id="rightTop">
+  <ul class="subnav">
+    <li><a class="btn1" href="index.php?app=stat">订单情况一览</a></li>
+    <li><span>按店铺统计</span></li>
+    <li><a class="btn1" href="index.php?app=stat&amp;act=goods_stat">按商品统计</a></li>
+    <li><a class="btn1" href="index.php?app=stat&amp;act=category_stat">按分类统计</a></li>
+  </ul>
+</div>
+<div id="flexigrid"></div>
+  <div class="search-ban-s" id="searchBarOpen"><i class="fa fa-search-plus"></i>高级搜索</div>
+  <div class="search-bar">
+    <div class="handle-btn" id="searchBarClose"><i class="fa fa-search-minus"></i>收起边栏</div>
+    <div class="title">
+      <h3>高级搜索</h3>
+    </div>
+    <form method="get" action="index.php" name="formSearch" id="formSearch">
+      <div id="searchCon" class="content">
+        <div class="layout-box">
+          <dl>
+            <dt>店铺名称</dt>
+            <dd>
+              <label>
+                <input type="text" class="s-input-txt" name="store_name" id="store_name" value="{$smarty.get.store_name}" placeholder="请输入店铺名称"/>
+              </label>
+            </dd>
+          </dl>
+          <dl>
+            <dt>按订单状态筛选</dt>
+            <dd>
+              <label>
+                <select name="order_type" id="order_type" class="s-select">
+                  <option value="" {if $order_type==''} selected="selected"{/if}>-请选择-</option>
+                  <!--{foreach from=$order_status item=val key=key}-->
+                  <option value="{$key}" {if $_REQUEST['order_type']!='' && $_REQUEST['order_type']==$key} selected="selected"{/if}>{$val}</option>
+                  <!--{/foreach}-->
+                </select>
+              </label>
+            </dd>
+          </dl>
+          <dl>
+            <dt>按时间周期筛选</dt>
+            <dd>
+              <label>
+                <select name="search_type" id="search_type" class="s-select">
+                  <option value="" >{$lang.select_pls}</option>
+                  <option value="day" {if $search_arr.search_type=='day'} selected="selected"{/if}>按照天统计</option>
+                  <option value="week" {if $search_arr.search_type=='week'} selected="selected"{/if}>按照周统计</option>
+                  <option value="month" {if $search_arr.search_type=='month'} selected="selected"{/if}>按照月统计</option>
+                </select>
+              </label>
+            </dd>
+            <dd id="searchtype_day" style="display:none;">
+              <label>
+                <input class="s-input-txt" type="text" value="{$search_arr.day.search_time|date}" id="search_time" name="search_time">
+              </label>
+            </dd>
+            <dd id="searchtype_week" style="display:none;">
+              <label>
+                <select name="searchweek_year" class="s-select">
+                  <!--{foreach from=$year_arr item=val key=key}-->
+                  <option value="{$key}" {if $search_arr.week.current_year == $key} selected="selected"{/if}>{$val}</option>
+                  <!--{/foreach}-->
+                </select>
+              </label>
+              <label>
+                <select name="searchweek_month" class="s-select">
+                  <!--{foreach from=$month_arr item=val key=key}-->
+                  <option value="{$key}" {if $search_arr.week.current_month == $key} selected="selected"{/if}>{$val}</option>
+                  <!--{/foreach}-->
+                </select>
+              </label>
+              <label>
+                <select name="searchweek_week" class="s-select">
+                  <!--{foreach from=$week_arr item=val key=key}-->
+                  <option value="{$val.key}" {if $search_arr.week.current_week == $val.key} selected="selected"{/if}>{$val.val}</option>
+                  <!--{/foreach}-->
+                </select>
+              </label>
+            </dd>
+            <dd id="searchtype_month" style="display:none;">
+              <label>
+                <select name="searchmonth_year" class="s-select">
+                  <!--{foreach from=$year_arr item=val key=key}-->
+                  <option value="{$key}" {if $search_arr.month.current_year == $key} selected="selected"{/if}>{$val}</option>
+                  <!--{/foreach}-->
+                </select>
+              </label>
+              <label>
+                <select name="searchmonth_month" class="s-select">
+                  <!--{foreach from=$month_arr item=val key=key}-->
+                  <option value="{$key}" {if $search_arr.month.current_month == $key} selected="selected"{/if}>{$val}</option>
+                  <!--{/foreach}-->
+                </select>
+              </label>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="bottom"> <a href="javascript:void(0);" id="submit" class="search-btn">提交查询</a> </div>
+    </form>
+  </div>
+<script type="text/javascript">
+//展示搜索时间框
+function show_searchtime(){
+	s_type = $("#search_type").val();
+	$("[id^='searchtype_']").hide();
+	$("#searchtype_"+s_type).show();
+}
+
+function update_flex(){
+	var data_url = 'index.php?app=stat&act=get_shop_stat_xml&'+$("#formSearch").serialize();
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+			{display: '店铺名称', name : 'seller_name', width : 150, sortable : false, align: 'center'},
+			{display: '开店时间', name : 'add_time', width : 100, sortable : false, align: 'center'},
+			{display: '地址', name : 'address', width : 150, sortable : false, align: 'center'},
+			{display: '联系电话', name : 'tel', width : 100, sortable : false, align: 'center'},
+    		{display: '金额', name : 'amount', width : 100, sortable : false, align: 'center'},	
+			{display: '订单总数', name : 'count', width : 100, sortable : false, align: 'center'},	
+    		],
+        buttons : [
+			{display: '<i class="fa fa-file-excel-o"></i>导出数据', name : 'csv', bclass : 'csv', title : '将选定行数据导出CVS文件', onpress : fg_operate }	
+        ],
+    	title: '店铺统计列表'
+    });
+}
+function fg_operate(name, bDiv) {
+	if(name == 'add'){
+		window.location.href = 'index.php?app=user&act=add';
+		return false;
+	}
+	var itemlist = new Array();
+	$('.trSelected',bDiv).each(function(){
+		itemlist.push($(this).attr('data-id'));
+	});
+}
+$(function () {
+	//切换登录卡
+	//$('#stat_tabs').tabs();
+	$('.tab-base li').click(function(){
+		$(this).addClass("active").siblings('li').removeClass('active');
+		var type = $(this).attr('type');
+		$('#'+$(this).siblings('li').attr('type')+'_div').hide();
+		$('#'+type+'_div').show();
+		getStatdata(type);
+	});
+
+	//统计数据类型
+	var s_type = $("#search_type").val();
+	$('#search_time').datepicker({dateFormat: 'yy-mm-dd'});
+
+	show_searchtime();
+	$("#search_type").change(function(){
+		show_searchtime();
+	});
+
+	//更新周数组
+	$("*[name='searchweek_month']").change(function(){
+		var year = $("*[name='searchweek_year']").val();
+		var month = $("*[name='searchweek_month']").val();
+		$("*[name='searchweek_week']").html('');
+		$.getJSON('index.php?app=stat&act=getweekofmonth',{y:year,m:month},function(data){
+	        if(data.done){
+	        	$.each(data.retval,function(index,value){
+					$("*[name='searchweek_week']").append('<option value="'+value.key+'">'+value.val+'</option>');
+				});
+	        }
+	    });
+	});
+
+	$('#submit').click(function(){
+    	$(".tab-base li.active").trigger("click");
+	    $('.flexigrid').after('<div id="flexigrid"></div>').remove();
+	    update_flex();
+    });
+    update_flex();
+});
+
+function fg_operate(name, bDiv) {
+	var itemlist = new Array();
+	$('.trSelected',bDiv).each(function(){
+		itemlist.push($(this).attr('data-id'));
+	});
+	if(name == 'csv'){
+		if($('.trSelected',bDiv).length==0){
+		   parent.layer.confirm('您确定要下载全部数据吗？',{icon: 3, title:'提示'},function(index){
+				fg_csv(itemlist, 'export_csv_shop');
+				parent.layer.close(index);
+			},function(index){
+				parent.layer.close(index);
+			});
+	   }else{
+		   fg_csv(itemlist, 'export_csv_shop');
+	   }
+	}
+}
+</script>
+{include file="footer.html"} 

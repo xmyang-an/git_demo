@@ -1,0 +1,51 @@
+{include file="header.html"}
+<div id="rightTop">
+    <p><strong>{$lang.payment_manage}</strong></p>
+    <ul class="subnav">
+  	　 <li><span>{$lang.payment_manage}</span></li>
+  </ul>
+</div>
+<div class="info2 flexigrid">
+    <table class="distinction">
+        <!--{if $payments}-->
+        <thead>
+        <tr>
+            <th class="firstCell" width="15%">{$lang.payment_name}</th>
+            <th align="left">{$lang.payment_description}</th>
+            <th width="5%">{$lang.enable}</th>
+            <th width="10%">{$lang.support_currency}</th>
+            <th width="10%">{$lang.author}</th>
+            <th width="10%" class="table-center">{$lang.version}</th>
+            <th width="50" class="handler" style="width: 100px">{$lang.handler}</th>
+        </tr>
+        </thead>
+        <!--{/if}-->
+        <tbody>
+        <!--{foreach from=$payments item=payment}-->
+        <tr class="tatr2">
+            <td class="firstCell">{$payment.name}</td>
+            <td align="left"><span class="padding1">{$payment.desc}</span></td>
+            <td>{if $payment.system_enabled}{$lang.yes}{else}{$lang.no}{/if}</td>
+            <td><span class="padding1">{$payment.currency}</span></td>
+            <td><a href="{$payment.website}" target="_blank" title="{$lang.author_website}">{$payment.author}</a></td>
+            <td class="table-center">{$payment.version}</td>
+            <td class="handler" width="50" style="width: 100px">
+                <!--{if !$payment.system_enabled}-->
+            <a href="javascript:goConfirm('{$lang.enable_confirm}','index.php?app=payment&amp;act=enable&amp;code={$payment.code}',true);">{$lang.enable}</a>
+                <!--{else}-->
+                <a href="javascript:goConfirm('{$lang.disable_confirm}','index.php?app=payment&act=disable&code={$payment.code}',true);">{$lang.disable}</a>
+				<!--{if !in_array($payment.code, array('cod'))}-->
+				<a href="index.php?app=payment&amp;act=conf&amp;code={$payment.code}">{$lang.config}</a>
+				<!--{/if}-->
+                <!--{/if}-->
+                </td>
+        </tr>
+        <!--{foreachelse}-->
+        <tr class="no_data">
+            <td colspan="7">{$lang.no_installed_payment}</td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+</div>
+{include file="footer.html"}

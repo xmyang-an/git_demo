@@ -1,0 +1,103 @@
+{include file=header.html} 
+<script type="text/javascript">
+$(function(){
+	
+	layer.open({type: 2,content: '请稍候，正在加载中...',shadeClose: false});
+	
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	
+	if($.getCookie('pointLng') && $.getCookie('pointLat')){
+		//alert($.getCookie('pointLng')+','+$.getCookie('pointLat'));
+		showResult(map, $.getCookie('pointLng'), $.getCookie('pointLat'));
+		
+	}
+	else
+	{
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				$.setCookie('pointLng', r.point.lng);
+				$.setCookie('pointLat', r.point.lat);
+				showResult(map, r.point.lng, r.point.lat);
+			}
+			else {
+				layer.closeAll();
+				layer.open({content: this.getStatus(), time: 3});
+			}        
+		},{enableHighAccuracy: true})
+	}
+});
+function showResult(map, lng, lat)
+{
+	var p1 = new BMap.Point(lng, lat);
+	var p2 = new BMap.Point({$travel.lng}, {$travel.lat});
+					
+	map.centerAndZoom(p1, 15);
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	map.addControl(new BMap.NavigationControl());// 左上角，添加比例尺   
+					
+	<!--{if !$smarty.get.type}-->
+	var transit = new BMap.TransitRoute(map, {renderOptions: {map: map, panel: "result", enableDragging: true}});
+	transit.setSearchCompleteCallback(function(results){
+		showNotice(transit.getStatus(), results.getNumPlans(), 0);
+	});
+	transit.search(p1, p2);
+	<!--{/if}-->
+					
+	<!--{if $smarty.get.type eq 'driving'}-->
+	var driving = new BMap.DrivingRoute(map, {renderOptions: {map: map, panel: "result", autoViewport: true, enableDragging: true}});
+	driving.setSearchCompleteCallback(function(results){
+		showNotice(driving.getStatus(), results.getNumPlans(), results.taxiFare.day.totalFare);
+	});
+	driving.search(p1, p2);
+	<!--{/if}-->
+					
+	<!--{if $smarty.get.type eq 'walking'}-->
+	var walking = new BMap.WalkingRoute(map, {renderOptions: {map: map, panel: "result", autoViewport: true, enableDragging: true}});
+	walking.setSearchCompleteCallback(function(results){
+		showNotice(walking.getStatus(), results.getNumPlans(), 0);
+	});
+	walking.search(p1, p2);
+	<!--{/if}-->
+}
+
+function showNotice(status, numPlans, taxiFare)
+{
+	layer.closeAll();
+	if(status == BMAP_STATUS_SUCCESS) {
+		if(numPlans <=0){
+			$('#result').html('<div class="notice-word mt10"><p>无此路线</p></div>');
+		}
+	}
+	else {
+		$('#result').html('<div class="notice-word mt10"><p>无此路线</p></div>');
+	}	
+	if(taxiFare > 0)
+	{
+		$(".J_TaxiFare").html('<div class="notice-word"><p class="yellow">预计打车费用为：'+taxiFare+'元</p></div>').show();
+	}
+	$(".J_Result .notice-word").show();
+}
+
+</script>
+<div id="main" class="w-full">
+	<div id="page-travel" class="mb10">
+		<ul class="clearfix travel-type">
+			<li class="float-left {if !$smarty.get.type}current{/if}"><a class="transit" href="{url app=travel&to=$smarty.get.to}"><i></i>公交</a></li>
+			<li class="float-left {if $smarty.get.type eq 'driving'}current{/if}"><a class="driving" href="{url app=travel&to=$smarty.get.to&type=driving}"><i></i>驾车</a></li>
+			<li class="float-left {if $smarty.get.type eq 'walking'}current{/if}"><a class="walking" href="{url app=travel&to=$smarty.get.to&type=walking}"><i></i>步行</a></li>
+		</ul>
+		<div class="J_Result">
+			<div id="allmap" style="width:100%; height:250px;"></div>
+			<!--{if $smarty.get.type eq 'driving'}-->
+			<div class="notice-word hidden"><p class="yellow" style="margin-bottom:3px;">温馨提示：可拖拽改变起点/终点位置</p></div>
+			<!--{else}-->
+			<div class="notice-word hidden"><p class="yellow" style="margin-bottom:3px;">温馨提示：用微信来访问将获得更准确的定位</p></div>
+			<!--{/if}-->
+			<div class="J_TaxiFare hidden"></div>
+			<div id="result"></div>
+		</div>
+	</div>
+</div>
+{include file=footer.html}

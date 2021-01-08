@@ -1,0 +1,130 @@
+{include file=top.html} 
+<script type="text/javascript">
+$(function(){
+    $('#login_form').validate({
+        errorPlacement: function(error, element){
+           var error_td = element.parent('dd');
+            error_td.find('label').hide();
+			error_td.find('i').hide();
+            error_td.append(error);
+        },
+        success       : function(label){
+            label.siblings('i').show().addClass('ok');
+            label.remove();
+        },
+        onkeyup : false,
+        rules : {
+            user_name : {
+                required : true
+            },
+            password : {
+                required : true
+            },
+            captcha : {
+                required : true,
+                remote   : {
+                    url : 'index.php?app=captcha&act=check_captcha',
+                    type: 'get',
+                    data:{
+                        captcha : function(){
+                            return $('#captcha1').val();
+                        }
+                    }
+                }
+            }
+        },
+        messages : {
+            user_name : {
+                required : '{$lang.user_name_required}'
+            },
+            password  : {
+                required : '{$lang.password_required}'
+            },
+            captcha : {
+                required : '{$lang.captcha_required}',
+                remote   : '{$lang.captcha_error}'
+            }
+        }
+    });
+	$('input[name="user_name"], input[name="password"], input[name="captcha"]').click(function(){
+		$(this).parent().find('label').hide();
+	});
+	
+});
+</script>
+<style>
+#footer{ background:#fff;}
+#footer, #footer a, #footer .foot-group .footnav .copy, #footer .foot-group .footnav .copy a{color:#bbb;}
+#footer .foot-group .footnav{margin-left:0;margin-top:0;}
+#footer .foot-group .footnav ul{width:454px; margin:0 auto;}
+#footer a:hover{color:#f60; text-decoration:none;}
+.w{width:1000px;}
+#site-nav{ display:none}
+.page-auth .auth-body{ background: #FFF3B5 }
+</style>
+<div id="main" class="w-full">
+  <div id="page-login" class="w-full page-auth mt20 mb20">
+    <div class="w-full auth-header pb10 mb10">
+      <div class="w logo mb10 clearfix"> <a class="float-left" href="{$site_url}" title="{$site_title}"><img alt="{$site_title}" src="{$site_logo}" /></a> <span>欢迎登陆</span></div>
+    </div>
+    <div class="w-full auth-body">
+    <div class="w clearfix">
+      <div class="col-main">
+        <div class="login-edit-field" area="login_left" widget_type="area"> 
+          <!--{widgets page=login area=login_left}-->
+        </div>
+      </div>
+      <div class="col-sub">
+        <div class="form">
+          <div class="title">{$lang.user_login} <a class="register" href="{url app=member&act=register&ret_url=$ret_url}">立即注册</a></div>
+          <div class="content">
+            <form method="post" id="login_form">
+              <dl class="clearfix">
+                <!--<dt>{$lang.user_name}</dt>-->
+                <dd>
+                  <input class="input" type="text" name="user_name"  id="user_name" title="{$lang.user_name_tip}" placeholder="用户名 / 手机号 / 邮箱" />
+                  <i class="i-name"></i> </dd>
+              </dl>
+              <dl class="clearfix">
+                <!--<dt>{$lang.password}</dt>-->
+                <dd>
+                  <input class="input" type="password" name="password"  id="password" title="{$lang.password_tip}" placeholder="{$lang.password}" />
+                  <i class="i-psw"></i> </dd>
+              </dl>
+			  <!--{if $captcha}-->
+              <dl class="clearfix">
+                <!--<dt>{$lang.captcha}</dt>-->
+                <dd class="captcha clearfix">
+                  <input type="text" class="input float-left" name="captcha" id="captcha1" title="{$lang.captcha_tip}" placeholder="{$lang.captcha}" />
+                  <a href="javascript:change_captcha($('#captcha'));" class="float-left"><img height="26" id="captcha" src="index.php?app=captcha&amp;{$random_number}" class="float-left" /></a> <i class="i-psw i-captcha"></i></dd>
+              </dl>
+              <!--{/if}-->
+              <dl class="clearfix">
+              	<dd class="clearfix" style="width:334px;">
+              		<h3 class="float-left gray mt5">{$lang.7autologin}</h3>
+              		<p class="float-right">
+                    	<label class="switch-checkbox-radio inline-block box-align-center J_SwtcherInput" for="switcher"><span class="switcher-style block"></span></label>
+          				<input name="AutoLogin" class="autoLogin hidden" id="switcher" value="1" type="checkbox">
+					</p>
+				</dd>
+              </dl>
+              <dl class="clearfix">
+                <!--<dt>&nbsp;</dt>-->
+                <dd class="clearfix">
+                  <input type="submit" class="login-submit" value="{$lang.login}" title="{$lang.login}" />
+                  <input type="hidden" name="ret_url" value="{$ret_url}" />
+                </dd>
+              </dl>
+              <div class="partner-login">
+                <h3>{$lang.use_partner_account_login} <a href="{url app=find_password}" class="find-password">{$lang.forget_password}</a></h3>
+                <p> <a href="{url app=qqconnect&act=login}" target="_blank"><img src="{res file=images/qq_n.png}" /> QQ</a> &nbsp;&nbsp; <a href="{url app=alipayconnect&act=login}" target="_blank"><img src="{res file=images/alipay_n.png}" /> 支付宝</a> &nbsp;&nbsp; <a href="{url app=xwbconnect&act=login}" target="_blank"><img  src="{res file=images/xwb_n.png}" /> 新浪微博</a> &nbsp;&nbsp; <a href="{url app=weixinconnect&act=login}" target="_blank"><img src="{res file=images/wx_n.png}" /> 微信登录</a> &nbsp;&nbsp; </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

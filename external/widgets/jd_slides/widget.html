@@ -1,0 +1,25 @@
+<!--{if $widget_data.ads}-->
+<div class="full-slides J_S{$widget_data.model_id}">
+  <ul class="bd">
+    <!-- {foreach from=$widget_data.ads item=image name=fe_image} -->
+    <li color="{$image.ad_bgcolor}" style="background:{$image.ad_bgcolor|default:none}">
+      <div class="w"> <a class="benner-width" href="{$image.ad_link_url}" target="_blank" target="_blank"><img width="730" height="378" src="{$image.ad_image_url}" /></a> </div>
+    </li>
+    <!-- {/foreach} -->
+  </ul>
+  <div class="nav-box">
+    <div class="hd"> 
+      <!-- {foreach from=$widget_data.ads item=image name=fe_image} --> 
+      <a {if $smarty.foreach.fe_image.first}class="ks-active"{/if} href="javascript:;"><i></i></a> 
+      <!-- {/foreach} --> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".J_S{$widget_data.model_id}").slide({titCell:".hd a", mainCell:".bd", effect:"{$widget_data.effect}",autoPlay:{$widget_data.autoplay}, titOnClassName:"ks-active", delayTime:1000, interTime: 5000});
+	});
+</script> 
+<!--{else}-->
+<center style="padding:10px;">请配置</center>
+<!--{/if}--> 

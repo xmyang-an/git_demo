@@ -1,0 +1,103 @@
+{include file="header.html"}
+<style>
+body{ background:#eaedf1;margin:0;padding:0;}
+#rightCon{ background:none;padding:0;margin-left:0;}
+</style>
+<div id="rightCon" class="clearfix info">
+  <div class="each order_form">
+    <dl>
+      <dt>{$lang.order_status}</dt>
+      <dd>
+        <ul class="clearfix">
+          <li><b>{$lang.order_sn}:</b>{$order.order_sn}&nbsp;&nbsp;&nbsp;</li>
+          <li><b>{$lang.order_status}{$lang.colon}</b> {$order.status|modifier:order_status}</li>
+          <li><b>{$lang.order_amount}{$lang.colon}</b> <span class="red_common">{$order.order_amount|price}</span> ({$lang.preference}{$lang.colon}{$order.discount|price})</li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="each order_form">
+    <dl>
+      <dt>{$lang.order_info}</dt>
+      <dd>
+        <ul class="clearfix">
+          <li><b>{$lang.buyer_name}{$lang.colon}</b> {$order.buyer_name|escape}</li>
+          <li><b>{$lang.seller_name}{$lang.colon}</b> {$order.seller_name|escape}</li>
+          <!--{if $order.payment_code}-->
+          <li><b>{$lang.payment_name}{$lang.colon}</b>{$order.payment_name|escape}</li>
+          <!--{/if}--> 
+          <!--{if $order.pay_message}-->
+          <li><b>{$lang.pay_message}{$lang.colon}</b>{$order.pay_message|escape}</li>
+          <!--{/if}-->
+          <li><b>{$lang.add_time}{$lang.colon}</b>{$order.add_time|date:complete}</li>
+          <!--{if $order.pay_time}-->
+          <li><b>{$lang.pay_time}{$lang.colon}</b>{$order.pay_time|date:complete}</li>
+          <!--{/if}--> 
+          <!--{if $order.ship_time}-->
+          <li><b>{$lang.ship_time}{$lang.colon}</b>{$order.ship_time|date:complete}</li>
+          <!--{/if}--> 
+          <!--{if $order.finished_time}-->
+          <li><b>{$lang.finished_time}{$lang.colon}</b>{$order.finished_time|date:complete}</li>
+          <!--{/if}--> 
+          <!--{if $order.postscript}-->
+          <li><b>{$lang.postscript}{$lang.colon}</b>{$order.postscript|escape}</li>
+          <!--{/if}-->
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <div class="each order_form">
+    <dl>
+      <dt>{$lang.consignee_info}</dt>
+      <dd>
+        <ul class="clearfix">
+          <li><b>{$lang.consignee}{$lang.colon}</b> {$order_extm.consignee|escape}</li>
+          <li><b>{$lang.region}{$lang.colon}</b> {$order_extm.region_name|escape}</li>
+          <li><b>{$lang.zipcode}{$lang.colon}</b> {$order_extm.zipcode|escape}</li>
+          <li><b>{$lang.phone_tel}{$lang.colon}</b> {$order_extm.phone_tel|escape}</li>
+          <li><b>{$lang.phone_mob}{$lang.colon}</b> {$order_extm.phone_mob|escape}</li>
+          <li><b>{$lang.address}{$lang.colon}</b> {$order_extm.address|escape}</li>
+          <li><b>{$lang.shipping_name}{$lang.colon}</b> {$order_extm.shipping_name|escape}</li>
+          <!--{if $order.invoice_no}-->
+          <li><b>{$lang.invoice_no}{$lang.colon}</b> {$order.invoice_no|escape}</li>
+          <!--{/if}-->
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <!--{if $order.distribution}-->
+  <div class="each order_form">
+    <dl>
+      <dt>分销商佣金</dt>
+      <dd>
+        <ul class="clearfix">
+          <!--{foreach from=$order.distribution item=dist name=fe_dist}-->
+            <li style="width:100%;"><b>{if $dist.layer eq 2}二{elseif $dist.layer eq 3}三{else}一{/if}级分销</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>用户ID{$lang.colon}</b>{$dist.user_id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>用户名{$lang.colon}</b>{$dist.user_name|escape}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>分销收入{$lang.colon}</b>{$dist.amount|price}</li>
+            <!--{/foreach}-->
+        </ul>
+      </dd>
+    </dl>
+  </div>
+  <!--{/if}-->
+  <div class="each order_form">
+    <dl>
+      <dt>{$lang.goods_info}</dt>
+      <dd class="clearfix"> 
+        <!--{foreach from=$goods_list item=goods}-->
+        <div class="order_info clearfix"> 
+        	<a href="{$site_url}/index.php?app=goods&amp;id={$goods.goods_id}" target="_blank" class="order_info_pic"><img width="50" height="50" alt="{$lang.goods_pic}" src="{$goods.goods_image}" /></a>
+          <div class="order_info_text">
+          	<a href="{$site_url}/index.php?app=goods&amp;id={$goods.goods_id}" target="_blank">{$goods.goods_name|escape}</a><br />
+            {$goods.specification|escape}
+            <p>{$lang.price}{$lang.colon} <span class="red_common">{$goods.price|price}</span></p>
+          	<p>{$lang.quantity}{$lang.colon} {$goods.quantity}</p>
+            
+          </div>
+          
+        </div>
+        <!--{/foreach}--> 
+      </dd>
+    </dl>
+  </div>
+</div>
+{include file="footer.html"} 

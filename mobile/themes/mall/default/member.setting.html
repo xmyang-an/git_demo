@@ -1,0 +1,129 @@
+{include file=member.header.html}
+<div id="main">
+<div class="member-setting">
+	<div class="fun-list clearfix">
+    	<div class="fun-row fun-row-line">
+            <a href="javascript:;" class="clearfix block portrait relative">
+          		<img class="float-left ml10" src="{$member.portrait}" width="60" height="60" />
+                <form method="post" id="form1" enctype="multipart/form-data"><input type="file" name="portrait" class="J_ChangePortrait" /></form>
+               	<p class="float-left title mt5">
+               		<span class="gray">{$lang.setting_portrait}</span><br />
+                	<span class="gray">{$lang.user_name}{$lang.colon}{$member.user_name}</span>
+               	</p>
+               	<em class="float-right view mr10" style="margin-top:20px;"></em>  
+           	</a>
+        </div>
+        <div class="fun-row fun-row-line wxHidden">
+            <a href="{url app=member&amp;act=password}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.edit_password}</span></p>
+               <em class="float-right view mr10"></em>  
+           </a>
+        </div>
+        <div class="fun-row fun-row-line wxHidden">
+            <a href="{url app=bind&act=search}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.member_bind}</span></p>
+               <em class="float-right view mr10"></em>  
+           </a>
+        </div>
+        <div class="line-background"></div>
+        <div class="fun-row fun-row-line wxHidden">
+            <a href="{url app=member&amp;act=phone}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.phone_mob}</span></p>
+               <em class="float-right view mr10">{$member.phone_mob}</em>   
+           </a>
+        </div>
+        <div class="fun-row fun-row-line">
+            <a href="{url app=member&amp;act=email}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.email}</span></p>
+               <em class="float-right view mr10">{$member.email}</em>  
+           </a>
+        </div>
+        <div class="line-background"></div>
+        <div class="fun-row fun-row-line">
+            <a href="{url app=member&amp;act=profile&field=real_name}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.real_name}</span></p>
+               <em class="float-right view mr10">{$member.real_name}</em>
+           </a>
+        </div>
+         
+        
+         <div class="fun-row fun-row-line">
+            <a href="{url app=member&amp;act=profile&field=im_qq}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.im_qq}</span></p>
+               <em class="float-right view mr10">{$member.im_qq|escape}</em>  
+           </a>
+        </div>
+        <div class="fun-row fun-row-line">
+            <a href="{url app=member&amp;act=profile&field=birthday}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.birthday}</span></p>
+               <em class="float-right view mr10">{$member.birthday|escape}</em>   
+           </a>
+        </div>
+        <div class="fun-row fun-row-line J_PopLayer" data-PopLayer="{popLayer:'.J_GenderPopLayer',top:'35%'}" >
+            <a href="javascript:;" class="clearfix block">
+               <p class="float-left title"><span>{$lang.gender}</span></p>
+               <em class="float-right view mr10 J_GenderSelectValue">{$lang.male}</em>   
+           </a>
+        </div>
+        <div class="pop-layer-common pop-wrap-b gender-pop-layer J_GenderPopLayer">
+          	 <div class="wraper has-title">
+          		<div class="hd"><i class="closed popClosed"></i>{$lang.gender}</div>
+       	 		<div class="bd radioUiWraper J_GenderSelect">
+ 					<form method="post" id="form2">
+     				<dl class="pl10 pr10 webkit-box popClosed radioUiStyle radioUiStyle2 border-bottom {if $member.gender eq '1'}active{/if}">
+         				<dt class="flex1">{$lang.male}</dt>
+                		<dd class="input"><input type="radio" name="gender" value="1" {if $member.gender eq '1'}checked="checked"{/if}/></dd>
+          			</dl>
+                    
+                    <dl class="pl10 pr10 webkit-box popClosed radioUiStyle radioUiStyle2 border-bottom {if $member.gender eq '2'}active{/if}">
+         				<dt class="flex1">{$lang.female}</dt>
+                		<dd class="input"><input type="radio" name="gender" value="2" {if $member.gender eq '2'}checked="checked"{/if}/></dd>
+          			</dl>
+                    
+                    <dl class="pl10 pr10 webkit-box popClosed radioUiStyle radioUiStyle2 {if $member.gender eq '0'}active{/if}">
+         				<dt class="flex1">{$lang.unknown}</dt>
+                		<dd class="input"><input type="radio" name="gender" value="0" {if $member.gender eq '0'}checked="checked"{/if}/></dd>
+          			</dl>
+    				</form>
+            	</div>
+       		 	<div class="ft pop-btn popClosed">关闭</div>
+             </div>
+		  </div>
+          
+        <div class="line-background"></div>
+        <div class="fun-row fun-row-line J_RedirectToWx" toType="redirect">
+            <a href="{url app=my_address}" class="clearfix block">
+               <p class="float-left title"><span>{$lang.my_address}</span></p>
+               <em class="float-right view mr10"></em>  
+           </a>
+        </div>
+        <div class="logout wxHidden">
+            <a href="{url app=member&act=logout}" class="btn-alipay">
+               {$lang.logout_current_account}   
+           </a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_GenderSelectValue').html($('.J_GenderSelect').find('dl.active dt').html());
+	$('.J_GenderSelect').on('click', 'dl', function(){
+		if(!$(this).hasClass('disabled')) {
+			$(this).addClass('active').siblings().removeClass('active');
+			$(this).find('input[type="radio"]').prop('checked', true);
+			
+			$('.J_GenderSelectValue').html($(this).find('dt').html());
+			
+			setTimeout(function() {
+				ajaxRequest('POST', REAL_SITE_URL + '/index.php?app=member&act=profile', $('#form2'), '', null);
+			}, 1500);
+		}
+	});
+	
+	$('.J_ChangePortrait').change(function(){
+		ajaxRequest('POST', REAL_SITE_URL + '/index.php?app=member&act=portrait', $('#form1'), window.location.href, '');
+	});
+});	
+</script>
+</div>
+{include file=footer.html} 

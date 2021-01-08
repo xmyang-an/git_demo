@@ -1,0 +1,5 @@
+<div id="container_{$stattype}" style="width:100%;height:250px;"></div>
+<script>	
+	var barChart = echarts.init($('#container_{$stattype}')[0]);
+	barChart.setOption($.parseJSON('{$stat_json}'));
+</script>

@@ -1,0 +1,38 @@
+{include file=member.header.html}
+<div id="main"> 
+  <!--{if $appAvailable neq 'TRUE'}-->
+  <div class="notice-word padding10">
+    <p>{$appAvailable.msg}</p>
+  </div>
+  <!--{else}-->
+  <div class="page-promotool" id="page-promotool">
+    <div class="exclusive">
+      <form method="post" class="fun-form-style">
+        <div class="form">
+          <div class="notice-word padding10"><p class="yellow">{$lang.note_for_create}</p></div>
+          <dl>
+            <dd class="webkit-box"> <span style="width:90px;">满金额包邮</span>
+              <input type="text" name="fullfree[fullamount]" value="{$fullfree.rules.fullamount}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="订单商品满多少金额免邮" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"> <span style="width:90px;">满件包邮</span>
+              <input type="text" name="fullfree[fullquantity]" value="{$fullfree.rules.fullquantity}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="单次购物满多少件免邮" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <div class="extra">
+            <p >
+              <label class="switch-checkbox-radio block mb20 box-align-center J_SwtcherInput {if $fullfree.status || !$fullfree}checked{/if} w-full" for="switcher"> <em class="block flex1 gray pl5">{$lang.launch}</em> <span class="switcher-style block"></span> </label>
+              <input name="status" class="hidden" id="switcher" value="1" type="checkbox" {if $fullfree.status || !$fullfree}checked="checked"{/if} />
+            </p>
+            <div>
+              <input type="submit" class="J_AjaxFormSubmit btn-alipay btn-alipay-fixed" value="{$lang.submit}" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--{/if}--> 
+</div>
+{include file=footer.html}

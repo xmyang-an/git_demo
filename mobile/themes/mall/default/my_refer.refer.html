@@ -1,0 +1,24 @@
+﻿{include file=member.header.html}
+<div class="list">
+	<ul style="background:#fff;">
+    	<!--{if $refers}-->
+        <!-- {foreach from=$refers item=refer name=fe_refer} -->
+    	<li style="padding:20px 10px;border-bottom:1px solid #e9e9e9;" class="webkit-box">
+        	<div class="l">
+            	<img src="{$refer.portrait}" style="width:42px;height:42px;border-radius:100%;display:block;margin-right:10px;" />
+            </div>
+            <div class="r">
+                <p class="fs14">{$refer.user_name|escape}</p>
+                <p class="webkit-box mt10 f99"><span class="flex1">{$refer.phone_mob|escape}</span><span>{$refer.reg_time|date}</span></p>
+            </div>
+        </li>
+        <!--{/foreach}-->
+        <!--{else}-->
+        <div class="infinite-empty notice-empty"><i>&#xe715;</i>
+        	<p>{$lang.no_records}</p>
+      	</div>
+        <!--{/if}-->
+    </ul>
+</div>
+{include file=page.bottom.html}
+{include file=footer.html}

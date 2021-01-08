@@ -1,0 +1,30 @@
+<!--{if $widget_data.ads}-->
+<div class="focus-trigeminy J_S{$widget_data.model_id}" >
+  <div class="scroller">
+    <div class="bd">
+      <ul class="clearfix">
+        <!--{foreach from=$widget_data.ads item=image}-->
+        <li><a href="{$image.ad_link_url}" target="_blank"><img src="{$image.ad_image_url}" border="0" height="136" width="243"></a></li>
+        <!--{/foreach}-->
+        
+      </ul>
+    </div>
+    <div class="hd"> <a href="javascript:void(0);" class="prev"></a> <a href="javascript:void(0);" class="next"></a> </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".J_S{$widget_data.model_id}").slide({pnLoop:false, mainCell:".bd ul",prevCell:".prev", nextCell:".next", effect:"leftLoop",autoPlay:true, scroll:1, vis:3, delayTime:1000, interTime: 5000});
+		$(".focus-trigeminy ul li").hover(function(){
+			$(this).parent().find('li').css('opacity', 0.5);
+			$(this).css('opacity', 1);
+		}, function(){
+			$(this).parent().find('li').css('opacity', 1);
+		});
+	});
+</script> 
+<!--{else}-->
+<center style="padding:10px;">
+  请配置
+</center>
+<!--{/if}-->

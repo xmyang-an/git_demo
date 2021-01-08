@@ -1,0 +1,77 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.goods_props}</p>
+  <ul class="subnav">
+    <li><a class="btn1" href="index.php?app=props">{$lang.prop_list}</a></li>
+    {if $smarty.get.act eq 'add_value'}
+    <li><span>{$lang.add_prop_value}</span> {else}
+    <li><a class="btn1" href="index.php?app=props&amp;act=add_value&pid={$prop_value.pid}">{$lang.add_prop_value}</a></li>
+    <li><span>{$lang.edit_prop_value}</span></li>
+    {/if}
+  </ul>
+</div>
+<script>
+$(function(){
+	if($('select[name="pid"]').find("option:selected").attr('is_color_prop')==1) {
+		$('#is_color_prop').show();
+	}
+	$('select[name="pid"]').change(function(){
+		if($(this).find('option:selected').attr('is_color_prop')==1){
+			$('#is_color_prop').show();
+		}
+		else
+		{
+			//$('#is_color_prop').find('input[name="color_value"]').val('');
+			$('#is_color_prop').hide();
+		}
+	});
+});
+</script>
+<div class="info">
+  <form method="post">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {$lang.prop_name}:</th>
+        <td class="paddingT15 wordSpacing5"><select name="pid">
+            
+                       {foreach from=$props item=item}
+                       
+            <option value="{$item.pid}" is_color_prop="{$item.is_color_prop}" {if $item.pid==$prop_value.pid} selected="selected"{/if}>{$item.name}</option>
+            
+                       {/foreach}
+                    
+          </select></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.prop_value}:</th>
+        <td class="paddingT15 wordSpacing5"><input class="prop_input infoTableInput2" type="text" name="prop_value" value="{$prop_value.prop_value|escape}" /></td>
+      </tr>
+      <tr id="is_color_prop" class="hidden">
+        <th class="paddingT15"> {$lang.color_value}:</th>
+        <td class="paddingT15 wordSpacing5"><input class="prop_input infoTableInput2  pickcolor" type="text" name="color_value" value="{$prop_value.color_value|escape}" />
+          <label class="gray">{$lang.color_value_note}</label></td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.sort_order}:</th>
+        <td class="paddingT15 wordSpacing5"><input class="sort_order prop_input" id="sort_order" type="text" name="sort_order" value="{$prop_value.sort_order}" /></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{$lang.status}:</th>
+        <td class="paddingT15 wordSpacing5"><p>
+            <label>
+              <input type="radio" name="status" value="1" {if $prop_value.status}checked="checked"{/if}/>
+              {$lang.yes}</label>
+            <label>
+              <input type="radio" name="status" value="0" {if !$prop_value.status}checked="checked"{/if}/>
+              {$lang.no}</label>
+          </p></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+          <input class="formbtn" type="reset" name="reset" value="{$lang.reset}" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="footer.html"} 

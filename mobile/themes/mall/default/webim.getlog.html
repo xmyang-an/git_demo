@@ -1,0 +1,23 @@
+{include file=member.header.html}
+<style type="text/css">
+.page-format{padding:10px 0;}
+.page-format .former{padding-left:10px;}
+.page-format .down{padding-right:10px}
+</style>
+<div id="main">
+<div class="page-actions"></div>
+<div class="webim clearfix bgf"> 
+  <!--{foreach from=$imlog item=log name=fe_item}-->
+  <div class="each padding10 {if $smarty.foreach.fe_item.iteration % 2 eq 0}green{else}blue{/if}" style="background:{if $smarty.foreach.fe_item.iteration % 2 eq 0}#fff{else}#fff{/if}">
+    <div class="webkit-box"><h3 class="fs14 flex1">
+    {$log.fromName}</h3><span class="gray ml10">{$log.add_time|date:Y-m-d H:i:s}</span></div>
+    <p class="mt5"> {$log.formatContent} </p>
+  </div>
+  <!--{/foreach}--> 
+  <!--{if $imlog}-->
+  <div class="clearfix">{include file=page.bottom.html}</div>
+  <!--{/if}-->
+</div>
+</div>
+</body>
+</html>

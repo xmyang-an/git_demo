@@ -1,0 +1,191 @@
+<script type="text/javascript">
+var _d = DialogManager.get('config_dialog');
+_d.setWidth(400);
+_d.setPosition('center');
+
+$("select[name='img_recom_id_2']").change(function(){
+    switchRecommend(this.value, 'img_cate_id_2');
+});
+$("select[name='img_recom_id_3']").change(function(){
+    switchRecommend(this.value, 'img_cate_id_3');
+});
+$("select[name='img_recom_id_4']").change(function(){
+    switchRecommend(this.value, 'img_cate_id_4');
+});
+$("select[name='img_recom_id_5']").change(function(){
+    switchRecommend(this.value, 'img_cate_id_5');
+});
+$("select[name='img_recom_id_6']").change(function(){
+    switchRecommend(this.value, 'img_cate_id_6');
+});
+
+switchRecommend($("select[name='img_recom_id_2']").val(), 'img_cate_id_2');
+switchRecommend($("select[name='img_recom_id_3']").val(), 'img_cate_id_3');
+switchRecommend($("select[name='img_recom_id_4']").val(), 'img_cate_id_4');
+switchRecommend($("select[name='img_recom_id_5']").val(), 'img_cate_id_5');
+switchRecommend($("select[name='img_recom_id_6']").val(), 'img_cate_id_6');
+
+function switchRecommend(recomId, selectName)
+{
+    if (recomId >= 0)
+    {
+        $("select[name='" + selectName + "']").hide();
+    }
+    else
+    {
+        $("select[name='" + selectName + "']").show();
+    }
+}
+
+</script>
+<div class="field_item">
+    <label>模块名称</label>
+    <p><input type="text" name="model_name" value="{$options.model_name}"/></p>
+    <label>关键字（多个关键字用|隔开）</label>
+    <p><textarea name="keyword" style="width:300px;height:55px;">{$options.keyword}</textarea></p>
+</div>
+
+<div class="field_item">
+    <label>左侧显示的分类（多个分类id用半角逗号隔开，如1,2,3,4,5,6）</label>
+    <p><textarea name="cate_ids"  style="width:300px;height:50px;">{$options.cate_ids}</textarea></p>
+	<label>左侧分类下大图:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:200px * 285px</span>)</label>
+    <p><input type="file" name="ad1_image_file" /><input type="hidden" name="ad1_image_url" value="{$options.ad1_image_url}" /></p>
+     <!-- {if $options.ad1_image_url} --><p><img src="{$options.ad1_image_url}" height="20" /></p><!-- {/if} -->
+     <label>左侧分类下大图链接地址:</label>
+    <p><input type="text" name="ad1_link_url" value="{$options.ad1_link_url}" /></p>
+</div>
+ 
+<div class="field_item">
+    <label>中部切换标题一</label>
+    <p><input type="text" name="cate_name_1" value="{$options.cate_name_1}" /></p>
+	<label>幻灯图片A:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:599px * 215px</span>)</label>
+    <p><input type="file" name="ad2_image_file" /><input type="hidden" name="ad2_image_url" value="{$options.ad2_image_url}" /></p>
+     <!-- {if $options.ad2_image_url} --><p><img src="{$options.ad2_image_url}" height="20" /></p><!-- {/if} -->
+    <label>幻灯图片A链接地址:</label>
+    <p><input type="text" name="ad2_link_url" value="{$options.ad2_link_url}" /></p>
+	
+    <label>幻灯图片B:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:599px * 215px</span>)</label>
+    <p><input type="file" name="ad3_image_file" /><input type="hidden" name="ad3_image_url" value="{$options.ad3_image_url}" /></p>
+     <!-- {if $options.ad3_image_url} --><p><img src="{$options.ad3_image_url}" height="20" /></p><!-- {/if} -->
+    <label>幻灯图片B链接地址:</label>
+    <p><input type="text" name="ad3_link_url" value="{$options.ad3_link_url}" /></p>
+	
+    <label>幻灯图片C:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:599px * 215px</span>)</label>
+    <p><input type="file" name="ad4_image_file" /><input type="hidden" name="ad4_image_url" value="{$options.ad4_image_url}" /></p>
+    <!-- {if $options.ad4_image_url} --><p><img src="{$options.ad4_image_url}" height="20" /></p><!-- {/if} -->    
+    <label>幻灯图片C链接地址:</label>
+    <p><input type="text" name="ad4_link_url" value="{$options.ad4_link_url}" /></p>
+    
+    <label>中部广告图1:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:199px * 215px</span>)</label>
+    <p><input type="file" name="ad5_image_file" /><input type="hidden" name="ad5_image_url" value="{$options.ad5_image_url}" /></p>
+    <!-- {if $options.ad5_image_url} --><p><img src="{$options.ad5_image_url}" height="20" /></p><!-- {/if} -->    
+    <label>中部广告图1链接地址:</label>
+    <p><input type="text" name="ad5_link_url" value="{$options.ad5_link_url}" /></p>
+    
+    <label>中部广告图2:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:199px * 215px</span>)</label>
+    <p><input type="file" name="ad6_image_file" /><input type="hidden" name="ad6_image_url" value="{$options.ad6_image_url}" /></p>
+    <!-- {if $options.ad6_image_url} --><p><img src="{$options.ad6_image_url}" height="20" /></p><!-- {/if} -->    
+    <label>中部广告图2链接地址:</label>
+    <p><input type="text" name="ad6_link_url" value="{$options.ad6_link_url}" /></p>
+    
+    <label>中部广告图3:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:199px * 215px</span>)</label>
+    <p><input type="file" name="ad7_image_file" /><input type="hidden" name="ad7_image_url" value="{$options.ad7_image_url}" /></p>
+    <!-- {if $options.ad7_image_url} --><p><img src="{$options.ad7_image_url}" height="20" /></p><!-- {/if} -->    
+    <label>中部广告图3链接地址:</label>
+    <p><input type="text" name="ad7_link_url" value="{$options.ad7_link_url}" /></p>
+    
+    <label>中部广告图4:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:199px * 215px</span>)</label>
+    <p><input type="file" name="ad8_image_file" /><input type="hidden" name="ad8_image_url" value="{$options.ad8_image_url}" /></p>
+    <!-- {if $options.ad8_image_url} --><p><img src="{$options.ad8_image_url}" height="20" /></p><!-- {/if} -->    
+    <label>中部广告图4链接地址:</label>
+    <p><input type="text" name="ad8_link_url" value="{$options.ad8_link_url}" /></p>
+    
+    <label>中部广告图5:(<span>支持 gif|jpg|jpeg|png 格式,尺寸:199px * 215px</span>)</label>
+    <p><input type="file" name="ad9_image_file" /><input type="hidden" name="ad9_image_url" value="{$options.ad9_image_url}" /></p>
+    <!-- {if $options.ad9_image_url} --><p><img src="{$options.ad9_image_url}" height="20" /></p><!-- {/if} -->    
+    <label>中部广告图5链接地址:</label>
+    <p><input type="text" name="ad9_link_url" value="{$options.ad9_link_url}" /></p>
+</div>
+   
+<div class="field_item">   
+    <label>中部切换标题二</label>
+    <p><input type="text" name="cate_name_2" value="{$options.cate_name_2}" /></p>
+    <label>中部切换标题二商品推荐类型</label>
+    <p><select name="img_recom_id_2">
+        <option value="0">请选择...</option>
+        <!-- {foreach from=$recommends key=recom_id item=recom_name} -->
+        <option value="{$recom_id}"{if $options.img_recom_id_2 eq $recom_id} selected="selected"{/if}>{$recom_name|escape}</option>
+        <!-- {/foreach} -->
+    </select>
+    <select name="img_cate_id_2">
+        <option value="0">请选择分类...</option>
+        {html_options options=$gcategories selected=$options.img_cate_id_2}
+    </select>
+	</p>
+</div>
+   
+<div class="field_item">   
+    <label>中部切换标题三</label>
+    <p><input type="text" name="cate_name_3" value="{$options.cate_name_3}" /></p>
+    <label>中部切换标题三商品推荐类型</label>
+    <p><select name="img_recom_id_3">
+        <option value="0">请选择...</option>
+        <!-- {foreach from=$recommends key=recom_id item=recom_name} -->
+        <option value="{$recom_id}"{if $options.img_recom_id_3 eq $recom_id} selected="selected"{/if}>{$recom_name|escape}</option>
+        <!-- {/foreach} -->
+    </select>
+    <select name="img_cate_id_3">
+        <option value="0">请选择分类...</option>
+        {html_options options=$gcategories selected=$options.img_cate_id_3}
+    </select>
+	</p>
+</div>
+   
+<div class="field_item">
+    <label>中部切换标题四</label>
+    <p><input type="text" name="cate_name_4" value="{$options.cate_name_4}" /></p>
+    <label>中部切换标题四商品推荐类型</label>
+    <p><select name="img_recom_id_4">
+        <option value="0">请选择...</option>
+        <!-- {foreach from=$recommends key=recom_id item=recom_name} -->
+        <option value="{$recom_id}"{if $options.img_recom_id_4 eq $recom_id} selected="selected"{/if}>{$recom_name|escape}</option>
+        <!-- {/foreach} -->
+    </select>
+    <select name="img_cate_id_4">
+        <option value="0">请选择分类...</option>
+        {html_options options=$gcategories selected=$options.img_cate_id_4}
+    </select>
+	</p>
+</div>
+
+<div class="field_item">
+    <label>右侧切换卡片一</label>
+    <p><input type="text" name="cate_name_5" value="{$options.cate_name_5}" /></p>
+    <label>右侧切换卡片一商品推荐类型</label>
+    <p><select name="img_recom_id_5">
+        <option value="0">请选择...</option>
+        <!-- {foreach from=$recommends key=recom_id item=recom_name} -->
+        <option value="{$recom_id}"{if $options.img_recom_id_5 eq $recom_id} selected="selected"{/if}>{$recom_name|escape}</option>
+        <!-- {/foreach} -->
+    </select>
+    <select name="img_cate_id_5">
+        <option value="0">请选择分类...</option>
+        {html_options options=$gcategories selected=$options.img_cate_id_5}
+    </select>
+	</p>
+    
+    <label>右侧切换卡片二</label>
+    <p><input type="text" name="cate_name_6" value="{$options.cate_name_6}" /></p>
+    <label>右侧切换卡片二商品推荐类型</label>
+    <p><select name="img_recom_id_6">
+        <option value="0">请选择...</option>
+        <!-- {foreach from=$recommends key=recom_id item=recom_name} -->
+        <option value="{$recom_id}"{if $options.img_recom_id_6 eq $recom_id} selected="selected"{/if}>{$recom_name|escape}</option>
+        <!-- {/foreach} -->
+    </select>
+    <select name="img_cate_id_6">
+        <option value="0">请选择分类...</option>
+        {html_options options=$gcategories selected=$options.img_cate_id_6}
+    </select>
+	</p>
+</div>

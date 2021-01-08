@@ -1,0 +1,44 @@
+{include file=header.html}
+<script type="text/javascript">
+$(function(){
+   $('#post_form').submit(function(){
+       if (!$('#accept').prop('checked'))
+       {
+            alert('{$lang.accept_first}');
+			return false;
+       }
+       return true;
+    });
+    $('#accept').click(function(){
+        $('#submit_button').get(0).disabled = !this.checked;
+    });
+	
+    $('#submit_button').get(0).disabled = !$('#accept').get(0).checked;
+});
+</script>
+<div class="main w">
+	<div class="mleft pleft">
+		<dl class="setpbox t1">
+			<dt>安装步骤</dt>
+			<dd>
+				<ul>
+					<li class="current">许可协议</li>
+					<li>环境检测</li>
+					<li>参数配置</li>
+					<li>正在安装</li>
+					<li>安装完成</li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+	<div class="pright mright">
+		<div class="pr-title"><h3>阅读许可协议</h3></div>
+		<div class="pr-agreement text">{$eula}</div>
+		<div class="btn-box">
+			<input name="accept" type="checkbox" id="accept" value="1" /><label for="accept"><strong class="fw300">我已经阅读并同意此协议</strong></label>
+			<input name="{$lang.next}" type="submit" id="submit_button" class="btn-normal ml20" value="{$lang.next}"  />
+		</div>
+	</div>
+    <div class="clear"></div>
+</div>
+{include file=footer.html}

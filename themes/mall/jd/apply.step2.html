@@ -1,0 +1,239 @@
+{include file="top.html"}
+<script type="text/javascript">
+//<!CDATA[
+$(function(){
+    regionInit("region");
+    $("#apply_form").validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('dd');
+			error_td.find('label').remove();
+            error_td.siblings('dd').remove();
+            error_td.append(error);
+        },
+        success: function(label){
+            label.addClass('validate_right').removeClass('error');
+        },
+        onkeyup: false,
+        rules: {
+            owner_name: {
+                required: true
+            },
+            store_name: {
+                required: true,
+                remote : {
+                    url  : 'index.php?app=apply&act=check_name&ajax=1',
+                    type : 'get',
+                    data : {
+                        store_name : function(){
+                            return $('#store_name').val();
+                        },
+                        store_id : '{$store.store_id}'
+                    }
+                },
+                maxlength: 20
+            },
+            tel: {
+                required: true,
+                minlength:6
+            },
+            image_1: {
+                //accept: "jpg|jpeg|png|gif"//高版本jquery不支持
+            },
+            image_2: {
+                //accept: "jpg|jpeg|png|gif"//高版本jquery不支持
+            },
+            notice: {
+                required : true
+            }
+        },
+        messages: {
+            owner_name: {
+                required: '{$lang.input_owner_name}'
+            },
+            store_name: {
+                required: '{$lang.input_store_name}',
+                remote: '{$lang.name_exist}',
+                maxlength: '{$lang.note_for_store_name}'
+            },
+            tel: {
+                required: '{$lang.input_tel}',
+                minlength: '{$lang.phone_tel_error}'
+            },
+            image_1: {
+                accept: '{$lang.select_valid_image}'
+            },
+            image_2: {
+                accept: '{$lang.select_valid_image}'
+            },
+            notice: {
+                required: '{$lang.check_notice}'
+            }
+        }
+    });
+
+	<!--{if $store && $store.sgrade}-->
+	$(".apply-submit li[sgid='{$store.sgrade}']").addClass('selected');
+	<!--{else}-->
+	$(".apply-submit .each:eq(0)").addClass('selected');
+	$('input[name="sgrade_id"]').val($(".apply-submit .each:eq(0)").attr('sgid'));
+	<!--{/if}-->
+
+	$(".apply-submit .each").click(function(){
+		$(this).addClass('selected');
+		$(this).siblings().removeClass('selected');
+		$('input[name="sgrade_id"]').val($(this).attr('sgid'));
+	});
+});
+//]]>
+</script>
+<style type="text/css">
+.w{width:1000px;}
+</style>
+<div id="main" class="w-full">
+	<div class="page-apply">
+		<div class="w logo mt10">
+			<p><a href="{$site_url}" title="{$site_title}"><img alt="{$site_title}" src="{$site_logo}" /></a></p>
+		</div>
+		<div class="w content clearfix">
+			<div class="left">
+            	<div class="steps">
+                    <dl class="setpbox">
+                        <dt>申请步骤</dt>
+                        <dd>
+                            <ul>
+                                <li class="succeed">入驻指南</li>
+                                <li class="succeed">签订入驻协议</li>
+                                <li class="current">填写商家信息</li>
+                                <li>平台审核</li>
+                                <li>店铺开通</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="setpbox contact-mall mt10">
+                        <dt>平台联系方式</dt>
+                        <dd>
+                            <p class="tel"><span>电话：</span>{$setting.phone}</p>
+                            <p class="email mt10"><span>邮箱：</span>{$setting.email}</p>
+                        </dd>
+                    </dl>
+                </div>
+			</div>
+			<div class="right">
+				<div class="apply-submit">
+				  <form method="post" enctype="multipart/form-data" action="{url app=apply&step=2}" id="apply_form">
+						<div class="sgrade clearfix">
+							<div class="dt">{$lang.store_grade}{$lang.colon}</div>
+							<ul class="clearfix">
+								<!--{foreach from=$sgrades item=sgrade name=fe_sgrade}-->
+								<li class="each" sgid="{$sgrade.grade_id}" {if $smarty.foreach.fe_sgrade.iteration%3 eq 0}style="margin-right:0"{/if}>
+									<h2>{$sgrade.grade_name}</h2>
+									<p>
+										<span>{$lang.goods_limit}{$lang.colon}<em>{$sgrade.goods_limit}</em></span><br />
+										<span>{$lang.space_limit}{$lang.colon}<em>{$sgrade.space_limit}</em></span>
+									</p>
+									<p>
+										<span>{$lang.skin_limit}{$lang.colon}<em>{$sgrade.skin_limit}</em></span><br />
+										<span>{$lang.charge}{$lang.colon}<em>{$sgrade.charge}</em></span>
+									</p>
+									<p>{$lang.add_use}{$lang.colon}
+									   <!--{foreach from=$sgrade.functions item=functions key=k name=v}-->
+									   <!--{if $domain && $k eq 'subdomain'}-->
+									   <span>{$lang.domain}</span>
+									   <!--{else}-->
+									   <span>{$lang.$k}</span>
+									   <!--{/if}-->
+									   <!--{if !$smarty.foreach.v.last}-->
+									   <!--{/if}-->
+									   <!--{/foreach}-->
+									</p>
+								</li>
+								<!--{/foreach}-->
+							</ul>
+							<input name="sgrade_id" type="hidden" value="{$store.sgrade}" />
+						</div>
+					   <dl>
+						  <dt><span class="f60">*</span>{$lang.owner_name}{$lang.colon}</dt>
+						  <dd class="widdt7"><input type="text" class="input border" name="owner_name" value="{$store.owner_name|escape}"/></dd>
+					   </dl>
+					   <dl>
+						  <dt>{$lang.owner_card}{$lang.colon}</dt>
+						  <dd><input type="text" class="input border" name="owner_card" value="{$store.owner_card|escape}" /></dd>
+					   </dl>
+					   <dl>
+						  <dt><span class="f60">*</span>{$lang.store_name}{$lang.colon}</dt>
+						  <dd><input type="text" class="input border" name="store_name" id="store_name" value="{$store.store_name|escape}"/></dd>
+						  
+					   </dl>
+					   <dl>
+						  <dt>{$lang.store_category}{$lang.colon}</dt>
+						  <dd>
+							 <div class="select_add">
+								<select name="cate_id">
+								   <option value="0">{$lang.select_pls}</option>
+								   {html_options options=$scategories selected=$scategory.cate_id}
+								</select>
+							 </div>
+						  </dd>
+						  <dd></dd>
+					   </dl>
+					   <dl>
+						  <dt>{$lang.region}{$lang.colon}</dt>
+						  <dd>
+							  <div class="select_add" id="region" style="widdt:500px;">
+								  <input type="hidden" name="region_id" value="{$store.region_id}" class="mls_id" />
+								  <input type="hidden" name="region_name" value="{$store.region_name}" class="mls_names" />
+								  {if $store.region_name}
+								  <span>{$store.region_name|escape}</span>
+								  <input type="button" value="{$lang.edit}" class="edit_region" />
+								  {/if}
+								  <select class="d_inline"{if $store.region_name} style="display:none;"{/if}>
+									 <option value="0">{$lang.select_pls}</option>
+									 {html_options options=$regions}
+								  </select>
+							   </div>
+						   </dd>
+						   <dd></dd>
+						</dl>
+						<dl>
+							<dt>{$lang.address}{$lang.colon}</dt>
+							<dd><input type="text" class="input border" name="address" value="{$store.address|escape}"/></dd>
+						</dl>
+						<dl>
+							<dt>{$lang.zipcode}{$lang.colon}</dt>
+							<dd><input type="text" class="input border" name="zipcode" value="{$store.zipcode|escape}"/></dd>
+							
+						 </dl>
+						 <dl>
+							 <dt><span class="f60">*</span>{$lang.tel}{$lang.colon}</dt>
+							 <dd>
+								 <input type="text" class="input border" name="tel"  value="{$store.tel|escape}"/>
+							 </dd>
+							
+						  </dl>
+						  <dl class="clearboth">
+							 <dt>{$lang.upload_image}{$lang.colon}</dt>
+							 <dd><input type="file" name="image_1" />
+								   {if $store.image_1}
+									<p class="d_inline"><img src="{$store.image_1}" width="50" style="vertical-align:middle;" /> <a href="{$site_url}/{$store.image_1}" target="_blank">{$lang.view}</a></p>
+									{/if} </dd>
+							 </dd>
+							 <dd><span class="field_notice">{$lang.note_for_image}</span></dd>
+						  </dl>
+						  <dl class="clearboth">
+							 <dt>{$lang.upload_permit}{$lang.colon}</dt>
+							 <dd><input type="file" name="image_2" />
+								 {if $store.image_2}<p class="d_inline"><img src="{$store.image_2}" width="50" style="vertical-align:middle;" /> <a href="{$site_url}/{$store.image_2}" target="_blank">{$lang.view}</a></p>{/if}
+							 </dd>
+							 <dd><span class="field_notice">{$lang.note_for_image}</span></dd>
+						  </dl>
+						  <dl class="clearboth">
+						  	<dt>&nbsp;</dt>
+						  	<dd><input class="btn-apply border0 sdlong fff pointer" type="submit" value="{$lang.submit}" /></dd>
+						 </dl>
+				   </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file=footer.html}

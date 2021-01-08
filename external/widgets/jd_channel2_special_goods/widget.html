@@ -1,0 +1,18 @@
+<div class="channel2-special-goods">
+  <div class="title clearfix">
+    <h2>{$widget_data.model_name}</h2>
+  </div>
+  <div class="goods-list clearfix"> 
+    <!--{foreach from=$widget_data.goods_list item=goods}-->
+    <dl class="clearfix">
+      <dt class="image"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.default_image}" width="115" height="115" /></a> </dt>
+      <dd class="name"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank" title="{$goods.goods_name|escape}"> 
+        <!--{if $goods.pro_name}--> 
+        <span>[{$goods.pro_name}]</span> 
+        <!--{/if}--> 
+        {$goods.goods_name|escape} </a> </dd>
+      <dd class="price"> <span class="old"><del>原价：{$goods.price|price}</del></span> <span class="new">{$goods.pro_price|price}</span> </dd>
+    </dl>
+    <!--{/foreach}--> 
+  </div>
+</div>

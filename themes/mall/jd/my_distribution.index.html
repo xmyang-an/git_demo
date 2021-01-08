@@ -1,0 +1,55 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="search_div clearfix mb20">
+          <form method="get" class="clearfix">
+            <div class="float-left"> <span class="title">店铺名称:</span>
+              <input class="text_normal" type="text" name="real_name" value="{$smarty.get.real_name|escape}" />
+              <input type="hidden" name="app" value="my_distribution" />
+              <input type="submit" class="btn" value="{$lang.search}" />
+            </div>
+            <!--{if $smarty.get.real_name}--> 
+            <a class="detlink" href="{url app=my_distribution}">{$lang.cancel_query}</a> 
+            <!--{/if}-->
+          </form>
+        </div>
+        <div class="tradelist">
+          <div class="subtit">
+            <ul class="clearfix">
+              <li>{$lang.user_name}</li>
+              <li>{$lang.store_name}</li>
+              <li>{$lang.tel}</li>
+              <li>{$lang.add_time}</li>
+              <li>{$lang.profit}</li>
+              <li>{$lang.orders}</li>
+            </ul>
+          </div>
+          <div class="list clearfix"> 
+            <!--{if $teams}--> 
+            <!--{foreach from=$teams item=team}-->
+            <ul class="clearfix" {if $team.refund} style="border-bottom:1px #ddd dashed;color:gray"{/if}>
+              <li>{$team.user_name|escape}</li>
+              <li>{$team.real_name|escape}</li>
+              <li>{$team.phone_mob}</li>
+              <li>{$team.add_time|date:Y.m.d H:i:s}</li>
+              <li>{$team.amount|price}</li>
+              <li><a href="{url app=my_distribution&act=order&did=$team.did}">{$lang.view}</a></li>
+            </ul>
+            <!--{/foreach}--> 
+            <!--{else}-->
+            <ul class="no-data">
+              <li>{$lang.no_records}</li>
+            </ul>
+            <!--{/if}--> 
+          </div>
+          <!--{if $teams}-->
+          <div class="mt10 clearfix">{include file=member.page.bottom.html}</div>
+          <!--{/if}--> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

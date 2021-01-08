@@ -1,0 +1,142 @@
+{include file=header.html}
+<script type="text/javascript">
+//<!CDATA[
+$(function(){
+	$('#coupon_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('.field_notice').hide();
+            $(element).after(error);
+        },
+        success       : function(label){
+            label.addClass('right').text('OK!');
+        },
+        onfocusout : false,
+        onkeyup    : false,
+        rules : {
+           coupon_name : {
+                required : true
+            },
+            coupon_value : {
+                required : true,
+                number : true
+            },
+            min_amount : {
+                required : true,
+                number : true
+            },
+            end_time : {
+                required : true
+            }
+        },
+        messages : {
+            coupon_name : {
+                required : '{$lang.coupon_name_required}'
+            },
+            coupon_value : {
+                required : '{$lang.coupon_value_required}',
+                number : '{$lang.coupon_value_only_number}'
+            },
+            min_amount : {
+                required : '{$lang.mim_amount_required}',
+                number : '{$lang.min_amount_only_number}'
+            },
+            end_time : {
+                required : '{$lang.end_time_required}'
+            }
+        }
+    });
+	
+    $('#add_time_from').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#add_time_to').datepicker({dateFormat: 'yy-mm-dd'});
+	
+	$('.J_DropImage').click(function(){
+		var url = $(this).attr('action');
+		var confirmed = true;
+		if($(this).attr('confirm')){
+			if(!confirm($(this).attr('confirm'))) {
+				confirmed = false;
+			}
+		}
+		if(confirmed) {
+			$.getJSON(url, {}, function(data){
+                if (data.done) {
+                    $('.image').remove();
+                }
+                else {
+                    layer.open({content:data.msg});
+                }
+            });
+		}
+	});
+});
+//]]>
+</script>
+<div id="rightTop">
+    <p>{$lang.coupon}</p>
+    <ul class="subnav">
+        <li><a class="btn1" href="index.php?app=coupon">{$lang.manage}</a></li>
+        <li><span>{if $smarty.get.act eq 'add'}{$lang.add}{else}{$lang.edit}{/if}</span></li>
+    </ul>
+</div>
+<div class="info">
+    <form method="post" id="coupon_form">
+        <table class="infoTable">
+            <tr>
+                <th class="paddingT15">
+                    {$lang.coupon_name}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput2" id="coupon_name" type="text" name="coupon_name" value="{$coupon.coupon_name|escape}" />
+                </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.coupon_value}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput2" id="coupon_value" type="text" name="coupon_value" value="{$coupon.coupon_value}" />
+                </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.time_limit}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput2"  type="text"  name="start_time" value="<!--{if $coupon.start_time}-->{$coupon.start_time|date}<!--{else}-->{$today|date}<!--{/if}-->" id="add_time_from" readonly="readonly" /> {$lang.to} <input class="infoTableInput2" name="end_time"  type="text"  value="<!--{if $coupon.end_time}-->{$coupon.end_time|date}<!--{/if}-->" id="add_time_to" readonly="readonly" />
+                </td>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.min_amount}:</th>
+                <td class="paddingT15 wordSpacing5">
+                	{$lang.min_amount_desc_start} 
+                    <input class="sort_order" id="min_amount" type="text" name="min_amount" value="{$coupon.min_amount}" />
+                     {$lang.min_amount_desc_end}
+                </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    优惠券数量:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput2" id="coupon_count" type="text" name="total" value="{$coupon.total|default:0}" /> <label class="field_notice">0代表无限数量</label>
+                </td>
+            </tr>
+             <tr>
+                <th class="paddingT15">
+                    {$lang.if_issue}:</th>
+                <td class="paddingT15">
+                	<span class="onoff">
+                    <label class="cb-enable {if $coupon.if_issue}selected{/if}">{$lang.yes}</label>
+                    <label class="cb-disable {if !$coupon.if_issue}selected{/if}">{$lang.no}</label>
+                    <input name="if_issue" value="1" type="radio" {if $coupon.if_issue}checked{/if}>
+                    <input name="if_issue" value="0" type="radio" {if !$coupon.if_issue}checked{/if}>
+                  </span>
+                  <span class="grey notice">{$lang.issue_desc}</span>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="ptb20">
+                    <input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+                    <input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

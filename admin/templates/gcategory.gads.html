@@ -1,0 +1,65 @@
+{include file="header.html"} 
+<script type="text/javascript">
+function add_uploadedfile(file_data)
+{
+    var newImg = '<tr id="' + file_data.file_id + '" class="tatr2" ectype="handle_pic" file_name="'+file_data.file_name+'" file_path="'+file_data.file_path+'" file_id="'+file_data.file_id+'"><input type="hidden" name="file_id[]" value="' + file_data.file_id + '" /><td><img width="40px" height="40px" src="' + SITE_URL + '/' + file_data.file_path + '" /></td><td>' + file_data.file_name + '</td><td><a href="javascript:drop_uploadedfile(' + file_data.file_id + ');">{$lang.drop}</a></td></tr>';
+    $('#thumbnails').prepend(newImg);
+}
+
+function drop_uploadedfile(file_id)
+{
+    if(!window.confirm(lang.uploadedfile_drop_confirm)){
+        return;
+    }
+    $.getJSON('index.php?app=gcategory&act=drop_uploadedfile&file_id=' + file_id, function(result){
+        if(result.done){
+            $('#' + file_id).remove();
+        }else{
+            alert('drop_error');
+        }
+    });
+}
+</script> 
+{$build_upload}
+<div id="rightTop">
+    <p>{$lang.gcategory}</p>
+    <ul class="subnav">
+        <li><a class="btn1" href="index.php?app=gcategory">{$lang.manage}</a></li>
+        <li><a class="btn1" href="index.php?app=gcategory&amp;act=add">{$lang.add}</a></li>
+        <li><a class="btn1" href="index.php?app=gcategory&amp;act=export">{$lang.export}</a></li>
+        <li><a class="btn1" href="index.php?app=gcategory&amp;act=import">{$lang.import}</a></li>
+		<li><span>{$lang.add_gads}</span></li>
+    </ul>
+</div>
+<div class="info">
+		<table class="infoTable">
+			<tr>
+				<th class="paddingT15"> {$lang.gcategory}:</th>
+				<td class="paddingT15 wordSpacing5">{$gcategory.cate_name}</td>
+			</tr>
+			<tr>
+				<th class="paddingT15">{$lang.upload_types}:</th>
+				<td class="paddingT15 wordSpacing5">
+					<iframe id="divComUploadContainer" src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}" width="500" height="46" scrolling="no" frameborder="0"> </iframe></td>
+			</tr>
+			<tr>
+				<th>{$lang.uploaded_files}:</th>
+				<td><div class="tdare">
+						<table  width="700px" cellspacing="0" class="dataTable">
+							<tbody id="thumbnails" class="J_contenteditor">
+								<!-- {foreach from=$files_belong_gcategory item=file} -->
+								<tr class="tatr2" id="{$file.file_id}" ectype="handle_pic" file_name="{$file.file_name|escape}" file_path="{$file.file_path}" file_id="{$file.file_id}">
+									<input type="hidden" name="file_id[]" value="{$file.file_id}" />
+									<td><img alt="{$file.file_name}" src="{$site_url}/{$file.file_path}" width="40px" height="40px" /></td>
+									<td>{$file.file_name}</td>
+									<td>编辑链接:<span class="editable" ectype="inline_edit" fieldname="link_url" fieldid="{$file.file_id}" required="1" title="{$lang.editable}">{if $file.link_url}{$file.link_url}{else}http://{/if}</span></td>
+									<td><a href="javascript:drop_uploadedfile({$file.file_id});">{$lang.drop}</a></td>
+								</tr>
+								<!-- {/foreach} -->
+							</tbody>
+						</table>
+					</div></td>
+			</tr>
+		</table>
+</div>
+{include file="footer.html"} 

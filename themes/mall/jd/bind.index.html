@@ -1,0 +1,261 @@
+{include file=top.html} 
+<script type="text/javascript">
+function checkForm(codeType)
+{
+	var checkResult = true;
+	if(codeType == 'email') {
+		checkResult = checkEmail($('#email'));
+	} else {
+		checkResult = checkPhone($('#phone_mob'));
+	}
+	
+	if($('.J_Password').css('display') == 'none') {
+		if($.trim($('#code').val()) == ''){
+			$('#code').parent().find('.field_notice').css('display', 'inline-block');
+			checkResult = false;
+		}
+	} else {
+		if($.trim($('#password').val()) == '') {	
+			$('#password').parent().find('.field_notice').css('display', 'inline-block');
+			checkResult = false;
+		}
+	}
+	return checkResult;
+}
+
+function checkPhone(o)
+{
+	var phone_mob = $.trim(o.val());
+		
+	if(!is_mobile(phone_mob)){
+		o.parent().find('i').removeClass('ok');
+		o.parent().find('.field_notice').css('display', 'inline-block');
+		return false;
+	}
+	else
+	{
+		o.parent().find('i').addClass('ok');
+		o.parent().find('.field_notice').css('display', 'none');
+			
+		$.ajax({
+             url: SITE_URL + "/index.php?app=member&act=check_phone_mob&ajax=1",
+			 type: "GET",
+             data: {phone_mob: phone_mob},
+             dataType: "json",
+			 async:false,
+             success: function(data){
+				if(data == true) {
+					// 该手机没有被注册过，允许注册
+					$('.J_Password').hide();
+					$('.J_PhoneCaptcha').show();
+					$('.J_PhoneNotice').hide();
+				}
+				else
+				{
+					// 该手机已经注册过，显示登陆密码框
+					$('.J_Password').show();
+					$('.J_PhoneCaptcha').hide();
+					$('.J_PhoneNotice').show();
+				}
+				
+			}
+
+		});
+		return true;
+	}
+}
+function checkEmail(o)
+{
+	var email = $.trim(o.val());
+		
+	if(!is_email(email)){
+		o.parent().find('i').removeClass('ok');
+		o.parent().find('.field_notice').css('display', 'inline-block');
+		return false;
+	}
+	else
+	{
+		o.parent().find('i').addClass('ok');
+		o.parent().find('.field_notice').css('display', 'none');
+		
+		$.ajax({
+			url: SITE_URL + "/index.php?app=member&act=check_email_info&ajax=1",
+			type: "GET",
+			data: {email: email},
+			dataType: "json",
+			async:false,
+			success: function(data){
+				if(data == true) {
+					// 该邮箱没有被注册过，允许注册
+					$('.J_Password').hide();
+					$('.J_EmailCaptcha').show();
+					$('.J_EmailNotice').hide();
+				}
+				else
+				{
+					// 该邮箱已经注册过，显示登陆密码框
+					$('.J_Password').show();
+					$('.J_EmailCaptcha').hide();
+					$('.J_EmailNotice').show();
+				}
+			}
+		});
+		return true;
+	}
+}
+
+$(function(){
+	
+	$('#phone_mob').change(function(){
+		return checkPhone($(this));
+	});
+	$('#email').change(function(){
+		return checkEmail($(this));
+	});
+	$('#code, #password').change(function(){
+		$(this).parent().find('.field_notice').css('display', $.trim($(this).val()) == '' ? 'inline-block' : 'none');
+	})
+	$('.J_Submit').click(function(){
+		if(checkForm('{$smarty.get.codeType|default:phone}') == true){
+			return true;
+		} else return false;
+	});
+	
+	$('#send_phonecode').click(function(){
+		var phone_mob = $.trim($("input[name='phone_mob']").val());
+		if(phone_mob=='' || !is_mobile(phone_mob)){
+			alert("{$lang.phone_mob_invalid}");
+			return;
+		}
+		$(this).attr("disabled", true);
+		send_phonecode($(this), {from: "member_bind", phone_mob: phone_mob}, 120);
+	});
+	$('#send_emailcode').click(function(){
+		var email = $.trim($("input[name='email']").val());
+		if(email=='' || !is_email(email)){
+			alert("{$lang.email_invalid}");
+			return;
+		}
+		$(this).attr("disabled", true);
+		send_emailcode($(this), {from: "member_bind", email: email}, 120);
+	});
+});
+</script>
+<style>
+#footer{ background:#fff;}
+#footer, #footer a, #footer .foot-group .footnav .copy, #footer .foot-group .footnav .copy a{color:#bbb;}
+#footer .foot-group .footnav{margin-left:0;margin-top:0;}
+#footer .foot-group .footnav ul{width:454px; margin:0 auto;}
+#footer a:hover{color:#f60; text-decoration:none;}
+.w{width:1000px;}
+</style>
+<div id="main" class="w-full">
+	<div id="page-member-bind" class="w-full page-auth mt20 mb20">
+		<div class="wrap">
+			<div class="w logo mb10">
+				<p><a href="{$site_url}" title="{$site_title}"><img alt="{$site_title}" src="{$site_logo}" /></a></p>
+			</div>
+			<div class="form clearfix w J_TabForm">
+				<form id="member_bind_form" method="post">
+					<!--// 不建议邮箱验证，切换卡隐藏掉
+                    <div class="pb20">
+						<ul class="tab J_Tab clearfix">
+							<li {if $smarty.get.codeType eq 'phone' || !$smarty.get.codeType}class="active"{/if}><a href="{url app=bind&codeType=phone}">手机短信验证</a></li>
+							<li {if $smarty.get.codeType eq 'email'}class="active"{/if}><a href="{url app=bind&codeType=email}">邮箱验证</a></li>
+						</ul>
+						
+					</div>-->
+					<!--{if $smarty.get.codeType eq 'phone' || !$smarty.get.codeType}-->
+					<div class="each mt20">
+                    	<!--以下"用户昵称"字段仅做为 腾讯QQ登录审核过程中使用，如果腾讯QQ登录审核通过之后应删掉-->
+                    	<dl class="clearfix">
+							<dt>用户昵称 :</dt>
+							<dd>
+								<input type="text"  class="input" value="{$bind.real_name}" />
+								<i></i> </dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><b>*</b>{$lang.phone_mob} :</dt>
+							<dd>
+								<input type="text" name="phone_mob" id="phone_mob" class="input"  />
+								<label class="field_notice" style="display:none">{$lang.phone_mob_invalid}</label>
+								<i class="i-phone"></i> </dd>
+						</dl>
+						<dl class="J_PhoneCaptcha clearfix">
+							<dt><b>*</b>{$lang.phone_captcha} :</dt>
+							<dd class="captchaCode clearfix">
+								<input type="text" name="code" id="code" class="input float-left" />
+								<input type="button" id="send_phonecode" class="float-left btn-captcha" value="{$lang.get_captcha}" />
+								<label class="field_notice" style="display:none">{$lang.phone_captcha_empty}</label>
+							</dd>
+						</dl>
+						<dl class="J_PhoneNotice hidden clearfix">
+							<dt>&nbsp;</dt>
+							<dd>
+								<div class="notice-word"><p class="yellow">该手机已经被注册，请填写登陆密码完成登陆</p></div>
+							</dd>
+						</dl>
+						<dl class="J_Password hidden clearfix">
+							<dt><b>*</b>{$lang.password} :</dt>
+							<dd>
+								<input type="password" name="password" id="password" class="input"  />
+								<label class="field_notice" style="display:none">{$lang.password_required}</label>
+								<i class="i-psw"></i> </dd>
+						</dl>
+					</div>
+					<!--{else}-->
+					<div class="each mt20">
+                    	<!--以下"用户昵称"字段仅做为 腾讯QQ登录审核过程中使用，如果腾讯QQ登录审核通过之后应删掉-->
+                    	<dl class="clearfix">
+							<dt>用户昵称 :</dt>
+							<dd>
+								<input type="text"  class="input" value="{$bind.real_name}" />
+								<i></i> </dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><b>*</b>{$lang.email} :</dt>
+							<dd>
+								<input type="text" name="email" id="email" class="input"  />
+								<label class="field_notice" style="display:none">{$lang.email_invalid}</label>
+								<i class="i-psw"></i> </dd>
+						</dl>
+						<dl class="J_EmailCaptcha clearfix">
+							<dt><b>*</b>{$lang.email_captcha} :</dt>
+							<dd class="captchaCode clearfix">
+								<input type="text" name="code" id="code" class="input float-left" />
+								<input type="button" id="send_emailcode" class="float-left btn-captcha" value="{$lang.get_captcha}" />
+								<label class="field_notice" style="display:none">{$lang.email_captcha_empty}</label>
+							</dd>
+						</dl>
+						<dl class="J_EmailNotice hidden clearfix">
+							<dt>&nbsp;</dt>
+							<dd>
+								<div class="notice-word"><p class="yellow">该邮箱已经被注册，请填写登陆密码完成登陆</p></div>
+							</dd>
+						</dl>
+						<dl class="J_Password hidden clearfix">
+							<dt><b>*</b>{$lang.password} :</dt>
+							<dd>
+								<input type="password" name="password" id="password" class="input"  />
+								<label class="field_notice" style="display:none">{$lang.password_required}</label>
+								<i class="i-psw"></i> </dd>
+						</dl>
+					</div>
+					<!--{/if}-->
+					<div class="submit">
+						<dl class="clearfix">
+							<dt>&nbsp;</dt>
+							<dd>
+								<input type="submit" value="{$lang.submit}" class="register-submit J_Submit" title="{$lang.submit}" />
+								<input type="hidden" name="ret_url" value="{$ret_url}" />
+								
+							</dd>
+						</dl>
+					</div>
+					<div class="notice-word mt20" style="width:170px;margin-left:160px;"><p class="yellow">请在10分钟内完成验证</p></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+{include file=member.footer.html}

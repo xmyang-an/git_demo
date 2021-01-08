@@ -1,0 +1,79 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+	$('.J_Period a').click(function(){
+		$(this).parent().find('a').removeClass('selected');
+		$(this).addClass('selected');
+		$(this).parent().find('input[name="period"]').val($(this).attr('value'));
+	});
+	
+	$('.J_Buy').click(function(){
+		//if(confirm('{$lang.buy_confirm}'))
+		//{
+			var aid = $.trim($('input[name="aid"]').val());
+			var period = $.trim($('input[name="period"]').val());
+			$.getJSON(SITE_URL + '/index.php?app=appmarket&act=buy', {'id':aid, 'period':period}, function(data){
+				if (data.done)
+				{
+					//alert(data.msg);
+					location.href= SITE_URL + '/index.php?app=appmarket&act=cashier&id=' + data.retval.bid;
+					
+				}
+				else
+				{
+					alert(data.msg);
+				}
+			});
+		//}
+	});
+});
+</script>
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool clearfix"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="appmarket">
+              <div class="appdetail mb20 clearfix">
+                <form>
+                  <div class="default-image float-left"><img width="240" height="167" src="{$appmarket.logo}" /></div>
+                  <ul class="app-info float-left">
+                    <li>
+                      <h3><font class="f60">[{$lang.$appmarket.appid}]</font> {$appmarket.title}</h3>
+                      <p class="gray">{$appmarket.summary}</p>
+                    </li>
+                    <li class="twocol"> <span class="first">{$lang.format_price}{$lang.colon}</span> <span class="price"><em>{$appmarket.config.charge|price}</em> {$lang.yuan}/{$lang.month}</span> </li>
+                    <li class="twocol clearfix"> <span class="float-left first">{$lang.format_period}{$lang.colon}</span> <span class="float-left period clearfix J_Period"> 
+                      <!--{foreach from=$appmarket.config.period item=item name=fe_item}--> 
+                      <!--{if $smarty.foreach.fe_item.first}-->
+                      <input type="hidden" name="period" value="{$item.key}" class="J_Period" />
+                      <!--{/if}--> 
+                      <a href="javascript:;" value="{$item.key}" {if $smarty.foreach.fe_item.first} class="selected"{/if}><b>{$item.value}</b></a> 
+                      <!--{/foreach}--> 
+                      </span> </li>
+                    <li class="twocol"> <span>
+                      <input type="hidden" name="aid" value="{$appmarket.aid}" class="J_Aid" />
+                      <input type="button" class="btn-buy J_Buy" value="{if !$appmarket.checkIsRenewal}{$lang.buy}{else}{$lang.renewal}{/if}" />
+                      </span> </li>
+                  </ul>
+                </form>
+              </div>
+              <div class="attr-tabs">
+                <ul class="user-menu">
+                  <li class="active"> <a style="border-left:1px solid #ddd;" href="javascript:;"> <span> {$lang.app_detail} </span> </a> </li>
+                  <!--<li> <a style="border-left:1px solid #ddd;" href="javascript:;"> <span> {$lang.sale_record} </span> </a> </li>-->
+                </ul>
+                </ul>
+              </div>
+              <div class="option_box">
+                <div class="default fs14"> {$appmarket.description|escape:editor} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

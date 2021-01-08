@@ -1,0 +1,201 @@
+{include file="header.html"} 
+<style type="text/css">
+.period input{ vertical-align:middle;margin-right:3px; display:inline-block}
+.period label{margin-right:10px; width:60px; display:inline-block;margin-bottom:5px;}
+</style>
+<script type="text/javascript">
+//<!CDATA[
+$(function(){
+    $('#appmarket_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('.field_notice').hide();
+            $(element).after(error);
+        },
+        success       : function(label){
+            label.addClass('right').text('OK!');
+        },
+        rules : {
+			appid  : {
+                required : true
+            },
+            title : {
+                required : true,
+                maxlength: 100
+            },
+			"config[charge]" : {
+				number     : true,
+				required : true,
+				min : 0
+			}
+        },
+        messages : {
+			appid  : {
+                required : '{$lang.appid_required}'
+            },
+            title : {
+                required : '{$lang.title_required}',
+                maxlength: '{$lang.title_maxlength_error}'
+            },
+			"config[charge]" : {
+				number     : '{$lang.number_only}',
+				required : '{$lang.price_empty}',
+                min : '{$lang.price_ge_0}'
+			}
+        }
+    });
+});
+
+function add_uploadedfile(file_data)
+{
+    var newImg = '<tr id="' + file_data.file_id + '" class="tatr2" ectype="handle_pic" file_name="'+file_data.file_name+'" file_path="'+file_data.file_path+'" file_id="'+file_data.file_id+'"><input type="hidden" name="file_id[]" value="' + file_data.file_id + '" /><td><img width="40px" height="40px" src="' + SITE_URL + '/' + file_data.file_path + '" /></td><td>' + file_data.file_name + '</td><td><a ectype="insert_editor" href="javascript:;">{$lang.insert_editor}</a> | <a href="javascript:drop_uploadedfile(' + file_data.file_id + ');">{$lang.drop}</a></td></tr>';
+    $('#thumbnails').prepend(newImg);
+}
+
+function drop_uploadedfile(file_id)
+{
+    if(!window.confirm(lang.uploadedfile_drop_confirm)){
+        return;
+    }
+    $.getJSON('index.php?app=appmarket&act=drop_uploadedfile&file_id=' + file_id, function(result){
+        if(result.done){
+            $('#' + file_id).remove();
+        }else{
+            alert('drop_error');
+        }
+    });
+}
+//]]>
+</script> 
+{$build_editor}
+{$build_upload}
+<div id="rightTop">
+	<p>{$lang.appmarket}</p>
+	<ul class="subnav">
+		<li><a class="btn1" href="index.php?app=appmarket">{$lang.manage}</a></li>
+		<li><span>{if $appmarket.aid}{$lang.edit}{else}{$lang.add}{/if}</span></li>
+	</ul>
+</div>
+<div class="info">
+	<form method="post" enctype="multipart/form-data" id="appmarket_form">
+		<table class="infoTable">
+			<tr>
+				<th class="paddingT15"> {$lang.appid}:</th>
+				<td class="paddingT15 wordSpacing5">
+                	<!--{if $appmarket}-->
+                    {$lang.$appmarket.appid}
+                    <!--{else}-->
+					<select name="appid">
+						<option value="">{$lang.select_pls}</option>
+						<!--{foreach from=$applist item=item key=key}-->
+						<option value="{$item.key}" {if $item.key eq $appmarket.appid} selected="selected"{/if}>{$item.value}</option>
+						<!--{/foreach}-->
+					</select>
+                    <!--{/if}-->
+				</td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.category}:</th>
+				<td class="paddingT15 wordSpacing5">
+					<select name="category">
+						<option value="1">{$lang.promotool}</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.title}:</th>
+				<td class="paddingT15 wordSpacing5"><input style="width:400px;" id="title" type="text" name="title" value="{$appmarket.title}" /></td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.summary}:</th>
+				<td class="paddingT15 wordSpacing5"><textarea class="infoTableInput" style="width:400px;height:34px;" id="summary" name="summary">{$appmarket.summary|escape}</textarea></td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.logo}:</th>
+				<td class="paddingT15 wordSpacing5">
+                    <div class="input-file-show">
+                        <span class="show"><a href="javascript:;" class="show_image"><i class="fa fa-image"></i></a></span>
+                        <span class="type-file-box">
+                            <input type="text" name="textfield" class="type-file-text" />
+                            <input type="button" name="button" value="选择上传..." class="type-file-button" />
+                            <input class="type-file-file" name="logo" id="app_logo" type="file" size="30" hidefocus="true">
+                            <label class="field_notice">{$lang.logo_notice}</label>
+                        </span>
+                        <!--{if $appmarket.logo}-->
+                        <div class="show_img"><img src="{$appmarket.logo}" max_height="90" /></div>
+                        <!--{/if}-->
+                    </div>
+                </td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.charge}:</th>
+				<td class="paddingT15 wordSpacing5">
+					<input type="text" class="width_short" id="config[charge]" type="text" name="config[charge]" value="{$appmarket.config.charge}"> {$lang.yuan}/{$lang.month}
+				</td>
+			</tr>
+			
+			<tr>
+				<th class="paddingT15"> {$lang.period}:</th>
+				<td class="paddingT15 wordSpacing5 period">
+					<!--{foreach from=$period item=item name=fe_item}-->
+					<label><input type="checkbox" name="config[period][]" value="{$item.key}" {if $appmarket.config.period && in_array($item.key, $appmarket.config.period)} checked="checked"{/if} />{$item.value}</label>
+					<!--{if $smarty.foreach.fe_item.iteration % 7 eq 0}--><br /><!--{/if}-->
+					<!--{/foreach}-->
+				</td>
+			</tr>
+			
+			<tr>
+				<th class="paddingT15"> <label for="description">{$lang.description}:</label></th>
+				<td class="paddingT15 wordSpacing5"><textarea id="description" name="description" style="width:650px;height:400px;">{$appmarket.description|escape}</textarea></td>
+			</tr>
+			<tr>
+				<th>{$lang.upload_types}:</th>
+				<td height="100" valign="middle">
+                	<div id="divUploadTypeContainer">
+						<input name="upload_types" id="bat_upload" type="radio" value="bat_upload" checked="checked" />
+						<label for="bat_upload">{$lang.bat_upload}</label>
+						<input name="upload_types" id="com_upload" type="radio" value="com_upload" />
+						<label for="com_upload">{$lang.com_upload}</label>
+					</div>
+					<div id="divSwfuploadContainer" class="WebUpload_filePicker">
+						<div id="divButtonContainer"> <span id="spanButtonPlaceholder"></span> </div>
+						<div id="divFileProgressContainer"></div>
+					</div>
+					<iframe id="divComUploadContainer" style="display:none;" src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}" width="500" height="46" scrolling="no" frameborder="0"> </iframe></td>
+			</tr>
+			<tr>
+				<th>{$lang.uploaded_files}:</th>
+				<td><div class="tdare">
+						<table  width="600px" cellspacing="0" class="dataTable">
+							<tbody id="thumbnails" class="J_descriptioneditor">
+								<!-- {foreach from=$files_belong_appmarket item=file} -->
+								<tr class="tatr2" id="{$file.file_id}" ectype="handle_pic" file_name="{$file.file_name|escape}" file_path="{$file.file_path}" file_id="{$file.file_id}">
+									<input type="hidden" name="file_id[]" value="{$file.file_id}" />
+									<td><img alt="{$file.file_name}" src="{$site_url}/{$file.file_path}" width="40px" height="40px" /></td>
+									<td>{$file.file_name}</td>
+									<td><a ectype="insert_editor" href="javascript:;">{$lang.insert_editor}</a> | <a href="javascript:drop_uploadedfile({$file.file_id});">{$lang.drop}</a></td>
+								</tr>
+								<!-- {/foreach} -->
+							</tbody>
+						</table>
+					</div></td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> <label>{$lang.enable}:</label></th>
+				<td class="paddingT15">
+                    <span class="onoff">
+                    <label class="cb-enable {if $appmarket.status}selected{/if}">{$lang.yes}</label>
+                    <label class="cb-disable {if !$appmarket.status}selected{/if}">{$lang.no}</label>
+                    <input name="status" value="1" type="radio" {if $appmarket.status}checked{/if}>
+                    <input name="status" value="0" type="radio" {if !$appmarket.status}checked{/if}>
+                  </span>
+                  <span class="grey notice"></span>
+			</tr>
+			<tr>
+				<th></th>
+				<td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" value="{$lang.submit}" />
+					<input class="formbtn" type="reset" value="{$lang.reset}" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+{include file="footer.html"} 

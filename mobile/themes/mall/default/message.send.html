@@ -1,0 +1,84 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+    $('.J_SelectOK').click(function (){
+		var name = '';
+		var str = $('input[name="to_user_name"]').val();
+		$('.friends-list').find('li').each(function(index, element) {
+			name = $(this).attr('data-value');
+			if($(this).hasClass('active')){
+            	doFriend(name, 'add');
+        	}else{
+           	 	doFriend(name, 'delete');
+        	}
+        });
+	});
+});
+function doFriend(user_name, action){
+    var input_name = $("input[name='to_user_name']").val();
+    var key, i = 0;
+    var exist = false;
+    var arrOld = new Array();
+    var arrNew = new Array();
+    input_name = input_name.replace(/\uff0c/g,',');
+    arrOld     = input_name.split(',');
+    for(key in arrOld){
+        arrOld[key] = $.trim(arrOld[key]);
+        if(arrOld[key].length > 0){
+            arrOld[key] == user_name &&  action == 'delete' ? null : arrNew[i++] = arrOld[key];
+            arrOld[key] == user_name ? exist = true : null;
+        }
+    }
+    if(!exist && action == 'add'){
+        arrNew[i] = user_name;
+    }
+    $("input[name='to_user_name']").val(arrNew);
+}
+</script>
+<div id="page-message">
+  <div class="page-actions"><i></i></div>
+  <div class="send-message">
+    <form method="post" class="fun-form-style">
+      <div class="form">
+      
+        <div class="record-filter pop-layer-common J_SendMessagePopLayer">
+          <div class="wraper has-title">
+            <div class="hd"><i class="closed popClosed"></i>好友列表({$friend_num})</div>
+            <div class="bd">
+              <ul class="friends-list checkboxUiWraper">
+                <!--{foreach from=$friends item=friend name=fe_friend}-->
+                <li class="webkit-box checkboxUiStyle checkboxUiStyle1 border-bottom {if $smarty.foreach.fe_friend.last}border-b-0{/if}" data-value="{$friend.user_name}">
+                  <div class="lp flex1 webkit-box"><span class="pl10"><img width="40" height="40" src="{$friend.portrait}" class="mr10" />{$friend.user_name|escape}</span></div>
+                  <div class="input rp box-align-center pr10">
+                    <input type="checkbox">
+                  </div>
+                </li>
+                <!--{/foreach}-->
+              </ul>
+            </div>
+            <div class="ft pop-btn popClosed J_SelectOK">完成</div>
+          </div>
+        </div>
+        
+        <dl>
+          <dd class="webkit-box"> <span>收<s style="margin:0 7px">件</s>人</span>
+            <input type="text" name="to_user_name" class="input flex1 J_SelectUserList" style="margin-right:0;" value="{$to_user_name}" />
+            <p class="J_PopLayer" data-PopLayer="{popLayer:'.J_SendMessagePopLayer',top:'35%'}" style="padding-left:35px;width:25px; text-align:right">
+            <i class="psmb-icon-font mr10 f99 box-align-center">&#xe629;</i> </p></dd>
+        </dl>
+        <dl>
+          <dt><span>消息内容</span></dt>
+          <dd class="webkit-box msg-content" style=" height:auto; line-height:18px;">
+            <textarea name="msg_content" class="flex1"></textarea>
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <div class="extra padding10 mt10">
+        <input type="hidden" name="ret_url" class="J_AjaxFormRetUrl" value="{url app=message&act=newpm}" />
+        <input type="submit" class="J_AjaxFormSubmit btn-alipay" value="{$lang.submit}" />
+      </div>
+    </form>
+  </div>
+</div>
+{include file=footer.html} 

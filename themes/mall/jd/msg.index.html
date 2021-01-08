@@ -1,0 +1,51 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right" class="clearfix"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="eject_wrap_msg clearfix">
+          <div class="eject_con">
+            <div class="msg">
+              <div class="margin2">
+                <div class="notice-word">
+                  <p> 
+                    <!--{ if $msg.phone_mob}--> 
+                    接收短信号码：<strong class="fs14 f60">{$msg.phone_mob}</strong> <a href="{url app=member&act=phone&ret_url=$ret_url}" class="mr20">[修改]</a> 短信可用数量：<strong class="fs14 f60"> {$msg.num|default:0} </strong>{$lang.item}，
+                    已发送数量：<strong class="fs14 f60"> {$msg.sendTotal|default:0} </strong>{$lang.item} 
+                    <!--{else}--> 
+                    您还没有绑定手机，不能使用短信功能，请先绑定手机！ <a href="{url app=member&act=phone&ret_url=$ret_url}">绑定</a> 
+                    <!--{/if}--> 
+                  </p>
+                </div>
+              </div>
+              <form method="post" id="msg_form">
+                <div class="mt20" style="line-height:30px;color:#333;"> <span>是否开启：</span>
+                  <label>
+                    <input type="radio" name="state" value="1"{if $msg.state eq "1"} checked="checked"{/if} />
+                    {$lang.yes} </label>
+                  <label>
+                    <input type="radio" name="state" value="0"{if $msg.state eq "0"} checked="checked"{/if} />
+                    {$lang.no} </label>
+                  <br />
+                  <span>选择发送：</span> 
+                  <!--{if $functions}--> 
+                  {foreach from=$functions item=fun}
+                  <input type="checkbox" name="functions[]" {if in_array($fun, $checked_functions)} checked{/if} value="{$fun}" id="function_{$fun}" />
+                  <label for="function_{$fun}">&nbsp;{$lang.$fun}</label>
+                  &nbsp;&nbsp;
+                  {/foreach} 
+                  <!--{/if}--> 
+                  <br />
+                  <div class="submit" style="padding-left:0;">
+                    <input type="submit" name="Submit" value="{$lang.submit}" class="btn mt20" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

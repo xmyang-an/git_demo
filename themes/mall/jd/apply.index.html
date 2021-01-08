@@ -1,0 +1,54 @@
+{include file=top.html}
+<style type="text/css">
+.w{width:1000px;}
+</style>
+<div id="main" class="w-full">
+	<div class="page-apply">
+		<div class="w logo mt10">
+			<p><a href="{$site_url}" title="{$site_title}"><img alt="{$site_title}" src="{$site_logo}" /></a></p>
+		</div>
+		<div class="w content clearfix">
+			<div class="left">
+            	<div class="steps">
+                    <dl class="setpbox">
+                        <dt>申请步骤</dt>
+                        <dd>
+                            <ul>
+                                <li class="current">入驻指南</li>
+                                <li>签订入驻协议</li>
+                                <li>填写商家信息</li>
+                                <li>平台审核</li>
+                                <li>店铺开通</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="setpbox contact-mall mt10">
+                        <dt>平台联系方式</dt>
+                        <dd>
+                            <p class="tel"><span>电话：</span>{$setting.phone}</p>
+                            <p class="email mt10"><span>邮箱：</span>{$setting.email}</p>
+                        </dd>
+                    </dl>
+                </div>
+			</div>
+			<div class="right">
+				<div class="joinin-info">
+					<ul class="nav J_tab">
+						<!--{foreach from=$articles item=article name=fe_article}-->
+						<li {if $smarty.foreach.fe_article.first}class="on"{/if} {if $smarty.foreach.fe_article.last} style="border:0;"{/if}>{$article.title|escape}</li>
+						<!--{/foreach}-->
+					</ul>
+					<ul class="tab-content">
+						<!--{foreach from=$articles item=article name=fe_article}-->
+						<li {if !$smarty.foreach.fe_article.first} class="hidden"{/if}>{$article.content}</li>
+						<!--{/foreach}-->
+					</ul>
+              </div>
+			  <div class="joinin-btn">
+			  		<a href="{url index.php?app=apply&step=1}" target="_self">我要入驻</a>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file=footer.html}

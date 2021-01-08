@@ -1,0 +1,85 @@
+{include file="header.html"}
+<div id="rightTop">
+    <p>{$lang.integral_manage}</p>
+    <ul class="subnav">
+    	<li><a class="btn1" href="index.php?app=integral">积分列表</a></li>
+        <li><span>{$lang.integral_setting}</span></li>
+    </ul>
+</div>
+<div class="info">
+  <form method="post">
+  	<table class="infoTable">
+            <tr>
+                <th class="paddingT15">
+                    {$lang.integral_enabled}:</th>
+                <td class="paddingT15">
+                  <span class="onoff">
+                    <label class="cb-enable {if $setting.integral_enabled}selected{/if}">{$lang.open}</label>
+                    <label class="cb-disable {if !$setting.integral_enabled}selected{/if}">{$lang.close}</label>
+                    <input name="integral_enabled" value="1" type="radio" {if $setting.integral_enabled}checked{/if}>
+                    <input name="integral_enabled" value="0" type="radio" {if !$setting.integral_enabled}checked{/if}>
+                  </span>
+                  <span class="grey notice"></span>      
+          		</td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.exchange_rate}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" type="text" name="exchange_rate" value="{$setting.exchange_rate}"/>
+                <span class="grey">{$lang.exchange_rate_note}</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.register_integral}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" type="text" name="register_integral" value="{$setting.register_integral}"/>
+                    <span class="grey">{$lang.register_integral_note}</span>
+                </td>
+            </tr>
+             <tr>
+                <th class="paddingT15">
+                    {$lang.sign_in_integral}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" type="text" name="sign_in_integral" value="{$setting.sign_in_integral}"/>
+					<span class="grey">{$lang.sign_in_integral_note}</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.open_integral}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" type="text" name="open_integral" value="{$setting.open_integral}"/>
+                    <span class="grey">{$lang.open_integral_note}</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.buying_integral}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <span class="grey" style="width:70px;margin-right:10px;display:inline-block;">{$lang.store_sgrade}</span>
+                    <span class="grey">{$lang.give_integral}</span>
+                </td>
+            </tr>
+            <!--{foreach from=$sgrades item=item}-->
+            <tr>
+                <th class="paddingT15">
+                 </th>
+                <td class="paddingT15 wordSpacing5">
+                	<span style="width:70px;margin-right:10px;display:inline-block;">{$item.grade_name}:</span>
+                    <input style="width:55px;" type="text" name="buying_integral[{$item.grade_id}]" value="{$item.buying_integral|default:0}"/>
+                </td>
+            </tr>
+            <!--{/foreach}-->
+			 <tr>            
+			 <th></th>
+            <td class="ptb20">
+                <input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+                <input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" />
+            </td>
+        </tr>
+        </table>
+  </form>
+</div>
+{include file="footer.html"}

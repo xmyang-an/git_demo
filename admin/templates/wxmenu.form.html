@@ -1,0 +1,141 @@
+{include file="header.html"}
+<script type="text/javascript">
+$(function(){
+    $('#weixin_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('.field_notice').hide();
+            $(element).after(error);
+        },
+        success       : function(label){
+            label.addClass('right').text('OK!');
+        },
+        onfocusout : false,
+        onkeyup    : false,
+        rules : {
+            name : {
+                required : true
+            },
+            sort_order : {
+                number   : true
+            }
+        },
+        messages : {
+            name : {
+                required : '{$lang.name_empty}'
+            },
+            sort_order  : {
+                number   : '{$lang.number_only}'
+            }
+        }
+    });
+	
+	$('input[name="type"]').change(function(){
+		var type = $(this).val();
+		$('tr.sel').hide();
+		$('tr.'+type).show();
+	});
+	
+	$('tr.sel').hide();
+	$('tr.'+$('input[name="type"]:checked').val()).show();
+});
+</script>
+<div id="rightTop">
+    <p>{$lang.wxmenu}</p>
+    <ul class="subnav">
+        <li><a class="btn1" href="index.php?app=wxmenu">{$lang.menus_list}</a></li>
+        <li><span>{if $menu.id}{$lang.edit}{else}{$lang.add}{/if}</span></li>
+    </ul>
+</div>
+<div class="explanation" id="explanation">
+  <div class="title" id="checkZoom">
+  	<i class="fa fa-lightbulb-o"></i>
+    <h4 title="{$lang.operation_tip}">{$lang.operation_tip}</h4>
+  </div>
+  <ul>
+    <li><i class="fa fa-angle-double-right"></i> {$lang.wxmenu_desc_1}</li>
+    <li><i class="fa fa-angle-double-right"></i> {$lang.wxmenu_desc_2}</li>
+  </ul>
+</div>
+<div class="info">
+    <form method="post" enctype="multipart/form-data" id="weixin_form">
+        <table class="infoTable">
+            <tr>
+                <th class="paddingT15">
+                    {$lang.menu_name}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" id="name" type="text" name="name" value="{$menu.name|escape}" /> <label class="field_notice"></label>               </td>
+            </tr>
+            <tr>
+                <th class="paddingT15">
+                    <label for="parent_id">{$lang.parent}:</label></th>
+                <td class="paddingT15 wordSpacing5">
+                    <select id="parent_id" name="parent_id"><option value="0">{$lang.select_pls}</option>{html_options options=$parents selected=$menu.parent_id}</select> <label class="field_notice"></label>               </td>
+            </tr>
+            <tr>
+              <th class="paddingT15">{$lang.menu_type}:</th>
+              <td class="paddingT15 wordSpacing5"><p>
+                <label>
+                  <input type="radio" name="type" value="view" {if $menu.type neq 'key'}checked="checked"{/if} />
+                  {$lang.to_url}</label>&nbsp;&nbsp;
+                <label>
+                  <input type="radio" name="type" value="click" {if $menu.type eq 'click'}checked="checked"{/if} />
+                  {$lang.send_msg}</label>
+                   <label class="field_notice"></label>
+              </p></td>
+            </tr>
+            <tr class="view sel">
+                <th class="paddingT15">
+                    {$lang.url}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" type="text" name="link" value="{$menu.link}" />  <label class="field_notice"></label>              </td>
+            </tr>
+            <tr class="click sel hidden">
+                <th class="paddingT15">
+                    {$lang.title}:</th>
+                <td class="paddingT15 wordSpacing5">
+                	<input type="hidden" name="reply_id" value="{$menu.reply_id}" />
+                    <input class="infoTableInput" type="text" name="reply_title" value="{$menu.reply.title|escape}"/>  <label class="field_notice"></label>              </td>
+            </tr>
+            <tr class="click sel hidden">
+                <th class="paddingT15">{$lang.image}:</th>
+                <td class="paddingT15 wordSpacing5">
+                  <div class="input-file-show">
+                        <span class="show"><a href="javascript:;" class="show_image"><i class="fa fa-image"></i></a></span>
+                        <span class="type-file-box">
+                            <input type="text" name="textfield" class="type-file-text" />
+                            <input type="button" name="button" value="选择上传..." class="type-file-button" />
+                            <input class="type-file-file" name="image" type="file" size="30" hidefocus="true">
+                        </span>
+                        <!--{if $menu.reply.image}-->
+                        <div class="show_img"><img src="{$site_url}/{$menu.reply.image}" /></div>
+                        <!--{/if}-->
+                    </div>
+                </td>
+              </tr>
+            <tr class="click sel hidden">
+                <th class="paddingT15">
+                    {$lang.reply_link}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="infoTableInput" type="text" name="reply_link" value="{$menu.reply.link|escape}"/>  <label class="field_notice"></label>              </td>
+            </tr>
+            <tr class="click sel hidden">
+                <th class="paddingT15">{$lang.content}:</th>
+                <td class="paddingT15 wordSpacing5"><textarea name="reply_content">{$menu.reply.content|escape}</textarea></td>
+              </tr>
+            <tr>
+                <th class="paddingT15">
+                    {$lang.sort_order}:</th>
+                <td class="paddingT15 wordSpacing5">
+                    <input class="sort_order" id="sort_order" type="text" name="sort_order" value="{$menu.sort_order}" />  <label class="field_notice">{$lang.sort_order_desc}</label>              </td>
+            </tr>
+
+          <tr>
+            <th></th>
+            <td class="ptb20">
+                <input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+                <input class="formbtn" type="reset" name="reset" value="{$lang.reset}" />            </td>
+        </tr>
+        </table>
+    </form>
+</div>
+{include file="footer.html"}

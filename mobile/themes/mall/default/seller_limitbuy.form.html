@@ -1,0 +1,157 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="seller-limitbuy">
+      <div class="promotool-form limitbuy-form">
+        <form method="post" class="fun-form-style">
+          <div class="form">
+            <dl>
+              <dt><span>{$lang.limitbuy_name}</span></dt>
+              <dd class="webkit-box">
+                <input type="text" id="pro_name" name="pro_name" value="{$limitbuy.pro_name}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.limitbuy_name}" style="padding-left:15px;" />
+                <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+            </dl>
+            <dl>
+              <dt><span>活动起止时间</span></dt>
+            </dl>
+            <dl class="time_limit">
+              <dd class="webkit-box"> <span>开始时间</span>
+                <input type="text" class="input center" name="start_time" value="{if $limitbuy.start_time}{$limitbuy.start_time|date:Y-m-d H:i} {else}{$today|date:Y-m-d H:i} {/if}" id="add_time_from" readonly="readonly" style="text-align:left" />
+              </dd>
+            </dl>
+            <dl>
+              <dd class="webkit-box"><span>结束时间</span>
+                <input type="text" class="input center" name="end_time" value="{if $limitbuy.end_time}{$limitbuy.end_time|date:Y-m-d H:i} {else}{$today|date:Y-m-d H:i} {/if}" id="add_time_to" readonly="readonly" style="text-align:left" />
+              </dd>
+            </dl>
+            <dl>
+              <dt><span>活动图片</span></dt>
+            </dl>
+            <div class="bgf padding10 webkit-box relative" >
+              <div class="add-image-btn">
+                <div class="filePicker"></div>
+                <i class="psmb-icon-font">&#xe6e8;</i> 
+                <!--{if $limitbuy.image}}--> 
+                <img src="{$limitbuy.image}" width="50" height="50" /> 
+                <!--{/if}-->
+                <input type="hidden" name="image" value="" />
+              </div>
+              <p class="fs12 gray flex1 ml10">点击修改活动图片，尺寸400像素*400像素<br />
+                <!--{if $limitbuy.image}}--><span class="mt10 inline-block J_AjaxRequest" action="{url app=seller_limitbuy&act=dropfile&id=$limitbuy.pro_id}" confirm="您确定要删除活动图片吗？"><i class="psmb-icon-font">&#xe671;</i>删除图片</span><!--{/if}--> 
+              </p>
+            </div>
+            <dl>
+              <dt> <a href="javascript:;" gs_id="seller_limitbuy" gs_name="goods_name" gs_callback="gs_callback" gs_title="选择商品" gs_width="480" gs_type="store" gs_store_id="{$store_id}" ectype="gselector" gs_class="simple-blue scroll" gs_position="bottom" class="webkit-box"><span class="flex1">选择商品</span><i class="psmb-icon-font mr10 fs12">&#xe629;</i></a></dt>
+            </dl>
+            <div class="goods-list bgf">
+              <div class="selectedGoods hidden" ectype="selected">
+                <div class="item">
+                  <div class="webkit-box pl10 pr10 pt5 pb5">
+                  	<img src="">
+                    <p class="name flex1 goods-name mt10"></p>
+                    <input type="hidden" name="goods_id" value="">
+                  </div>                  
+                  <div ectype="spec_list" class="proSpec">
+                    <ul ectype="spec_hd" class="webkit-box">
+                      <li class="flex1 pl5">商品规格</li>
+                      <li class="flex1">库存</li>
+                      <li class="flex1">价格</li>
+                      <li class="flex1">优惠</li>
+                      <li class="flex1">类型</li>
+                    </ul>
+                  </div>
+                  <div ectype="template" class="hidden">
+                    <ul ectype="spec_item" class="webkit-box">
+                      <li class="flex1 pl5">
+                        <input ecname="spec_id[]" value="{1}" type="hidden">
+                        {2}</li>
+                      <li class="flex1">{3}</li>
+                      <li class="flex1">
+                        <input ecname="price[{4}]" type="hidden" value="{5}" />
+                        {6}</li>
+                      <li class="flex1">
+                        <input ecname="pro_price[{7}]" type="text" value="{8}" />
+                      </li>
+                      <li class="flex1">
+                        <select ecname="pro_type[{9}]">
+                          <option value="price" {10}>元</option>
+                          <option value="discount" {11}>折</option>
+                        </select>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="padding10 fs12 gray center J_NoSelected">你还没有选择商品</div>
+            </div>
+            <div class="extra" style="margin-top:50px;">
+              <input type="submit" class="J_AjaxFormSubmit btn-alipay btn-alipay-fixed" value="{$lang.submit}" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	
+	$('body').on('touchend click', '.masker', function(){
+		DialogManager.close("seller_limitbuy");
+	});
+	
+	$("#add_time_from").datetimePicker({
+        title: '开始时间'
+		//,times: function () {return false;}//不显示小时分秒
+     });
+	 $("#add_time_to").datetimePicker({
+        title: '结束时间'
+		//,times: function () {return false;}
+     });
+	 
+	 $('.filePicker').compressUpload({
+		server: REAL_SITE_URL + '/index.php?app=seller_limitbuy&act=upload',
+		pick: '.filePicker',
+		fileVal: 'image',
+		crop: true,
+		callback: function(file, response, pick, target) {
+			$(pick).parent().find('img').remove();
+			$(pick).parent().append(sprintf('<img src="{1}" width="50" height="50" />', response+"?"+Math.random()));
+			$('input[name="image"]').val(response);
+		}
+	});
+	
+	gs_query_info('{$limitbuy.goods_id}');
+})
+
+function gs_callback(id, code)
+{
+	DialogManager.close(id);
+	gs_query_info(code);
+}
+
+function gs_query_info(goods_id)
+{
+	$.getJSON(REAL_SITE_URL + '/index.php?app=seller_limitbuy&act=query_goods_info',{'goods_id':goods_id},function(data){
+		if(data.done){
+			if(data.retval) {
+				$('[ectype="selected"]').show().find('img').attr('src', data.retval.default_image).next('.goods-name').html(data.retval.goods_name).next('input[name="goods_id"]').val(data.retval.goods_id);
+			
+				$('[ectype="spec_list"]').find('[ectype="spec_item"]').remove();
+				$('.J_NoSelected').hide();
+				
+				var html = '';
+				var template = $('[ectype="template"]').clone(true);
+				$.each(data.retval.gs,function(i,item){
+					html += sprintf(replace_all(template.html(), 'ecname', 'name'), item.spec_id, item.spec_1+' '+item.spec_2, item.stock, item.spec_id, item.price, item.price, item.spec_id, item.pro_price, item.spec_id, item.pro_type == 'price' ? 'selected="selected"' : '', item.pro_type != 'price' ? 'selected="selected"' : '');				
+				});
+				$('[ectype="spec_list"]').append(html);
+			}
+			if($('[ectype="spec_list"]').html() == '') {
+				$('.J_NoSelected').show();
+			}
+		}
+	});
+}
+</script> 
+{include file=footer.html}

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<title> {$lang.sysmsg} </title>
+<link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
+<link href="templates/style/font/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<style>
+body {background-color:#fbfdff; overflow:auto; padding:20px;}
+#page_footer {color: #999; border-top: 1px solid #cbe4f5; text-align: center; padding-top: 20px;}
+</style>
+</head>
+<body>
+<div class="message">
+<h1>{$lang.sysmsg}</h1>
+<dl>
+    <dt><i class="fa fa-info-circle"></i>{$title}</dt>
+    <!--{if $auto_redirect}-->
+    <dd>{$lang.backup_notice}</dd>
+    <script>setTimeout("window.location.replace('{$auto_link}');", 1250);</script>
+    <!--{else}-->
+    <!--{foreach from=$list item=file}-->
+    <dd><a target="_blank" href="{$file.href}">{$file.name}</a></dd>
+    <!--{/foreach}-->
+    <!--{/if}-->
+</dl>
+</div>
+{include file="footer.html"}

@@ -1,0 +1,118 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+    $('#add_time_from').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#add_time_to').datepicker({dateFormat: 'yy-mm-dd'});
+});
+</script>
+<style type="text/css">
+.tradelist li{ text-align:center; width:130px;}
+</style>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_index table">
+          <table>
+            <tr class="line_bold">
+              <th colspan="8"> <div class="search_div clearfix">
+                  <form method="get" class="clearfix">
+                    <div class="float-left"> <span class="title">{$lang.order_sn}:</span>
+                      <input class="text_normal" type="text" name="order_sn" value="{$query.order_sn|escape}" />
+                      <span class="title">{$lang.add_time}:</span>
+                      <input class="text_normal width2" type="text" name="add_time_from" id="add_time_from" value="{$query.add_time_from}" />
+                      &#8211;
+                      <input class="text_normal width2" id="add_time_to" type="text" name="add_time_to" value="{$query.add_time_to}" />
+                      <span class="title">{$lang.buyer_name}:</span>
+                      <input class="text_normal" type="text" name="buyer_name" value="{$query.buyer_name|escape}" />
+                      <input type="hidden" name="app" value="my_distribution" />
+                      <input type="hidden" name="act" value="order" />
+                      <input type="submit" class="btn" value="{$lang.search}" />
+                    </div>
+                    <!--{if $query.buyer_name or $query.add_time_from or $query.add_time_to or $query.order_sn}--> 
+                    <a class="detlink" href="{url app=my_distribution&act=order}">{$lang.cancel_query}</a> 
+                    <!--{/if}-->
+                  </form>
+                </div>
+              </th>
+            </tr>
+            <tr class="sep-row" height="20">
+              <td colspan="8"></td>
+            </tr>
+            <tr class="line gray">
+              <th class="align1">
+                <span>{$lang.goods_name}</span>
+              </th>
+              <th>{$lang.price}</th>
+              <th>{$lang.quantity}</th>
+              <th>{$lang.buyer_name}</th>
+              <th>{$lang.order_amount}</th>
+              <th>{$lang.order_status}</th>
+              <th>{$lang.distributioner}</th>
+              <th>{$lang.distribution_profit}</th>
+            </tr>
+            <!-- 循环开始 --> 
+            <!--{foreach from=$orders item=order name=fe_order}-->
+            <tr class="sep-row">
+              <td colspan="8"></td>
+            </tr>
+            <tr class="line-hd">
+              <th colspan="8" class="clearfix"> <p class="float-left">
+                  <label>{$lang.order_sn}：</label>
+                  {$order.order_sn}
+                  <label>{$lang.closing_time}：</label>
+                  {$order.add_time|date:Y-m-d H:i:s} </p>
+              </th>
+            </tr>
+            <!--{foreach from=$order.order_goods item=goods name=fe_goods}-->
+            <tr class="line line-blue{if $smarty.foreach.fe_goods.last} last_line{/if}">
+              <td valign="top" class="first clearfix"><div class="pic-info float-left"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.goods_image}" width="50" height="50" /></a> </div>
+                <div class="txt-info float-left">
+                  <div class="txt"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name}</a> </div>
+                  <!--{if $goods.specification}-->
+                  <p class="gray-color mt5">{$goods.specification}</p>
+                  <!--{/if}--> 
+                </div></td>
+              <td valign="top" class="align2">{$goods.price}</td>
+              <td valign="top" class="align2"><strong>{$goods.quantity}</strong></td>
+              <!--{if $smarty.foreach.fe_goods.first}-->
+              <td valign="top" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><a href="{url app=message&act=send&to_id=$order.buyer_id}" target="_blank">{$order.buyer_name|escape}</a> <br />
+                
+                <!--{if $order.buyer_info.real_name}-->{$order.buyer_info.real_name|escape|truncate:14}<!--{else}-->----<!--{/if}--> 
+                <br />
+                <a href="javascript:;" class="J_StartLayim" data-toid="{$order.seller_id}"><img src="{$site_url}/static/images/myim2.png" width="17" height="17" style="vertical-align:middle" /></a> <a target="_blank" href="{url app=message&act=send&to_id=$order.buyer_id}" class="email"></a></td>
+              <td valign="top" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><strong>{$order.order_amount}</strong><br />
+                <span class="gray-color">(含运费:{$order.shipping_fee})</span></td>
+              <td valign="top"class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><div class="btn-order-status">
+                  <p><span class="{if $order.status==0}gray-color{else}color4{/if}">{$order.status|modifier:order_status}</span></p>
+                  <!--//查看订单--> 
+                  <a href="{url app=seller_order&act=view&order_id=$order.order_id}" target="_blank">{$lang.view_order}</a> </div></td>
+              <td valign="top" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><a href="{url app=my_distribution&real_name=$order.distributioner}" target="_blank">{$order.distributioner|escape}</a></td>
+              <td valign="top" width="54" class="align2 bottom-blue last" rowspan="{$order.goods_quantities}"><p>{$order.profit|price}</p></td>
+              <!--{/if}--> 
+            </tr>
+            <!--{/foreach}--> 
+            <!--{foreachelse}-->
+            <tr>
+              <td colspan="8"><div class="notice-word">
+                  <p>{$lang.no_records}</p>
+                </div></td>
+            </tr>
+            <!--{/foreach}--> 
+            <!--{if $orders}-->
+            <tr class="sep-row">
+              <td colspan="8"></td>
+            </tr>
+            <tr class="operations btion">
+              <th colspan="8"> <div class="position2 clearfix"> {include file=member.page.bottom.html} </div>
+              </th>
+            </tr>
+            <!--{/if}-->
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<iframe name="seller_order" style="display:none;"></iframe>
+{include file=member.footer.html}

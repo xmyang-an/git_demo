@@ -1,0 +1,127 @@
+{include file=member.header.html}
+{$editor_upload}
+{$build_editor}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_select">
+          <div class="promotool">
+            <div class="bundle bundle-form"> 
+              <!--{if $appAvailable neq 'TRUE'}-->
+              <div class="notice-word">
+                <p>{$appAvailable.msg}</p>
+              </div>
+              <!--{else}-->
+              <form method="post" id="meal_form" enctype="multipart/form-data">
+                <ul class="form-elem">
+                  <li class="clearfix">
+                    <label class="float-left">{$lang.title}{$lang.colon}<span class="field-required">*</span></label>
+                    <p class="float-left">
+                      <input type="text" name="title" class="input-long" value="{$meal.title}" />
+                      <span class="field-notice">{$lang.note_for_title}</span></p>
+                  </li>
+                  <li class="clearfix" style="width:728px;">
+                    <label class="float-left">{$lang.items}{$lang.colon}<span class="field-required">*</span></label>
+                    <div class="float-left lst-products clearfix">
+                      <div class="th clearfix">
+                        <p class="cell-thumb float-left">搭配宝贝</p>
+                        <p class="cell-title float-left">宝贝标题</p>
+                        <p class="cell-price float-left">原价</p>
+                        <p class="cell-action float-left">操作</p>
+                      </div>
+                      <div class="entity">
+                        <ul ectype="meal_goods_list">
+                          <!--{foreach from=$meal.meal_goods item=goods}-->
+                          <li class="clearfix">
+                            <p class="cell-input">
+                              <input type="hidden" name="selected_ids[]" value="{$goods.goods_id}" />
+                            </p>
+                            <p class="cell-thumb float-left"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.default_image}" width="50" height="50" /></a> </p>
+                            <p class="cell-title float-left"><a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name}</a></p>
+                            <p class="J_getPrice cell-price float-left" price="{$goods.price}">{$goods.price}</p>
+                            <p class="cell-action float-left"><a class="J_MealDel" href="javascript:;">{$lang.drop}</a></p>
+                          </li>
+                          <!--{foreachelse}-->
+                          <div class="pt5 pb5 align2 gray-color">{$lang.add_records}</div>
+                          <!--{/foreach}-->
+                        </ul>
+                      </div>
+                      <p> <a href="javascript:;" gs_id="gselector-meal" gs_name="goods_name" gs_callback="gs_callback" gs_title="{$lang.gselector}" gs_width="690"  gs_type="meal" gs_store_id="{$store_id}" ectype="gselector" gs_opacity="0.05" gs_class="simple-blue" name="gselector-meal" id="gselector-meal" class="btn-add-product">{$lang.gselector}</a> </p>
+                    </div>
+                  </li>
+                  <li class="clearfix">
+                    <label class="float-left">套餐原价{$lang.colon}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <p class="float-left">
+                      <input class="J_priceTotal gray" type="text" readonly="readonly" value="" />
+                    </p>
+                  </li>
+                  <li class="clearfix">
+                    <label class="float-left">套餐一口价{$lang.colon}<span class="field-required">*</span></label>
+                    <p class="float-left">
+                      <input type="text" name="price" value="{$meal.price}" />
+                      <span class="field-notice">搭配一口价不得高于单个宝贝原价总和。</span></p>
+                  </li>
+                  <li class="clearfix">
+                    <label class="float-left">套餐描述{$lang.colon}<span class="field-required">*</span></label>
+                    <div class="float-left">
+                      <div class="editor" style="background:none;padding-top:0;margin-top:0;width:700px;">
+                        <div>
+                          <textarea name="description" id="description" style="width:100%; height:350px;">{$meal.description|escape}</textarea>
+                        </div>
+                        <div style=" position: relative; top: 10px; z-index: 5;"><a class="btn3" id="open_editor_uploader">{$lang.uploadedfile}</a>
+                          <div class="upload_con" id="editor_uploader" style=" opacity:0;">
+                            <div class="upload_con_top"></div>
+                            <div class="upload_wrap">
+                              <ul>
+                                <li class="EDITOR_SWFU_filePicker">
+                                  <div id="divSwfuploadContainer">
+                                    <div id="divButtonContainer"> <span id="editor_upload_button"></span> </div>
+                                  </div>
+                                </li>
+                                <li>
+                                  <iframe src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}&instance=desc_image" width="86" height="30" scrolling="no" frameborder="0"></iframe>
+                                </li>
+                                <li id="open_editor_remote" class="btn2">{$lang.rem_upload}</li>
+                              </ul>
+                              <div id="editor_remote" class="upload_file" style="display:none">
+                                <iframe src="index.php?app=comupload&act=view_remote&id={$id}&belong={$belong}&instance=desc_image" width="272" height="39" scrolling="no" frameborder="0"></iframe>
+                              </div>
+                              <div id="editor_upload_progress"></div>
+                              <div class="upload_txt"> <span>{$lang.note_for_upload}</span> </div>
+                            </div>
+                            <div class="upload_con_bottom"></div>
+                          </div>
+                        </div>
+                        <ul id="desc_images" class="preview  J_descriptioneditor">
+                          <!--{foreach from=$files_belong_meal item=file}-->
+                          <li ectype="handle_pic" file_name="{$file.file_name|escape}" file_path="{$file.file_path}" file_id="{$file.file_id}">
+                            <input type="hidden" name="file_id[]" value="{$file.file_id}">
+                            <div class="pic"> <img src="{$site_url}/{$file.file_path}" width="80" height="80" alt="{$file.file_name|escape}" title="{$file.file_name|escape}" /></div>
+                            <div ectype="handler" class="bg">
+                              <p class="operation"> <a href="javascript:void(0);" class="cut_in" ectype="insert_editor" ecm_title="{$lang.insert_editor}"></a> <span class="delete" ectype="drop_image" ecm_title="{$lang.drop}"></span> </p>
+                            </div>
+                          </li>
+                          <!--{/foreach}-->
+                        </ul>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="clearfix relative" style="z-index:99">
+                    <label class="float-left">&nbsp;</label>
+                    <p class="wrap_btn wrap_btn_blue mt20">
+                      <input type="submit" value="{$lang.submit}" class="btn-alipay" style="width:200px;" />
+                    </p>
+                  </li>
+                </ul>
+              </form>
+              <!--{/if}--> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

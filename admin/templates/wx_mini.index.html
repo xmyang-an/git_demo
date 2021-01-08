@@ -1,0 +1,51 @@
+{include file="header.html"}
+<div id="rightTop">
+    <p>{$lang.wx_mini_manage}</p>
+    <ul class="subnav">
+        <li><span>基本信息</span></li>
+        </ul>
+</div>
+
+<div class="info">
+    <form method="post" enctype="multipart/form-data">
+        <table class="infoTable">
+           <tr>
+                <th class="paddingT15"> <label for="hot_search">热门关键字:</label></th>
+                <td class="paddingT15 wordSpacing5"><input id="hot_search" type="text" name="hot_search" value="{$setting.hot_search}" class="infoTableInput"/>
+                <label class="field_notice">多个关键字之间用空格隔开</label></td>
+            </tr>
+            <tr>
+            <th class="paddingT15">显示模块:</th>
+            <td class="paddingT15">
+              <span class="onoff">
+                <label class="cb-enable {if $setting.hide_module}selected{/if}">{$lang.open}</label>
+                <label class="cb-disable {if !$setting.hide_module}selected{/if}">{$lang.close}</label>
+                <input name="hide_module" value="1" type="radio" {if $setting.hide_module}checked{/if}>
+                <input name="hide_module" value="0" type="radio" {if !$setting.hide_module}checked{/if}>
+              </span>
+              <span class="grey notice">为了通过审核暂时隐藏某些小程序模块，审核通过后即可显示。</span>      
+              </td>
+          </tr>
+            <tr>
+            <th class="paddingT15">开启多地区:</th>
+            <td class="paddingT15">
+              <span class="onoff">
+                <label class="cb-enable {if $setting.enable_city}selected{/if}">{$lang.open}</label>
+                <label class="cb-disable {if !$setting.enable_city}selected{/if}">{$lang.close}</label>
+                <input name="enable_city" value="1" type="radio" {if $setting.enable_city}checked{/if}>
+                <input name="enable_city" value="0" type="radio" {if !$setting.enable_city}checked{/if}>
+              </span>
+              <span class="grey notice">开启多地区后，将会对商品和店铺进行地区筛选</span>      
+              </td>
+          </tr>
+          <tr>
+            <th></th>
+            <td class="ptb20">
+                <input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+                <input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" />
+            </td>
+        </tr>
+        </table>
+    </form>
+</div>
+{include file="footer.html"}

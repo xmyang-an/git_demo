@@ -1,0 +1,90 @@
+{include file=header.html}
+<div id="page-store-index">
+	{include file=store.slides.html}
+	<div class="w-shop clearfix">
+        <div class="col-sub w210">
+        	{include file=left.html}	
+        </div>
+        <div class="col-main float-right w980">
+        	<div class="new-goods goods-list-shop mb10 border">
+            	<div class="title clearfix border-b">
+                	<h3 class="float-left">{$lang.new_goods}</h3>
+                    <a class="float-right" href="{url app=store&act=search&id=$store.store_id&order=add_time desc}">{$lang.more_new_goods}</a>
+                </div>
+                <ul class="content  clearfix">
+                    <!--{foreach from=$new_goods item=ngoods name=fe_n}-->
+                    <li class="float-left">
+                    	<dl>
+                            <dt class="border"><a href="{url app=goods&id=$ngoods.goods_id}" target="_blank"><img src="{$ngoods.default_image}"  /></a></dt>
+                            <dd class="desc mt10"><a href="{url app=goods&id=$ngoods.goods_id}" target="_blank">{$ngoods.goods_name|escape|truncate:50}</a></dd>
+                            <dd class="mt10 J_GoodsEvaluation" data-score="{$ngoods.goods_evaluation}"><span></span></dd>
+                            <dd class="price mt10 w-full clearfix"><strong>{$ngoods.price|price}</strong><em><a href="{url app=goods&id=$ngoods.goods_id&act=saleslog}#module" target="_blank">售出{$ngoods.sales}</a>&nbsp;|&nbsp;<a href="{url app=goods&id=$ngoods.goods_id&act=comments}#module" target="_blank">评论{$ngoods.comments}</a></em></dd>
+                         </dl>
+                   </li>
+                   <!--{/foreach}-->
+                </ul>
+            </div>
+            
+            <!--{if $recommended_goods}-->
+        	<div class="new-goods goods-list-shop mb10 border">
+            	<div class="title clearfix border-b">
+                	<h3 class="float-left">{$lang.recommended_goods}</h3>
+                    <!--a class="float-right" href="">{$lang.more_rec_goods}</a-->
+                </div>
+                <ul class="content  clearfix">
+                    <!--{foreach from=$recommended_goods item=rgoods name=fe_r}-->
+                    <li class="float-left">
+                    	<dl>
+                            <dt class="border"><a href="{url app=goods&id=$rgoods.goods_id}" target="_blank"><img src="{$rgoods.default_image}"  /></a></dt>
+                            <dd class="desc mt10"><a href="{url app=goods&id=$rgoods.goods_id}" target="_blank">{$rgoods.goods_name|escape|truncate:50}</a></dd>
+                            <dd class="mt10 J_GoodsEvaluation" data-score="{$rgoods.goods_evaluation}"><span></span></dd>
+                            <dd class="price mt10 w-full clearfix"><strong>{$rgoods.price|price}</strong><em><a href="{url app=goods&id=$rgoods.goods_id&act=saleslog}#module" target="_blank">售出{$rgoods.sales}</a>&nbsp;|&nbsp;<a href="{url app=goods&id=$rgoods.goods_id&act=comments}#module" target="_blank">评论{$rgoods.comments}</a></em></dd>
+                         </dl>
+                   </li>
+                   <!--{/foreach}-->
+                </ul>
+            </div>
+            <!--{/if}-->
+            
+            <!--{if $hot_sale_goods}-->
+        	<div class="new-goods goods-list-shop mb10 border">
+            	<div class="title clearfix border-b">
+                	<h3 class="float-left">{$lang.hot_sale_goods}</h3>
+                    <a class="float-right" href="{url app=store&act=search&id=$store.store_id&order=sales desc}">{$lang.more_hotsale_goods}</a>
+                </div>
+                <ul class="content  clearfix">
+                    <!--{foreach from=$hot_sale_goods item=hgoods name=fe_h}-->
+                    <li class="float-left">
+                    	<dl>
+                            <dt class="border"><a href="{url app=goods&id=$hgoods.goods_id}" target="_blank"><img src="{$hgoods.default_image}"  /></a></dt>
+                            <dd class="desc mt10"><a href="{url app=goods&id=$hgoods.goods_id}" target="_blank">{$hgoods.goods_name|escape|truncate:50}</a></dd>
+                            <dd class="mt10 J_GoodsEvaluation" data-score="{$hgoods.goods_evaluation}"><span></span></dd>
+                            <dd class="price mt10 w-full clearfix"><strong>{$hgoods.price|price}</strong><em><a href="{url app=goods&id=$hgoods.goods_id&act=saleslog}#module" target="_blank">售出{$hgoods.sales}</a>&nbsp;|&nbsp;<a href="{url app=goods&id=$hgoods.goods_id&act=comments}#module" target="_blank">评论{$hgoods.comments}</a></em></dd>
+                         </dl>
+                   </li>
+                   <!--{/foreach}-->
+                </ul>
+            </div>
+            <!--{/if}-->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{lib file=jquery.plugins/raty/jquery.raty.js}" charset="utf-8"></script>
+<script type="text/javascript">
+$(function(){
+	$('.J_GoodsEvaluation').each(function(index, element) {
+        $(this).raty({
+    		readOnly: true,
+            score: $(this).attr('data-score')
+		});
+    });
+	$.each($('.countdown'),function(){
+		var theDaysBox  = $(this).find('.NumDays');
+		var theHoursBox = $(this).find('.NumHours');
+		var theMinsBox  = $(this).find('.NumMins');
+		var theSecsBox  = $(this).find('.NumSeconds');	
+		countdown(theDaysBox, theHoursBox, theMinsBox, theSecsBox)
+	});
+});
+</script>
+{include file=footer.html}

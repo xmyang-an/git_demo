@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="{$site_url}/" />
+<meta http-equiv="Content-Type" content="text/html;charset={$charset}" />
+<!--IE8下出现登录成功后自动切换兼容模式导致登录退出可以考虑使用下面-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="author" content="mibao123.com" />
+<meta name="generator" content="mibao123.com {$mimall_version}" />
+<meta name="copyright" content="mibao123.com All Rights Reserved" />
+<meta name="format-detection" content="telephone=no">
+{$page_seo}
+
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link type="text/css" href="{res file=css/user.css}" rel="stylesheet" />
+<script type="text/javascript">
+//<!CDATA[
+var SITE_URL = "{$site_url}";
+var REAL_SITE_URL = "{$real_site_url}";
+var PRICE_FORMAT = '{$price_format}';
+//]]>
+</script>
+<script type="text/javascript" src="index.php?act=jslang"></script>
+<script type="text/javascript" src="{lib file=user.js}" charset="utf-8"></script>
+{$_head_tags}
+</head>
+<body>
+<div id="site-nav" class="w-full">
+   <div class="shoptop w clearfix">
+      <div class="login_info">
+         {$lang.hello},
+         <!--{if !$visitor.user_id}-->
+         {$visitor.user_name|escape}
+         <a href="{url app=member&act=login&ret_url=$ret_url}">{$lang.login}</a>
+         <a href="{url app=member&act=register&ret_url=$ret_url}">{$lang.register}</a>
+         <!--{else}-->
+         <a href="{url app=member}"><span>{$visitor.user_name|escape}</span></a>
+         <a href="{url app=member&act=logout}">{$lang.logout}</a>
+         <a href="{url app=message&act=newpm}">{$lang.pm}<!--{if $new_message}-->(<span>{$new_message}</span>)<!--{/if}--></a>
+         <!--{/if}-->
+      </div>
+      <ul class="quick-menu J_GlobalPop">
+        {if !$index}<li class="home"><a href="{$site_url}">{$lang.back_home}</a></li>{/if}
+        <li class="item">
+           <div class="menu iwantbuy">
+              <a class="menu-hd" href="{url app=category}">{$lang.i_want_buy}<b></b></a>
+              <div class="menu-bd J_GlobalPopSub">
+                 <div class="menu-bd-panel">
+                    <div>
+                       <p><a href="{url app=category}">{$lang.gcategory}</a></p>
+                       <p><a href="{url app=search&order=sales desc}">大家都喜欢</a></p>
+					   <p><a href="{url app=search&order=add_time desc}">最新上架</a></p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+         </li>
+         <li class="item">
+            <div class="menu mytb">
+               <a class="menu-hd" href="{url app=buyer_admin}">我是买家<b></b></a>
+               <div class="menu-bd J_GlobalPopSub">
+                  <div class="menu-bd-panel">
+                     <div>
+                        <p><a href="{url app=buyer_order}">已买到的宝贝</a></p>
+                        <p><a href="{url app=friend}">我的好友</a></p>
+                        <p><a href="{url app=my_question}">我的咨询</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </li>
+         <li class="item">
+            <div class="menu seller-center">
+               <a class="menu-hd" href="{url app=seller_admin}">我是卖家<b></b></a>
+               <div class="menu-bd J_GlobalPopSub">
+                  <div class="menu-bd-panel">
+                     <div>
+                        <p><a href="{url app=seller_order}">已卖出的宝贝</a></p>
+                        <p><a href="{url app=my_goods}">出售中的宝贝</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </li>
+         <li class="item">
+            <div class="menu sites">
+               <a class="menu-hd" href="javascript:;">用户中心<b></b></a>
+               <div class="menu-bd J_GlobalPopSub">
+                  <div class="cart-list  eject-box">
+				<div class="login-status"> 你好，<!--{if !$visitor.user_id}-->请 <a href="{url app=member}">登录</a><!--{else}--><a href="{url app=member}">{$visitor.user_name|escape}</a><a href="{url app=member&act=logout}" class="ml5">[{$lang.logout}]</a><!--{/if}--> 
+				</div>
+				<div class="member-nav-list">
+					<ul class="ls">
+						<li><a href="{url app=buyer_order}" target="_blank">我的订单</a></li>
+						<li><a href="{url app=my_question}" target="_blank">咨询回复</a></li>
+						<li><a href="{url app=my_coupon}" target="_blank">优惠券</a></li>
+					</ul>
+					<ul class="ls">
+						<li><a href="{url app=friend}" target="_blank">我的好友</a></li>
+						<li><a href="{url app=my_favorite}" target="_blank">我的关注</a></li>
+						<li><a href="{url app=member&act=password}" target="_blank">修改密码</a></li>
+						<li><a href="{url app=find_password}" target="_blank">找回密码</a></li>
+					</ul>
+				</div>
+				<div class="view-list"> 
+					<!--{if $g_history}-->
+					<p>我浏览过的商品：</p>
+					<ul class="clearfix w-full mt5">
+						<!--{foreach from=$g_history item=h name=fe_h}-->
+						<li class="float-left"> <a class="border block" href="{url app=goods&id=$h.goods_id}"><img src="{$h.default_image}" alt="{$h.goods_name}" title="{$h.goods_name|escape}"  width="50" height="50"/></a> </li>
+						<!--{/foreach}-->
+					</ul>
+					<!--{else}-->
+					<div class="w-full center">暂时没有浏的商品览记录</div>
+					<!--{/if}--> 
+				</div>
+			</div>
+               </div>
+            </div>
+        </li>
+         <li class="item">
+            <div class="menu favorite">
+               <a class="menu-hd" href="{url app=my_favorite}">收藏夹<b></b></a>
+               <div class="menu-bd J_GlobalPopSub">
+                  <div class="menu-bd-panel">
+                     <div>
+                       <p><a href="{url app=my_favorite}">收藏的宝贝</a></p>
+                       <p><a href="{url app=my_favorite&type=store}">收藏的店铺</a></p>
+                    </div>
+                 </div>
+               </div>
+           </div>
+         </li>
+         <li class="item" style="background:none">
+            <div class="menu sites">
+               <a class="menu-hd" href="javascript:;">网站导航<b></b></a>
+               <div class="menu-bd padding10 J_GlobalPopSub">
+                  <!--{foreach from=$navs.header item=nav}-->
+                  <a href="{$nav.link}" {if $nav.open_new} target="_blank" {/if}>{$nav.title|escape}</a>
+                  <!--{/foreach}-->
+               </div>
+            </div>
+        </li>
+     </ul>
+   </div>
+</div>
+<div id="header">
+	<div class="w clearfix">
+    	<div class="logo" title="{$site_title}"><a href="index.php"><img height="50" src="{$site_logo}" alt="{$site_title}" /></a></div>
+        <div class="shopnav">
+    	<ul class="clearfix">
+        	<li class="first"><a href="{$site_url}"><span>首页</span></a></li>
+        	<li class="{if in_array($member_role, array('buyer_admin')) && !in_array($smarty.get.app, array('deposit', 'bind', 'bank')) && !in_array($smarty.get.act, array('profile', 'setting'))}current{/if}"><a href="{url app=buyer_admin}"><span>我是买家</span></a></li>
+            <li class="{if in_array($member_role, array('seller_admin')) && !in_array($smarty.get.app, array('deposit', 'bind', 'bank')) && !in_array($smarty.get.act, array('profile', 'setting'))}current{/if}"><a href="{url app=seller_admin}"><span>我是卖家</span></a></li>
+            <li class="{if in_array($member_role, array('promotool_admin')) && !in_array($smarty.get.app, array('deposit', 'bind', 'bank')) && !in_array($smarty.get.act, array('profile', 'setting'))}current{/if}"><a href="{url app=promotool_admin}"><span>营销中心</span></a></li>
+            <li class="{if in_array($smarty.get.app, array('member')) && in_array($smarty.get.act, array('index','profile', 'setting')) || in_array($smarty.get.app, array('bind'))}current{/if}"><a href="{url app=member&act=setting}"><span>账户设置</span></a></li>
+            <li class="last {if in_array($smarty.get.app, array('deposit', 'bank'))}current{/if}"><a href="{url app=deposit}"><span>财务管理</span></a></li>
+        </ul>
+    </div>
+    </div>
+    
+</div>

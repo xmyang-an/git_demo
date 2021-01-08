@@ -1,0 +1,72 @@
+{include file=member.header.html}
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak={$baidukey.browser}"></script> 
+<script>
+$(function(){
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var zoom = '{$store.zoom}' || 15;
+	<!--{if $store.lat && $store.lng}-->
+	showMap(map, new BMap.Point({$store.lng},{$store.lat}),zoom);
+	<!--{else}-->	
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			showMap(map, new BMap.Point(r.point.lng, r.point.lat));
+		}
+		else {
+			layer.open({content: this.getStatus(), time: 3});
+		}        
+	},{enableHighAccuracy: true, maximumAge:60})	
+	<!--{/if}-->
+	
+	setTimeout(function(){
+		$('.s-map-tip').slideUp();
+	},8000);
+});
+
+function showMap(map, point,zoom)
+{
+	map.centerAndZoom(point, zoom);
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	map.addControl(new BMap.NavigationControl());// 左上角，添加比例尺   
+	var marker = new BMap.Marker(point);// 创建标注
+	map.addOverlay(marker);             // 将标注添加到地图中
+	marker.enableDragging();
+	marker.addEventListener("dragend", function(e){
+		$("input[name='lat']").val(e.point.lat); 
+		$("input[name='lng']").val(e.point.lng);  
+		$("input[name='zoom']").val(map.getZoom());   
+		
+		// 保存到数据库
+		ajaxRequest($('form').attr('method'), window.location.href, $('form'), null, null);
+		
+		var pt = new BMap.Point(e.point.lng, e.point.lat);
+		var geoc = new BMap.Geocoder();    
+		geoc.getLocation(pt, function(rs){
+			var addComp = rs.addressComponents;
+			var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+			var infoWindow = new BMap.InfoWindow(address);  // 创建信息窗口对象   
+			map.openInfoWindow(infoWindow, pt);      // 打开信息窗口
+			
+		});
+	})
+}
+
+
+</script>
+<div id="main">
+  <div class="my-store-map">
+    <div class="s-map-tip">
+      <p>将标注拖放到您店铺所在的位置</p>
+    </div>
+    <div class="info">
+      <div id="allmap" style="width:100%;height:100%;"></div>
+      <form  method="post">
+        <input type="hidden" name="lat" value="{$store.lat}" />
+        <input type="hidden" name="lng" value="{$store.lng}" />
+        <input type="hidden" name="zoom" value="{$store.zoom}" />
+      </form>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

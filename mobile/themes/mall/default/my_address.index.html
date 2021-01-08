@@ -1,0 +1,27 @@
+{include file=member.header.html}
+<div id="page-my-address" class="mb10">
+<div class="page-body my-address pb20">
+  <!-- {foreach from=$addresses item=address name=v} -->
+  <div class="addr-item mb10">
+    <div class="l1"> <a href="{url app=my_address&act=edit&addr_id=$address.addr_id}">
+      <div class="wraper">
+        <div class="tp webkit-box">
+          <p class="consignee flex1 overflow-ellipsis mr20">{$address.consignee|escape}</p>
+          <p class="phone fs12">{if $address.phone_mob}{$address.phone_mob}{else}{$address.phone_tel}{/if}</p>
+        </div>
+        <div class="addr bp mt5 f99 fs12">{$address.region_name|escape}{$address.address|escape}</div>
+      </div>
+      </a> </div>
+    <div class="l2 webkit-box">
+      <p class="fs12 block ml10 addr-type {if $address.setdefault}default{else}J_AjaxRequest{/if}" action="{url app=my_address&act=setdefault&addr_id=$address.addr_id}"><i class="psmb-icon-font fs12"></i> 默认地址</p> 
+      <p class="flex1 align-right"> <a href="{url app=my_address&act=edit&addr_id=$address.addr_id}" class="edit fs12 mr10">编辑</a> <a action="{url app=my_address&act=drop&addr_id=$address.addr_id}" class="J_AjaxRequest drop fs12">删除</a> </p>
+    </div>
+  </div>
+  <!-- {foreachelse} -->
+  <div class="notice-empty"><i>&#xe715;</i><p class="mb20">{$lang.no_records}</p><a href="{url app=my_address&act=add}" class="btn-add">立即添加</a></div>
+  <!--{/foreach}--> 
+  <!--{if $addresses}-->
+  <div class="fixed-add-address"><a href="{url app=my_address&act=add}">添加新地址</a></div>
+  <!--{/if}--> 
+</div>
+{include file=footer.html}

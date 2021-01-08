@@ -1,0 +1,120 @@
+{include file=member.header.html}
+<script type="text/javascript">
+$(function(){
+    $('#add_time_from').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#add_time_to').datepicker({dateFormat: 'yy-mm-dd'});
+});
+</script>
+<div id="main" class="clearfix"> 
+  {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_index table">
+          <table>
+            <tr class="line_bold">
+              <th colspan="7"> <div class="search_div clearfix align1">
+                  <form method="get" class="float-left clearfix">
+                    <span>{$lang.add_time}: </span>
+                    <input type="text" class="text1 width2" name="add_time_from" id="add_time_from" value="{$query.add_time_from}"/>
+                    &#8211;
+                    <input type="text" class="text1 width2" name="add_time_to" id="add_time_to" value="{$query.add_time_to}"/>
+                    <span>{$lang.order_sn}:</span>
+                    <input type="text" class="text1" name="order_sn" value="{$query.order_sn|escape}">
+                    <span>{$lang.order_status}</span>
+                    <select name="type">
+                      
+                    					{html_options options=$types selected=$type}
+									
+                    </select>
+                    <input type="hidden" name="app" value="my_refer" />
+                    <input type="hidden" name="act" value="refer_order" />
+                    <input type="submit" class="btn" value="搜索" />
+                  </form>
+                  <!--{if $query.seller_name or $query.add_time_from or $query.add_time_to or $query.order_sn or $query.type}--> 
+                  <a class="detlink" href="{url app=my_refer&act=refer_order}">{$lang.cancel_query}</a> 
+                  <!--{/if}--> 
+                </div>
+              </th>
+            </tr>
+            <tr class="sep-row" height="20">
+              <td colspan="8"></td>
+            </tr>
+            <tr class="line gray">
+              <th class="align1">
+                <span class="ml10">{$lang.goods_name}</span>
+              </th>
+              <th>{$lang.price}</th>
+              <th>{$lang.quantity}</th>
+              <th>{$lang.order_amount}</th>
+              <th>{$lang.order_status}</th>
+            </tr>
+            <tr class="sep-row">
+              <td colspan="7"></td>
+            </tr>
+            
+            <!--{if $orders}-->
+            
+            
+            <!--{foreach from=$orders item=order}-->
+            <tr class="sep-row">
+              <td colspan="7"></td>
+            </tr>
+            <tr class="line-hd">
+              <th colspan="7"> <p> 
+                  <label>{$lang.order_sn}：</label>
+                  {$order.order_sn}
+                   <label class="ml20">买家：</label>
+                  {$order.buyer_name}
+                  <label class="ml20">{$lang.add_time}：</label>
+                  {$order.add_time|date:Y-m-d H:i:s} <a href="{url app=store&id=$order.seller_id}" target="_blank" style="margin-left:15px;">{$order.seller_name|escape}</a> <a href="javascript:;" class="J_StartLayim" data-toid="{$order.seller_id}"><img src="{$site_url}/static/images/myim2.png" width="17" height="17" style="vertical-align:middle" /></a> <a target="_blank" href="{url app=message&act=send&to_id=$order.seller_id}" class="email"></a> </p>
+              </th>
+            </tr>
+            
+            <!--{foreach from=$order.order_goods item=goods name=fe_goods}-->
+            <tr class="line line-blue {if !$order.order_gift && $smarty.foreach.fe_goods.last}last_line{/if}">
+              <td valign="top" class="first clearfix"><div class="pic-info float-left"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.goods_image}" width="50" height="50" /></a> </div>
+                <div class="txt-info float-left">
+                  <div class="txt"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name}{if $goods.reward}<span style="font-size:12px;background:#f60;color:#fff;padding:0 3px;margin-left:5px;">返利{$goods.reward|price}</span>{else}<span style="font-size:12px;background:#999;color:#fff;padding:0 3px;margin-left:5px;">无返利</span>{/if}</a> </div>
+                  <!--{if $goods.specification}-->
+                  <p class="gray-color mt5">{$goods.specification}</p>
+                  <!--{/if}--> 
+                </div></td>
+              <td class="align2">{$goods.price|price}</td>
+              <td class="align2">{$goods.quantity}</td>
+              <!--{if $smarty.foreach.fe_goods.first}-->
+              <td valign="top" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><div class="mt15"><b id="order{$order.order_id}_order_amount">{$order.order_amount|price}</b></div></td>
+              <td valign="top" width="100" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><div class="btn-order-status">
+                  <p><span class="{if $order.status==0}gray-color{else}color4{/if}">{$order.status|modifier:order_status}</span></p>
+                 
+                </div></td>
+              <!--{/if}-->
+            </tr>
+            <!--{/foreach}--> 
+            
+            <!--{/foreach}-->
+            
+            <tr class="sep-row">
+              <td colspan="7"></td>
+            </tr>
+            <tr class="operations btion">
+              <th colspan="7"> 
+                <div class="position2 clearfix"> {include file=member.page.bottom.html} </div>
+              </th>
+            </tr>
+            
+            <!--{else}-->
+            <tr class="sep-row">
+              <td colspan="7"><div class="notice-word">
+                  <p>{$lang.no_records}</p>
+                </div></td>
+            </tr>
+            <!--{/if}-->
+            
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

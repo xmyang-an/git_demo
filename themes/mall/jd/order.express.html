@@ -1,0 +1,34 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_index table">
+          <div class="express-info">{$lang.express_company}{$lang.colon}<span>{$kuaidi_info.express_company}</span>&nbsp;&nbsp;&nbsp;&nbsp;{$lang.express_num}{$lang.colon}<span>{$kuaidi_info.express_num}</span></div>
+          <!--{if $kuaidi_info.url}-->
+          <iframe src="{$kuaidi_info.url}" width="534" height="340" frameborder="0" ></iframe>
+          <!--{else}--> 
+          <!--{if $kuaidi_info.status==1}-->
+          <div class="express-body">
+            <dl class="title">
+              <dt><strong>{$lang.time}</strong></dt>
+              <dd><strong>{$lang.process}</strong></dd>
+            </dl>
+            <!--{foreach from=$kuaidi_info.data item=kuaidi name=fe_kuaidi}-->
+            <dl {if $smarty.foreach.fe_kuaidi.last} style="color:{if $kuaidi_info.state==3}#1B730C{else}#FF6600{/if}"{/if}>
+              <dt>{$kuaidi.time}</dt>
+              <dd>{$kuaidi.context}</dd>
+            </dl>
+            <!--{/foreach}--> 
+          </div>
+          <!--{else}-->
+          <div class="">{$kuaidi_info.message}</div>
+          <!--{/if}--> 
+          <!--{/if}-->
+          <div class="express-from">{$lang.express_from}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

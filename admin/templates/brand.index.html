@@ -1,0 +1,124 @@
+{include file="header.html"}
+<div id="rightTop">
+  <ul class="subnav">
+    <!--{if $smarty.get.wait_verify}-->
+    <li><a class="btn1" href="index.php?app=brand">{$lang.brand}</a></li>
+    <!--{else}-->
+    <li><span>{$lang.brand}</span></li>
+    <!--{/if}-->
+    <!--{if $smarty.get.wait_verify}-->
+    <li><span>{$lang.wait_verify}</span></li>
+    <!--{else}-->
+    <li><a class="btn1" href="index.php?app=brand&amp;wait_verify=1">{$lang.wait_verify}</a></li>
+    <!--{/if}-->
+  </ul>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+          <input type="hidden" name="app" value="brand" />
+          <!--{if $smarty.get.wait_verify}-->
+          <input type="hidden" name="wait_verify" value="{$smarty.get.wait_verify}" />
+          <!--{/if}-->
+          {$lang.brand_name}:
+          <input class="queryInput" type="text" name="brand_name" value="{$smarty.get.brand_name|escape}" />
+          {$lang.tag}:
+          <input class="queryInput" type="text" name="tag" value="{$smarty.get.tag|escape}" />
+          <input type="submit" class="formbtn" value="{$lang.query}" />
+      <!--{if $filtered}-->
+      <a class="formbtn formbtn1" href="index.php?app=brand">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var wait_verify = '{$smarty.get.wait_verify}';
+	var data_url = 'index.php?app=brand&act=get_xml&'+$("#formSearch").serialize();
+	if(wait_verify == '1'){
+		data_url += '&wait_verify=1';
+	}
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 150, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.brand_id}', name : 'brand_id', width : 50, sortable : true, align: 'center'},
+    		{display: '{$lang.brand_name}', name : 'brand_name', width : 200, sortable : true, align: 'center'},
+			{display: '{$lang.tag}', name : 'tag', width : 100, sortable : true, align: 'left'},
+    		{display: '{$lang.brand_logo}', name : 'brand_logo', width : 150, sortable : true, align: 'center'},    		
+			{display: '{$lang.sort_order}', name : 'sort_order', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.recommended}', name : 'recommended', width: 50, sortable : true, align : 'center'},  
+			{display: '{$lang.if_show}', name : 'if_show', width: 50, sortable : true, align : 'center'} 		
+    		],
+        buttons : [
+            {display: '<i class="fa fa-plus"></i>{$lang.add_data}', name : 'add', bclass : 'add', title : '{$lang.add_data}', onpress : fg_operate },
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate }
+        ],
+    	sortname: "sort_order",
+    	sortorder: "asc",
+    	title: '{$lang.brand_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	if(name == 'add'){
+		window.location.href = 'index.php?app=brand&act=add';
+		return false;
+	}
+	if($('.trSelected',bDiv).length>0){
+        var itemlist = new Array();
+		$('.trSelected',bDiv).each(function(){
+			itemlist.push($(this).attr('data-id'));
+		});
+		if (name == 'del') {	
+            fg_delete(itemlist,'brand');
+		}
+    } else {
+		parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+       return false;
+    }
+}
+function fg_apply(id) {
+	if (typeof id == 'number') {
+    	var id = new Array(id.toString());
+	};
+	parent.layer.confirm('您确定要通过品牌申请吗？',{btn: ['通过', '拒绝'],icon: 3, title:'{$lang.notice}'},function(index){
+		id = id.join(',');
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: "index.php?app=brand&act=pass",
+			data: "id="+id,
+			success: function(data){
+				if (data.done){
+					$("#flexigrid").flexReload();
+				} else {
+					parent.layer.alert(data.msg);
+				}
+			}
+		});
+		parent.layer.close(index);
+	},function(index){
+		parent.layer.prompt({
+			formType: 2,
+			value: '',
+			title: '拒绝理由'
+		}, function(value, index, elem){
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: "index.php?app=brand&act=refuse",
+				data: "id="+id+"&content="+value,
+				success: function(data){
+					if (data.done){
+						parent.layer.close(index);
+						$("#flexigrid").flexReload();
+					} else {
+						parent.layer.alert(data.msg);
+					}
+				}
+			});
+		});
+		parent.layer.close(index);
+	});	
+}
+</script>
+{include file="footer.html"} 

@@ -1,0 +1,212 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+    $('#add_time_from').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#add_time_to').datepicker({dateFormat: 'yy-mm-dd'});
+	
+	$('a[ectype="batchcancel"]').click(function(){
+		var items = getCheckItemIds();
+		if(items)
+		{
+        	var uri = $(this).attr('uri');
+       	 	uri = uri + '&' + $(this).attr('name') + '=' + items;
+        	var id = 'buyer_order_cancel_order';
+        	var title = $(this).attr('dialog_title') ? $(this).attr('dialog_title') : '{$lang.cancel_order}';
+        	//var url = $(this).attr('uri');
+        	var width = '500';
+        	ajax_form(id, title, uri, width);
+		}
+		else {
+			layer.open({content:'没有选任何项'})
+		}
+    });
+	$('.J_MergePay').click(function(){
+		var items = getCheckItemIds();
+		if(items)
+		{
+			var uri = $(this).attr('uri');
+        	uri = uri + '&' + $(this).attr('name') + '=' + items;
+			location.href = uri;
+		}
+	});
+});
+function getCheckItemIds()
+{
+	if($('.checkitem:checked').length == 0){
+		return false;
+	}
+	if($(this).attr('presubmit')){
+		if(!eval($(this).attr('presubmit'))){
+			return false;
+		}
+	}
+	var items = '';
+	$('.checkitem:checked').each(function(){
+		items += this.value + ',';
+	});
+	items = items.substr(0, (items.length - 1));
+		
+	return items;
+}
+</script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_index table">
+          <table>
+            <tr class="line_bold">
+              <th colspan="7"> <div class="search_div clearfix align1">
+                  <form method="get" class="float-left clearfix">
+                    <span>{$lang.add_time}: </span>
+                    <input type="text" class="text1 width2" name="add_time_from" id="add_time_from" value="{$query.add_time_from}"/>
+                    &#8211;
+                    <input type="text" class="text1 width2" name="add_time_to" id="add_time_to" value="{$query.add_time_to}"/>
+                    <span>{$lang.order_sn}:</span>
+                    <input type="text" class="text1" name="order_sn" value="{$query.order_sn|escape}">
+                    <span>{$lang.order_status}</span>
+                    <select name="type">
+                      
+                    					{html_options options=$types selected=$type}
+									
+                    </select>
+                    <input type="hidden" name="app" value="buyer_order" />
+                    <input type="hidden" name="act" value="index" />
+                    <input type="submit" class="btn" value="{$lang.soso}" />
+                  </form>
+                  <!--{if $query.seller_name or $query.add_time_from or $query.add_time_to or $query.order_sn or $query.type}--> 
+                  <a class="detlink" href="{url app=buyer_order}">{$lang.cancel_query}</a> 
+                  <!--{/if}--> 
+                </div>
+              </th>
+            </tr>
+            <tr class="sep-row" height="20">
+              <td colspan="8"></td>
+            </tr>
+            <tr class="line gray">
+              <th class="align1">
+              	<label class="mr20"><input type="checkbox" id="all" class="checkall mr5" />{$lang.checkall}</label>
+                <span class="ml10">{$lang.goods_name}</span>
+              </th>
+              <th>{$lang.price}</th>
+              <th>{$lang.quantity}</th>
+              <th>{$lang.payment_name}</th>
+              <th>{$lang.order_amount}</th>
+              <th>{$lang.order_status}</th>
+              <th>{$lang.evaluation}</th>
+            </tr>
+            <tr class="sep-row">
+              <td colspan="7"></td>
+            </tr>
+            
+            <!--{if $orders}-->
+            
+            
+            <!--{foreach from=$orders item=order}-->
+            <tr class="sep-row">
+              <td colspan="7"></td>
+            </tr>
+            <tr class="line-hd">
+              <th colspan="7"> <p> <input type="checkbox" value="{$order.order_id}" class="checkitem" {if $order.status neq ORDER_PENDING && $order.status neq ORDER_SUBMITTED}disabled="disabled"{/if} />
+                  <label>{$lang.order_sn}：</label>
+                  {$order.order_sn}
+                  <label>{$lang.add_time}：</label>
+                  {$order.add_time|date:Y-m-d H:i:s} <a href="{url app=store&id=$order.seller_id}" target="_blank" style="margin-left:15px;">{$order.seller_name|escape}</a> <a href="javascript:;" class="J_StartLayim" data-toid="{$order.seller_id}"><img src="{$site_url}/static/images/myim2.png" width="17" height="17" style="vertical-align:middle" /></a> <a target="_blank" href="{url app=message&act=send&to_id=$order.seller_id}" class="email"></a> </p>
+              </th>
+            </tr>
+            
+            <!--{foreach from=$order.order_goods item=goods name=fe_goods}-->
+            <tr class="line line-blue {if !$order.order_gift && $smarty.foreach.fe_goods.last}last_line{/if}">
+              <td valign="top" class="first clearfix"><div class="pic-info float-left"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.goods_image}" width="50" height="50" /></a> </div>
+                <div class="txt-info float-left">
+                  <div class="txt"> <a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name}</a> </div>
+                  <!--{if $goods.specification}-->
+                  <p class="gray-color mt5">{$goods.specification}</p>
+                  <!--{/if}--> 
+                </div></td>
+              <td class="align2">{$goods.price|price}</td>
+              <td class="align2">{$goods.quantity}</td>
+              <!--{if $smarty.foreach.fe_goods.first}-->
+              <td valign="top" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><div class="mt15"><!--{if $order.payment_name}-->{$order.payment_name|escape}<!--{/if}--></div></td>
+              <td valign="top" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><div class="mt15"><b id="order{$order.order_id}_order_amount">{$order.order_amount|price}</b></div></td>
+              <td valign="top" width="100" class="align2 bottom-blue" rowspan="{$order.goods_quantities}"><div class="btn-order-status">
+                  <p><span class="{if $order.status==0}gray-color{else}color4{/if}">{$order.status|modifier:order_status}</span></p>
+                  <!--查看订单--> 
+                  <a href="{url app=buyer_order&act=view&order_id=$order.order_id}" target="_blank">{$lang.view_order}</a> 
+                  <!--付款--> 
+                  <a href="{url app=cashier&order_id=$order.order_id}" target="_blank" id="order{$order.order_id}_action_pay"{if $order.status neq ORDER_PENDING} style="display:none"{/if} class="btn-order-status-pay">{$lang.pay}</a> 
+                  <!--确认收货--> 
+                  <a href="javascript:;" ectype="dialog" dialog_id="buyer_order_confirm_order" dialog_width="400" dialog_title="{$lang.confirm_order}" uri="index.php?app=buyer_order&amp;act=confirm_order&order_id={$order.order_id}&ajax"  id="order{$order.order_id}_action_confirm"{if $order.status neq ORDER_SHIPPED} style="display:none"{/if} />{$lang.confirm_order}</a> 
+                  <!--取消订只有已提交和待付款的订单可以取消--> 
+                  <a href="javascript:;" ectype="dialog" dialog_width="400" dialog_title="{$lang.cancel_order}" dialog_id="buyer_order_cancel_order" uri="index.php?app=buyer_order&amp;act=cancel_order&order_id={$order.order_id}&ajax"  id="order{$order.order_id}_action_cancel" {if $order.status neq ORDER_PENDING and $order.status neq ORDER_SUBMITTED}style="display:none"{/if}>{$lang.cancel_order}</a>
+                  <!--查看物流--> 
+                  <!--{if $enable_express}--> 
+                  <a target="_blank" class="btn1" href="{url app=order_express&amp;order_id=$order.order_id}" {if $order.status neq ORDER_SHIPPED && $order.status neq ORDER_FINISHED}style="display:none"{/if}>{$lang.view_delivery_track}</a>
+                  <!--{/if}--> 
+                  
+                  <!--{if $order.payment_code neq 'cod'}--> 
+                  <!--{if $order.refund_status eq 'SUCCESS'}--> 
+                  <a href="{url app=refund&act=view&refund_id=$order.refund_id}" style="color:#096">退款成功</a> 
+                  <!--{elseif $order.refund_status eq 'CLOSED'}--> 
+                  <a href="{url app=refund&act=view&refund_id=$order.refund_id}" class="gray">退款关闭</a> 
+                  <!--{elseif $order.refund_status}--> 
+                  <a href="{url app=refund&act=view&refund_id=$order.refund_id}" style="color:#ff6600">退款中</a> 
+                  <!--{elseif (in_array($order.status, array(20, 30)))}--> 
+                  <!--{if $order.can_refund}-->
+                  <a href="{url app=refund&act=add&order_id=$order.order_id}">退款/退货</a> 
+                  <!--{/if}--> 
+                  <!--{/if}--> 
+                  <!--{/if}--> 
+                  
+                </div></td>
+              <td width="60" class="align2 bottom-blue last" valign="top" rowspan="{$order.goods_quantities}">
+              	<!--{if $order.evaluation_status}-->
+                <p class="gray-color">{$lang.already_evaluate}</p>
+                <!--{/if}--> 
+                <a class="btn1" href="{url app=buyer_order&act=evaluate&order_id=$order.order_id}" target="_blank" id="order{$order.order_id}_evaluate" {if $order.status neq ORDER_FINISHED or $order.evaluation_status neq 0}style="display:none"{/if}> {$lang.evaluate}</a>
+               
+              </td>
+              <!--{/if}-->
+            </tr>
+            <!--{/foreach}--> 
+            <!--{foreach from=$order.order_gift item=goods name=fe_goods}-->
+            <tr class="line line-blue {if $smarty.foreach.fe_goods.last}last_line{/if}">
+              <td valign="top" class="first clearfix relative"><div class="pic-info float-left"> <a href="{url app=gift&id=$goods.goods_id}" target="_blank"><img src="{$goods.default_image}" width="50" height="50" /></a> </div>
+                <div class="txt-info float-left">
+                  <div class="txt"> <a href="{url app=gift&id=$goods.goods_id}" target="_blank">{$goods.goods_name}</a> </div>
+                  <em class="label-gift">{$lang.gift}</em> </div></td>
+              <td class="align2">{$goods.price|price}</td>
+              <td class="align2">{$goods.quantity}</td>
+            </tr>
+            <!--{/foreach}--> 
+            
+            <!--{/foreach}-->
+            
+            <tr class="sep-row">
+              <td colspan="7"></td>
+            </tr>
+            <tr class="operations btion">
+              <th colspan="7"> <p class="position1 clearfix">
+                  <input type="checkbox" id="all2" class="checkall float-left mt5" />
+                  <label for="all2" class="float-left mr20 ml5" style="margin-top:2px;">{$lang.checkall}</label>
+                  <a href="javascript:;" class="delete" ectype="batchcancel" uri="index.php?app=buyer_order&act=cancel_order" name="order_id">{$lang.cancel_order}</a> <a href="javascript:;" class="mergepay J_MergePay" uri="index.php?app=cashier" name="order_id">{$lang.mergepay}</a> </p>
+                <div class="position2 clearfix"> {include file=member.page.bottom.html} </div>
+              </th>
+            </tr>
+            
+            <!--{else}-->
+            <tr class="sep-row">
+              <td colspan="7"><div class="notice-word">
+                  <p>{$lang.no_records}</p>
+                </div></td>
+            </tr>
+            <!--{/if}-->
+            
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<iframe id='iframe_post' name="iframe_post" src="about:blank" frameborder="0" width="0" height="0" style="display:none"></iframe>
+{include file=member.footer.html} 

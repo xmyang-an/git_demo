@@ -1,0 +1,107 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+    $('#my_distribution').validate({
+	  errorPlacement: function(error, element){
+		  $(element).next('span').find('.field_notice').hide();
+		  $(element).next('span').after(error);
+	  },
+	  success       : function(label){
+		  label.addClass('validate_right').text('OK!');
+	  },
+     rules : {
+            distribution_1 : {
+                required   : true,
+                number : true
+            },
+			distribution_2 : {
+                required   : true,
+                number : true
+            },
+			distribution_3 : {
+                required   : true,
+                number : true
+            }
+        },
+        messages : {
+            distribution_1  : {
+                required   : '{$lang.distribution_no_empty}',
+				number : '{$lang.number_only}'
+            },
+			distribution_2 : {
+                required   : '{$lang.distribution_no_empty}',
+				number : '{$lang.number_only}'
+            },
+			distribution_3 : {
+                required   : '{$lang.distribution_no_empty}',
+				number : '{$lang.number_only}'
+            }
+        }
+    });
+});
+</script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public">
+          <div class="promotool">
+            <div class="bundle bundle-list"> 
+              <!--{if $appAvailable neq 'TRUE'}-->
+              <div class="notice-word">
+                <p>{$appAvailable.msg}</p>
+              </div>
+              <!--{else}-->
+              <div class="notice-word">
+                <p class="yellow-big">{$lang.setting_desc}</p>
+              </div>
+              <div class="information">
+                <form method="post" id="my_distribution">
+                  <div class="setup info shop">
+                    <table style="width: 100%">
+                      <tr>
+                        <th width="60">{$lang.enable_distribution}{$lang.colon}</th>
+                        <td><input type="radio" name="enable_distribution" checked value="1" />
+                          <label>{$lang.yes}</label>
+                          &nbsp;&nbsp;&nbsp;
+                          <input type="radio" name="enable_distribution" {if !$store.enable_distribution}checked{/if} value="0" />
+                          <label>{$lang.no}</label></td>
+                      </tr>
+                      <tr>
+                        <th>{$lang.distribution_1}{$lang.colon}</th>
+                        <td><input type="text" name="distribution_1" class="text width_short"  value="{$store.distribution_1}" />
+                          % <span>
+                          <label class="field_notice">{$lang.distribution_note}</label>
+                          </span></td>
+                      </tr>
+                      <tr>
+                        <th>{$lang.distribution_2}{$lang.colon}</th>
+                        <td><input type="text" name="distribution_2" class="text width_short"  value="{$store.distribution_2}" />
+                          % <span>
+                          <label class="field_notice">{$lang.distribution_note}</label>
+                          </span></td>
+                      </tr>
+                      <tr>
+                        <th>{$lang.distribution_3}{$lang.colon}</th>
+                        <td><input type="text" name="distribution_3" class="text width_short"  value="{$store.distribution_3}" />
+                          % <span>
+                          <label class="field_notice">{$lang.distribution_note}</label>
+                          </span></td>
+                      </tr>
+                    </table>
+                    <div class="issuance" style="text-align:left; margin-left:80px; margin-top:20px;">
+                      <input type="submit" class="btn" value="{$lang.submit}" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              
+              <!--{/if}--> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

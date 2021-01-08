@@ -1,0 +1,103 @@
+{include file=header.html}
+<script type="text/javascript">
+$(function(){
+  {if $site_url_error}
+  $('#site_url').focus();
+  {/if}
+  {if $admin_email_error}
+  $('#admin_email').focus();
+  {/if}
+});
+</script>
+<div class="main w">
+	<div class="mleft pleft">
+		<dl class="setpbox t1">
+			<dt>安装步骤</dt>
+			<dd>
+				<ul>
+					<li class="succeed">许可协议</li>
+					<li class="succeed">环境检测</li>
+					<li class="current">参数配置</li>
+					<li>正在安装</li>
+					<li>安装完成</li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+	<div class="pright mright">
+    	{if $missing_items ||  $mysql_error || $create_db_error}
+        <ul class="messages">
+            {if $missing_items}
+            <li>{$lang.have_missing_item}:&nbsp;{foreach from=$missing_items item=item}[{$lang.$item}]&nbsp;&nbsp;{/foreach}</li>
+            {/if}
+            {if $mysql_error}
+            <li>{$lang.connect_mysql_failed}:{$mysql_error}</li>
+        	{/if}
+        	{if $create_db_error}
+            <li>{$lang.create_db_error}:{$create_db_error}</li>
+        	{/if}
+        </ul>
+        {/if}
+		<div class="pr-title"><h3>{$lang.check_env}</h3></div>
+		<div class="check-box2 mt10">
+        	<table>
+                <tr>
+                    <th>{$lang.db_host}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" name="db_host" value="{$smarty.post.db_host|default:localhost}" />{$lang.db_host_notice}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.db_port}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" name="db_port" value="{$smarty.post.db_port|default:3306}" />{$lang.db_port_notice}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.db_name}:</th>
+                    <td><input type="text" class="input_text" name="db_name" value="{$smarty.post.db_name}" />{$lang.db_name_notice}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.db_user}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" name="db_user" value="{$smarty.post.db_user}" />{$lang.db_user_notice}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.db_pass}:</th>
+                    <td class="clearfix"><input type="password" class="input_text" name="db_pass" value="{$smarty.post.db_pass}" />{$lang.db_pass_notice}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.db_prefix}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" name="db_prefix" value="{$smarty.post.db_prefix|default:swd_}" />{$lang.db_prefix_notice}</td>
+                </tr>
+                {if $has_samedb}
+                <tr>
+                    <td class="clearfix" colspan="3" style="padding:10px;line-height:18px;"><input type="checkbox" name="force_install" id="force_install" value="1" />&nbsp;&nbsp;<label for="force_install">{$lang.force_install}</label><strong style="color:red;font-weight:400;">{$lang.force_install_notice}</strong></td>
+                </tr>
+                {/if}
+            </table>
+        </div>
+        <div class="pr-title mt10"><h3>{$lang.init_info}</h3></div>
+		<div class="check-box2 mt10">
+        	<table>
+                <tr>
+                    <th>{$lang.site_url}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" name="site_url" id="site_url" value="{if $smarty.post.site_url}{$smarty.post.site_url}{else}{$site_url}{/if}" />{if $site_url_error}<strong style="color:red">{$lang.site_url_error}</strong>{else}{$lang.site_url_notice}{/if}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.admin_name}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" name="admin_name" value="{$smarty.post.admin_name}" />{$lang.admin_name_notice}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.admin_email}:</th>
+                    <td class="clearfix"><input type="text" class="input_text" id="admin_email" name="admin_email" value="{$smarty.post.admin_email}" />{if $admin_email_error}<strong style="color:red">{$lang.admin_email_error}</strong>{else}{$lang.admin_email_notice}{/if}</td>
+                </tr>
+                <tr>
+                    <th>{$lang.admin_pass}:</th>
+                    <td class="clearfix"><input type="password"  class="input_text" name="admin_pass" value="{$smarty.post.admin_pass}" />{$lang.admin_pass_notice}</td>
+                </tr>
+            </table>
+        </div>
+		<div class="btn-box">
+            <input class="btn-normal" type="button" value="{$lang.prev}" onclick="window.history.go(-1);" />
+			<input name="{$lang.next}" type="submit" id="submit_button" class="btn-normal ml10" value="{$lang.next}"  />
+		</div>
+	</div>
+    <div class="clear"></div>
+</div>
+{include file=footer.html}

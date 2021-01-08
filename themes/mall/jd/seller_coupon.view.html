@@ -1,0 +1,42 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public table">
+          <table>
+            <!-- {if $couponsns} -->
+            
+            <tr class="gray">
+              <th>优惠券号码</th>
+              <th>会员名称</th>
+              <th>会否可用</th>
+            </tr>
+            <!-- {/if} --> 
+            <!-- {if $coupons} -->
+            <tbody>
+              <!-- {/if} --> 
+              <!-- {foreach from=$couponsns item=coupon name=v} -->
+              <tr class="line<!--{if $smarty.foreach.v.last}--> last_line<!--{/if}-->">
+                <td class="align2">{$coupon.coupon_sn}</td>
+                <td class="align2">{$coupon.user_name}</td>
+                <td class="align2"><span {if $coupon.status}class="right_ico" status="on" {else} class="wrong_ico" status="off"{/if}></span></td>
+              </tr>
+              <!-- {foreachelse} -->
+              <tr>
+                <td colspan="8" class="padding6"><div class="notice-word">
+                    <p>{$lang.no_records}</p>
+                  </div></td>
+              </tr>
+              <!--{/foreach}--> 
+              <!-- {if $coupons} -->
+            </tbody>
+            <!-- {/if} --> 
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<iframe name="seller_coupon" style="display:none;"></iframe>
+{include file=member.footer.html}

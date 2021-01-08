@@ -1,0 +1,60 @@
+{include file="header.html"} 
+<script type="text/javascript" src="{lib file=ajax_tree_prop.js}" charset="utf-8"></script>
+<div id="rightTop">
+  <p>{$lang.goods_props}</p>
+  <ul class="subnav">
+    <li><span>{$lang.prop_list}</span></li>
+    <li><a class="btn1" href="index.php?app=props&amp;act=add">{$lang.add_props}</a></li>
+    <li><a class="btn1" href="index.php?app=gcategory">{$lang.distribute_props}</a></li>
+  </ul>
+</div>
+<div class="info2 flexigrid">
+  <form method="get">
+    <input type="hidden" name="app" value="props" />
+    <input type="hidden" name="act" value="drop" />
+    <table  class="distinction">
+      <thead>
+        <tr class="tatr1">
+          <th><input id="checkall_1" type="checkbox" class="checkall" /></th>
+          <th width="50%"><span class="all_checkbox">
+            <label for="checkall_1">{$lang.checkall}</label>
+            </span>{$lang.prop_name} / {$lang.prop_value}</th>
+          <th>{$lang.sort_order}</th>
+          <th>{$lang.status}</th>
+          <th class="handler">{$lang.handler}</th>
+        </tr>
+      </thead>
+      
+      <tbody id="treet1">
+     	<!--{if $prop_list}-->
+        <!--{foreach from=$prop_list item=prop}-->
+        <tr>
+          <td class="align_center w30"><input type="checkbox" class="checkitem" value="{$prop.pid}"  name="pid[]"/></td>
+          <td class="node" width="50%"><img src="templates/style/images/treetable/tv-expandable.gif" ectype="flex" status="open" fieldid="{$prop.pid}"> <span>{$prop.name|escape}</span></td>
+          <td class="align_center"><span>{$prop.sort_order}</span></td>
+          <td class="align_center"><!--{if $prop.status}--><img src="templates/style/images/positive_enabled.gif" /><!--{else}--><img src="templates/style/images/positive_disabled.gif"/><!--{/if}--></td>
+          <td class="handler bDiv" style=" background:none; width:280px; text-align:left;"><a href="index.php?app=props&amp;act=edit&amp;pid={$prop.pid}" class="btn blue"><i class="fa fa-pencil-square-o"></i>{$lang.edit}</a> <a href="javascript:goConfirm('{$lang.drop_confirm}', 'index.php?app=props&amp;act=drop&amp;pid={$prop.pid}',true);" class="btn red"><i class="fa fa-trash-o"></i>{$lang.drop}</a> <a href="index.php?app=props&amp;act=add_value&amp;pid={$prop.pid}" class="btn green"><i class="fa fa-plus"></i>{$lang.add_prop_value}</a></span></td>
+        </tr>
+        <!--{/foreach}-->
+        <!--{else}-->
+        <tr>
+          <td colspan="5" class="no-data"><i class="fa fa-exclamation-circle"></i>{$lang.no_data}</td>
+        </tr>
+        <!--{/if}-->
+      </tbody>
+      
+      <tfoot>
+        <tr class="tr_pt10">
+          <td class="align_center"><input id="checkall_2" type="checkbox" class="checkall"></td>
+          <td colspan="4" id="batchAction"><span class="all_checkbox mt5">
+            <label for="checkall_2">{$lang.checkall}</label>
+            </span>&nbsp;&nbsp;
+            <div class="fbutton J_FormSubmit" style="border:0;">
+              <div class="del" title="{$lang.batch_del_for_selected}"><span><i class="fa fa-trash"></i>{$lang.batch_del}</span></div>
+            </div></td>
+        </tr>
+      </tfoot>
+    </table>
+  </form>
+</div>
+{include file="footer.html"}

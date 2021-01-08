@@ -1,0 +1,73 @@
+{include file=header.html} 
+<div id="main">
+  <div id="page-cart" class="page-cart page-body">
+    <form method="post" class="J_Cart" style="padding-bottom:90px;">
+      <!--{foreach from=$myCart.carts item=cart key=store_id}-->
+      <div class="store-each cart-it J_Store-{$store_id} bgf">
+        <div class="store-info bgf" style="border-bottom:1px #f7f7f7 solid">
+          <div class="info clearfix">
+            <h3 class="clearfix">
+              <span class="selectfill float-left" style="margin-top:0;">
+              <input class="rebuild-checkbox J_SelectStoreAll"  name="store_id" type="checkbox"  id="{$store_id}" value="{$store_id}"/>
+              <b></b>
+              </span>
+              <label for="{$store_id}" class="float-left"><i class="psmb-icon-font mr5 ml5">&#xe656;</i><a href="{url app=store&id=$store_id}">{$cart.store_name|escape}<i class="psmb-icon-font">&#xe638;</i></a></label>
+              <!--{if $cart.couponReceive}-->
+              <a class="ml5 fs13" href="javascript:;" ectype="dialog" dialog_id="coupon" dialog_width="400" dialog_title="领取优惠券" uri="{url app=coupon&act=search&store_id=$store_id&ajax}" id="coupon" dialog_class="simple-blue" dialog_opacity="0.5" dialog_position="bottom" style="color:#E4393C">领券</a>
+              <!--{/if}-->
+           	</h3>
+            <p class="float-right edit pointer J_Edit" store_id="{$store_id}">编辑</p>
+          </div>
+        </div>
+        <!--{if $cart.storeFullPreferInfo}-->
+      	  <div class="fullprefer-info pl10 pr5 pt10 pb10 clearfix J_FullPerferAmount fs12" data-value="{$cart.storeFullPreferInfo.amount}" data-detail="{$cart.storeFullPreferInfo.detail}">
+        	<s>满减</s> {$cart.storeFullPreferInfo.text}<ins class="J_FullPerferPlus">,还差{$cart.storeFullPreferInfo.amount}元</ins><a href="{url app=store&id=$store_id}" class="float-right">去凑单<i class="psmb-icon-font">&#xe638;</i></a>
+          </div>
+          <!--{/if}-->
+        <ul class="padding10" style="padding-top:0;padding-bottom:0; background:#f9f9f9;">
+          
+          <!--{foreach from=$cart.goods item=goods name=fe_goods}-->
+          <li class="J_CartItem-{$goods.rec_id} J_GoodsEach pt10 pb10" {if $smarty.foreach.fe_goods.first}  style="border-top:0"{/if}>
+            <div class="it clearfix relative"> 
+            	<div class="selectfill float-left"><input type="checkbox" name="buy[{$goods.rec_id}]" store_id="{$store_id}" value="{$store_id}:{$goods.rec_id}:{$goods.goods_id}" class="J_SelectGoods" /><b></b>
+                 </div>
+            	<div class="pic"> <a  href="{url app=goods&id=$goods.goods_id}"><img src="{$goods.goods_image}"  width="80" height="80" alt="{$goods.goods_name|escape}" /></a></div>
+              <div class="detail">
+                <div class="attr"> <a href="{url app=goods&id=$goods.goods_id}" class="desc line-clamp-2">
+                  <p>{$goods.goods_name|escape}</p>
+                  </a>
+                  <p class="props overflow-ellipsis">{$goods.specification|escape}</p>
+                </div>
+                <div class="price clearfix"> <em class="J_ItemPrice-{$goods.rec_id} float-left">{$goods.price|price}</em> 
+                  <dd class="hidden J_ItemSubtotal-{$goods.rec_id} J_GetSubtotal" price="{$goods.subtotal}"></dd>
+                </div>
+              </div>
+              <div class=" hidden-part"> 
+              	<span class="quantity-handle block"> 
+                	<i onclick="decrease_quantity({$goods.rec_id});"  class="pointer l psmb-icon-font">&#xe633;</i>
+                		<input id="input_item_{$goods.rec_id}" type="text" class="J_GetQuantity" value="{$goods.quantity}" orig="{$goods.quantity}" changed="{$goods.quantity}" onkeyup="change_quantity({$store_id}, {$goods.rec_id}, {$goods.spec_id}, this);" />
+                	<i onclick="add_quantity({$goods.rec_id});" class="pointer r psmb-icon-font">&#xe632;</i> 
+                </span>
+                <a class="del hidden" href="javascript:drop_cart_item({$store_id}, {$goods.rec_id});" onclick="javascript:return confirm('{$lang.drop_confirm}');">删<br />除</a> 
+              </div>                
+            </div>
+          </li>
+          <!--{/foreach}-->
+        </ul>
+      </div>
+      <!--{/foreach}-->
+      <div class="go2order webkit-box">
+      	<span class="selectfill pointer" style="margin:15px 0 0 11px; padding-left:25px; width:40px;">
+			<input class="rebuild-checkbox J_SelectAll" type="checkbox" id="selectall" />
+     		<b style="margin-top:0px;"></b><label for="selectall" class="fs14">{$lang.checkall}</label>
+            
+     	</span>
+        <p class="ml10 flex1">
+        	<span style="display:none">合计：</span>
+         <strong class="price fs14 strong mr20 J_CartAllAmount">{$myCart.allAmount|price}</strong> </p>
+        <input type="submit" class="btn float-right border-0 pointer" value="去结算" />
+      </div>
+    </form>
+  </div>
+</div>
+{include file=footer.html} 

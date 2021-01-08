@@ -1,0 +1,67 @@
+{include file="header.html"}
+<script type="text/javascript">
+function clean_file()
+{
+    $.getJSON('index.php?app=widget&act=clean_file', function(data){
+        if (data.done)
+        {
+			parent.layer.confirm(data.msg,{icon: 3, title:'{$lang.notice}'},function(index){
+				parent.layer.close(index);
+				$.getJSON('index.php?app=widget&act=clean_file&continue', function(rzt){
+                    parent.layer.alert(rzt.msg);
+                });
+				return false;	
+			},function(index){
+				parent.layer.close(index);
+				return false;
+			});
+        }
+        else
+        {
+			parent.layer.alert(data.msg);
+            return false;
+        }
+    });
+}
+</script>
+<div id="rightTop">
+    <p><strong>{$lang.widget_manage}</strong><a href="javascript:void(0);" onclick="clean_file();" title="{$lang.clean_file_note}" style="font-size:12px; font-weight:normal;">[ {$lang.clean_file} ]</a></p>
+    <ul class="subnav">
+        <li><span>{$lang.manage}</span></li>
+    </ul>
+</div>
+<div class="info2 flexigrid">
+    <table class="distinction">
+        <!--{if $widgets}-->
+        <thead>
+        <tr>
+            <th width="15%">{$lang.widget_name}</th>
+            <th align="left">{$lang.widget_description}</th>
+            <th width="10%">{$lang.author}</th>
+            <th width="50">{$lang.version}</th>
+            <th class="handler" style="width:150px;">{$lang.handler}</th>
+        </tr>
+        </thead>
+        <!--{/if}-->
+        <tbody>
+        <!--{foreach from=$widgets item=widget}-->
+        <tr class="tatr2">
+            <td>{$widget.display_name|escape}</td>
+            <td align="left">{$widget.desc|escape}</td>
+            <td><a href="{$widget.website}" target="_blank" title="{$lang.author_website}">{$widget.author|escape}</a></td>
+            <td>{$widget.version|escape}</td>
+            <td class="handler">
+                <!--<a href="index.php?app=widget&amp;act=edit&name={$widget.name}&file=script">{$lang.edit_widget_script}</a>
+                |-->
+                <a href="index.php?app=widget&amp;act=edit&name={$widget.name}&file=template">{$lang.edit_widget_template}</a>
+                </td>
+        </tr>
+        <!--{foreachelse}-->
+        <tr class="no_data">
+            <td colspan="5">{$lang.no_installed_widget}</td>
+        </tr>
+        <!--{/foreach}-->
+        </tbody>
+    </table>
+</div>
+{include file="footer.html"}

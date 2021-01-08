@@ -1,0 +1,14 @@
+Sun, 01 Nov 2020 14:40:29 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Sun, 01 Nov 2020 15:50:14 +0800	[2]Invalid argument supplied for foreach()	/app/xwbconnect.app.php	91
+Sun, 01 Nov 2020 18:21:14 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Sun, 01 Nov 2020 21:02:14 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106
+Wed, 04 Nov 2020 05:33:05 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106
+Mon, 09 Nov 2020 20:51:25 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Wed, 18 Nov 2020 02:14:37 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Sun, 22 Nov 2020 16:14:30 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106
+Sun, 22 Nov 2020 16:14:35 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106
+Mon, 23 Nov 2020 16:16:32 +0800	[2]extract() expects parameter 1 to be array, null given	/mobile/app/weixinconnect.app.php	131
+Sun, 29 Nov 2020 01:47:23 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Sun, 29 Nov 2020 03:04:22 +0800	[2]Invalid argument supplied for foreach()	/app/xwbconnect.app.php	91
+Sun, 29 Nov 2020 20:14:19 +0800	[2]array_merge(): Argument #2 is not an array	/eccore/mimall.php	244
+Sun, 29 Nov 2020 20:14:22 +0800	[2]array_merge(): Argument #2 is not an array	/eccore/mimall.php	244

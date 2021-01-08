@@ -1,0 +1,55 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="promotool my-appmarket"> 
+      <!--TAB-->
+      <div class="listTab">
+        <div class="fixed-gap"></div>
+        <div class="fixed-bd bgf border-bottom">
+          <ul class="items webkit-box">
+            <li class="flex1 center"><a href="{url app=appmarket&act=my}">已购买的应用</a></li>
+            <li class="flex1 center"><a href="javascript:void(0);" class="active">购买订单记录</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <li class="webkit-box border-bottom"> <a href="{1}" class="webkit-box flex1"> <img  src="{2}" width="75" height="50"  />
+            <div class="flex1 ml10">
+              <div class="t line-clamp-2"><font color="#E4393C">[{3}]</font> {4}</div>
+              <div class="b mt5 fs12 f99">购买周期：</span><span>{5}个月 </div>
+              <div><span class="price"><em>{6}</em></span></div>
+            </div>
+             <p class="gray fs12 ml10 mt20" >{7}</p> </a></li>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>我是有底线的<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      <div class="extra">
+        <div class="fixed-gap"></div>
+        <a href="{url app=appmarket}" class="btn-alipay btn-alipay-fixed">进入应用市场</a> </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, item) {
+				html += sprintf(template.html(), "{url app=appmarket&act=view&id="+item.aid+"}", item.logo, item.name, item.title, item.period, price_format(item.amount), item.add_time);
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+
+</script> 
+{include file=footer.html}

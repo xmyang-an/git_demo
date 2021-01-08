@@ -1,0 +1,64 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="my_distribution"> 
+      <!--{if $appAvailable neq 'TRUE'}-->
+      <div class="notice-word mt10">
+        <p>{$appAvailable.msg}</p>
+      </div>
+      <!--{else}--> 
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <li item_id="{1}" class="item">
+          	<div class="webkit-box border-bottom pb10">
+            <div class="img mr5"> <img src="{2}" class="block" width="50" /> </div>
+            <div class="lp flex1 pr10">
+              <p class="title"><a href="{3}">{4}<i class="psmb-icon-font fs12">&#xe629;</i></a></p>
+              <dl class="mt5 fs12 gray">
+                <span><i class="psmb-icon-font">&#xe635;</i>：</span><span class="fs12">{5}</span>
+              </dl>
+              <dl class="mt5 fs12 gray">
+                <span><i class="psmb-icon-font">&#xe6ec;</i>：{6}</span>
+              </dl>
+            </div>
+            <div class="rp">
+              <p class="center"><span class="block gray mb10">分销收入</span><em class="f60 fs14 price">{7}</em></p>
+            </div>
+            </div>
+            <div class="bottom mt10 align-right">
+            	<a class="fs12 btn1" href="{8}">分销订单</a>
+            </div>
+          </li>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      
+      <div class="clearfix" style="margin-top:48px;">
+      	<a href="{url app=my_distribution&act=setting}" class="btn-alipay btn-alipay-fixed">分销设置</a>
+      </div>
+      <!--{/if}--> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, team) {
+				html += sprintf(template.html(), team.dst_id, team.logo, "{url app=store&id="+team.store_id+"&did="+team.did+"}", team.real_name, team.user_name, team.phone_mob, team.amount ? '+'+team.amount : 0, "{url app=my_distribution&act=order&did="+team.did+"}");
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script> 
+{include file=footer.html}

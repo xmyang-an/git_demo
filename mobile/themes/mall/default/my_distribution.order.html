@@ -1,0 +1,107 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-buyer-order" class="buyer-order-body"> 
+    <!--TAB-->
+    <div class="listTab">
+      <div class="fixed-gap"></div>
+      <div class="fixed-bd bgf border-bottom">
+        <ul class="items webkit-box">
+          <li class="flex1 center"><a class="{if $smarty.get.type eq '' || $smarty.get.type eq 'all_orders'}active{/if}" href="{url app=my_distribution&act=order&did=$smarty.get.did}">全部</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'pending'}active{/if}" href="{url app=my_distribution&act=order&did=$smarty.get.did&type=pending}">待付款</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'accepted'}active{/if}" href="{url app=my_distribution&act=order&did=$smarty.get.did&type=accepted}">待发货</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'shipped'}active{/if}" href="{url app=my_distribution&act=order&did=$smarty.get.did&type=shipped}">待收货</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'finished'}active{/if}" href="{url app=my_distribution&act=order&did=$smarty.get.did&type=finished}">已完成</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!--AJAX数据显示区域-->
+    <div class="clearfix J_InfiniteList">
+      <div class="infinite-result clearfix hidden"> </div>
+      <div class="infinite-template">
+        <div class="order-form mb10">
+          <h2 class="webkit-box">
+            <p class="name pl10 flex1"><i class="psmb-icon-font fs16">&#xe635;</i> {1}</p>
+            <p class="status ml10 mr10"> <em>{2}</em> </p>
+          </h2>
+          <div class="J_GoodsList"> 
+            <!--订单商品循环-->
+            <div class="order-goods-list clearfix"> <a href="{1}" class="block webkit-box">
+              <div class="pic"><img src="{2}"/></div>
+              <div class="txt flex1">
+                <p class="goods-name line-clamp-2">{3}</p>
+                <p class="attr mt5">{4}</p>
+                <p class="fs12 mt5 green" style="display:{5}">退款成功</p>
+                <p class="fs12 mt5 gray" style="display:{6}">退款关闭</p>
+                <p class="fs12 mt5 f60" style="display:{7}">退款中</p>
+              </div>
+              <div class="qua-pri">
+                <p class="pri">{8}</p>
+                <p class="qua">x {9}</p>
+              </div>
+              </a> </div>
+            <!--订单商品循环结束--> 
+          </div>
+          <div class="J_GiftList"> 
+            <!--订单赠品循环-->
+            <div class="order-goods-list clearfix"> <a href="{1}" class="block webkit-box">
+              <div class="pic"><img src="{2}"></div>
+              <div class="txt flex1">
+                <p class="goods-name line-clamp-2">{3}</p>
+                <em class="label-gift mt5">{$lang.gift}</em> </div>
+              <div class="qua-pri">
+                <p class="pri">{4}</p>
+                <p class="qua">x {5}</p>
+              </div>
+              </a> </div>
+            <!--订单赠品循环结束--> 
+          </div>
+          <p class="align-right static"> <em class="mr10">共<span class="ml5 mr5">{3}</span>件商品</em><em>合计<span class="ml5 mr5">{4}</span></em><em>(含运费<span class="ml5">{5}</span>)</em> </p>
+          <p class="static webkit-box"> <em class="flex1">分销商：<a href="{6}">{7}<i class="psmb-icon-font fs12">&#xe629;</i></a></em> <em class="align-right">佣金：{8}</em> </p>
+          <div class="operate-btn pt10"> 
+            <!--退款详情--> 
+            <a class="btn1 mr5" href="{9}" style="display:{10}">{$lang.refund_detail}</a> 
+            <!--查看订单--> 
+            <a class="btn1 mr10" href="{11}">{$lang.view_order}</a> </div>
+        </div>
+      </div>
+      <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+      <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了，别扯了<ins class="vline vright"></ins></div>
+      <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+        <p>{$lang.no_records}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 15, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			$.each(data, function(k, order) {
+				var refund_status = '';
+				var template = TEMP.clone(true);
+		
+				var items1 = '';
+				$.each(order.order_goods, function(k1, goods) {
+					items1 += sprintf(template.find('.J_GoodsList').html(), "{url app=seller_order&act=view&order_id="+order.order_id+"}", goods.goods_image, goods.goods_name, goods.specification, order.refund_status == 'SUCCESS' ? "inline-block" : "none", order.refund_status == 'CLOSED' ? "inline-block" : "none",($.inArray(order.refund_status, ['', undefined]) < 0 && $.inArray(order.refund_status, ['SUCCESS', 'CLOSED']) < 0) ? "inline-block" : "none", price_format(goods.price), goods.quantity);
+				});
+				if(items1) {
+					template.find('.J_GoodsList').html(items1);
+				} else template.find('.J_GoodsList').remove();
+				
+				var items2 = '';
+				$.each(order.order_gift, function(k2, goods) {
+					items2 += sprintf(template.find('.J_GiftList').html(), "{url app=seller_order&act=view&order_id="+order.order_id+"}", goods.default_image, price_format(goods.price), goods.quantity);
+				});
+				if(items2) {
+					template.find('.J_GiftList').html(items2);
+				} else template.find('.J_GiftList').remove();
+				
+				html += sprintf(template.html(), order.buyer_name, order.status_label, order.total_quantity, price_format(order.order_amount), price_format(order.shipping_fee), "{url app=store&id="+order.seller_id+"&did="+order.did+"}", order.distributioner, order.profit, "{url app=refund&act=view&refund_id="+order.refund_id+"}", (order.payment_code == 'cod' || (order.refund_status == '' || order.refund_status == undefined)) ? "none" : "inline-block", "{url app=seller_order&act=view&order_id="+order.order_id+"}");
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script> 
+{include file=footer.html}

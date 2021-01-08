@@ -1,0 +1,76 @@
+{include file=member.header.html} 
+<script>
+$(function(){
+	
+	$('.J_Bank p').html($('.J_BankPopLayer').find('li.active:last').find('.lp span').html());
+	$('.J_BankPopLayer li').click(function(){
+		$('.J_Bank p').html($(this).find('.lp span').html());
+	});
+	
+	$('#deposit-withdraw').submit(function(){
+		if($(this).find('input[name="money"]').val()=='' || $(this).find('input[name="money"]').val() <= 0) {
+			errormsg('{$lang.withdraw_money_error}');
+			return false;
+		}
+	});
+})
+</script>
+<div class="deposit">
+  <div class="deposit-withdraw"> 
+    <!--{if $deposit_account.money gt 0}--> 
+    <!--{if !$bank_list}-->
+    <div class="notice-empty"><i>&#xe715;</i>
+      <p>您还没有设置提现银行卡，请先设置后再申请提现。</p>
+      <a class="btn mt10" href="{url app=bank&act=add}">马上设置</a></div>
+    <!--{else}-->
+    <form method="get" id="deposit-withdraw" class="fun-form-style">
+      <input type="hidden" name="app" value="deposit" />
+      <input type="hidden" name="act" value="withdraw_confirm" />
+      <div class="title webkit-box">
+        <p class="fs14 flex1">可用余额：<s>{$deposit_account.money}</s> 元</p>
+        <a class="fs14" href="{url app=deposit&act=drawlist}">提现记录<i class="psmb-icon-font fs12">&#xe629;</i></a>
+      </div>
+      <div class="form"> 
+        
+        <!--{if $bank_list}-->
+        <div class="pop-layer-common bank-pop-layer J_BankPopLayer">
+          <div class="wraper has-title no-ft">
+            <div class="hd"><i class="closed popClosed"></i>选择银行</div>
+            <ul class="bd radioUiWraper">
+              <!--{foreach from=$bank_list item=bank key=key name=fe_bank}-->
+              <li class="webkit-box radioUiStyle radioUiStyle1 border-bottom popClosed {if $smarty.foreach.fe_bank.first}active{/if} {if $smarty.foreach.fe_bank.last}border-b-0{/if}">
+                <div class="lp flex1 webkit-box"><span class="pl10">{$bank.bank_name}({$bank.formatnum})</span></div>
+                <div class="input rp box-align-center pr10">
+                  <input type="radio" name="bid" value="{$bank.bid}" {if $smarty.foreach.fe_bank.first} checked="checked" {/if}>
+                </div>
+              </li>
+              <!--{/foreach}-->
+            </ul>
+          </div>
+        </div>
+        <!--{/if}-->
+        
+        <dl class="J_Bank mt10 J_PopLayer" data-PopLayer="{popLayer:'.J_BankPopLayer',top:'35%', fixedBody: true}">
+          <dd class="webkit-box"> <span>提现到卡</span>
+            <p class="flex1"></p>
+            <i class="psmb-icon-font mr10 f99 box-align-center">&#xe629;</i> </dd>
+        </dl>
+        <dl class="clearfix">
+          <dd class="webkit-box"> <span>提现金额</span>
+            <input type="text" name="money" value="" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="单位元" />
+            <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+        </dl>
+        <div class="extra mt10">
+          <input class="btn-alipay" type="submit" value="下一步" />
+        </div>
+      </div>
+    </form>
+    <!--{/if}--> 
+    <!--{else}-->
+    <div class="notice-empty"><i>&#xe715;</i>
+      <p>您目前账户余额为<span class="f60">0</span>元，不能申请提现</p>
+    </div>
+    <!--{/if}--> 
+  </div>
+</div>
+{include file=footer.html} 

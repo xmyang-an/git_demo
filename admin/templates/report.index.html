@@ -1,0 +1,89 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.report_manage}</p>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var data_url = 'index.php?app=report&act=get_xml';
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 150, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.add_time}', name : 'add_time', width : 120, sortable : true, align: 'center'},
+			{display: '{$lang.user_name}', name : 'user_name', width : 50, sortable : false, align: 'center'},
+			{display: '{$lang.report_goods}', name : 'goods_name', width : 250, sortable : false, align: 'center'},
+    		{display: '{$lang.report_store}', name : 'store_name', width : 50, sortable : false, align: 'center'},
+			{display: '{$lang.content}', name : 'content', width : 200, sortable : false, align: 'center'},
+    		{display: '{$lang.upload_files}', name : 'files', width : 160, sortable : false, align: 'center'}, 
+			{display: '{$lang.status}', name : 'status', width: 50, sortable : true, align : 'center'}		
+    		],
+        buttons : [
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate },
+			{display: '<i class="fa fa-edit"></i>{$lang.batch_verify}', name : 'verify', bclass : 'add', title : '{$lang.batch_verify}', onpress : fg_operate }
+        ],
+		searchitems : [
+			{display: '{$lang.user_name}', name : 'user_name'},
+			{display: '{$lang.report_goods}', name : 'goods_name'},
+            {display: '{$lang.report_store}', name : 'store_name'}
+        ],
+    	sortname: "report_id",
+    	sortorder: "desc",
+    	title: '{$lang.report_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	var itemlist = new Array();
+	$('.trSelected',bDiv).each(function(){
+		itemlist.push($(this).attr('data-id'));
+	});
+	if (name == 'verify') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+       fg_verify(itemlist);
+	}
+	if (name == 'del') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+	   
+       fg_delete(itemlist,'report');
+	}
+}
+
+function fg_verify(id){
+	parent.layer.confirm('{$lang.verify_msg}',{icon: 3, title:'{$lang.tip}',btn: ['{$lang.agree}', '{$lang.refuse}']},function(index){
+		parent.layer.prompt({
+			formType: 2,
+			value: '',
+			title: '{$lang.submit_verify_content}'
+		}, function(value, index, elem){
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: 'index.php?app=report&act=verify',
+				data: "id="+id+"&verify="+value,
+				success: function(data){
+					if (data.done){
+						parent.layer.alert('{$lang.verify_ok}');
+						parent.layer.close(index);
+						$("#flexigrid").flexReload();
+					} else {
+						parent.layer.alert(data.msg);
+					}
+				},
+				error: function(data){
+					parent.layer.alert(data.msg);
+				}
+			});
+			parent.layer.close(index);
+		});
+	},function(index){
+		parent.layer.close(index);
+	});	
+}
+</script>
+{include file="footer.html"} 

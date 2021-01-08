@@ -1,0 +1,143 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-buyer-order" class="buyer-order-body"> 
+    <!--TAB-->
+    <div class="listTab">
+      <div class="fixed-gap"></div>
+      <div class="fixed-bd bgf border-bottom">
+        <ul class="items webkit-box">
+          <li class="flex1 center"><a class="{if $smarty.get.type eq '' || $smarty.get.type eq 'all_orders'}active{/if}" href="{url app=buyer_order}">全部</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'pending'}active{/if}" href="{url app=buyer_order&type=pending}">待付款</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'accepted'}active{/if}" href="{url app=buyer_order&type=accepted}">待发货</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'shipped'}active{/if}" href="{url app=buyer_order&type=shipped}">待收货</a></li>
+          <li class="flex1 center"><a class="{if $smarty.get.type eq 'finished' && $smarty.get.evaluation_status eq '0'}active{/if}" href="{url app=buyer_order&type=finished&evaluation_status=0}">待评价</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!--AJAX数据显示区域-->
+    <div class="clearfix J_InfiniteList">
+      <div class="infinite-result clearfix hidden"> </div>
+      <div class="infinite-template">
+        <div class="order-form mb10">
+          <h2 class="webkit-box">
+            <p class="name pl10 flex1"><a class="J_RedirectToWx" href="{1}"><i class="psmb-icon-font fs16">&#xe656;</i> {2}<i class="psmb-icon-font fs12">&#xe629;</i></a></p>
+            <p class="status ml10 mr10"> <em>{3}</em> </p>
+          </h2>
+          <div class="goods-list"> 
+            <!--订单商品循环-->
+            <div class="order-goods-list clearfix"> <a href="{1}" class="J_RedirectToWx block webkit-box">
+              <div class="pic"><img src="{2}"/></div>
+              <div class="txt flex1">
+                <p class="goods-name line-clamp-2">{3}</p>
+                <p class="attr mt5">{4}</p>
+                <p class="fs12 mt5 green" style="display:{5}">退款成功</p>
+                <p class="fs12 mt5 gray" style="display:{6}">退款关闭</p>
+                <p class="fs12 mt5 f60" style="display:{7}">退款中</p>
+              </div>
+              <div class="qua-pri">
+                <p class="pri">{8}</p>
+                <p class="qua">x {9}</p>
+              </div>
+              </a> </div>
+            <!--订单商品循环结束--> 
+          </div>
+          <div class="gift-list"> 
+            <!--订单赠品循环-->
+            <div class="order-goods-list clearfix"> <a href="{1}" class="block webkit-box">
+              <div class="pic"><img src="{2}"></div>
+              <div class="txt flex1">
+                <p class="goods-name line-clamp-2">{3}</p>
+                <em class="label-gift mt5">{$lang.gift}</em> </div>
+              <div class="qua-pri">
+                <p class="pri">{4}</p>
+                <p class="qua">x {5}</p>
+              </div>
+              </a> </div>
+            <!--订单赠品循环结束--> 
+          </div>
+          <p class="align-right static"> <em class="mr10">共<span class="ml5 mr5">{4}</span>件商品</em><em>合计<span class="ml5 mr5">{5}</span></em><em>(含运费<span class="ml5">{6}</span>)</em> </p>
+          <div class="operate-btn pt10"> 
+            <!--付款--> 
+            <a class="btn2 mr5  J_RedirectToWx" href="{7}" id="order{8}_action_pay" style="display:{9}" >{$lang.pay}</a> 
+            <!--确认收货--> 
+            <a class="btn2 mr5" href="javascript:;" ectype="dialog" dialog_id="buyer_order_confirm_order" dialog_width="400" dialog_title="{$lang.confirm_order}" uri="{10}"  id="order{11}_action_confirm" style="display:{12}" dialog_class="simple-blue" dialog_opacity="0.5" dialog_position="bottom" />{$lang.confirm_order}</a>
+            <!--取消订单--> 
+            <a class="btn2 mr5" href="{13}" style="display:{14}">{$lang.cancel_order}</a> 
+            <!-- 查看物流 --> 
+            <a class="btn1 mr5" href="{15}" style="display:{16}">{$lang.view_delivery_track}</a> 
+            <!--评价--> 
+            <a class="btn1 mr5" href="{17}"  id="order{18}_evaluate" style="display:{19}">{$lang.evaluate}</a> 
+            <!--退款详情--> 
+            <a class="btn1 mr5 J_RedirectToWx" toType="redirect" href="{20}" style="display:{21}">{$lang.refund_detail}</a> 
+            <!--退款/退货--> 
+            <a class="btn1 mr5 J_RedirectToWx" toType="redirect" href="{22}" style="display:{23}">{$lang.refund_money_goods}</a> 
+            <!--查看订单--> 
+            <a class="btn1 mr10 J_RedirectToWx" href="{24}">{$lang.view_order}</a> </div>
+        </div>
+      </div>
+      <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+      <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>没有订单了，快去多淘点吧<ins class="vline vright"></ins></div>
+      <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+        <p>{$lang.no_records}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 5, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			$.each(data, function(k, order) {
+				var template = TEMP.clone(true);
+				
+				var items1 = '';
+				$.each(order.order_goods, function(k1, goods) {
+					items1 += sprintf(template.find('.goods-list').html(), "{url app=buyer_order&act=view&order_id="+order.order_id+"}", goods.goods_image, goods.goods_name, goods.specification, order.refund_status == 'SUCCESS' ? "inline-block" : "none", order.refund_status == 'CLOSED' ? "inline-block" : "none",($.inArray(order.refund_status, ['', undefined]) < 0 && $.inArray(order.refund_status, ['SUCCESS', 'CLOSED']) < 0) ? "inline-block" : "none", price_format(goods.price), goods.quantity);
+				});
+				if(items1) {
+					template.find('.goods-list').html(items1);
+				} else template.find('.goods-list').remove();
+				
+				var items2 = '';
+				$.each(order.order_gift, function(k2, goods) {
+					items2 += sprintf(template.find('.gift-list').html(), "{url app=buyer_order&act=view&order_id="+order.order_id+"}", goods.default_image, goods.goods_name, price_format(goods.price), goods.quantity);
+				});
+				if(items2) {
+					template.find('.gift-list').html(items2);
+				} else template.find('.gift-list').remove();
+			
+				html += sprintf(template.html(), 
+					"{url app=store&id="+order.seller_id+"}", // {1}
+					order.seller_name, // {2}
+					order.status_label, // {3}
+					order.total_quantity, // {4}
+					price_format(order.order_amount), // {5}
+					price_format(order.shipping_fee), // {6}
+					"{url app=cashier&order_id="+order.order_id+"}", // {7} 
+					order.order_id, // {8}
+					(order.status != 11) ? "none" : "inline-block", // {9}
+					"{url app=buyer_order&act=confirm_order&order_id="+order.order_id+"&ajax}", // {10}
+					order.order_id, // {11}
+					(order.status != 30) ? "none" : "inline-block", // {12}
+					"{url app=buyer_order&act=cancel_order&order_id="+order.order_id+"}", // {13}
+					(order.status != 10 && order.status != 11) ? "none" : "inline-block", // {14}
+					"{url app=order_express&order_id="+order.order_id+"}", // {15}
+					(order.status != 30 && order.status != 40) ? "none" : "inline-block", // {16}
+					"{url app=buyer_order&act=evaluate&order_id="+order.order_id+"}", // {17}
+					order.order_id, // {18}
+					(order.status != 40 || order.evaluation_status != 0) ? "none" : "inline-block", // {19}
+					"{url app=refund&act=view&refund_id="+order.refund_id+"}", // {20}
+					(order.payment_code == 'cod' || (order.refund_status == '' || order.refund_status == undefined)) ? "none" : "inline-block", // {21}
+					"{url app=refund&act=add&order_id="+order.order_id+"}", // {22}
+					(order.payment_code != 'cod' && ($.inArray(parseInt(order.status), [20,30]) > -1) && order.can_refund == true) ? "inline-block" : "none",	// {23}				
+					"{url app=buyer_order&act=view&order_id="+order.order_id+"}" // {24}
+				);
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script> 
+{include file=footer.html}

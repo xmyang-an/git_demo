@@ -1,0 +1,208 @@
+{include file=member.header.html}
+{$editor_upload}
+{$build_editor} 
+<script type="text/javascript">
+//<!CDATA[
+
+function add_uploadedfile(file_data)
+{
+    if(file_data.instance == 'desc_image'){
+        $('#desc_images').append('<li style="z-index:4" file_name="'+ file_data.file_name +'" file_path="'+ file_data.file_path +'" ectype="handle_pic" file_id="'+ file_data.file_id +'"><input type="hidden" name="desc_file_id[]" value="'+ file_data.file_id +'"><div class="pic" style="z-index: 2;"><img src="{$site_url}/'+ file_data.file_path +'" width="80" height="80" alt="'+ file_data.file_name +'" /></div><div ectype="handler" class="bg" style="z-index: 3;display:none"><p class="operation"><a href="javascript:void(0);" class="cut_in" ectype="insert_editor" ecm_title="{$lang.insert_editor}"></a><span class="delete" ectype="drop_image" ecm_title="{$lang.drop}"></span></p></div></li>');
+                trigger_uploader();
+        if(EDITOR_SWFU.getStats().progressNum == 0){
+            window.setTimeout(function(){
+                $('#editor_uploader').css('opacity', 0);
+				$('*[ectype="handle_pic"]').css('z-index', 999);
+            },5000);
+        }
+    }
+}
+function drop_image(goods_file_id)
+{
+    if (confirm(lang.uploadedfile_drop_confirm))
+	{
+		var url = SITE_URL + '/index.php?app=seller_fullgift&act=drop_image';
+		$.getJSON(url, {'id':goods_file_id}, function(data){
+			if (data.done)
+			{
+				$('*[file_id="' + goods_file_id + '"]').remove();
+			}
+			else
+			{
+				alert(data.msg);
+			}
+		});
+	}
+}
+
+$(function(){
+     $('#goods_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('label').remove();
+            $(element).after(error);
+        },
+        success       : function(label){
+			label.removeClass('error');
+            label.addClass('validate_right').text('OK!');
+        },
+        onkeyup : false,
+        rules : {
+            goods_name : {
+                required   : true
+            },
+            price      : {
+                number     : true,
+                required : true,
+                min : 0
+            }
+        },
+        messages : {
+            goods_name  : {
+                required   : '{$lang.title_empty}'
+            },
+            price       : {
+                number   : '{$lang.number_only}',
+                required : '{$lang.price_empty}',
+                min : '{$lang.price_ge_0}'
+            }
+        }
+    });
+});
+//]]>
+</script>
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool clearfix"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div  class="wrap fullgift-add"> 
+          <!--{if $appAvailable neq 'TRUE'}-->
+          <div class="notice-word">
+            <p>{$appAvailable.msg}</p>
+          </div>
+          <!--{else}-->
+          <div class="publish public" style="margin-top:-21px;">
+            <form method="post" id="goods_form" enctype="multipart/form-data">
+              <h5 class="box-title">1.赠品基本信息</h5>
+              <ul class="box-body">
+                <li class="subbox clearfix">
+                  <label class="subbox-title">赠品标题：</label>
+                  <div class="subbox-body">
+                    <input style="width:500px;" type="text" name="goods_name" value="{$goods.goods_name|escape}" class="text width_normal" />
+                  </div>
+                </li>
+                <li class="subbox clearfix">
+                  <label class="subbox-title">赠品价格：</label>
+                  <div class="subbox-body">
+                    <input name="price" value="{$goods.price}" type="text" class="text width_short" />
+                  </div>
+                </li>
+              </ul>
+              <h5 class="box-title">2.赠品图片及描述</h5>
+              <ul class="box-body">
+                <li class="subbox clearfix">
+                  <label class="subbox-title">赠品图片：</label>
+                  <div class="subbox-body">
+                    <div class="multimage-wrapper">
+                      <div class="multimage-panels clearfix">
+                        <div class="image-fields float-left">
+                          <div class="image-demo"> 
+                            <!--{if $goods.default_image}--> 
+                            <img src="{$goods.default_image}" width="120" /> 
+                            <!--{else}--> 
+                            <span class="red">* 主图</span>
+                            <p class="gray">建议350*350</p>
+                            <!--{/if}--> 
+                          </div>
+                        </div>
+                        <div class="upload_btn float-left"> <span class="btn-txt">图片上传</span>
+                          <input name="goods_image" id="goods_image" type="file" class="btn-file-input">
+                          <div class="text">{$lang.note_for_upload_single}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="subbox clearfix">
+                  <label class="subbox-title">{$lang.description}：</label>
+                  <div class="subbox-body">
+                    <div class="add_wrap">
+                      <div class="editor">
+                        <div>
+                          <textarea name="description" id="description"  style="width:713px; height:400px;">{$goods.description|escape}</textarea>
+                        </div>
+                        <div class="multimage-wrapper descimage-wrapper">
+                          <ul class="multimage-tabs clearfix">
+                            <li class="selected">插入描述图片</li>
+                          </ul>
+                          <div class="multimage-panels clearfix">
+                            <div style=" position: relative; top: 10px; z-index: 5;"> <a class="btn-upload-image" id="open_editor_uploader"><b>{$lang.uploadedfile}</b></a>
+                              <div class="upload_con" id="editor_uploader" style=" opacity:0; left:150px;">
+                                <div class="upload_con_top"></div>
+                                <div class="upload_wrap">
+                                  <ul>
+                                    <li class="EDITOR_SWFU_filePicker">
+                                      <div id="divSwfuploadContainer">
+                                        <div id="divButtonContainer"> <span id="editor_upload_button"></span> </div>
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <iframe src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}&instance=desc_image" width="86" height="30" scrolling="no" frameborder="0"></iframe>
+                                    </li>
+                                    <li id="open_editor_remote" class="btn2">{$lang.rem_upload}</li>
+                                  </ul>
+                                  <div id="editor_remote" class="upload_file" style="display:none">
+                                    <iframe src="index.php?app=comupload&act=view_remote&id={$id}&belong={$belong}&instance=desc_image" width="272" height="39" scrolling="no" frameborder="0"></iframe>
+                                  </div>
+                                  <div id="editor_upload_progress"></div>
+                                </div>
+                                <div class="upload_con_bottom"></div>
+                              </div>
+                              <div class="text">{$lang.note_for_upload}</div>
+                            </div>
+                          </div>
+                          <div class="multimage-piclist clearfix">
+                            <ul id="desc_images" class="preview J_descriptioneditor">
+                              <!--{foreach from=$desc_images item=desc_image}-->
+                              <li ectype="handle_pic" file_name="{$desc_image.file_name|escape}" file_path="{$desc_image.file_path}" file_id="{$desc_image.file_id}">
+                                <input type="hidden" name="desc_file_id[]" value="{$desc_image.file_id}">
+                                <div class="pic"> <img src="{$site_url}/{$desc_image.file_path}" width="80" height="80" alt="{$desc_image.file_name|escape}" title="{$desc_image.file_name|escape}" /> </div>
+                                <div ectype="handler" class="bg">
+                                  <p class="operation"> <a class="cut_in" ectype="insert_editor" href="javascript:void(0);" ecm_title="{$lang.insert_editor}"></a> <span class="delete" ectype="drop_image" ecm_title="{$lang.drop}"></span> </p>
+                                </div>
+                              </li>
+                              <!--{/foreach}-->
+                            </ul>
+                          </div>
+                          <!--{if $desc_images}-->
+                          <div class="notice-word" style="padding:14px;">
+                            <p class="yellow">插入方法：将鼠标移至需要插入的图片上面，然后点击插入按钮，即可将图片插入到编辑器中。</p>
+                          </div>
+                          <!--{/if}--> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <h5 class="box-title">4.其他设置</h5>
+              <ul class="box-body">
+                <li class="subbox clearfix">
+                  <label class="subbox-title">是否上架：</label>
+                  <div class="subbox-body clearfix">
+                    <label class="switch-checkbox-radio inline-block box-align-center J_SwtcherInput {if $goods.if_show || !$goods}checked{/if}" for="switcher"><span class="switcher-style block"></span></label>
+                    <input name="if_show" class="hidden" id="switcher" value="1" type="checkbox" {if $goods.if_show || !$goods} checked="checked" {/if}>
+                  </div>
+                </li>
+              </ul>
+              <div class="issuance">
+                <input type="submit" class="btn" value="{$lang.submit}" />
+              </div>
+            </form>
+          </div>
+          <!--{/if}--> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

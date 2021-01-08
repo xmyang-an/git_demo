@@ -1,0 +1,70 @@
+{include file="header.html"}
+<script type="text/javascript">
+//<!CDATA[
+$(function()
+{
+    var map = {$map};
+    if (map.length > 0)
+    {
+        var option = {openImg: "templates/style/images/treetable/tv-collapsable.gif", shutImg: "templates/style/images/treetable/tv-expandable.gif", leafImg: "templates/style/images/treetable/tv-item.gif", lastOpenImg: "templates/style/images/treetable/tv-collapsable-last.gif", lastShutImg: "templates/style/images/treetable/tv-expandable-last.gif", lastLeafImg: "templates/style/images/treetable/tv-item-last.gif", vertLineImg: "templates/style/images/treetable/vertline.gif", blankImg: "templates/style/images/treetable/blank.gif", collapse: false, column: 1, striped: false, highlight: true, state:false};
+        $("#treet1").jqTreeTable(map, option);
+    }
+});
+//]]>
+</script>
+
+<div id="rightTop">
+    <p>{$lang.scategory}</p>
+    <ul class="subnav">
+        <li><span>{$lang.manage}</span></li>
+        <li><a class="btn1" href="index.php?app=scategory&amp;act=add">{$lang.add}</a></li>
+        <li><a class="btn1" href="index.php?app=scategory&amp;act=export">{$lang.export}</a></li>
+        <li><a class="btn1" href="index.php?app=scategory&amp;act=import">{$lang.import}</a></li>
+    </ul>
+</div>
+
+<div class="info2 flexigrid">
+    <table class="distinction">
+        <!-- {if $scategories} -->
+        <thead>
+        <tr>
+            <th class="w30"><input id="checkall_1" type="checkbox" class="checkall" /></th>
+            <th width="50%"><span class="all_checkbox"><label for="checkall_1">{$lang.checkall}</label></span>{$lang.cate_name}</td>
+            <th>{$lang.sort_order}</th>
+            <th class="handler" style="width:200px;">{$lang.handler}</th>
+        </tr>
+        </thead>
+        <tbody id="treet1"><!-- {/if} -->
+        <!--{foreach from=$scategories item=scategory}-->
+        <tr>
+            <td class="align_center w30"><input type="checkbox" class="checkitem" value="{$scategory.cate_id}" /></td>
+            <td class="node" width="50%"><span ectype="inline_edit" fieldname="cate_name" fieldid="{$scategory.cate_id}" required="1" title="{$lang.editable}" class="node_name editable">{$scategory.cate_name|escape}</span></td>
+            <td class="align_center"><span ectype="inline_edit" fieldname="sort_order" fieldid="{$scategory.cate_id}" datatype="pint" maxvalue="255" title="{$lang.editable}" class="editable">{$scategory.sort_order}</span></td>
+            <td class="handler bDiv" style=" background:none; width:250px; text-align:left;">
+                <a href="index.php?app=scategory&amp;act=edit&amp;id={$scategory.cate_id}" class="btn blue"><i class="fa fa-pencil-square-o"></i>{$lang.edit}</a>
+                <a href="javascript:goConfirm('{$lang.drop_confirm}', 'index.php?app=scategory&amp;act=drop&amp;id={$scategory.cate_id}',true);" class="btn red"><i class="fa fa-trash-o"></i>{$lang.drop}</a>
+                <!-- {if $scategory.layer lt 2} --><a href="index.php?app=scategory&amp;act=add&amp;pid={$scategory.cate_id}" class="btn green"><i class="fa fa-plus"></i>{$lang.add_child}</a><!-- {/if} -->
+            </td>
+        </tr>
+        <!--{foreachelse}-->
+        <tr class="no_data">
+            <td colspan="4">{$lang.no_data}</td>
+        </tr>
+        <!--{/foreach}-->
+        <!-- {if $scategories} --></tbody><!-- {/if} -->
+        <tfoot>
+            <tr class="tr_pt10">
+            <!-- {if $scategories} -->
+                <td class="align_center"><label for="checkall1"><input id="checkall_2" type="checkbox" class="checkall"></label></td>
+                <td colspan="3" id="batchAction">
+                    <span class="all_checkbox mt5"><label for="checkall_2">{$lang.checkall}</label></span>&nbsp;&nbsp;
+                    <div class="fbutton JBatchDel" style="border:0;" uri="index.php?app=scategory&act=drop" name="id"><div class="del" title="{$lang.batch_del_for_selected}"><span><i class="fa fa-trash"></i>{$lang.batch_del}</span></div></div>
+                </td>
+            <!--{/if}-->
+            </tr>
+        </tfoot>
+
+    </table>
+</div>
+
+{include file="footer.html"}

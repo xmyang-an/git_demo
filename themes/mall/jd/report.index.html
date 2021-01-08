@@ -1,0 +1,137 @@
+{include file="member.header.html"} 
+<style type="text/css">
+.w{width:1200px;}
+body{background:#ffff;}
+#header,#site-nav{display:none;}
+</style>
+<script type="text/javascript">
+$(function(){
+	
+	$('.submit-btn').click(function(){
+		if($('.fe-area').val() == ''){
+			alert('{$lang.content_no_empty}');
+			return false;
+		}
+		$('#reportForm').submit();
+	});
+	
+	$('.filePicker').compressUpload({
+		server: REAL_SITE_URL + '/index.php?app=report&act=uploadImages&item_id={$smarty.get.id}',
+		pick: '.filePicker',
+		crop: false,
+		callback: function(file, response, pick, target) {
+			if(response.done){
+				add_uploadedfile(response.retval);
+			}else{
+				alert(response.msg);
+			}
+		}
+	});
+
+})
+function add_uploadedfile(file_data)
+{
+    $('#images').append('<li style="z-index:4" ectype="J-handle_pic" file_id="'+ file_data.file_id +'"><input type="hidden" value="'+ file_data.file_id +'" name="file_id[]"/><div class="pic"><img src="{$site_url}/'+ file_data.file_path +'" width="80" height="80" alt="" /><div ectype="handler" class="bg"><p class="operation"><span class="delete" onclick="drop_image('+ file_data.file_id +');" ecm_title="{$lang.drop}"></span></p></div></div></li>');
+}
+function drop_image(file_id)
+{
+    if (confirm(lang.uploadedfile_drop_confirm))
+    {
+       var url = SITE_URL + '/index.php?app=buyer_order&act=drop_image';
+       $.getJSON(url, {'id':file_id}, function(data){
+           if (data.done)
+           {
+              $('*[file_id="' +file_id + '"]').remove();
+           }
+           else
+           {
+              alert(data.msg);
+           }
+        });
+     }
+}
+</script>
+<div classs="page-report">
+    <div class="report w-full">
+        <div class="header">
+            <div class="title w">
+                <i class="sw-ifont">&#xe6ac;</i>
+                <span class="head-text">全网举报</span>
+            </div>
+        </div>
+        <div class="content mb20 mt10 w">
+            <h3 class="suom">请您根据实际情况提交相应的举报材料，完毕后请点击页面底部的“提交举报”按钮。</h3>
+            <form method="post" id="reportForm">
+            <h3 class="title">商品信息: </h3>
+            <div class="goods-info mt20 clearfix">
+                    <div class="info-img float-left">
+                        <a href="{url app=goods&id=$goods.goods_id}" target="_blank">
+                            <img src="{$goods.default_image}" width="80" height="80">
+                        </a>
+                    </div>
+                    <ul class="info-label float-left">
+                        <li>
+                            <label>商品ID:</label>
+                            <span>{$goods.goods_id}</span>
+                        </li>
+                        <li>
+                            <label>商品名称:</label>
+                            <a href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name|escape}</a>
+                        </li>
+                        <li>
+                            <label>商品类目:</label>
+                            <span>{$goods.cate_name|escape}</span>
+                        </li>
+                        <li>
+                            <label>被举报人:</label><a href="{url app=store&id=$goods.store_id}" target="_blank">{$goods.store_name|escape}</a>
+                        </li>
+                    </ul>
+            </div>
+            <h3 class="title">举报描述: </h3>
+            <div class="desc">
+                <textarea name="content" cols="30" rows="10" class="fe-area" placeholder="请描叙该商品,或者该店铺存在的问题"></textarea>
+                <div class="msg-care">注意：被举报人能且只能看到此框中的内容，请您注意不要在此框填写会员名、订单号、运单号等任何可能泄露身份的信息</div>
+            </div>
+            <h3 class="title">上传证明: </h3>
+            <div class="upload-area">
+                <dl class="explain-box clearfix">
+                    <dt class="float-left">
+                        <a href="" target="_blank">
+                        <img src="static/images/57981fa7N5bf90331.png" width="60" height="60" alt="示例"></a>
+                    </dt>
+                    <dd class="float-left gray" style="height:60px">
+                        <h3>凭证要求</h3>
+                        <p>请您提供能证明该商品虚假宣传的截图，要求凭证清晰完整无修改。</p>
+                    </dd>
+                </dl>
+                <div class="i-want-show multimage-wrapper">
+                		<div class="upload_btn filePicker" >
+                             <div class="btn-upload-image open_uploader"><b class="hide">点击晒图</b></div>
+                        </div>
+                        <div class="multimage-piclist clearfix" style="background:none;padding:0;margin-top:10px;">
+                          <div class="small_pic">
+                            <ul id="images">
+                              <!--{foreach from=$images item=image}-->
+                              <li ectype="J-handle_pic" file_id="{$image.file_id}">
+                                <input type="hidden" name="file_id[]" value="{$image.file_id}">
+                                <div class="pic"> <img src="{$site_url}/{$image.file_path}" width="80" height="80" />
+                                  <div ectype="handler" class="bg">
+                                    <p class="operation"> <span class="delete" onclick="drop_image({$image.file_id});" ecm_title="{$lang.drop}"></span> </p>
+                                  </div>
+                                </div>
+                              </li>
+                              <!--{/foreach}-->
+                            </ul>
+                            <div class="clear"></div>
+                          </div>
+                        </div>
+                    </div>
+            	</div>
+            	<div class="issuance">
+                  <input type="submit" class="btn submit-btn" value="{$lang.submit}" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{include file=footer.html}

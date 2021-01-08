@@ -1,0 +1,104 @@
+{include file=member.header.html}
+<script type="text/javascript">
+$(function(){
+	$('.J_del').click(function(){
+		if(confirm('{$lang.drop_confirm}')){
+			var id = $(this).attr('data-id');
+			var url = SITE_URL + '/index.php?app=my_report&act=ajaxDrop';
+			var row = $(this).parents('.item');
+			$.getJSON(url,{'id':id},function(data){
+				if(data.done){
+					row.remove();
+				}else{
+					alert(data.msg);
+				}
+			});
+		}
+	})
+})
+</script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_select table">
+          <table>
+					<tr class="line gray">
+						<th width="280">{$lang.report_goods}</th>
+						<th width="80">{$lang.report_store}</th>
+						<th>{$lang.content}</th>
+						<th width="280">{$lang.upload_files}</th>
+                        <th width="50">{$lang.status}</th>
+					</tr>
+					<tr class="sep-row">
+						<td colspan="5"></td>
+					</tr>
+					<!--{if $reports}-->
+					<tr class="operations">
+						<th colspan="5"> <p class="position1 clearfix">
+								<input type="checkbox" id="all" class="checkall"/>
+								<label for="all">{$lang.checkall}</label>
+                                <a href="javascript:;" class="delete" ectype="batchbutton" uri="index.php?app=my_report&act=drop" name="id" presubmit="confirm('{$lang.drop_confirm}')">{$lang.drop}</a>
+							</p>
+							<p class="position2 clearfix"> {include file=member.page.top.html} </p>
+						</th>
+					</tr>
+					
+					<!--{foreach from=$reports item=val name=fe_val}-->
+                    <tbody class="item">
+					<tr class="sep-row">
+						<td colspan="5"></td>
+					</tr>
+					<tr class="line-hd">
+						<th colspan="5"> <p> <input type="checkbox" value="{$val.report_id}" class="checkitem" <!--{if $val.status}--> disabled="disabled" <!--{/if}-->/>
+								<label>{$lang.add_time}：</label>
+								{$val.add_time|date:Y-m-d H:i:s} <a href="javascript:;" class="J_del" style="margin-left:15px;" data-id="{$val.report_id}">{$lang.drop}</a> 
+							</p>
+						</th>
+					</tr>
+					<tr class="line">
+						<td valign="top" class="first clearfix"><div class="pic-info float-left"> <a href="{url app=goods&id=$val.goods_id}" target="_blank"><img src="{$val.goods_image}" width="50" height="50" /></a> </div>
+							<div class="txt-info float-left" style="width:180px;">
+								<div class="txt"> <a href="{url app=goods&id=$val.goods_id}" target="_blank">{$val.goods_name}</a> </div> 
+							</div>
+                        </td>
+						<td class="align2"><a href="{url app=store&id=$val.store_id}" target="_blank">{$val.store_name}</a></td>
+						<td class="align2">{$val.content|escape}</td>
+						<td>
+                        	<!--{foreach from=$val.images item=image}-->
+                        	<a href="{$site_url}/{$image}" target="_blank"><img src="{$image}" width="50" height="50" /></a>
+                            <!--{/foreach}-->
+                        </td>
+                        <td class="align2">{if $val.status eq 1}{$lang.done}{else}{$lang.wait_verify}{/if}</td>
+					</tr>
+                    </tbody>
+					<!--{/foreach}--> 
+					
+					<tr class="sep-row">
+						<td colspan="5"></td>
+					</tr>
+					<tr class="operations">
+						<th colspan="5"> <p class="position1 clearfix">
+								<input type="checkbox" id="all2" class="checkall"/>
+								<label for="all2">{$lang.checkall}</label>
+                                <a href="javascript:;" class="delete" ectype="batchbutton" uri="index.php?app=my_report&act=drop" name="id" presubmit="confirm('{$lang.drop_confirm}')">{$lang.drop}</a>
+							</p>
+							<p class="position2 clearfix"> {include file=member.page.bottom.html} </p>
+						</th>
+					</tr>
+					
+					<!--{else}-->
+					<tr class="sep-row">
+						<td colspan="5"><div class="notice-word">
+								<p>{$lang.no_records}</p>
+							</div></td>
+					</tr>
+					<!--{/if}-->
+					
+				</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

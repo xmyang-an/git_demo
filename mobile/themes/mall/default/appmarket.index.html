@@ -1,0 +1,60 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="promotool appmarket">
+      <!--TAB-->
+      <div class="listTab">
+        <div class="fixed-gap"></div>
+        <div class="fixed-bd bgf border-bottom">
+          <ul class="items webkit-box">
+            <li class="flex1 center"><a href="{url app=appmarket}" {if !$smarty.get.sort}class="active" {/if}>默认</a></li>
+            <li class="flex1 center"><a href="{if $smarty.get.order eq 'desc'}{url app=appmarket&sort=sales&order=asc}{else}{url app=appmarket&sort=sales&order=desc}{/if}" {if $smarty.get.sort eq 'sales'}class="active {if $smarty.get.order eq 'desc'}desc{else}asc{/if}" {/if}>使用人数</a></li>
+            <li class="flex1 center"><a href="{if $smarty.get.order eq 'desc'}{url app=appmarket&sort=add_time&order=asc}{else}{url app=appmarket&sort=add_time&order=desc}{/if}" {if $smarty.get.sort eq 'add_time'}class="active {if $smarty.get.order eq 'desc'}desc{else}asc{/if}" {/if}>上架时间</a></li>
+            <li class="flex1 center"><a href="{if $smarty.get.order eq 'desc'}{url app=appmarket&sort=views&order=asc}{else}{url app=appmarket&sort=views&order=desc}{/if}" {if $smarty.get.sort eq 'views'}class="active {if $smarty.get.order eq 'desc'}desc{else}asc{/if}" {/if}>人气</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!--AJAX数据显示区域-->
+      <div class="squares app-list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <li class="item"> <a href="{1}" class="webkit-box block">
+            <div class="pic padding5"><img src="{2}" ></div>
+            <div class="info flex1">
+              <h2 class="goods-name line-clamp-2"><font color="#E4393C">[{3}]</font> {4}</h2>
+              <div class="pri-sales clearfix"> <span class="price float-left">{5}</span> <ins class="sales float-right">{6}人使用</ins> </div>
+            </div>
+            </a> </li>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      <div class="extra">
+        <div class="fixed-gap"></div>
+        <a href="{url app=appmarket&act=my}" class="btn-alipay btn-alipay-fixed">{$lang.myapp}</a> </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, item) {
+				html += sprintf(template.html(), "{url app=appmarket&act=view&id="+item.aid+"}", item.logo, item.name, item.title, price_format(item.config.charge), item.sales);
+			});
+			target.find('.infinite-result').append(html).show();
+			$('.app-list').find('.item').each(function(index, element) {
+        		$(this).find('img').css('height', $(this).find('img').width() * 2 / 3);
+    		});
+			
+		}
+	});
+});
+</script> 
+{include file=footer.html} 

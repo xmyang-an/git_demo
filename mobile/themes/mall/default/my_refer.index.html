@@ -1,0 +1,105 @@
+{include file=member.header.html}
+<script type="text/javascript">
+var clipboardText = new Clipboard('.J-CopyLink', {
+    text: function() {
+       return REAL_SITE_URL+'/index.php?app=member&act=register&r={$visitor.user_id}';
+    }
+});
+
+clipboardText.on('success', function(e) {
+	layer.confirm('{$lang.success_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+
+clipboardText.on('error', function(e) {
+   layer.confirm('{$lang.fail_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+
+var clipboardQrode = new Clipboard('.J-CopyQrcode', {
+    target: function() {
+       return document.querySelector('.J-Qrcode');
+    }
+});
+
+clipboardQrode.on('success', function(e) {
+	layer.confirm('{$lang.success_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+
+clipboardQrode.on('error', function(e) {
+   layer.confirm('{$lang.fail_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+</script>
+<style  type="text/css">
+.page-refer .tab{background:#ff5722;}
+.page-refer .tab .item{width:33.3333%;position:relative;}
+.page-refer .tab .item:after{position:absolute;content:'';right:0;top:0;bottom:0;background:rgba(250, 250, 250, 0.3);width:1px;}
+.page-refer .tab .item:before{position:absolute;content:'';right:0;left:0;bottom:0;background:rgba(250, 250, 250, 0.3);height:1px;}
+.page-refer .tab .item a{color:#fff;display:block;text-align:center;padding:20px 10px;line-height:16px;}
+.page-refer .tab .item a span{font-size:14px;}
+.page-refer .tab .item a p{margin-top:5px;}
+.rebateLink button{background:#f60;line-height:36px;height:38px;border:0;color:#fff;}
+</style>
+<div id="main" class="page-refer"> 
+	<div class="tab webkit-box flex-wrap">
+    	<div class="item">
+        	<a href="javascript:;">
+            	<span><!--{if $parent_refers}-->{$parent_refers.user_name}<!--{else}-->自行注册<!--{/if}--></span>
+                <p>推荐人</p>
+            </a>
+        </div>
+        <div class="item">
+        	<a href="{url app=my_refer&act=all_refer}">
+            	<span>{$my_refer_count|default:0}</span>
+                <p>团队人数</p>
+            </a>
+        </div>
+        <div class="item">
+        	<a href="{url app=my_refer&act=refer_order}">
+            	<span>{$my_refer_amount|price}</span>
+                <p>推广奖励</p>
+            </a>
+        </div>
+        <div class="item">
+        	<a href="{url app=my_refer&act=refer_user1}">
+            	<span>{$refer_count_1}</span>
+                <p>一级团队</p>
+            </a>
+        </div>
+        <div class="item">
+        	<a href="{url app=my_refer&act=refer_user2}">
+            	<span>{$refer_count_2}</span>
+                <p>二级团队</p>
+            </a>
+        </div>
+        <div class="item">
+        	<a href="{url app=my_refer&act=refer_user3}">
+            	<span>{$refer_count_3}</span>
+                <p>三级团队</p>
+            </a>
+        </div>
+    </div>
+    <div class="rebateLink" style="width:60%;margin:20px auto;">
+         <div class="qr J-Qrcode"><img style="max-width:100%;" src="{$refer_qrcode}" /></div>
+             <div class="btns mt20 webkit-box">
+                 <button class="J-CopyQrcode flex1 mr20">复制二维码</button>
+                 <button style="background:#00BCD4;" class="J-CopyLink flex1">复制链接</button>
+             </div>
+         </div>
+    </div>
+</div>
+{include file=footer.html}

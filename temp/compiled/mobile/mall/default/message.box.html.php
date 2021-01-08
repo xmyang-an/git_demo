@@ -1,0 +1,53 @@
+<?php echo $this->fetch('member.header.html'); ?>
+<div id="main">
+  <div id="page-message">
+    <div class="page-actions wxHidden"><i></i></div>
+    <div class="tabs">
+      <ul class="tab-list clearfix">
+        <li <?php if ($_GET['act'] == 'newpm'): ?>class="active"<?php endif; ?>><a href="<?php echo url('app=message&act=newpm'); ?>">未读信息</a></li>
+        <li <?php if ($_GET['act'] == 'privatepm'): ?>class="active"<?php endif; ?>><a href="<?php echo url('app=message&act=privatepm'); ?>">私人信息</a></li>
+        <li <?php if ($_GET['act'] == 'systempm'): ?>class="active"<?php endif; ?>><a href="<?php echo url('app=message&act=systempm'); ?>" style="border-right:0;">系统信息</a></li>
+      </ul>
+    </div>
+    <div class="pm-list"> 
+      
+      
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <ul class="infinite-template">
+          <li> <a href="{1}" class="block webkit-box">
+            <div class="send-user-logo padding10"> <img width="60" height="60" src="{2}" /> </div>
+            <div class="detail pt10 pr10 pb10 flex1">
+              <div class="t clearfix"><span class="block float-left"> {3}{4}</span><em class="float-right">{5}</em></div>
+              <p class="d line-clamp-2 mt5"> <span style="color:#FF2700; display:{6}">[未读]</span>{7}</p>
+            </div>
+            </a> </li>
+        </ul>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>没有</p>
+        </div>
+      </div>
+    </div>
+    <div class="extra wxHidden">
+    	<div class="fixed-gap"></div>
+    	<a href="<?php echo url('app=message&act=send'); ?>" class="btn-alipay btn-alipay-fixed">发站内信</a>
+    </div>
+  </div>
+  <script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 10, params: <?php echo $this->_var['infiniteParams']; ?>, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, message) {
+				html += sprintf(template.html(), "<?php echo url('app=message&act=view&msg_id="+message.msg_id+"'); ?>", message.user_info.portrait, message.i_send ? '<i class="psmb-icon-font mr5 i-send">&#xe6a5;</i>' : '<i class="psmb-icon-font mr5 no-i-send">&#xe6a6;</i>', message.user_info.user_name, message.last_update, message.new ? 'inline-block' : 'none', message.content);
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script> 
+</div>
+<?php echo $this->fetch('footer.html'); ?> 

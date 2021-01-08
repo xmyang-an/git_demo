@@ -1,0 +1,83 @@
+{include file=member.header.html}
+<script type="text/javascript">
+var clipboardText = new Clipboard('.J-CopyLink', {
+    text: function() {
+       return REAL_SITE_URL+'/index.php?app=member&act=register&r={$visitor.user_id}';
+    }
+});
+
+clipboardText.on('success', function(e) {
+	layer.confirm('{$lang.success_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+
+clipboardText.on('error', function(e) {
+   layer.confirm('{$lang.fail_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+
+var clipboardQrode = new Clipboard('.J-CopyQrcode', {
+    target: function() {
+       return document.querySelector('.J-Qrcode');
+    }
+});
+
+clipboardQrode.on('success', function(e) {
+	layer.confirm('{$lang.success_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+
+clipboardQrode.on('error', function(e) {
+   layer.confirm('{$lang.fail_to_copy}', {
+	  btn: ['{$lang.confirm}']
+	}, function(index){
+	  layer.close(index);
+	});
+});
+</script>
+<div id="main" class="clearfix"> 
+  {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+            <div class="public">
+                <div class="information">
+                    <div class="info">
+                        <table>
+                            <tr>
+                                <th width="20"></th>
+                                <td>我的推荐人:<font color="#f00" class="ml5"><!--{if $parent_refers}-->{$parent_refers.user_name}<!--{else}-->自行注册<!--{/if}--></font><span class="ml20">我的团队人数：<strong><font color="#f00" class="fs14 ml5">{$my_refer_count|default:0}</font></strong></span><span class="ml20">我的推广奖励：<strong><font color="#f00" class="fs14 ml5">{$my_refer_amount|price}</font></strong></span></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                	<div class="rebateLink mt20">
+                                        <div class="qr J-Qrcode">
+                                            <img width="150" src="{$refer_qrcode}" />
+                                        </div>
+                                        <div class="btns mt20">
+                                            <button class="J-CopyQrcode mr20">复制二维码</button>
+                                            <button class="J-CopyLink">复制链接</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+{include file=footer.html}

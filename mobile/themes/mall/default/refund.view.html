@@ -1,0 +1,128 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-refund"> 
+    <!--{if $smarty.get.type eq 'logs'}-->
+    <div class="refund-logs mb10"> 
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <div class="infinite-result clearfix hidden"> </div>
+        <div class="infinite-template">
+          <div class="clearfix">
+            <div class="title webkit-box">
+              <h3 class="flex1">{1}</h3>
+              <span>{2}</span> </div>
+            <div class="content mb10"> {3} 
+              {4} </div>
+          </div>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底喽<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      
+    </div>
+    <script type="text/javascript">
+	$(function(){
+		$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+				var html = '';
+				var template = TEMP.clone(true);
+				$.each(data.message, function(k, message) {
+					html += sprintf(template.html(), message.sender, message.created, message.content, $.inArray(message.pic_url, [undefined, '', null]) > -1 ? '' : '<p class="mt10"><img src="'+message.pic_url+'" style="max-width:100%;" /></p>');
+				});
+				target.find('.infinite-result').append(html).show();
+			}
+		});
+	});
+	</script> 
+    
+    <!--{elseif $smarty.get.type eq 'send'}-->
+    <div class="refund-send"> 
+      <!--{if $refund.status neq 'SUCCESS' && $refund.status neq 'CLOSED'}-->
+      <form method="post" enctype="multipart/form-data" id="refund_form" class="fun-form-style">
+        <div class="form">
+          <dl class="textarea" >
+            <dd class="webkit-box" style="height:70px;">
+              <textarea name="content" class="flex1" placeholder="请填写理由" ></textarea>
+            </dd>
+          </dl>
+          <div class="bgf padding10">
+            <p class="add-image-btn"> <i class="psmb-icon-font">&#xe6ce;</i>
+              <input type="file" name="refund_cert" onChange="getTempPath(this);" />
+            </p>
+          </div>
+          <div class="extra">
+            <input type="hidden" value="{url app=refund&act=view&type=logs&refund_id=$refund.refund_id}" class="J_AjaxFormRetUrl" />
+            <input type="submit" value="{$lang.submit}" class="btn-alipay J_AjaxFormSubmit" />
+          </div>
+        </div>
+      </form>
+      <!--{/if}--> 
+    </div>
+    <!--{else}-->
+    <div class="refund-detail">
+      <div class="table-list">
+        <div class="title">
+          <div class="ml10">
+            <h3 class="fs14">{$refund.status_label}</h3>
+            <p class="mt10">{$refund.created|date:Y-m-d H:i:s}</p>
+            <!--{if $refund.status neq 'SUCCESS' && $refund.status neq 'CLOSED'}--> 
+            <a href="{url app=refund&act=view&type=send&refund_id=$refund.refund_id}" class="btn-send">提交申诉</a> 
+            <!--{/if}--> 
+          </div>
+        </div>
+        <ul>
+          <li class="webkit-box J_PopLayer" data-PopLayer="{popLayer:'.J_OrderAmountPopLayer',top:'35%', fixedBody: true}"> <span class="th"><em>订单总额</em></span> <span class="td flex1"><em>{$refund.total_fee}</em><i class="psmb-icon-font">&#xe629;</i></span> </li>
+          <li class="webkit-box mb10 J_PopLayer" data-PopLayer="{popLayer:'.J_RefundAmountPopLayer',top:'35%', fixedBody: true}"> <span class="th"><em>退款总额</em></span> <span class="td flex1"><em>{$refund.refund_total_fee}</em><i class="psmb-icon-font">&#xe629;</i></span> </li>
+          <li class="webkit-box"> <span class="th"><em>退款编号</em></span> <span class="td flex1"><em>{$refund.refund_sn}</em></span> </li>
+          <li class="webkit-box"> <span class="th"><em>收货情况</em></span> <span class="td flex1"><em>{$refund.shipped_text}</em></span> </li>
+          <li class="webkit-box"> <span class="th"><em>退款原因</em></span> <span class="td flex1"><em>{$refund.refund_reason}</em></span> </li>
+          <li class="webkit-box"> <span class="th"><em>退款说明</em></span> <span class="td flex1"><em>{$refund.refund_desc}</em></span> </li>
+          <li class="webkit-box"> <span class="th"><em>协商历史</em></span> <a class="td flex1" href="{url app=refund&act=view&type=logs&refund_id=$refund.refund_id}"><i class="psmb-icon-font">&#xe629;</i></a></li>
+        </ul>
+      </div>
+      <div class="refund_btn webkit-box mt10"> 
+        <!--{if $refund.status neq 'SUCCESS' && $refund.status neq 'CLOSED' && $refund.status neq 'WAIT_ADMIN_AGREE'}--> 
+        <!--{if $refund.buyer_id eq $visitor.user_id}--> 
+        <a href="javascript:;" class="J_AjaxRequest flex1 blue" confirm="您确定要取消退款么？" action="{url app=refund&act=cancel&refund_id=$refund.refund_id}">取消退款</a> <a href="{url app=refund&act=edit&refund_id=$refund.refund_id}" class="flex1">修改退款</a> 
+        <!--{else}--> 
+        <a href="javascript:;" class="J_AjaxRequest  flex1" confirm="点击【同意退款】按钮，相关货款将退还给买家，是否继续？" action="{url app=refund&act=agree&refund_id=$refund.refund_id}" >同意退款</a> <a href="{url app=refund&act=refuse&refund_id=$refund.refund_id}" class="flex1">拒绝退款</a> 
+        <!--{/if}--> 
+        <!--{if $refund.ask_customer}--> 
+        <a class="flex1 gray">客服已介入</a> 
+        <!--{else}--> 
+        <a href="javascript:;" class="J_AjaxRequest flex1" confirm="您确定需要平台客服介入处理么？" action="{url app=refund&act=ask_customer&refund_id=$refund.refund_id}">申请介入</a> 
+        <!--{/if}--> 
+        <!--{/if}--> 
+        
+        <!--{if $refund.buyer_id eq $visitor.user_id}--> 
+        <a class="flex1 gray J_RedirectToWx" href="{url app=buyer_order&act=view&order_id=$refund.order_id}">查看订单</a> 
+        <!--{else}--> 
+        <a class="flex1 gray" href="{url app=seller_order&act=view&order_id=$refund.order_id}">查看订单</a> 
+        <!--{/if}--> 
+      </div>
+      <div class="pop-layer-common bank-pop-layer J_OrderAmountPopLayer">
+        <div class="wraper">
+          <div class="bd padding10">
+            <h3>订单总额说明</h3>
+            <p class="gray mt5 fs12">订单总额 = 商品总额({$refund.goods_fee}) + 运费总额({$refund.shipping_fee})</p>
+          </div>
+          <div class="ft popClosed pop-btn">关闭</div>
+        </div>
+      </div>
+      <div class="pop-layer-common bank-pop-layer J_RefundAmountPopLayer">
+        <div class="wraper">
+          <div class="bd padding10">
+            <h3>退款总额说明</h3>
+            <p class="gray mt5 fs12">退款总额 = 退款商品总额({$refund.refund_goods_fee}) + 退运费总额({$refund.refund_shipping_fee})</p>
+          </div>
+          <div class="ft popClosed pop-btn">关闭</div>
+        </div>
+      </div>
+    </div>
+    <!--{/if}--> 
+  </div>
+</div>
+{include file=footer.html} 

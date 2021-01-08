@@ -1,0 +1,104 @@
+{include file=top.html}
+<div id="header" class="w-full">
+	<!--{if $index}-->
+	<div class="top-ads" area="top-ads" widget_type="area"> 
+		<!--{widgets page=index area=top-ads}--> 
+	</div>
+    <!--{/if}-->
+	<div class="shop-t w clearfix pb10 mb10 pt5">
+		<div class="logo mt10"> <a href="{$site_url}" title="{$site_title}"><img alt="{$site_title}" src="{$site_logo}" /></a> </div>
+		<div class="top-search"> 
+			
+			<div class="top-search-box clearfix">
+				<div class="form-fields">
+					<form method="GET" action="{url app=search}" class="clearfix">
+						<input type="hidden" name="app" value="search" />
+						<input type="hidden" name="act" value="{if $smarty.get.act eq 'store'}store{else}index{/if}" />
+                        <ul class="select-act J_SearchType">
+                        	<li class="{if $smarty.get.act eq 'index' || !$smarty.get.act}current{/if}"><span value="index">{$lang.goods}</span></li>
+                            <li class="{if $smarty.get.act eq 'store'}current{/if}"><span value="store">{$lang.store}</span></li>
+                        </ul>
+                        
+						<input type="text" name="keyword" value="{$smarty.get.keyword}" class="keyword" placeholder="{$hot_keywords.0}" />
+						<input type="submit" value="{$lang.search}" class="submit" hidefocus="true" />
+					</form>
+				</div>
+			</div>
+			<div class="top-search-keywords"> <span>{$lang.hot_search}{$lang.colon}</span> 
+				<!--{foreach from=$hot_keywords item=keyword name=fe_keyword}--> 
+				<a {if $smarty.foreach.fe_keyword.first == 1}style="color:#d96430;"{/if} href="{url app=search&keyword=$keyword|escape:url}">{$keyword}</a> 
+				<!--{/foreach}--> 
+			</div>
+		</div>
+		<div class="header_cart J_GlobalPop">
+        	<div class="item">
+			<div class="title clearfix"> <b></b><a href="{url app=cart}">去购物车结算</a><em>></em> </div>
+			<div class="shoping"><span class="count-cart J_C_T_GoodsKinds">{$cart_goods_kinds}</span></div>
+			<div class="shadow"></div>
+			<div class="cart-list eject-box J_GlobalPopSub J_HasGoods"> 
+				<!--{if $carts_top.cart_items}-->
+				<div class="goods-list">
+					<h4>最新加入的商品</h4>
+					<!--{foreach from=$carts_top.cart_items item=cart name=fe_cart}-->
+					<div {if $smarty.foreach.fe_cart.last}style="border:0px;"{/if} class="clearfix list J_CartItem-{$cart.rec_id}">
+						<div class="goods-img"> <a href="{url app=goods&id=$cart.goods_id}" target="_top"><img alt="{$cart.goods_name}" src="{$cart.goods_image}" width="40" height="40"></a> </div>
+						<div class="goods-title"> <a title="{$cart.goods_name}" href="{url app=goods&id=$cart.goods_id}" target="_top">{$cart.goods_name}</a> </div>
+						<div class="goods-admin">
+							<div class="mini-cart-count"><strong class="mini-cart-price J_ItemPrice-{$cart.rec_id}">{$cart.price|price}</strong> ×<span class="J_ItemQuantity-{$cart.rec_id}">{$cart.quantity}</span></div>
+							<div class="mini-cart-del"><a href="javascript:;" onclick="drop_cart_item({$cart.store_id}, {$cart.rec_id});">删除</a></div>
+						</div>
+					</div>
+					<!--{/foreach}--> 
+				</div>
+				<div class="total"> <span>共<strong class="J_C_T_GoodsKinds">{$cart_goods_kinds}</strong>件商品</span><span>共计<strong class="J_C_T_Amount">{$carts_top.total_amount|price}</strong></span><br />
+					<a href="{url app=cart}">去购物车结算</a> </div>
+				<!--{else}-->
+				<div class="nogoods clearfix J_NoGoods"> <b></b>购物车中还没有商品，赶紧选购吧！ </div>
+				<!--{/if}--> 
+			</div>
+            </div>
+		</div>
+	</div>
+    <!--{if $index}-->
+    <div class="shop-t-pop J_SearchFixed hidden">
+    	<div class="w clearfix">
+    	<div class="logo mt10"> <a href="{$site_url}" title="{$site_title}"><img alt="{$site_title}" src="{$site_logo}" /></a> </div>
+		<div class="top-search"> 
+			
+			<div class="top-search-box clearfix">
+				<div class="form-fields">
+					<form method="GET" action="{url app=search}" class="clearfix">
+						<input type="hidden" name="app" value="search" />
+						<input type="hidden" name="act" value="{if $smarty.get.act eq 'store'}store{else}index{/if}" />
+                        <ul class="select-act J_SearchType">
+                        	<li class="{if $smarty.get.act eq 'index' || !$smarty.get.act}current{/if}"><span value="index">{$lang.goods}</span></li>
+                            <li class="{if $smarty.get.act eq 'store'}current{/if}"><span value="store">{$lang.store}</span></li>
+                        </ul>
+                        
+						<input type="text" name="keyword" value="{$smarty.get.keyword}" class="keyword" placeholder="{$hot_keywords.0}" />
+						<input type="submit" value="{$lang.search}" class="submit" hidefocus="true" />
+					</form>
+				</div>
+			</div>
+			
+		</div>
+        </div>
+    </div>
+    <!--{/if}-->
+	<div  class="w-full mall-nav relative ">
+		<div class="mall-bg w">
+			<ul class="w clearfix">
+				
+				<li class="each float-left inline-block"><a class="{if $index}current{/if}" href="{$site_url}">{$lang.home}</a></li>
+				<li class="each float-left inline-block"><a class="{if !$index and $nav.link eq $current_url}current{/if}" href="https://shop.yatdim.com/index.php?app=mybrand&act=index">自营品牌a</a></li>
+				<li class="each float-left inline-block"><a class="{if !$index and $nav.link eq $current_url}current{/if}" href="https://shop.yatdim.com/index.php?app=spotgoods&act=index">现货出售</a></li>
+				<li class="each float-left inline-block"><a class="{if !$index and $nav.link eq $current_url}current{/if}" href="https://shop.yatdim.com/index.php?app=trades&act=index">供求信息</a></li>
+				<li class="each float-left inline-block"><a class="{if !$index and $nav.link eq $current_url}current{/if}" href="https://shop.yatdim.com/index.php?app=member&act=register">商家入驻</a></li>
+				<li class="each float-left inline-block"><a class="{if !$index and $nav.link eq $current_url}current{/if}" href="http://www.yatdim.com/index">->壹点官网入口</a></li>
+				<!--{foreach from=$navs.middle item=nav name=fe_nav}-->
+				<li class="each float-left inline-block"><a class="{if !$index and $nav.link eq $current_url}current{/if}" href="{$nav.link}"{if $nav.open_new} target="_blank"{/if}>{$nav.title|escape}{if $smarty.foreach.fe_nav.iteration eq 1}<span class="absolute block">HOT</span>{/if}</a></li>
+				<!--{/foreach}-->
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<div id="left">
+  <h3 class="curmenu"> 
+    <!--{if $member_role eq 'buyer_admin'}--> 
+    {$lang.im_buyer} 
+    <!--{elseif $member_role eq 'seller_admin'}--> 
+    {$lang.im_seller} 
+    <!--{elseif $member_role eq 'promotool_admin'}--> 
+    {$lang.promotool} 
+    <!--{/if}--> 
+  </h3>
+  <!--{foreach from=$_member_menu item=item name=fe_item}--> 
+  <!--{if $item.submenu}-->
+  <dl class="menu">
+    <!--{foreach from=$item.submenu item=subitem k=k}-->
+    <dd><a href="{$subitem.url}" class="{if $subitem.name eq $_curitem}active{else}normal{/if}"><span class="ico {$subitem.name}">{$subitem.text}</span></a></dd>
+    <!--{/foreach}-->
+  </dl>
+  <!--{/if}--> 
+  <!--{/foreach}--> 
+</div>

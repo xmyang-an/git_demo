@@ -1,0 +1,29 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-refund">
+    <div class="refund-send"> 
+      <form method="post" enctype="multipart/form-data" id="refund_form" class="fun-form-style">
+        <div class="form">
+          <dl>
+            <dt><span>退款编号：{$refund.refund_sn}</span></dt>
+          </dl>
+          <dl class="textarea" >
+            <dd class="webkit-box" style="height:70px;">
+              <textarea name="content" class="flex1" placeholder="请填写理由" ></textarea>
+            </dd>
+          </dl>
+          <div class="bgf padding10">
+            <p class="add-image-btn"> <i class="psmb-icon-font">&#xe6ce;</i>
+              <input type="file" name="refund_cert" onChange="getTempPath(this);" />
+            </p>
+          </div>
+          <div class="extra">
+            <input type="hidden" value="{url app=refund&act=view&type=logs&refund_id=$refund.refund_id}" class="J_AjaxFormRetUrl" />
+            <input type="submit" value="{$lang.submit}" class="btn-alipay J_AjaxFormSubmit" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

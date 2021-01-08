@@ -1,0 +1,69 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="seller-fullgift">
+      <div class="promotool-form fullgift-form">
+        <form method="post" class="fun-form-style">
+          <div class="form">
+          <dl>
+            <dt><span>赠品基本信息</span></dt>
+            <dd class="webkit-box"> <span>赠品标题</span>
+              <input type="text" name="goods_name" value="{$goods.goods_name}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.giftTitle}" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"> <span>赠品价格</span>
+              <input type="text" class="input clearInput flex1" name="price" value="{$goods.price}" oninput="javascript:clearInput(this)" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dt><span>赠品主图</span></dt>
+          </dl>
+          <div class="bgf padding10 webkit-box relative" >
+            <div class="add-image-btn">
+              <div class="filePicker"></div>
+              <i class="psmb-icon-font">&#xe6e8;</i> 
+              <!--{if $goods.default_image}--> 
+              <img src="{$goods.default_image}" width="50" height="50" /> 
+              <!--{/if}-->
+              <input type="hidden" name="default_image" value="" />
+            </div>
+            <p class="fs12 gray flex1 ml10">点击修改赠品图片，尺寸400像素*400像素</p>
+          </div>
+          <dl>
+            <dt><span>赠品描述</span></dt>
+            <dd class="textarea webkit-box">
+              	<textarea class="flex1" name="description">{$goods.description|escape}</textarea>
+            </dd>
+          </dl>
+          <div class="extra">
+            <p >
+              <label class="switch-checkbox-radio w-full block mb20 box-align-center J_SwtcherInput {if  $goods.if_show || !$goods}checked{/if}" for="switcher"> <em class="block flex1 gray">上架</em> <span class="switcher-style block"></span> </label>
+              <input name="if_show" class="hidden" id="switcher" value="1" type="checkbox" {if $goods.if_show || !$goods}checked="checked"{/if} />
+            </p>
+            <div class="clearfix">
+              <p class="fixed-gap"></p>
+              <input type="submit" class="J_AjaxFormSubmit btn-alipay btn-alipay-fixed" value="{$lang.submit}" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	 $('.filePicker').compressUpload({
+		server: REAL_SITE_URL + '/index.php?app=seller_fullgift&act=upload',
+		pick: '.filePicker',
+		fileVal: 'image',
+		crop: true,
+		callback: function(file, response, pick, target) {
+			$(pick).parent().find('img').remove();
+			$(pick).parent().append(sprintf('<img src="{1}" width="50" height="50" />', response+"?"+Math.random()));
+			$('input[name="default_image"]').val(response);
+		}
+	});
+})
+</script> 
+{include file=footer.html}

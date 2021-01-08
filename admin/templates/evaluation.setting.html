@@ -1,0 +1,29 @@
+{include file="header.html"}
+<style type="text/css">
+.infoTable textarea{ width:500px;}
+</style>
+<div id="rightTop">
+  <p>{$lang.evaluation_manage}</p>
+  <ul class="subnav">
+  	<li><a class="btn1" href="index.php?app=evaluation">{$lang.manage}</a></li>
+  	<li><span>{$lang.setting}</span></li>
+    <li><a class="btn1" href="index.php?app=evaluation&amp;act=auto">{$lang.evaluation_auto}</a></li>
+  </ul>
+</div>
+<div class="info">
+  <form method="post">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> <label for="auto_user">{$lang.auto_user}:</label></th>
+        <td class="paddingT15 wordSpacing5"><textarea name="auto_user" id="auto_user">{$setting.auto_user|escape}</textarea><label class="field_notice">{$lang.auto_user_note}</label></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+          <input class="formbtn " type="reset" name="Submit2" value="{$lang.reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="footer.html"}

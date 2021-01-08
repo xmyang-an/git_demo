@@ -1,0 +1,68 @@
+{include file=member.header.html}
+<div id="page-member">
+  <div class="main dcenter">
+    <div class="d-header">
+      <div class="mark-text">我的收益（元）<a class="more-link" href="{url app=dcenter&act=profit}">查看明细<i class="psmb-icon-font">&#xe61d;</i></a></div>
+      <div class="amount-box clearfix"> <span class="amount">{$statistics.amount|default:0}</span> <a href="{url app=deposit&act=withdraw}">提现</a></div>
+    </div>
+    <div class="team stores">
+      <div class="hd">
+        <h3 class="fs14">我的分销店铺（<span class="red">{$storescount|default:0}</span>）</h3>
+      </div>
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <div class="bd">
+            <div class="top pt10 pb10 clearfix"> <span class="float-left">供货商：{1}</span> <span class="float-right red">{2}</span> </div>
+            <div class="item clearfix webkit-box"> <a href="{3}"><img src="{4}" width="40" height="40"></a>
+              <div class="info clearfix flex1 ml10">
+                <p class="clearfix mb5"><span class="float-left">{5}</span></p>
+                <p class="clearfix gray fs12">收益:<span class="red"> {6}</span>元</p>
+              </div>
+              <div class="earning"> <a href="{7}" class="gray fs12"> <i class="psmb-icon-font icon-fenxiao">&#xe6b0;</i>
+                <div class="title">设置</div>
+                </a> <a href="{8}" class="gray fs12"> <i class="psmb-icon-font icon-fenxiao">&#xe6e1;</i>
+                <div class="title">二维码</div>
+                </a> <a href="{9}" class="gray fs12"> <i class="psmb-icon-font icon-fenxiao">&#xe656;</i>
+                <div class="title">查看</div>
+                </a> </div>
+            </div>
+          </div>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底喽<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i class="psmb-icon-font">&#xe65f;</i>
+          <p>您还没有分销的店铺，加油分销吧！</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, store) {
+				html += sprintf(template.html(), 
+					store.store_name,
+					(store.enable_distribution == 1) ? '提成：'+store.distribution_rate+'%' : '<font class="green">分销关闭</font>',
+					"{url app=store&id="+store.store_id+"&did="+store.did+"}",
+					store.logo, 
+					store.real_name,
+					store.amount,
+					"{url app=dcenter&act=edit&did="+store.did+"}",
+					"{url app=default&act=code&did="+store.did+"}",
+					"{url app=store&id="+store.store_id+"&did="+store.did+"}"
+				);
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script> 
+{include file=footer.html}

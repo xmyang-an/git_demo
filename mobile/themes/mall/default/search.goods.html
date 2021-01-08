@@ -1,0 +1,196 @@
+{include file=header.html}
+<div id="main">
+  <div id="page-search-goods" class="page J_page">
+    <div class="page-body search-goods"> 
+    
+    <div class="listTab mall-menus">
+    	<div class="fixed-gap"></div>
+        <div class="fixed-bd">
+        <ul class="items webkit-box">
+          <li class="flex1"><a class="block center active fs14" href="javascript:;"><span>商品</span></a></li>
+          <li class="flex1"><a class="block center fs14" href="{url app=search&act=store}"><span>店铺</span></a></li>
+          <li class="flex1"><a class="block center fs14" href="{url app=limitbuy}"><span>促销</span></a></li>
+          <li class="flex1"><a class="block center fs14" href="{url app=integral}"><span>积分</span></a></li>
+        </ul>
+        </div>
+      </div>
+      
+      <!--TAB-->
+      <div class="listTab">
+        <div class="fixed-gap"></div>
+        <div class="fixed-bd clearfix">
+          <ul class="items clearfix">
+            <li><a href="javascript:void(0);" class="active J_ActiveSort"><span>综合排序</span><i class="psmb-icon-font">&#xe61f;</i></a></li>
+            <li><a href="javascript:void(0);" id="sales-desc" ectype="sort"><span>销量优先</span></a></li>
+            <li><a href="javascript:;" class="goodsFilter J_PopLayer" data-PopLayer="{popLayer:'.J_GoodsFilterPopLayer', fixedBody: true, left:80, direction:'right'}"><span>筛选</span><i class="psmb-icon-font">&#xe6cc;</i></a></li>
+          </ul>
+          <div class="list-style display-mode"> <span class="psmb-icon-font squares clearfix J_ChangeDisplayMode" id="goodsDisplayMode"></span> </div>
+        </div>
+      </div>
+      
+      <!--综合排序列项-->
+      <div class="sort-eject hidden J_SortEject" onclick="$(this).slideUp();"> <span><a href="javascript:void(0);" class="active block webkit-box" ectype="sort"><ins class="flex1">综合排序</ins><i class="psmb-icon-font hidden">&#xe694;</i></a></span> <span><a href="javascript:void(0);" id="price-desc" ectype="sort" class="block webkit-box"><ins class="flex1">价格从高到低</ins><i class="psmb-icon-font hidden">&#xe694;</i></a></span> <span><a href="javascript:void(0);" id="price-asc" ectype="sort" class="block webkit-box"><ins class="flex1">价格从低到高</ins><i class="psmb-icon-font hidden">&#xe694;</i></a></span> <span><a href="javascript:void(0);" id="views-desc" ectype="sort" class="block webkit-box"><ins class="flex1">人气排序</ins><i class="psmb-icon-font hidden">&#xe694;</i></a></span> <span><a href="javascript:void(0);" id="add_time-desc" ectype="sort" class="block webkit-box"><ins class="flex1">上架从新到旧</ins><i class="psmb-icon-font hidden">&#xe694;</i></a></span></div>
+      
+      <!--AJAX数据显示区域-->
+      <div class="{$display_mode} goods-list clearfix J_InfiniteList" ectype="current_display_mode" data-cookie="goodsDisplayMode">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <li> <a href="{1}" class="webkit-box block">
+            <div class="pic padding5"><img src="{res file=images/empty.gif}"  class="lazyload" initial-url="{2}"></div>
+            <div class="info flex1">
+              <h2 class="goods-name line-clamp-2">{3}</h2>
+              <p class="store-name">{4}</p>
+              <div class="pri-sales clearfix"> <span class="price float-left">{5}</span> <ins class="sales float-right">已售{6}</ins> </div>
+            </div>
+            </a> </li>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pop-layer-common pop-wrap-r search-filter J_GoodsFilterPopLayer">
+    <div class="wraper">
+      <div class="bd">
+        <div class="attrs"> 
+          <!--{if $filters}-->
+          <div class="attr attr-extra">
+            <div class="attrk">{$lang.your_selected}{$lang.colon}</div>
+            <div class="filter-list attrv">
+              <ul class="clearfix selected-attr">
+                <!--{foreach from=$filters item=filter}-->
+                <li><a href="javascript:void(0);" id="{$filter.key}" class="each-filter"><span>{$filter.name}{$lang.colon}{$filter.value}</span></a></li>
+                <!--{/foreach}-->
+              </ul>
+            </div>
+          </div>
+          <!--{/if}-->
+          <div class="pri-filter attr">
+            <div class="t attrk">价格区间</div>
+            <div class="c clearfix mt10"> <span class="block-wrap">
+              <input type="text" name="start_price" value="">
+              </span> <span class="line"></span> <span class="block-wrap">
+              <input  type="text"  name="end_price" value="">
+              </span> <span class="psmb-icon-font search-btn J_SearchFilterPrice J_CloseFilterPop">&#xe662;</span> </div>
+          </div>
+          <div class="attr"> 
+            <!--{if $categories}-->
+            <div class="attrk">{$lang.gcategory}</div>
+            <div class="attrv">
+              <ul class="clearfix"  ectype="ul_cate">
+                <!--{foreach from=$categories item=gcategory name=fe_gcategory}-->
+                <li {if $smarty.foreach.fe_gcategory.iteration gt 6}class="hidden"{/if}><a href="javascript:void(0);" id="{$gcategory.cate_id}"><span>{$gcategory.cate_name}({$gcategory.count})</span></a></li>
+                <!--{/foreach}-->
+              </ul>
+              <!--{if $category_count gt 6}-->
+              <div class="options"> <a class="more" href="javascript:void(0);"><span>查看更多</span><i></i></a> </div>
+              <!--{/if}--> 
+            </div>
+            <!--{/if}--> 
+            <!--{if $brands && !$filters.brand}-->
+            <div class="attrk">{$lang.brand}</div>
+            <div class="attrv">
+              <ul  ectype="ul_brand" class="clearfix">
+                <!--{foreach from=$brands item=row name=fe_row}-->
+                <li {if $smarty.foreach.fe_row.iteration gt 6}class="hidden"{/if}><a href="javascript:void(0);" id="{$row.brand|escape|url}"><img src="{$row.brand_logo}"/></a></li>
+                <!--{/foreach}-->
+              </ul>
+              <!--{if $brand_count gt 6}-->
+              <div class="options"> <a class="more" href="javascript:void(0);"><span>查看更多</span><i></i></a> </div>
+              <!--{/if}--> 
+            </div>
+            <!--{/if}--> 
+            <!--{foreach from=$props item=prop name=fe_prop}-->
+            <div class="attrk">{$prop.name}</div>
+            <div class="attrv">
+              <ul  ectype="ul_prop" class="clearfix">
+                <!--{foreach from=$prop.value item=row name=fe_row}-->
+                <li {if $smarty.foreach.fe_row.iteration gt 6}class="hidden"{/if}> <a href="javascript:void(0);" id="{$row.pid}:{$row.vid}" selected_props="{$props_selected}" title="{$row.prop_value}"> <span {if $prop.is_color_prop}class="color"{/if}> 
+                  <!--{if $prop.is_color_prop}--> 
+                  <i {if $row.color_value}style="background:{$row.color_value}"{else}class="duocai"{/if} title="{$row.prop_value}">{$row.prop_value|escape}</i> 
+                  <!--{else}--> 
+                  {$row.prop_value|escape} 
+                  <!--{/if}--> 
+                  </span> </a> </li>
+                <!--{/foreach}-->
+              </ul>
+              <!--{if $prop.prop_count gt 6}-->
+              <div class="options"> <a class="more" href="javascript:void(0);"><span>查看更多</span><i></i></a> </div>
+              <!--{/if}--> 
+            </div>
+            <!--{/foreach}--> 
+            
+            <!--{if $price_intervals && !$filters.price}-->
+            <div class="attrk">{$lang.price}</div>
+            <div class="attrv">
+              <ul class="clearfix" ectype="ul_price">
+                <!--{foreach from=$price_intervals item=row name=fe_row}-->
+                <li {if $smarty.foreach.fe_row.iteration gt 6}class="hidden"{/if}><a href="javascript:void(0);" id="{$row.min} - {$row.max}"><span>{$row.min|price} - {$row.max|price}</span></a></li>
+                <!--{/foreach}-->
+              </ul>
+              <!--{if $price_count gt 6}-->
+              <div class="options"> <a class="more" href="javascript:void(0);"><span>查看更多</span><i></i></a> </div>
+              <!--{/if}--> 
+            </div>
+            <!--{/if}--> 
+            <!--{if $regions && !$filters.region_id}-->
+            <div class="attrk">{$lang.region}</div>
+            <div class="attrv">
+              <ul class="clearfix" ectype="ul_region">
+                
+                <!--{foreach from=$regions item=row name=fe_row}-->
+                <li {if $smarty.foreach.fe_row.iteration gt 6}class="hidden"{/if}><a href="javascript:void(0);" id="{$row.region_id}"><span>{$row.region_name|escape}</span></a></li>
+                <!--{/foreach}-->
+              </ul>
+              <!--{if $region_count gt 6}-->
+              <div class="options"> <a class="more" href="javascript:void(0);"><span>查看更多</span><i></i></a> </div>
+              <!--{/if}--> 
+            </div>
+            <!--{/if}--> 
+          </div>
+        </div>
+      </div>
+      <div class="ft webkit-box clearfix"> <span class="pop-btn flex1"> <a uri="{url app=search&cate_id=$smarty.get.cate_id&keyword=$smarty.get.keyword}" href="javascript:;" class="popReset">重置</a></span> <span class="pop-btn flex1"><i class="popClosed">关闭</i></span> </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	var order = '{$smarty.get.order}';
+	if(order){
+		var	order_arr = order.split(' ');
+		var activeSort = order_arr[0]+'-'+order_arr[1];
+		$("[ectype='sort']").removeClass('active');
+		$('#'+activeSort).addClass('active');
+		
+		if(activeSort == 'sales-desc'){
+			$(".J_ActiveSort").removeClass('active').find('span').text('综合排序');
+		}else{
+			$(".J_ActiveSort").find('span').text($('#'+activeSort).find('ins').text());
+		}
+	}
+	
+	var filter_price = '{$smarty.get.price}';
+	if(filter_price){
+		filter_price = filter_price.split('-');
+		$('input[name="start_price"]').val(number_format(filter_price[0],0));
+		$('input[name="end_price"]').val(number_format(filter_price[1],0));
+	}
+
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, goods) {
+				html += sprintf(template.html(), "{url app=goods&id="+goods.goods_id+"}", goods.default_image, goods.goods_name, goods.store_name, price_format(goods.price), goods.sales);
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+	
+});
+</script> 
+{include file=footer.html}

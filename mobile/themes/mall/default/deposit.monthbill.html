@@ -1,0 +1,26 @@
+{include file=member.header.html} 
+<div class="deposit">
+  <div class="monthbilllist">
+    <div class="content">
+      <!--{if $monthbill}-->
+      <ul class="subtit padding10" style="background:#EAF9F7;color:#444;">
+        <li class="clearfix">
+          <div class="month float-left">月份</div>
+          <div class="download float-right">操作</div>
+        </li>
+      </ul>
+      <ul>
+      	<!--{foreach from=$monthbill item=bill key=key}-->
+        <li class="padding10 clearfix" style="border-bottom:#ddd solid 1px; background:#fff;">
+          <div class="month float-left">{$key}</div>
+          <div class="download float-right"> <a target="_blank" href="{url app=deposit&act=downloadbill&month=$key}" class="f60">下载</a> </div>
+        </li>
+      </ul>
+      <!--{/foreach}-->
+      <!--{else}-->
+      <div class="notice-empty"><i>&#xe661;</i><p>没有任何月账单可共下载</p></div>
+      <!--{/if}-->
+    </div>
+  </div>
+</div>
+{include file=footer.html} 

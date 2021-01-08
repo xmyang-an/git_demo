@@ -1,0 +1,66 @@
+<div class="qa-info-page">
+    <!--{foreach from=$qa_info item=qainfo name=fe_qa}-->
+    <div  class="qa-list">
+        <div class="leave-word">
+        	<dl class="t clearfix">
+            	<dt>咨询网友：</dt>
+            	<dd>
+                	<span><!-- {if $qainfo.user_name} -->{$qainfo.user_name}<!--{else}-->{$lang.guest}<!-- {/if} --></span>
+                    <i class="ml20">{$qainfo.time_post|date:complete}</i>
+                </dd>
+            </dl>
+            <dl class="leave-con clearfix">
+            	<dt>{$lang.question_content}： </dt>
+            	<dd><p>{$qainfo.question_content|escape|nl2br}</p></dd>
+            </dl>
+            <!-- {if $qainfo.reply_content} -->
+            <dl class="reply-con clearfix">
+            	<dt>{$lang.store_reply}：</dt>
+            	<dd>
+               		<p>{$qainfo.reply_content|escape|nl2br}</p> 
+                    <i>{$qainfo.time_reply|date:complete}</i>
+            	</dd>
+            </dl>
+            <!-- {/if} -->
+        </div>
+    </div>
+    <!-- {foreachelse} -->
+    <div style="border:0px;" class="no-record no-access">{$lang.no_records}</div>
+    <!--{/foreach}--> 
+	{if $qa_info}{include file=page.bottom.html}{/if}
+    <!--{if $smarty.get.app eq 'goods'}-->
+    <div class="fill-con">
+    <!--{if !$guest_comment_enable and !$visitor.user_id}-->
+    <div class="no-access">{$lang.login_to_comment}</div>
+    <!--{else}-->
+    <form method="post" id="message" action="index.php?app={$smarty.get.app}<!--{if $smarty.get.act}-->&amp;act={$smarty.get.act}<!--{elseif $smarty.get.app eq 'goods'}-->&amp;act=qa<!--{/if}-->&amp;id={$smarty.get.id}">
+    	<div class="qar-info">
+        	<label for="qar-email">
+        		<strong>{$lang.qa_email}:</strong>
+        		<input type="text" id="qar-email" class="txt" name="email" value="{$email}" placeholder="非会员可输入邮件进行咨询，以便客服人员给您回执。" />
+        	</label>
+            <!--{if $captcha}-->
+            <label for="captcha_value">
+            	<strong>{$lang.captcha}:</strong>
+                <input type="text" class="text" name="captcha" id="captcha_value" />
+                <img  id="captcha" class="captcha" src="index.php?app=captcha&amp;{$random_number}" />
+                <span onclick="change_captcha($('#captcha'));">看不清验证码？点击图片换一张。</span>
+            </label>
+             <!--{/if}-->
+        </div>
+    	<div class="qa-content">
+        	<strong class="ml5">{$lang.wanner_qa}:</strong>
+        	<textarea name="content" class="qa-textarea"></textarea>
+            <span class="field_message"><span class="field_notice"></span></span>
+        </div>
+        <div class="bottom">
+        <!--{if $smarty.session.user_info}-->
+        <label><input type="checkbox" name="hide_name" value="hide" /> {$lang.hide_name}</label>
+        <!--{/if}-->
+        <input type="submit" value="{$lang.submit_message}" name="qa" class="submit"/>
+        </div>
+    </form>
+    <!--{/if}-->
+    </div>
+    <!--{/if}-->
+</div>

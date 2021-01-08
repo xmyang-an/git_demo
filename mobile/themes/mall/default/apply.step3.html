@@ -1,0 +1,31 @@
+{include file=header.html}
+<style>
+body{ background:#fff;}#header{ display:none}
+</style>
+<div id="main" class="w-full"> 
+  <!--<div class="page-actions"><i></i></div>-->
+  <div class="page-apply">
+    <div class="showMessage">
+      <div class="noticeMsg"> 
+      	<span class="icon"><i class="psmb-icon-font fff"></i></span>
+        <h2>操作提示</h2>
+        <p class="msgDesc"> 
+          <!--{if $store.apply_remark}--> 
+          审核不通过，原因为：{$store.apply_remark} 
+          <!--{else}--> 
+          {$lang.user_has_application} 
+          <!--{/if}--> 
+        </p>
+        <!--{if $store.apply_remark}-->
+        <div class="padding10 mt10"><a href="{url app=apply&step=2&id=$store.store_id}" class="btn-alipay btn-alipay-green">前往修改</a></div>
+        <!--{else}-->
+        <div class="padding10 mt10">
+        	<a href="{$site_url}" class="btn-alipay btn-alipay-green">返回首页</a>
+        	<!--<a href="{$site_url}" class="btn-alipay btn-alipay-gray mt10">返回用户中心</a>-->
+    	</div>
+        <!--{/if}--> 
+      </div>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

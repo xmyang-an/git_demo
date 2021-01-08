@@ -1,0 +1,71 @@
+{include file="header.html"}
+<div id="rightTop">
+  <ul class="subnav">
+    <li><span>{$lang.material_manage}</span></li>
+  </ul>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+          <input type="hidden" name="app" value="material" />
+          设备：
+    	  <select id="device" name="device">
+          	<option value="">{$lang.select_pls}</option>
+          	{html_options options=$devices  selected=$smarty.get.device}
+          </select>
+          类型：
+    	  <select id="device" name="type">
+          	<option value="">{$lang.select_pls}</option>
+          	{html_options options=$types  selected=$smarty.get.type}
+          </select>
+          名称:
+          <input class="queryInput" type="text" name="name" value="{$smarty.get.name|escape}" />
+          <input type="submit" class="formbtn" value="{$lang.query}" />
+      <!--{if $filtered}-->
+      <a class="formbtn formbtn1" href="index.php?app=material">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var data_url = 'index.php?app=material&act=get_xml&'+$("#formSearch").serialize();
+
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 150, sortable : false, align: 'center', className: 'handle'},
+			{display: '素材名称', name : 'name', width : 100, sortable : true, align: 'center'},
+    		{display: '图片', name : 'url', width : 150, sortable : true, align: 'center'},
+			{display: '链接', name : 'link', width : 200, sortable : true, align: 'center'},
+    		{display: '类型', name : 'type', width : 100, sortable : true, align: 'center'},    		
+			{display: '设备', name : 'device', width : 100, sortable : true, align: 'center'},    		
+			{display: '{$lang.sort_order}', name : 'sort_order', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.if_show}', name : 'if_show', width: 50, sortable : true, align : 'center'} 		
+    		],
+        buttons : [
+            {display: '<i class="fa fa-plus"></i>{$lang.add_data}', name : 'add', bclass : 'add', title : '{$lang.add_data}', onpress : fg_operate },
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate }
+        ],
+    	title: '素材列表'
+    });
+});
+function fg_operate(name, bDiv) {
+	if(name == 'add'){
+		window.location.href = 'index.php?app=material&act=add';
+		return false;
+	}
+	if($('.trSelected',bDiv).length>0){
+        var itemlist = new Array();
+		$('.trSelected',bDiv).each(function(){
+			itemlist.push($(this).attr('data-id'));
+		});
+		if (name == 'del') {	
+            fg_delete(itemlist,'material');
+		}
+    } else {
+		parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+       return false;
+    }
+}
+</script>
+{include file="footer.html"} 

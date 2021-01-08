@@ -1,0 +1,121 @@
+{include file="header.html"}
+<style type="text/css">
+.infoTable textarea{ width:500px;}
+</style>
+<script>
+$(function(){
+	$('#cate').change(function(){
+		var cate_id = $(this).val();
+		if(cate_id){
+			$('.J_tips').html('');$('#comment').html('');
+			var url = 'index.php?app=evaluation&act=getTpl';
+			$.getJSON(url,{'cate_id':cate_id},function(data){
+				if(data.done){
+					$.each(data.retval.eval_tips,function(index,value){
+						$('.J_tips').append('<input id="tip_'+index+'" type="checkbox" name="tips[]" value="'+value+'"/> <label for="tip_'+index+'">'+value+'</label>&nbsp;');
+					});
+					$('#comment').append('<option value="">随机选择</option>');
+					$.each(data.retval.eval_templates,function(index,value){
+						$('#comment').append('<option value="'+value+'">'+value+'</option>');
+					});
+				}else{
+					parent.layer.alert(data.msg);
+				}
+			});
+		}
+	});
+	$('.J_store').change(function(){
+		$('#goods').html('');
+		var store_id = $(this).val();
+		if(store_id){
+			var url = 'index.php?app=evaluation&act=getGoods';
+			$.getJSON(url,{'store_id':store_id},function(data){
+				if(data.done){
+					$('#goods').append('<option value="">全部商品</option>');
+					$.each(data.retval,function(index,value){
+						$('#goods').append('<option value="'+value.goods_id+'">'+value.goods_name+'</option>');
+					});
+				}else{
+					parent.layer.alert(data.msg);
+				}
+			});
+		}
+	});
+})
+</script>
+<div id="rightTop">
+  <p>{$lang.evaluation_manage}</p>
+  <ul class="subnav">
+    <li><a class="btn1" href="index.php?app=evaluation">{$lang.manage}</a></li>
+    <li><a class="btn1" href="index.php?app=evaluation&act=setting">{$lang.setting}</a></li>
+    <li><span>{$lang.evaluation_auto}</span></li>
+  </ul>
+</div>
+<div class="info">
+  <form method="post">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"><label for="cate"> 选择分类:</label></th>
+        <td class="paddingT15 wordSpacing5">
+          <select id="cate" name="cate">
+          		<option value="">不限分类</option>
+                {html_options options=$gcategories}
+          </select>
+          <span class="grey">按商品分类进行评论</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="store"> 选择店铺:</label></th>
+        <td class="paddingT15 wordSpacing5">
+          <select id="store" name="store" class="J_store">
+          	<option value="">不限店铺</option>
+            <!--{foreach from=$stores item=store}-->
+             <option value="{$store.store_id}">{$store.store_name|escape}</option>
+             <!--{/foreach}-->
+          </select>
+          <span class="grey">选择需要评论的店铺</span>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="goods"> 选择商品:</label></th>
+        <td class="paddingT15 wordSpacing5">
+          <select id="goods" name="goods">
+          		<option value="">全部商品</option>
+          </select>
+          <span class="grey">选择要评论的商品</span>
+        </td>
+      </tr>
+      <tr>
+          <th class="paddingT15">
+              选择标签:
+          </th>
+        	<td class="paddingT15 wordSpacing5 J_tips">
+            </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="comment"> 评论内容:</label></th>
+        <td class="paddingT15 wordSpacing5">
+          <select id="comment" name="comment">
+          		<option value="">随机选择</option>
+                <!--{foreach from=$comments item=comment}-->
+                 <option value="{$comment|escape}">{$comment|escape}</option>
+                 <!--{/foreach}-->
+          </select>
+          <span class="grey">选择要评论内容</span>
+      </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"><label for="quantity"> 购买数量:</label></th>
+        <td class="paddingT15 wordSpacing5"><input id="quantity" type="text" name="quantity" value="" style="width:50px;"/>
+        <span class="grey">输入购买数量1-9，不输入则随机</span></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+          <input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="footer.html"}

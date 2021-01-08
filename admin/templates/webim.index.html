@@ -1,0 +1,55 @@
+{include file="header.html"}
+<script type="text/javascript">
+$(function(){
+	$('.J_CheckTalk').click(function(){
+		var o = $(this);
+		var id = $(this).attr('data-fromid');
+		var imforbid = $(this).attr('data-imforbid');
+		var url = "index.php?app=webim&act=checkTalk&id="+id+"&imforbid="+imforbid;
+		goConfirm('您确定要禁止或解禁该用户发言？',url,true);
+	});
+	$('.J_DelTalk').click(function(){
+		var o = $(this);
+		var logid = $(this).attr('data-logid');
+		var url = "index.php?app=webim&act=delTalk&logid="+logid;
+		goConfirm('您确定要删除此项？',url,true);
+	});
+});
+</script>
+<div id="rightTop">
+  <p>{$lang.webim}</p>
+    <ul class="subnav">
+    <li><span>{$lang.manage}</span></li>
+  </ul>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+          <input type="hidden" name="app" value="webim" />
+          <input class="queryInput" type="text" name="fromName" value="{$smarty.get.fromName|escape}" placeholder="用户" />给
+          <input class="queryInput" type="text" name="toName" value="{$smarty.get.toName|escape}" placeholder="用户" />发言，
+          内容为
+          <input class="queryInput" type="text" name="formatContent" value="{$smarty.get.formatContent|escape}" />
+          <input type="submit" class="formbtn" value="{$lang.query}" style="float:none; display:inline-block" />
+      <!--{if $filtered}-->
+       <a class="formbtn formbtn1" href="index.php?app=webim">{$lang.cancel_query}</a>
+     <!--{/if}-->
+    </form>
+</div>
+<div class="tdare webim">
+
+    <!--{foreach from=$imlog item=log name=fe_item}-->
+  <div class="each">
+	  <div class="hd clearfix"><h3>{$log.fromName} > {$log.toName}</h3><span style="color: #8B8B8B; margin-left: 10px;">发送时间 :  {$log.add_time|date:Y-m-d H:i:s}</span><p><a href="javascript::" class="J_CheckTalk formbtn" data-imforbid="{if $log.imforbid}0{else}1{/if}" data-fromid="{$log.fromid}">{if !$log.imforbid}禁言{else}<font color="#333">解禁</font>{/if}</a> <a href="javascript:;" class="J_DelTalk formbtn formbtn1" data-logid="{$log.logid}">{$lang.drop}</a></p></div>
+    <div class="bd">
+    	<div class="wrap">{$log.formatContent}</div>
+    </div>
+  </div>
+  <!--{/foreach}--> 
+    <div id="dataFuncs">
+        <div class="pageLinks">{include file=page.bottom.html}</div>
+        
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+{include file="footer.html"}

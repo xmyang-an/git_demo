@@ -1,0 +1,160 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-my-coupon" class="mb10">
+    <div class="my-coupon coupon"> 
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <div class="item webkit-box {1} {2}" item_id="{3}" style="height:95px;">
+            <div class="invalid-sign psmb-icon-font {4}">&#xe6a4;</div>
+            <div class="lp flex1 ml5">
+              <div class="wraper webkit-box">
+                <div class="d-tail flex1">
+   					<div class="store-name fs14 overflow-ellipsis">{5}</div>
+						<span class="vp"> 
+                  			<em class="{6}">有效期：{7}</em> <em class="{8}">{$lang.no_limit}</em> <br />
+                  			<em class="{9}">剩余{10}张</em> <em class="{11}">{$lang.no_limit}</em>
+                  		</span>
+                	</div>
+              	</div>
+    		</div>
+            <div class="rp relative mr5">
+              <div class="info box-align-center fs12">
+                <div class="wraper">
+                  <p class="cv"><ins>&yen;</ins><span>{12}</span></p>
+                  <p class="ma"> <em class="{13}">满{14}可用</em> <em class="{15}">{$lang.no_limit}</em> </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>没有更多啦，扯得人家好痛呀<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      <div class="w-full btn-fixed">
+        <div class="fixed-gap"></div>
+        <div class="fixed-bd webkit-box"> <a href="{url app=seller_coupon&act=add}" class="btn-alipay flex1">{$lang.add_coupon}</a> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function() {
+	$('body').on('touchend', '.weui_actions_mask', function(){
+		$.closeActions();
+	});
+	
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, coupon) {
+				html += sprintf(template.html(), 
+					coupon.valid != 1 ? 'invalid-item' : '', 
+					coupon.waitPublish == 1 ? 'waitPublish' : '', 
+					coupon.coupon_id, 
+					coupon.valid != 1 ? '' : 'hidden', 
+					coupon.coupon_name, 
+					parseInt(coupon.end_time) > 0 ? '' : 'hidden', 
+					coupon.end_time, 
+					parseInt(coupon.end_time) > 0 ? 'hidden' : '', 
+					coupon.total > 0 ? '' : 'hidden', 
+					coupon.surplus, 
+					coupon.total > 0 > 0 ? 'hidden' : '', 
+					coupon.coupon_value, 
+					coupon.min_amount > 0 ? '' : 'hidden', 
+					coupon.min_amount, 
+					coupon.min_amount > 0 ? 'hidden' : ''
+				);
+			});
+			if(html) {
+				target.find('.infinite-result').append(html).show();
+				actions(target);
+			}
+		}
+	});
+});
+  
+function actions(target)
+{
+	target.find('.item').each(function(index, element) {
+		var o = $(this);
+		var item_id = o.attr('item_id');
+		o.unbind('click');
+		o.click(function(){
+			var url = REAL_SITE_URL+"/index.php?app=seller_coupon&act=drop&id="+item_id;
+			if(o.hasClass('invalid-item') == true){
+				var action = [
+					{
+						text: "{$lang.drop}",
+						onClick: function() {
+							ajaxRequest('GET', url, null, '', o);
+						}
+					}];
+			}
+			else
+			{
+				if(o.hasClass('waitPublish') == true)
+				{
+					var action = [
+						{
+							text: "{$lang.drop}",
+							onClick: function() {
+								ajaxRequest('GET', url, null, '', o);
+							}
+						},
+						{
+							text: "{$lang.edit}",
+							onClick: function() {
+								window.location.href = url.replace('drop', 'edit');
+							}
+						},
+						{
+							text: "{$lang.if_issue}",
+							onClick: function() {
+								ajaxRequest('GET', url.replace('drop', 'issue'), null, '', o);
+							}
+						}];
+				}
+				else
+				{
+					var action = [
+						{
+							text: "{$lang.export}",
+							onClick: function() {
+								ajax_form('export', '{$lang.coupon_export}', url.replace('drop', 'export')+'&dialog_id=export', '300', 'simple-blue', '0.5', 'bottom');
+								return false;
+							}
+						},
+						{
+							text: "{$lang.extend}",
+							onClick: function() {
+								ajax_form('extend', '{$lang.coupon_extend}', url.replace('drop', 'extend')+'&dialog_id=extend', '300', 'simple-blue', '0.5', 'bottom');
+								return false;
+							}
+						},
+						{
+							text: "领取记录",
+							onClick: function() {
+								window.location.href = url.replace('drop', 'view');
+							}
+						}
+					]; 
+				}
+			}
+			 
+			$.actions({
+				title: "选择操作",
+				actions: action
+			});
+		
+		});
+	});
+}
+</script> 
+{include file=footer.html}

@@ -1,0 +1,41 @@
+{include file=header.html}
+<div id="rightTop">
+    <p>{$lang.coupon}</p>
+    <ul class="subnav">
+        <li><a class="btn1" href="index.php?app=coupon">{$lang.manage}</a></li>
+        <li><span>领取记录</span></li>
+    </ul>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){console.log('index.php?app=coupon&act=get_view_xml&id={$smarty.get.id}');
+    $("#flexigrid").flexigrid({
+    	url: 'index.php?app=coupon&act=get_view_xml&id={$smarty.get.id}',
+    	colModel : [
+			{display: '优惠券号码', name : 'coupon_sn', width : 200, align: 'center'},
+    		{display: '领取会员', name : 'coupon_value', width :100, align: 'center'},
+			{display: '是否可用', name : 'total', width : 100,  align: 'left'},
+    		],
+    	title: '优惠券领取记录'
+    });
+});
+function fg_operate(name, bDiv) {
+	if(name == 'add'){
+		window.location.href = 'index.php?app=brand&act=add';
+		return false;
+	}
+	if($('.trSelected',bDiv).length>0){
+        var itemlist = new Array();
+		$('.trSelected',bDiv).each(function(){
+			itemlist.push($(this).attr('data-id'));
+		});
+		if (name == 'del') {	
+            fg_delete(itemlist,'brand');
+		}
+    } else {
+		parent.layer.alert('没有选择操作项',{icon: 0});
+       return false;
+    }
+}
+</script>
+{include file=footer.html}

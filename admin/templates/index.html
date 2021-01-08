@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge charset={$charset}">
+<meta http-equiv="Content-Type" content="text/html;charset={$charset}" />
+<title>{$lang.admin_backend}</title>
+<link href="templates/style/admin.css" rel="stylesheet" type="text/css" />
+<link href="templates/style/font/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="//at.alicdn.com/t/font_635041_8akn9oixr0j7zaor.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{lib file=jquery-1.11.1.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=layer/layer.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=layer/extend/layer.ext.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=base.js}" charset="utf-8"></script>
+<script type="text/javascript">
+var menu = {$menu_json};
+</script>
+<script type="text/javascript" src="{res file=js/index.js}" charset="utf-8"></script>
+</head>
+<body style="background:#16B8D8">
+<div class="back_nav">
+  <div class="back_nav_list"> 
+    <!--{foreach from=$back_nav key=key item=menu}-->
+    <dl>
+      <dt>{$menu.text}</dt>
+      <!--{foreach from=$menu.children key=sub_key item=sub_menu}-->
+      <dd><a href="javascript:;" onclick="openItem('{$sub_key}','{$key}');">{$sub_menu.text}</a></dd>
+      <!--{/foreach}-->
+    </dl>
+    <!--{/foreach}--> 
+  </div>
+</div>
+<div class="admincp-header" id="head" style="width:100%;box-shadow: 3px 3px 5px #000;">
+  <div class="admincp-name">
+  	<h1 style=" font-weight:normal; font-size:16px; position:relative;">壹点网 <span style="font-size:12px;"></span></h1>
+    <p style="color:#fff;">后台管理中心</p>
+  </div>
+  <div class="module-menu">
+    <ul class="row clearfix" id="nav">
+    </ul>
+  </div>
+  <div class="admincp-header-r">
+    <div class="manager">
+      {$lang.hello}{$visitor.user_name}
+    </div>
+    <ul class="operate row">
+      <li><a href="javascript:;" class="refresh show-option" id="iframe_refresh"  title="刷新页面">&nbsp;</a></li>
+      <li><a href="javascript:;" class="update-cach show-option" id="clear_cache"  title="更新缓存">&nbsp;</a></li>
+      <li><a class="sitemap show-option" id="back_btn" href="javascript:void(0);" title="查看全部管理菜单"></a></li>
+      <li><a class="homepage show-option" target="_blank" href="{$site_url}/index.php" title="新窗口打开商城首页">&nbsp;</a></li>
+      <li><a class="login-out show-option" href="index.php?act=logout" title="安全退出管理中心">&nbsp;</a></li>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="admincp-container">
+  <div class="admincp-container-left" id="left">
+    <div class="top-border"></div>
+    <div id="leftMenus">
+      <dl id="submenu">
+        <dt><i class="iconfont icon-liebiao2"></i><a class="ico1" id="submenuTitle" href="javascript:;"></a></dt>
+      </dl>
+      <dl id="history" class="history">
+        <dt><i class="iconfont icon-shenpijilu"></i><a class="ico2" id="historyText" href="#">{$lang.action_history}</a> </dt>
+      </dl>
+    </div>
+    <div class="about" title="about MiMall"><a href="#" target="_blank">&copy; 技术支持 MiMall.NET</a></div>
+  </div>
+  <div class="admincp-container-right" id="right">
+    <div class="top-border"></div>
+    <iframe frameborder="0" style="display:none;" width="100%" id="workspace"></iframe>
+  </div>
+</div>
+</body>
+</html>

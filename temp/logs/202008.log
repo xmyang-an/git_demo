@@ -1,0 +1,40 @@
+Tue, 04 Aug 2020 09:14:23 +0800	[256]MySQL Error[1054]: Unknown column 'add_time' in 'order clause'
+MySQL Query:SELECT *,brand.brand_id FROM swd_brand brand WHERE recommended = 1 ORDER BY add_time DESC
+Wrong File:  /var/www/html/eccore/model/mysql.php[525]	/eccore/model/mysql.php	278
+Tue, 04 Aug 2020 22:15:04 +0800	[256]MySQL Error[1054]: Unknown column 'add_time' in 'order clause'
+MySQL Query:SELECT *,brand.brand_id FROM swd_brand brand ORDER BY add_time DESC
+Wrong File:  /var/www/html/eccore/model/mysql.php[525]	/eccore/model/mysql.php	278
+Fri, 07 Aug 2020 16:50:47 +0800	[2]fsockopen(): php_network_getaddresses: getaddrinfo failed: Name or service not known	/includes/libraries/class.smtp.php	89
+Sat, 08 Aug 2020 16:48:47 +0800	[2]move_uploaded_file() expects parameter 1 to be string, array given	/app/xunjia.app.php	34
+Sat, 08 Aug 2020 16:50:21 +0800	[2]move_uploaded_file() expects parameter 1 to be string, array given	/app/xunjia.app.php	34
+Sat, 08 Aug 2020 16:50:33 +0800	[2]move_uploaded_file() expects parameter 1 to be string, array given	/app/xunjia.app.php	34
+Sat, 08 Aug 2020 16:54:43 +0800	[2]move_uploaded_file(static/xunjia/1596876883WechatIMG158.jpeg): failed to open stream: Permission denied	/app/xunjia.app.php	34
+Sat, 08 Aug 2020 16:58:53 +0800	[2]mkdir(): No such file or directory	/app/xunjia.app.php	29
+Sat, 08 Aug 2020 17:09:04 +0800	[2]move_uploaded_file(static/xunjia/1596877744WechatIMG158.jpeg): failed to open stream: Permission denied	/app/xunjia.app.php	34
+Sat, 08 Aug 2020 17:53:08 +0800	[2]move_uploaded_file() expects parameter 2 to be a valid path, array given	/app/xunjia.app.php	38
+Sat, 08 Aug 2020 17:54:12 +0800	[2]move_uploaded_file() expects parameter 2 to be a valid path, array given	/app/xunjia.app.php	38
+Sat, 08 Aug 2020 17:54:36 +0800	[2]move_uploaded_file() expects parameter 2 to be a valid path, array given	/app/xunjia.app.php	38
+Sat, 08 Aug 2020 21:08:06 +0800	[2]move_uploaded_file() expects parameter 2 to be a valid path, array given	/app/xunjia.app.php	38
+Sat, 08 Aug 2020 21:08:26 +0800	[2]move_uploaded_file() expects parameter 2 to be a valid path, array given	/app/xunjia.app.php	38
+Sat, 08 Aug 2020 22:16:35 +0800	[2]trim() expects parameter 1 to be string, array given	/app/xunjia.app.php	7
+Sun, 16 Aug 2020 22:18:50 +0800	[2]file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed	/admin/app/template.app.php	326
+Sun, 16 Aug 2020 22:19:10 +0800	[2]file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed	/admin/app/template.app.php	326
+Sun, 16 Aug 2020 22:19:14 +0800	[2]file_get_contents(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed	/admin/app/template.app.php	326
+Sat, 22 Aug 2020 23:23:07 +0800	[256]MySQL Error[1146]: Table 'degou_pan.swd_' doesn't exist
+MySQL Query:INSERT INTO swd_(goods_info,xunjia_content,company_name,linkman,mobile_phone,contact_mail,create_time) VALUES('[{"brand":"aa","product":"vv","model":"33","number":"11d","img":"static\/xunjia\/1598109787"}]','','a','','','','1598109787')
+Wrong File:  /var/www/html/eccore/model/model.base.php[299]	/eccore/model/mysql.php	278
+Sat, 22 Aug 2020 23:27:54 +0800	[256]MySQL Error[1146]: Table 'degou_pan.swd_' doesn't exist
+MySQL Query:INSERT INTO swd_(goods_info,xunjia_content,company_name,linkman,mobile_phone,contact_mail,create_time) VALUES('[{"brand":"aa","product":"vv","model":"33","number":"11d","img":"static\/xunjia\/1598110074"}]','','a','','','','1598110074')
+Wrong File:  /var/www/html/eccore/model/model.base.php[299]	/eccore/model/mysql.php	278
+Sat, 22 Aug 2020 23:31:48 +0800	[256]MySQL Error[1146]: Table 'degou_pan.swd_' doesn't exist
+MySQL Query:INSERT INTO swd_(goods_info,xunjia_content,company_name,linkman,mobile_phone,contact_mail,create_time) VALUES('[{"brand":"aa","product":"cc","model":"33","number":"11d","img":"static\/xunjia\/1598110308"}]','','aa','吉银科技','18977076327','qq.com','1598110308')
+Wrong File:  /var/www/html/eccore/model/model.base.php[299]	/eccore/model/mysql.php	278
+Sat, 22 Aug 2020 23:38:12 +0800	[256]MySQL Error[1146]: Table 'degou_pan.swd_' doesn't exist
+MySQL Query:INSERT INTO swd_(goods_info,xunjia_content,company_name,linkman,mobile_phone,contact_mail,create_time) VALUES('[{"brand":"aa","product":"cc","model":"33","number":"11d","img":"static\/xunjia\/1598110692"}]','','aa','吉银科技','18977076327','qq.com','1598110692')
+Wrong File:  /var/www/html/eccore/model/model.base.php[299]	/eccore/model/mysql.php	278
+Sat, 22 Aug 2020 23:38:25 +0800	[256]MySQL Error[1146]: Table 'degou_pan.swd_' doesn't exist
+MySQL Query:INSERT INTO swd_(goods_info,xunjia_content,company_name,linkman,mobile_phone,contact_mail,create_time) VALUES('[{"brand":"a","product":"dd","model":"33f","number":"11d","img":"static\/xunjia\/1598110705"}]','','aa','吉银科技','18977076327','qq.com','1598110705')
+Wrong File:  /var/www/html/eccore/model/model.base.php[299]	/eccore/model/mysql.php	278

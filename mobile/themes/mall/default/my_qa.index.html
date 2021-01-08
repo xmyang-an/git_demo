@@ -1,0 +1,54 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-my-qa">
+    <div class="my-qa"> 
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <div class="infinite-result clearfix hidden"> </div>
+        <div class="infinite-template">
+          <ul class="item">
+            <li class="mt"> <a href="{1}"  class="overflow-ellipsis block webkit-box"> <span class="flex1">{2}</span> <i class="psmb-icon-font f99">&#xe629;</i> </a> </li>
+            <li class="qa-box mc border-bottom">
+              <dl class="webkit-box">
+                <dt><img src="{3}" /></dt>
+                <dd class="flex1 ml10">
+                  <p class="l1">{4}咨询{$lang.colon}{5}</p>
+                  <p class="time l2">{6}</p>
+                </dd>
+              </dl>
+              <dl class="webkit-box" style="display:{7}">
+                <dd class="flex1 mr10">
+                  <p class="l1">{$lang.my_reply}{$lang.colon}{8}</p>
+                  <p class="time l2">{9}</p>
+                </dd>
+                <dt><img src="{10}" /></dt>
+              </dl>
+            </li>
+            <li class="handle"> <a href="javascript:;" class="J_AjaxRequest delete fs12" confirm="{$lang.drop_confirm}" action="{11}"><i class="psmb-icon-font f99 fs14">&#x3468;</i>{$lang.drop}</a> <a style="display:{12}" href="{13}" class="ml10 fs12"><i class="psmb-icon-font f99 fs14">&#xe612;</i>{$lang.reply}</a> <a style="display:{14}" href="{15}" class="ml10 fs12"><i class="psmb-icon-font f99 fs14">&#xe695;</i>{$lang.edit_reply}</a> </li>
+          </ul>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 5, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, qa) {
+				html += sprintf(template.html(), "{url app=goods&id="+qa.item_id+"}", qa.item_name, qa.portrait, qa.user_name ? '会员“'+qa.user_name+'”' : '匿名访客', qa.question_content, qa.time_post, qa.reply_content ? '' : 'none', qa.reply_content, qa.time_reply,qa.store_logo, "{url app=my_qa&act=drop&id="+qa.ques_id+"}", qa.reply_content ? 'none' : '', "{url app=my_qa&act=reply&ques_id="+qa.ques_id+"}", qa.reply_content ? '' : 'none', "{url app=my_qa&act=edit_reply&ques_id="+qa.ques_id+"}");
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script> 
+{include file=footer.html}

@@ -1,0 +1,52 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.import_data}</p>
+  <ul class="subnav">
+  	  <li><a href="{url app=region&act=export}">{$lang.export_data}</a></li>
+  	　 <li><span>{$lang.import_data}</span></li>
+  </ul>
+</div>
+<div class="info">
+  <form method="post" enctype="multipart/form-data">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15">{$lang.select_file}:</th>
+        <td class="paddingT15 wordSpacing5">
+        <div class="input-file-show" style="padding-left:5px;">
+                <span class="type-file-box">
+                    <input type="text" name="textfield" class="type-file-text" />
+                    <input type="button" name="button" value="选择上传..." class="type-file-button" />
+                    <input class="type-file-file" name="csv" type="file" size="30" hidefocus="true">
+                </span>
+            </div>
+        <span class="grey notice">{$lang.note_for_file}</span></td>
+      </tr>
+      <tr>
+        <th class="paddingT15">{$lang.select_charset}:</th>
+        <td class="paddingT15 wordSpacing5"><p>
+            <label>
+            <input type="radio" name="charset" value="utf-8" checked="checked" />
+            utf-8</label>
+            <label>
+            <input type="radio" name="charset" value="gbk" />
+            gbk</label>
+            <label>
+            <input type="radio" name="charset" value="big5" />
+            big5</label>
+            <span class="grey">{$note_for_import}</span>
+          </p>
+          </td>
+      </tr>
+      <tr>
+        <th class="paddingT15" valign="top">{$lang.file_format}:</th>
+        <td class="paddingT15 wordSpacing5">{$lang.file_format_desc}</td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.import}" />
+          <input class="formbtn" type="button" onclick="history.go(-1)" value="{$lang.back}" />        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="footer.html"} 

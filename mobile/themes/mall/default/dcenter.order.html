@@ -1,0 +1,98 @@
+{include file=member.header.html}
+<div id="main">
+  <div class="dcenter">
+    <div class="d-header">
+      <div class="mark-text">我的收益（元） <a class="more-link" href="{url app=dcenter&act=profit}">查看明细<i class="psmb-icon-font">&#xe61d;</i></a></div>
+      <div class="amount-box clearfix"> <span class="amount J_Amount"></span> <a href="{url app=deposit&act=withdraw}">提现</a></div>
+    </div>
+    <div  class="top-tab">
+      <ul class="clearfix">
+        <li class="JOrderTab on" data-status=""><a href="{url app=dcenter&act=order}">所有订单</a></li>
+        <li class="JOrderTab" data-status="pending"><a href="{url app=dcenter&act=order&type=pending}">待付款</a></li>
+        <li class="JOrderTab" data-status="accepted"><a href="{url app=dcenter&act=order&type=accepted}">已付款</a></li>
+        <li class="JOrderTab" data-status="finished"><a href="{url app=dcenter&act=order&type=finished}">已完成</a></li>
+      </ul>
+    </div>
+    <!--<div class="count-text">共找到 <span>{$statistics.total.count|default:0}</span> 笔订单，预计分销总收入 <span>{$statistics.total.amount|price}</span>
+      <p>一级 <span>{$statistics.layer1.count|default:0}</span> 笔，二级 <span>{$statistics.layer2.count|default:0}</span> 笔，三级 <span>{$statistics.layer3.count|default:0}</span> 笔。</p>
+    </div>-->
+    <div class="earn-list mt10"> 
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result js-order-cate clearfix hidden">
+        </ul>
+        <ul class="infinite-template">
+          <li class="panel mb10">
+            <div class="earn-info clearfix js-earn-info">
+              <div class="float-left">
+                <div class="earn-id">{1}级订单：{2}</div>
+                <div class="earn-date">{3}</div>
+              </div>
+              <div class="float-right">
+                <p class="price">+{4}</p>
+                <div class="status red">{5}</div>
+              </div>
+            </div>
+            <div class="order-detail hidden">
+              <div class="address">
+                <div><span>分<s style="margin:0 6px">销</s>商：</span>{6}（{7}）</div>
+                <div><span>买家会员：</span>{8}</div>
+              </div>
+              <dl class="goods-list">
+                <dd class="clearfix"> <a href="{1}" class="clearfix webkit-box">
+                  <div class="goods-image"><img width="80" height="80" src="{2}" alt="{3}"></div>
+                  <div class="goods-detail flex1 ml10">
+                    <p>{4}</p>
+                    <p>{5}</p>
+                    <p class="goods-price gray fs12">{6} x {7}</p>
+                  </div>
+                  </a> </dd>
+              </dl>
+            </div>
+          </li>
+        </ul>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').on('click', '.js-earn-info', function(){
+		$(this).parent().find(".order-detail").slideToggle('slow');
+		$(this).parent().toggleClass('on');
+	});
+	var type = '{$smarty.get.type}';
+	$(".JOrderTab").each(function(index, element) {
+        if($(this).attr("data-status") == type){
+			$(this).addClass("on").siblings("li").removeClass('on');
+		}
+    });
+	
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			$.each(data.retval.list, function(k, order) {
+				var items = '';
+				var template = TEMP.clone(true);
+				$.each(order.order_goods, function(k1, goods) {
+					items += sprintf(template.find('.goods-list').html(),
+						"{url app=goods&id="+goods.goods_id+"}", goods.goods_image, goods.goods_name, goods.goods_name, goods.specification ? goods.specification : '', price_format(goods.price), goods.quantity);
+				});
+				if(items) {
+					template.find('.goods-list').html(items);
+				} else template.find('.goods-list').parent().remove();
+				html += sprintf(template.html(), order.layer == 1 ? "一" : (order.layer == 2 ? "二" : "三"), order.order_sn, order.add_time, order.item_profit ? order.item_profit : '0.00', order.status == 'refund_success' ? '<b style="color:green; font-weight:normal;">买家已退款</b>' : order.status, order.dtb_name, order.dtb_phone_mob, order.buyer_name);
+			});
+			target.find('.infinite-result').append(html).show();
+			$('.J_Amount').html(data.retval.total_statistics.amount ? data.retval.total_statistics.amount : 0);
+		}
+	});
+})
+</script> 
+{include file=footer.html}

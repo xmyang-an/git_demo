@@ -1,0 +1,47 @@
+{include file="header.html"}
+<script type="text/javascript">
+$(function(){
+    $('#msg_instrunction').toggle(function(){
+        $(this).next('div').fadeIn("slow")
+    },function(){
+        $(this).next('div').fadeOut("slow");
+    });
+});
+
+</script>
+<style type="text/css">
+#short_msg_desc { margin-top:10px; }
+#short_msg_desc a { color:#0099CC; }
+#short_msg_desc div { display:none;color:#646665;border:1px solid #CCCCCC;padding:5px;width:340px;background-color:#F5F5F5;line-height:25px; }
+</style>
+<div id="rightTop">
+  <p>{$lang.report_manage}</p>
+  <ul class="subnav">
+		<li><a class="btn1" href="index.php?app=report">{$lang.report_manage}</a></li>
+		<li><span>发送信息</span></li>
+   </ul>
+</div>
+<div class="info">
+<form method="POST" id="notice_form">
+<table class="infoTable">
+    <tr id="user_list">
+        <th class="paddingT15"> {$lang.receiver}:</th>
+        <td class="paddingT15 wordSpacing5">{$member.user_name|escape}</td>
+    </tr>
+    <tr id="msg">
+        <th class="paddingT15">{$lang.content}:</td>
+        <td class="paddingT15 wordSpacing5"><textarea name="content" style="width:400px; height:300px;">{$lang.report_handle}</textarea>
+            <div id="short_msg_desc"><a href="javascript:;" id="msg_instrunction">{$lang.msg_instruction}</a>
+                <div>{$lang.code_example}</div>
+            <div>
+        </td>
+    </tr>
+    <tr>
+        <th class="paddingT15"> </th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+          <input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" /></td>
+    </tr>
+</table>
+</form>
+</div>
+{include file="footer.html"}

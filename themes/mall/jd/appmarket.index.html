@@ -1,0 +1,52 @@
+{include file=member.header.html}
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool clearfix"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="appmarket">
+              <div class="bundle bundle-list">
+                <div class="notice-word" style="display:none">
+                  <p class="yellow-big">{$lang.note_for_create}</p>
+                </div>
+                <div class="applist"> 
+                  <!--{if $appmarket}-->
+                  <div class="list-sort clearfix">
+                    <ul class="float-left clearfix">
+                      <li><a href="{url app=appmarket}" {if !$smarty.get.sort}class="active" {/if}>默认</a></li>
+                      <li><a href="{if $smarty.get.order eq 'desc'}{url app=appmarket&sort=sales&order=asc}{else}{url app=appmarket&sort=sales&order=desc}{/if}" {if $smarty.get.sort eq 'sales'}class="active" {/if}>使用人数</a></li>
+                      <li><a href="{if $smarty.get.order eq 'desc'}{url app=appmarket&sort=add_time&order=asc}{else}{url app=appmarket&sort=add_time&order=desc}{/if}" {if $smarty.get.sort eq 'add_time'}class="active" {/if}>上架时间</a></li>
+                      <li><a href="{if $smarty.get.order eq 'desc'}{url app=appmarket&sort=views&order=asc}{else}{url app=appmarket&sort=views&order=desc}{/if}" {if $smarty.get.sort eq 'views'}class="active" {/if}>人气</a></li>
+                    </ul>
+                    <div class="total fs14 float-right mr10">找到符合条件的应用<b class="f60"> {$page_info.item_count|default:0}</b> 个</div>
+                  </div>
+                  <ul class="list-each clearfix">
+                    <!--{foreach from=$appmarket item=item name=fe_item}-->
+                    <li {if $smarty.foreach.fe_item.iteration % 3 eq 0} style="margin-right:0"{/if}>
+                      <div class="pic"><a href="{url app=appmarket&act=view&id=$item.aid}" target="_blank"><img width="260" height="181"  src="{$item.logo}" /></a></div>
+                      <div class="info">
+                        <p class="title"><font class="f60">[{$lang.$item.appid}]</font> {$item.title}</p>
+                        <p class="summary">{$item.summary}</p>
+                        <p class="price clearfix"> <em class="float-left"><strong>{$item.config.charge|price}</strong> {$lang.yuan}/{$lang.month}</em> <em class="float-right"><b>{$item.sales|default:0}</b> {$lang.ren}{$lang.use}</em> </p>
+                        <p class="mt10 clearfix"><a class="btn-buy" href="{url app=appmarket&act=view&id=$item.aid}" target="_blank">{if !$item.checkIsRenewal}{$lang.buy}{else}{$lang.renewal}{/if}</a></p>
+                      </div>
+                    </li>
+                    <!--{/foreach}-->
+                  </ul>
+                  <div class="mt20 clearfix">{include file=member.page.bottom.html}</div>
+                  <!--{else}-->
+                  <div class="notice-word">
+                    <p>{$lang.no_records}</p>
+                  </div>
+                  <!--{/if}--> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

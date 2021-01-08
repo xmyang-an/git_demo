@@ -1,0 +1,260 @@
+{include file=member.header.html}
+<style>
+.txt { margin-right:20px}
+.spec ul { width: 630px; overflow: hidden; }
+.spec .td { padding-bottom: 10px; }
+.spec li { float: left; margin-left: 6px; display: inline; }
+.spec li input { text-align: center; }
+.spec .th { padding: 3px 0; margin-bottom: 10px; background: #f8f8f8; }
+</style>
+<script type="text/javascript">
+//<!CDATA[
+$(function(){
+    $('#start_time').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#end_time').datepicker({dateFormat: 'yy-mm-dd'});
+    check_spec();
+
+    $('#pro_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('label').remove();
+            $(element).after(error);
+        },
+        success       : function(label){
+			label.removeClass('error');
+            label.addClass('validate_right').text('OK!');
+        },
+        onkeyup : false,
+        rules : {
+            pro_name : {
+                required   : true
+            },
+            pro_desc : {
+                maxlength   : 255
+            },
+            end_time      : {
+                required     : true
+            },
+            goods_id      : {
+                required   :true,
+                min    : 1
+            }
+        },
+        messages : {
+            pro_name  : {
+                required   : '{$lang.fill_pro_name}'
+            },
+            pro_desc  : {
+                maxlength   : '{$lang.fill_max_pro_desc}'
+            },
+            end_time       : {
+                required     : '{$lang.fill_end_time}'
+            },
+            goods_id      : {
+                required:  '{$lang.fill_goods}',
+                min   : '{$lang.fill_goods}'
+            }
+        }
+    });
+
+});
+
+function gs_callback(){
+    query_spec($('#goods_id').val());
+}
+
+function check_spec(){
+	$('#submit_pro').unbind('click');
+    $('#submit_pro').click(function(){
+        $('label.error').remove();
+        var qty = 0;
+        var error = false;
+        var price_empty = false;
+		var pro_price_DY_price = false;// 促销价大于原价
+		var discount_error = false;
+		
+        $('*[ectype="spec_item"]').each(function(){
+            var obj_pro_price = $(this).find('input[ectype="pro_price"]');
+            var pro_price = obj_pro_price.val();
+			var obj_pro_type = $(this).find('select[ectype="pro_type"]');
+			var price = $(this).find('li[ectype="price[]"]').text();
+            qty++;
+           
+			if(pro_price == ''){
+ 				price_empty = obj_pro_price;
+       			return false;
+     		}
+ 			if(pro_price != '' && (!Number(pro_price) || pro_price < 0 || isNaN(pro_price))){
+    			error = obj_pro_price;
+				return false;
+			}
+			if(obj_pro_type.val()=='price' && (Number(pro_price) > Number(price))) {
+				pro_price_DY_price = obj_pro_price;
+				return false;
+			}
+			if(obj_pro_type.val()=='discount' && (pro_price=='' || (pro_price.split(".").length!=1 && pro_price.split(".")[1].length>=2) || Number(pro_price) < 0 || Number(pro_price) > 10 || (Math.round(Number(pro_price) * Number(price)*0.1*100)*0.01==Math.round(Number(price)*100)*0.01))){
+				discount_error = obj_pro_price;
+				return false;
+			}
+        })
+        if(qty == 0){
+            alert('{$lang.has_no_goods}');
+            return false;
+        }
+        if(error != false){
+            error.focus();
+            error.addClass('error');
+			alert('{$lang.invalid_pro_price}');
+            return false;
+        }
+        if(price_empty != false){
+            price_empty.focus();
+            price_empty.addClass('error');
+			alert('优惠幅度不能为空！');
+            return false;
+        }
+		if(pro_price_DY_price != false){
+			pro_price_DY_price.focus();
+			pro_price_DY_price.addClass('error');
+			alert('优惠价不能大于原价');
+			return false;
+		}
+		if(discount_error != false){
+			discount_error.focus();
+			discount_error.addClass('error');
+			alert('折扣必须在0-10之间，而且最多只能有一个小数点');
+			return false;
+		}
+    });
+}
+
+function query_spec(goods_id){
+    $.getJSON('index.php?app=seller_limitbuy&act=query_goods_info',{
+        'goods_id':goods_id
+        },
+        function(data){
+            if(data.done){
+                var goods = data.retval;
+                $('#spec_name').html(goods.spec_name);
+                $('ul[ectype="spec_item"]').remove();
+                    $.each(goods._specs,function(i,item){
+                        $('#pro_spec').append('<ul ectype="spec_item" class="td"><li class="distance2"><input name="spec_id[]" value="'+ item.spec_id +'" type="hidden" />'+ item.spec +'</li><li class="distance1">' + item.stock + '</li><li class="distance1" ectype="price[]"><input name="price['+ item.spec_id +']" type="hidden" value="'+ item.price +'"/>'+ item.price +'</li><li class="distance1" style="width:130px;"><input ectype="pro_price" name="pro_price['+item.spec_id+']" type="text" class="text width2" /></li><li class="distance1"><select ectype="pro_type" name="pro_type['+item.spec_id+']" ><option value="price">{$lang.pro_type_price}</option><option value="discount">{$lang.pro_type_discount}</option></select></li></ul>');
+                });
+                check_spec();
+            }
+        });
+}
+//]]>
+</script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div id="seller_limitbuy_form" class="wrap">
+        <div class="public">
+          <div class="promotool">
+            <div class="bundle bundle-list"> 
+              <!--{if $appAvailable neq 'TRUE'}-->
+              <div class="notice-word">
+                <p>{$appAvailable.msg}</p>
+              </div>
+              <!--{else}-->
+              <div class="notice-word">
+                <p class="yellow-big">{$lang.note_for_create}</p>
+              </div>
+              <form method="post" id="pro_form" enctype="multipart/form-data">
+                <div class="information_index">
+                  <h4>{$lang.limitbuy_basic_info}</h4>
+                  <div class="add_wrap">
+                    <div class="assort">
+                      <p class="txt">{$lang.limitbuy_name}:</p>
+                      <p>
+                        <input type="text" name="pro_name" value="{$limitbuy.pro_name|escape}" class="text" />
+                        <span class="red">*</span></p>
+                    </div>
+                    <div class="assort">
+                      <p class="txt">{$lang.pro_image}:</p>
+                      <p>
+                        <input type="file" name="image" />
+                        <span class="red">*</span>{$lang.pro_image_note}</p>
+                      <!--{if $limitbuy.image}-->
+                      <p><img src="{$limitbuy.image}" height="30" /></p>
+                      <!--{/if}--> 
+                    </div>
+                    <div class="assort">
+                      <p class="txt" > {$lang.start_time}:</p>
+                      <p>
+                        <input name="start_time" id="start_time" value="{$limitbuy.start_time|date:Y-m-d}" type="text" class="text width2" />
+                        <span class="red">*</span> </p>
+                    </div>
+                    <div class="assort">
+                      <p class="txt"> {$lang.end_time}:</p>
+                      <p>
+                        <input name="end_time" id="end_time" value="{$limitbuy.end_time|date:Y-m-d}" type="text" class="text width2" />
+                        <span class="red">*</span> </p>
+                    </div>
+                    <div class="assort">
+                      <p class="txt"> {$lang.pro_desc}:</p>
+                      <p>
+                        <textarea style="overflow-y: auto; width: 250px; vertical-align: top;" id="pro_desc" name="pro_desc" class="text">{$limitbuy.pro_desc|escape}</textarea>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="add_wrap">
+                    <div class="assort">
+                      <p class="txt">{$lang.select_goods}:</p>
+                      <p> {if !$goods}
+                        <input gs_id="goods_id" gs_name="goods_name" gs_callback="gs_callback" gs_title="{$lang.select_goods}" gs_width="480" gs_type="store" gs_store_id="{$store_id}" ectype="gselector" type="text" name="goods_name" id="goods_name" value="{$limitbuy.goods_name|escape}" class="text" />
+                        <span class="red">*</span> {else}
+                        {$goods.goods_name|escape}
+                        {/if}
+                        <input type="hidden" id="goods_id" name="goods_id" value="{$limitbuy.goods_id}" />
+                      </p>
+                    </div>
+                    <div class="assort">
+                      <p class="txt" style="float:left">{$lang.spec_price}: </p>
+                      <div id="pro_spec" class="spec" style="float:left">
+                        <ul class="th">
+                          <li id="spec_name" class="distance2">{if $goods}{$goods.spec_name}{else}{$lang.spec}{/if}</li>
+                          <li class="distance1">{$lang.stock}</li>
+                          <li class="distance1">{$lang.price}</li>
+                          <li class="distance2" style="width:130px;">{$lang.pro_price}</li>
+                          <li class="distance1">{$lang.pro_type}</li>
+                        </ul>
+                        {foreach from=$goods._specs item=spec}
+                        <ul ectype="spec_item" class="td">
+                          <li class="distance2">
+                            <input name="spec_id[]" value="{$spec.spec_id}" type="hidden" />
+                            {$spec.spec} </li>
+                          <li class="distance1">{$spec.stock}</li>
+                          <li class="distance1" ectype="price[]" style="width:130px;">
+                            <input name="price[{$spec.spec_id}]" type="hidden" value="{$spec.price}" />
+                            {$spec.price}</li>
+                          <li class="distance2">
+                            <input ectype="pro_price" name="pro_price[{$spec.spec_id}]" type="text" class="text width2" value="{$spec.pro_price}" />
+                          </li>
+                          <li>
+                            <select ectype="pro_type" name="pro_type[{$spec.spec_id}]" >
+                              <option value="price"{if $spec.pro_type eq 'price'} selected="selected"{/if}>{$lang.pro_type_price}</option>
+                              <option value="discount"{if $spec.pro_type eq 'discount'} selected="selected"{/if}>{$lang.pro_type_discount}</option>
+                            </select>
+                          </li>
+                        </ul>
+                        {/foreach} </div>
+                    </div>
+                    <div class="assort issuance">
+                      <p class="txt"></p>
+                      <p>
+                        <input id="submit_pro" type="submit" class="btn-alipay" value="{$lang.submit}" />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <!--{/if}--> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

@@ -1,0 +1,56 @@
+{include file="header.html"} 
+<style>
+.gray{color:gray;}
+</style>
+<div id="rightTop">
+	<p>{$lang.merchant}</p>
+	<ul class="subnav">
+		<li><a class="btn1" href="index.php?app=merchant">{$lang.manage}</a></li>
+        {if $smarty.get.act eq 'add'}
+        <li><span>{$lang.add}</span></li>
+        {else}
+        <li><a class="btn1" href="index.php?app=merchant&amp;act=add">{$lang.add}</a></li>
+		<li><span>{$lang.edit}</span></li>
+		{/if}
+	</ul>
+</div>
+<div class="info">
+	<form method="post" id="article_form">
+		<table class="infoTable">
+			<tr>
+				<th class="paddingT15"> {$lang.name}:</th>
+				<td class="paddingT15 wordSpacing5">
+                	<input class="infoTableInput" id="name" type="text" name="name" value="{$merchant.name|escape}" />
+                    <label class="gray">{$lang.name_note}</label>
+                </td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.appId}:</th>
+				<td class="paddingT15 wordSpacing5">
+                	<input class="infoTableInput" id="appId" type="text" name="appId" value="{$merchant.appId|escape}" />
+                    <a href="javascript:;" style="display:inline-block;border:1px solid #e4e4e4;padding:0 15px;line-height:20px;border-radius:3px;margin-right:10px;background:#f9f9f9;" onclick="$(this).parent().find('input').val(randomString(20));">随机</a><label class="gray">{$lang.appId_note}</label>
+                </td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.appKey}:</th>
+				<td class="paddingT15 wordSpacing5">
+                	<input class="infoTableInput" id="appKey" type="text" name="appKey" value="{$merchant.appKey|escape}" />
+                    <a href="javascript:;" style="display:inline-block;border:1px solid #e4e4e4;padding:0 15px;line-height:20px;border-radius:3px;margin-right:10px;background:#f9f9f9;"   onclick="$(this).parent().find('input').val(randomString(32));">随机</a> <label class="gray">{$lang.appKey_note}</label>
+                </td>
+			</tr>
+			<tr>
+				<th class="paddingT15"> {$lang.status}:</th>
+				<td class="paddingT15 wordSpacing5">
+                	<label><input type="radio" name="closed"  value="0" {if !$merchant || $merchant.closed eq '0'} checked="checked"{/if} />{$lang.normal}</label>
+                    <label><input type="radio" name="closed"  value="1" {if $merchant.closed eq '1'} checked="checked"{/if}/>{$lang.closed}</label>
+                </td>
+			</tr>
+			<tr>
+				<th></th>
+				<td class="ptb20"><input class="formbtn" type="submit" name="Submit" value="{$lang.submit}" />
+					<input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+{include file="footer.html"} 

@@ -1,0 +1,22 @@
+<!--{if $widget_data.ads}-->
+<div class="circle J_S{$widget_data.model_id} mb10 mt10 w">
+  <p class="title"><img src="{$widget_data.ad1_image_url}" width="231" height="151" /></p>
+  <div class="scroller">
+    <div class="hd"> <a class="prev-{$widget_data.model_id} prev" href="javascript:;"></a> <a class="next-{$widget_data.model_id} next" href="javascript:;"></a> </div>
+    <ul class="bd clearfix">
+      <!--{foreach from=$widget_data.ads item=image name=fe_image} -->
+      <li><a href="{$image.ad_link_url}" target="_blank" title="{$image.ad_title}"><img title="{$image.ad_title}" class="lazyload" initial-url="{$image.ad_image_url}"  alt="{$image.ad_title}"/></a> </li>
+      <!-- {/foreach} -->
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".J_S{$widget_data.model_id} .scroller").slide({pnLoop:false, mainCell:".bd",prevCell:".prev-{$widget_data.model_id}", nextCell:".next-{$widget_data.model_id}", effect:"leftLoop",autoPlay:false, scroll:1, vis:4, delayTime:1000, interTime: 5000});  
+	});
+</script> 
+<!--{else}-->
+<center style="padding:10px;">
+  请配置
+</center>
+<!--{/if}-->

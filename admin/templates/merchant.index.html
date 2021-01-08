@@ -1,0 +1,76 @@
+{include file="header.html"}
+<style>
+.pl10{padding-left:10px;}
+.formbtn{float:none; display:inline-block; /*line-height:30px;*/}
+</style>
+<div id="rightTop">
+    <p>{$lang.merchant}</p>
+    <ul class="subnav">
+        <li><span>{$lang.manage}</span></li>
+        <li><a class="btn1" href="index.php?app=merchant&amp;act=add">{$lang.add}</a></li>
+    </ul>
+</div>
+<div class="mrightTop" style="margin-top:10px;">
+    <div class="fontl">
+        <form method="get">
+            <div class="left pl10">
+                <input type="hidden" name="app" value="merchant" />
+                <input type="hidden" name="act" value="index" />
+                {$lang.name}:
+                <input class="queryInput" type="text" name="name" value="{$query.name|escape}" />
+                {$lang.appId}:
+                <input class="queryInput" type="text" name="appId" value="{$query.appId|escape}" />
+                <input type="submit" class="formbtn" value="{$lang.query}" />
+            </div>
+            <!--{if $filtered}-->
+            <a class="formbtn" href="index.php?app=merchant">{$lang.cancel_query}</a>
+            <!--{/if}-->
+        </form>
+    </div>
+    <div class="fontr">
+        {include file=page.top.html}
+    </div>
+</div>
+<div class="tdare">
+    <table width="100%" cellspacing="0" class="dataTable">
+        <!--{if $merchants}-->
+        <tr class="tatr1">
+            <td width="20" class="firstCell"><input type="checkbox" class="checkall" /></td>
+            <td align="left">{$lang.name}</td>
+            <td>{$lang.appId}</td>
+            <td>{$lang.appKey}</td>
+            <td>{$lang.status}</td>
+            <td>{$lang.add_time}</td>
+            <td>{$lang.handler}</td>
+        </tr>
+        <!--{/if}-->
+        <!--{foreach from=$merchants item=merchant}-->
+        <tr class="tatr2">
+            <td class="firstCell"><input type="checkbox" class="checkitem" value="{$merchant.id}"/></td>
+            <td>{$merchant.name|escape}</td>
+            <td>{$merchant.appId|escape}</td>
+            <td>{$merchant.appKey}</td>
+            <td>{if $merchant.closed eq '0'}<img src="templates/style/images/positive_enabled.gif" />{else}<img src="templates/style/images/positive_disabled.gif" />{/if}</td>
+            <td>{$merchant.add_time|date:complete}</td>
+            <td><a href="index.php?app=merchant&amp;act=edit&amp;id={$merchant.id}">{$lang.edit}</a></td>
+        </tr>
+        <!--{foreachelse}-->
+        <tr class="no_data">
+            <td colspan="7">{$lang.no_data}</td>
+        </tr>
+        <!--{/foreach}-->
+    </table>
+    <!--{if $merchants}-->
+    <div id="dataFuncs">
+        <div class="pageLinks">
+            {include file=page.bottom.html}
+        </div>
+        <div id="batchAction" class="left paddingT15">
+            &nbsp;&nbsp;
+            <input class="formbtn batchButton" type="button" value="{$lang.drop}" name="id" uri="index.php?app=merchant&act=drop" presubmit="confirm('{$lang.drop_confirm}');" />
+        </div>
+    </div>
+    <div class="clear"></div>
+    <!--{/if}-->
+</div>
+{include file="footer.html"}

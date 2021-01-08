@@ -1,0 +1,204 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful">
+      <div class="profile clearfix">
+        <div class="photo">
+          <p><img src="{$user.portrait}" width="70" height="70" /></p>
+        </div>
+        <div class="info clearfix">
+          <dl class="col-1 float-left">
+            <dt> <span>{$lang.welcome}</span><strong>{$user.user_name|escape}</strong> <a href="{url app=member&act=profile}">{$lang.edit_profile}</a> </dt>
+            <dd class="gray"> <span>{$lang.last_login}{$lang.colon}{$user.last_login|date:complete}</span> <span>{$lang.last_ip}{$lang.colon}{$user.last_ip}</span> </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="platform clearfix"> 
+        
+        <!--{if $store && $member_role eq 'seller_admin'}-->
+        <div class="clearfix w-full deal">
+            <div class="welitem clearfix">
+                <a class="wrap" href="{url app=store&act=credit&id=$store.store_id}">
+                    <p class="l1">好评率</p>
+                    <p class="l2"><img src="static/images/praise.png" /></p>
+                    <h3 class="l3">{$store.praise_rate|default:0}%</h3>
+                </a> 
+            </div>
+             <div class="welitem clearfix">
+                <a class="wrap" href="{url app=store&id=$store.store_id}">
+                    <p class="l1">商家等级</p>
+                    <p class="l2"><img src="static/images/grade.png" /></p>
+                    <h3 class="l3"><span>{$sgrade.grade_name}</span></h3>
+                </a> 
+            </div>
+             <div class="welitem clearfix">
+                <a class="wrap" href="{url app=store&act=credit&id=$store.store_id}">
+                    <p class="l1">{$lang.expire_time}</p>
+                    <p class="l2"><img src="static/images/period.png" /></p>
+                    <h3 class="l3"><!--{if $sgrade.add_time}-->{sprintf lang=leaving_day var1=sgrade.add_time}<!--{else}--><span>{$lang.no_limit}</span><!--{/if}--></h3>
+                </a> 
+            </div>
+             <div class="welitem clearfix">
+                <a class="wrap" href="{url app=store&act=credit&id=$store.store_id}">
+                    <p class="l1">{$lang.goods_put}</p>
+                    <p class="l2"><img src="static/images/product.png" /></p>
+                    <h3 class="l3">{$sgrade.goods.used}/<!--{if $sgrade.goods.total}-->{$sgrade.goods.total}<!--{else}--><span>{$lang.no_limit}</span><!--{/if}--></h3>
+                </a> 
+            </div>
+             <div class="welitem clearfix">
+                <a class="wrap" href="{url app=store&act=credit&id=$store.store_id}">
+                    <p class="l1">{$lang.space_use}</p>
+                    <p class="l2"><img src="static/images/space.png" /></p>
+                    <h3 class="l3">{$sgrade.space.used}M/<!--{if $sgrade.space.total}-->{$sgrade.space.total}M<!--{else}--><span>{$lang.no_limit}</span><!--{/if}--></h3>
+                </a> 
+            </div>
+        </div>
+        <!--{else}-->
+        <div class="clearfix w-full">
+          <div class="welitem clearfix"> <a class="wrap" href="{url app=deposit}">
+            <p class="l1">账户余额</p>
+            <p class="l2"><img src="static/images/yue.png" /></p>
+            <h3 class="l3"><i class="gray">&yen;</i> {$user.deposit_account.money|default:0}</h3>
+            </a> </div>
+          <div class="welitem clearfix"> <a class="wrap" href="{url app=my_coupon}">
+            <p class="l1">优惠券</p>
+            <p class="l2"><img src="static/images/coupon2.png" /></p>
+            <h3 class="l3">{$user.coupon_count|default:0} <i class="gray">张</i></h3>
+            </a> </div>
+          <div class="welitem clearfix"> <a class="wrap" href="{url app=my_integral}">
+            <p class="l1">商城积分</p>
+            <p class="l2"><img src="static/images/integral.png" /></p>
+            <h3 class="l3">{$user.integral|default:0} <i class="gray">个</i></h3>
+            </a> </div>
+          <div class="welitem clearfix"> <a class="wrap" href="{url app=message&act=newpm}">
+            <p class="l1">未读短信息</p>
+            <p class="l2"><img src="static/images/message.png" /></p>
+            <h3 class="l3">{$new_message} <i class="gray">条</i></h3>
+            </a> </div>
+          <div class="welitem clearfix"> <a class="wrap" href="{url app=friend}">
+            <p class="l1">好友</p>
+            <p class="l2"><img src="static/images/friends.png" /></p>
+            <h3 class="l3">{$user.friends|default:0} <i class="gray">人</i></h3>
+            </a> </div>
+        </div>
+ 
+        <div class="buyer-notice">
+          <div class="box-notice box">
+            <div class="hd">
+              <h2>{$lang.buyer_remind}</h2>
+            </div>
+            <div class="bd dealt">
+              <div class="list clearfix">
+                <dl>
+                  <dd> <span>{sprintf lang=order_for_pay_remind var1=buyer_stat.pending}</span> </dd>
+                </dl>
+                <dl>
+                  <dd> <span>{sprintf lang=order_for_confirm_remind var1=buyer_stat.shipped}</span> </dd>
+                </dl>
+                <dl>
+                  <dd><span>{sprintf lang=order_for_evaluate_remind var1=buyer_stat.finished}</span> </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-list box">
+        	<div class="hd">
+				<h2>我的订单 <a href="{url app=buyer_order}">查看全部订单</a></h2>
+          </div>
+          <ul>
+          	 <!--{foreach from=$my_orders item=order name=fe_order}-->
+			  <li class="clearfix">
+         		  <div class="order_goods">
+         		  	 <!--{foreach from=$order.order_goods item=goods name=fe_goods}-->
+					  <a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img src="{$goods.goods_image}" width="50" height="50"/></a>
+         		  	 <!--{/foreach}-->
+         		  </div>
+         		  <div class="price gray">{$order.order_amount|price}</div>
+				  <div class="add_time gray">{$order.add_time|date:complete}</div>
+				  <div class="status gray">{$order.status|modifier:order_status}</div>
+				  <div class="op"><a href="{url app=buyer_order&act=view&order_id=$order.order_id}">查看订单</a></div>
+         	</li>
+            <!--{foreachelse}-->
+            <div class="member-noorders">
+            	<img src="{res file=images/orderEmptyBg.png}" />
+                <div class="empty-tips">
+                    <div class="empty-tips-title">您还没有订单</div>
+                    <div class="empty-tips-text">好货这么多，快去买买买！</div>
+                </div>
+            </div>
+          	<!--{/foreach}-->
+          </ul>
+        </div>
+        <!--{/if}-->
+        
+        <!--{if $store && $member_role eq 'seller_admin'}-->
+        <div class="seller-notice">
+          <div class="box-notice box">
+            <div class="hd">
+              <h2>{$lang.seller_remind}</h2>
+            </div>
+            <div class="bd dealt">
+              <div class="list clearfix">
+                <dl>
+                  <dd> <span>{sprintf lang=order_for_settle_remind var1=seller_stat.submitted}</span></dd>
+                </dl>
+                <dl>
+                  <dd> <span>{sprintf lang=order_for_ship_remind var1=seller_stat.accepted}</span> </dd>
+                </dl>
+                <dl>
+                  <dd> <span>{sprintf lang=question_to_reply_remind var1=seller_stat.replied}</span> </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--{/if}--> 
+        <!--{if $_member_menu.overview}-->
+        <div class="apply-notice box-notice box">
+          <div class="hd">
+            <h2>{$lang.apply_remind}</h2>
+          </div>
+          <div class="bd">
+            <div class="extra"> 
+              <div class="notice-word">
+                <p class="yellow">
+              <!--{if $applying}--> 
+              <!--{if $apply_remark}--> 
+              {sprintf lang=store_applying_reject var1=apply_remark var2=user.sgrade} 
+              <!--{else}--> 
+              {sprintf lang=store_applying var1=user.sgrade} 
+              <!--{/if}--> 
+              <!--{else}-->
+              {$lang.not_seller}{$lang.colon}<a href="{$_member_menu.overview.url}" title="{$_member_menu.overview.text}">{$_member_menu.overview.text}</a>
+              <!--{/if}--> 
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--{/if}--> 
+        
+        <!--{if $store && $member_role eq 'seller_admin'}-->
+        <div class="rate-info box">
+        	<div class="hd">
+            <h2>店铺评分</h2>
+          </div>
+          <ul>
+            <li> {$lang.goods_evaluation} <span class="credit">{$store.avg_goods_evaluation}</span> <span class="compare">{$lang.compare_insdusty}</span> <span class="{$store.industy_compare.goods_compare.class}"> <i></i> {$store.industy_compare.goods_compare.name} <em><!--{if $store.industy_compare.goods_compare.value eq 0}-->----<!--{else}-->{$store.industy_compare.goods_compare.value}%<!--{/if}--></em></span> </li>
+            <li> {$lang.service_evaluation} <span class="credit">{$store.avg_service_evaluation}</span> <span class="compare">{$lang.compare_insdusty}</span> <span class="{$store.industy_compare.service_compare.class}"> <i></i> {$store.industy_compare.service_compare.name} <em><!--{if $store.industy_compare.service_compare.value eq 0}-->----<!--{else}-->{$store.industy_compare.goods_compare.value}%<!--{/if}--></em> </span> </li>
+            <li> {$lang.shipped_evaluation} <span class="credit">{$store.avg_shipped_evaluation}</span> <span class="compare">{$lang.compare_insdusty}</span> <span class="{$store.industy_compare.shipped_compare.class}"> <i></i> {$store.industy_compare.shipped_compare.name} <em><!--{if $store.industy_compare.shipped_compare.value eq 0}-->----<!--{else}-->{$store.industy_compare.shipped_compare.value}%<!--{/if}--></em> </span> </li>
+            
+            
+            <li> {$lang.all_evaluation} <span class="credit" style="color:#f50;">{$store.avg_evaluation|default:0}</span></li>
+            
+          </ul>
+        </div>
+        <!--{/if}--> 
+        
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

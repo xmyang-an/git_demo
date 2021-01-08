@@ -1,0 +1,48 @@
+{include file=header.html}
+<div id="page-goods-index">
+    {include file=curlocal.html} {include file=goodsinfo.html}
+    <div class="w-shop clearfix">
+        <div class="col-sub w210">
+            {include file=left.html}
+        </div>
+        <div class="col-main float-right w980">
+            <div class="attr-tabs">
+                <ul class="user-menu">
+                    <li>
+                        <a style="border-left:1px solid #ddd;" href="{url app=goods&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.goods_detail}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{url app=goods&act=comments&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.goods_comment}({$goods.sys_comment})
+                            </span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{url app=goods&act=saleslog&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.sales_log}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{url app=goods&act=qa&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.qa}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="salelog-list">
+                {include file=saleslog.html}
+            </div>
+            {include file=page.bottom.html}
+        </div>
+    </div>
+</div>
+{include file=footer.html}

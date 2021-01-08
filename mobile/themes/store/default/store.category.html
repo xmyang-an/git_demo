@@ -1,0 +1,25 @@
+{include file=header.html}
+<div id="main">
+  <div id="page-store-category">
+    <div id="gcategory">
+      <div class="gcategory">
+        <ul class="gcategory-list">
+          <!--{foreach from=$gcategorys item=gcategory name=fe_gcategory}-->
+          <li class="bgf" {if $smarty.foreach.fe_gcategory.iteration % 2 eq 0} style="background:#fbfbfb"{/if}> <a class="webkit-box gcategory-value" href="{url app=store&id=$store.store_id&act=search&cate_id=$gcategory.id}"><span class="ml10 fs13 flex1">{$gcategory.value|escape}</span><i class="psmb-icon-font mr10">&#xe629;</i></a> 
+            <!--{if $gcategory.children}-->
+            <dl class="category-child bgf" {if $smarty.foreach.fe_gcategory.iteration % 2 neq 0} style="background:#fbfbfb"{/if}>
+              <dd class="clearfix"> 
+                <!--{foreach from=$gcategory.children item=child name=fe_child}--> 
+                <a href="{url app=store&id=$store.store_id&act=search&cate_id=$child.id}" class="child-value"> <span {if $smarty.foreach.fe_child.iteration % 2 eq 0} style="margin-right:0"{/if}>{$child.value|escape}</span></a> 
+                <!--{/foreach}--> 
+              </dd>
+            </dl>
+            <!--{/if}--> 
+          </li>
+          <!--{/foreach}-->
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

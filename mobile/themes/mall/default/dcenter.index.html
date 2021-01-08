@@ -1,0 +1,32 @@
+{include file=member.header.html}
+<div id="page-member">
+  <div class="main dcenter">
+    <div class="d-header">
+      <div class="mark-text clearfix"> 我的收益（元）<a class="more-link" href="{url app=dcenter&act=profit}">查看明细<i class="psmb-icon-font">&#xe61d;</i></a> </div>
+      <div class="amount-box clearfix"><span class="amount">{$statistics.amount|default:0}</span><a href="{url app=deposit&act=withdraw}">提现</a></div>
+    </div>
+    <div class="outlet-nav">
+      <ul class="clearfix">
+        <li> <a href="{url app=dcenter&act=profit}"> <i class="psmb-icon-font icon-qiandaizi">&#xe65e;</i>
+          <div class="title">收益统计</div>
+          </a> </li>
+        <li> <a href="{url app=dcenter&act=team}"> <i class="psmb-icon-font icon-wodekehu">&#xe61a;</i>
+          <div class="title">我的团队</div>
+          <em class="num">{$teamscount|default:0}</em> </a> </li>
+        <li> <a href="{url app=dcenter&act=order}"> <i class="psmb-icon-font icon-fenxiao">&#xe64d;</i>
+          <div class="title">分销订单</div>
+          <em class="num">{$orderscount|default:0}</em> </a> </li>
+        <li> <a href="{url app=dcenter&act=stores}"> <i class="psmb-icon-font icon-yemiantuiguang">&#xe656;</i>
+          <div class="title">我的店铺</div>
+          <em class="num">{$storescount|default:0}</em> </a> </li>
+        <li> <a class="myinform" href="{url app=deposit}"> <i class="psmb-icon-font icon-hongbao">&#xe646;</i>
+          <div class="title">我的资产</div>
+          </a> </li>
+        <li> <a href="{url app=dcenter&act=ranks}"> <i class="psmb-icon-font icon-icon2">&#xe65d;</i>
+          <div class="title">英雄榜</div>
+          </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

@@ -1,0 +1,54 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'dialog-icon-font';  /* project id 37350 */
+  src: url('font_467120_68ao4th2rt138fr/iconfont.eot');
+  src: url('font_467120_68ao4th2rt138fr/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('font_467120_68ao4th2rt138fr/iconfont.woff') format('woff'),
+  url('font_467120_68ao4th2rt138fr/iconfont.ttf') format('truetype'),
+  url('font_467120_68ao4th2rt138fr/iconfont.svg#iconfont') format('svg');
+}
+
+.dialog-icon-font {
+  font-family:"dialog-icon-font" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.dialog_body {background: #fff;}
+.dialog_head { height: 30px;display:none;}
+.dialog_title {color: #666; font-size: 14px; font-weight: bold; display: block;color:#666666;background-color:#f1f1f1;border-bottom: 1px #E1E1E1 solid;padding: 8px 10px; height:14px;}
+.dialog_close_button {display: block; width: 14px; height: 14px; background: url(images/dialog_close_button.gif) left top; position: absolute; top: 8px; right: 8px;}
+.dialog_close_button:hover { background: url(images/dialog_close_button.gif); background-position: left -14px;}
+.dialog_content {}
+.dialog_loading { text-align:center; }
+.dialog_loading_text { padding:0px;padding-top:20px;padding-left:10px;width:220px;font-style:italic;margin:40px auto 40px auto; text-align:left; font-size:15px;background:transparent url(images/loading.gif) no-repeat center top; }
+.dialog_message_body { margin:15px 5px 5px 5px; }
+.dialog_message_contents { margin:0px 10px; padding-left:45px; padding-top:5px; padding-bottom:20px; }
+.dialog_message_notice { background:transparent url(images/message_notice.gif) no-repeat left top; }
+.dialog_message_warning { background:transparent url(images/message_warning.gif) no-repeat left top; }
+.dialog_message_confirm { background:transparent url(images/message_confirm.gif) no-repeat left top; }
+.dialog_buttons_bar { text-align:center;margin-top:5px;margin-bottom:20px; }
+.dialog_buttons_bar input { margin:0px 5px; }
+.dialog_buttons_bar .btn1 {width: 75px; height: 29px; border: 0; background: url(images/btn1.gif); color: #c73702; font-weight: bold; font-size: 14px;}
+.dialog_buttons_bar .btn2 {width: 75px; height: 29px; border: 0; background: url(images/btn2.gif); color: #4e4e4e; font-weight: bold; font-size: 14px;}
+
+.dialog_no_title .dialog_head {height:0; overflow:hidden}
+
+/* style2 */
+.simple-blue { background:#fff;}
+.simple-blue .dialog_head { height:50px; display:block; }
+.simple-blue .dialog_title { border:0; background:#fff; font-weight:normal; text-align:center;color:#222; height:50px; line-height:50px; text-align:center; font-size:16px; background:#fbfbfb;padding:0;}
+.simple-blue .dialog_close_button{ top:16px; right:0; left:10px; width:16px; height:16px; background:none; font-size:0; text-indent:0px !important;}
+.simple-blue .dialog_close_button:after{ content:'\e670'; font-family:'dialog-icon-font' !important; font-size:16px}
+.simple-blue{position:fixed !important;left:0;right:0;bottom:0; width:100% !important;}
+.simple-blue .dialog_body,.simple-blue .dialog_body .dialog_content{border-radius:0;width:100%;position:relative;}
+
+.simple-blue .dialog-form{ background:#f4f4f4}
+.simple-blue .dialog-form .dialog-form-bd{/*padding-bottom:70px;*/ background:#fff;}
+.simple-blue .dialog-form .extra{margin-top:70px;}
+.simple-blue .dialog-form .btn-alipay{background:#f60; width:100%; height:49px; line-height:49px; color:#fff;border:0; border-radius:0; display:inline-block; cursor:pointer; position:absolute; bottom:0; left:0; font-size:16px;}
+
+

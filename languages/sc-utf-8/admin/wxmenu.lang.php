@@ -1,0 +1,35 @@
+<?php
+return array(
+   'menus_list' 		=> '菜单列表',
+   'menu_name'			=> '菜单名称',
+   'parent' 			=> '上级菜单',
+   'menu_type'			=> '菜单类型',
+   'menu_value'			=> '菜单值',
+   'sort_order_desc'	=> '数字范围为0~255，数字越小越靠前',
+   'new_msg'			=> '新建消息',
+   'send_msg'			=> '发送消息',
+   'to_url' 			=> '跳转网页',
+   'url' 				=> '网页地址',
+   'reply_link'			=> '原文链接',
+   'content'			=> '正文',
+   'image'				=> '封面图片',
+   'menu_exist' 		=> '菜单名称已存在',
+   'link_not_empty'		=> '跳转网页不能为空',
+   'select_menu_type'	=> '请选择菜单类型',
+   'add_menu_successed'	=> '菜单增加成功',
+   'edit_menu_successed'=> '菜单编辑成功',
+   'add_child'			=> '添加子菜单',
+   'no_such_menu'		=> '没有该菜单',
+   'menu_gt_3' 			=> '一级菜单不能多于3个',
+   'menu_gt_5'			=> '每个一级菜单下不能多于5个二级菜单',
+   'name_gt_8' 			=> '二级菜单字数不超过8个字',
+   'name_gt_4'			=> '一级菜单数字不超过4个字',
+   'wxmenu_desc_1'		=> '1. 微信菜单一共是两级菜单，一级菜单不能多于3个，字数不能超过4个字;',
+   'wxmenu_desc_2'		=> '2. 每个一级菜单下不能多于5个二级菜单，二级菜单字数不能超过8个字，添加菜单时，请不要超出规定。',
+   
+   'update_menu'		=> '生成菜单', 
+   'menu_empty'		=> '菜单为空，生成失败',
+   'update_menu_successed'		=> '生成菜单成功', 
+   
+);
+?>

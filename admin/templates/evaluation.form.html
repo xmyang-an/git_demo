@@ -1,0 +1,70 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.evaluation_manage}</p>
+  <ul class="subnav">
+  	<li><a class="btn1" href="index.php?app=evaluation">{$lang.manage}</a></li>
+  	<li><a class="btn1" href="index.php?app=evaluation&act=setting">{$lang.setting}</a></li>
+    <li><a class="btn1" href="index.php?app=evaluation&amp;act=auto">{$lang.evaluation_auto}</a></li>
+    <li><span>{$lang.edit}</span></li>
+  </ul>
+</div>
+<div class="info">
+  <form method="post">
+    <table class="infoTable">
+     	<tr>
+          <th class="paddingT15">{$lang.buyer_name}:</th>
+          <td class="paddingT15 wordSpacing5">
+              {$order_goods.buyer_name}
+          </td>
+      </tr>
+      <tr>
+          <th class="paddingT15">{$lang.seller_name}:</th>
+          <td class="paddingT15 wordSpacing5">
+              {$order_goods.seller_name}
+          </td>
+      </tr>
+      <tr>
+          <th class="paddingT15">{$lang.goods_name}:</th>
+          <td class="paddingT15 wordSpacing5">{$order_goods.goods_name}</td>
+      </tr>
+      <tr>
+          <th class="paddingT15">{$lang.evaluation_grade}:</th>
+          <td class="paddingT15 wordSpacing5">
+              <label><input type="radio" name="evaluation" value="3" {if $order_goods.evaluation  eq '3'}checked="checked"{/if} />  {$lang.evaluation_3}</label>
+              <label><input type="radio" name="evaluation" value="2" {if $order_goods.evaluation  eq '2'}checked="checked"{/if} />  {$lang.evaluation_2}</label>
+              <label><input type="radio" name="evaluation" value="1" {if $order_goods.evaluation  eq '1'}checked="checked"{/if} />  {$lang.evaluation_1}</label>
+          </td>
+      </tr>
+      <!--{if $order_goods.images}-->
+      <tr>
+          <th class="paddingT15">晒图:</th>
+          <td class="paddingT15 wordSpacing5">
+          	 <ul>
+                 <!--{foreach from=$order_goods.images item=image key=key}-->
+                 <li style="float:left;margin-right:10px;border:1px solid #e4e4e4;position:relative;">
+                 	<input type="hidden" name="imagses[]" value="{$image}" />
+                 	<a href="{$site_url}/{$image}" target="_blank"><img style="display:block;" src="{$site_url}/{$image}" width="60" height="60" /></a>
+                    <span onclick="$(this).parents('li').remove();" style="position:absolute;left:0;right:0;bottom:0;height:20px;line-height:20px;background:rgba(0,0,0,0.5);color:#fff;text-align:center;font-size:12px;cursor:pointer;">删除</span>
+                 </li>
+                 <!--{/foreach}-->
+                 <div class="clear"></div>
+             </ul>
+          </td>
+      </tr>
+     <!-- {/if}-->
+      <tr>
+          <th class="paddingT15">{$lang.comment}:</th>
+          <td class="paddingT15 wordSpacing5">
+              <textarea name="comment" >{$order_goods.comment}</textarea>
+          </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+          <input class="formbtn" type="reset" name="Reset" value="{$lang.reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="footer.html"}

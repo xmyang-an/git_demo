@@ -1,0 +1,108 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.goods}</p>
+  <ul class="subnav">
+    <li><!--{if $smarty.get.closed}--><a class="btn1" href="index.php?app=goods">{$lang.all_goods}</a><!--{else}--><span>{$lang.all_goods}</span><!--{/if}--></li>
+    <li><!--{if $smarty.get.closed}--><span>{$lang.closed}</span><!--{else}--><a class="btn1" href="index.php?app=goods&amp;closed=1">{$lang.closed}</a><!--{/if}--></li>
+  </ul>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+      <input type="hidden" name="app" value="goods" />
+      <!--{if $smarty.get.closed}-->
+      <input type="hidden" name="closed" value="1" />
+      <!--{/if}--> 
+      {$lang.goods_name}:
+      <input class="queryInput" type="text" name="goods_name" value="{$smarty.get.goods_name|escape}" />
+      {$lang.store_name}:
+      <input class="queryInput" type="text" name="store_name" value="{$smarty.get.store_name|escape}" />
+      {$lang.brand}:
+      <input class="queryInput" type="text" name="brand" value="{$smarty.get.brand|escape}" />
+      {$lang.gcategory}:
+      <div id="gcategory" style="display:inline;">
+        <select class="querySelect" name="cate_id">
+          <option>{$lang.select_pls}</option>
+          {html_options options=$gcategories selected=$smarty.get.cate_id}
+        </select>
+      </div>
+      <input type="submit" class="formbtn" value="{$lang.query}" />
+      <!--{if $filtered}-->
+      <a class="formbtn formbtn1" href="index.php?app=goods<!--{if $smarty.get.closed}-->&amp;closed=1<!--{/if}-->">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var closed = '{$smarty.get.closed}';
+	var data_url = 'index.php?app=goods&act=get_xml&'+$("#formSearch").serialize();
+	if(closed == '1'){
+		data_url += '&closed=1';
+	}
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 150, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.goods_name}', name : 'goods_name', width : 250, sortable : true, align: 'center'},
+			{display: 'ID', name : 'goods_id', width : 50, sortable : true, align: 'center'},
+			{display: '{$lang.price}', name : 'price', width : 50, sortable : true, align: 'center'},
+    		{display: '{$lang.store_name}', name : 'store_name', width : 100, sortable : true, align: 'center'},
+			{display: '{$lang.brand}', name : 'brand', width : 100, sortable : true, align: 'center'},
+    		{display: '{$lang.cate_name}', name : 'cate_name', width : 250, sortable : true, align: 'center'}, 
+			{display: '{$lang.distribution_rate}', name : 'distribution_rate', width : 100, sortable : false, align: 'center'},    		
+			{display: '{$lang.if_show}', name : 'if_show', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.close}', name : 'closed', width: 50, sortable : true, align : 'center'},  
+			{display: '{$lang.views}', name : 'views', width: 50, sortable : true, align : 'center'} 		
+    		],
+        buttons : [
+            {display: '<i class="fa fa-thumbs-o-up"></i>{$lang.batch_recommend}', name : 'recommend', bclass : 'csv', title : '{$lang.batch_recommend}', onpress : fg_operate },
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate },
+			{display: '<i class="fa fa-edit"></i>{$lang.batch_edit}', name : 'edit', bclass : 'add', title : '{$lang.batch_edit}', onpress : fg_operate },
+			{display: '<i class="fa fa-file-excel-o"></i>{$lang.export_data}', name : 'csv', bclass : 'csv', title : '{$lang.export_data_to_CVS}', onpress : fg_operate }
+        ],
+    	sortname: "goods_id",
+    	sortorder: "desc",
+    	title: '{$lang.goods_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	var itemlist = new Array();
+	$('.trSelected',bDiv).each(function(){
+		itemlist.push($(this).attr('data-id'));
+	});
+	if(name == 'recommend'){
+		if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	    }
+		window.location.href = 'index.php?app=goods&act=recommend&id='+itemlist;
+	}
+	if (name == 'edit') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+       window.location.href = 'index.php?app=goods&act=edit&id='+itemlist;
+	}
+	if (name == 'del') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+       fg_delete(itemlist,'goods','',true);
+	}
+	if(name == 'csv'){
+		if($('.trSelected',bDiv).length==0){
+		   parent.layer.confirm('{$lang.download_all_data}',{icon: 3, title:'{$lang.notice}'},function(index){
+				fg_csv(itemlist);
+				parent.layer.close(index);
+			},function(index){
+				parent.layer.close(index);
+			});
+	   }else{
+		   fg_csv(itemlist);
+	   }
+	}
+}
+</script>
+{include file="footer.html"} 

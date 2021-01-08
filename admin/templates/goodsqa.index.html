@@ -1,0 +1,62 @@
+{include file="header.html"}
+<style type="text/css">
+.store_reply { padding:5px 0px; color:green; }
+</style>
+<div id="rightTop">
+  <p>{$lang.consulting}</p>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+    	  <input type="hidden" name="app" value="consulting" />
+          {$lang.user_name}:
+          <input class="queryInput" type="text" name="user_name" value="{$smarty.get.user_name|escape}" />
+          {$lang.question_content}:
+          <input class="queryInput" type="text" name="question_content" value="{$smarty.get.question_content|escape}" />
+          {$lang.store_name}:
+          <input class="queryInput" type="text" name="store_name" value="{$smarty.get.store_name|escape}" />
+          <input type="submit" class="formbtn" value="{$lang.query}" />
+      <!--{if $filtered}-->
+      <a class="formbtn formbtn1" href="index.php?app=consulting">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var data_url = 'index.php?app=consulting&act=get_xml&'+$("#formSearch").serialize();
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 50, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.user_name}', name : 'user_name', width : 100, sortable : true, align: 'center'},
+			{display: '{$lang.type}', name : 'type', width : 50, sortable : true, align: 'center'},
+			{display: '{$lang.item_name}', name : 'item_name', width : 150, sortable : true, align: 'center'},
+    		{display: '{$lang.question_content}', name : 'question_content', width : 250, sortable : true, align: 'center'},
+			{display: '{$lang.reply_content}', name : 'reply_content', width : 250, sortable : true, align: 'center'},
+    		{display: '{$lang.store_name}', name : 'store_name', width : 80, sortable : true, align: 'center'},    		
+			{display: '{$lang.time_post}', name : 'time_post', width: 150, sortable : true, align : 'center'}	
+    		],
+        buttons : [
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate }
+        ],
+    	sortname: "time_post",
+    	sortorder: "desc",
+    	title: '{$lang.consulting_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	if($('.trSelected',bDiv).length>0){
+        var itemlist = new Array();
+		$('.trSelected',bDiv).each(function(){
+			itemlist.push($(this).attr('data-id'));
+		});
+		if (name == 'del') {	
+            fg_delete(itemlist,'consulting');
+		}
+    } else {
+		parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+        return false;
+    }
+}
+</script>
+{include file="footer.html"} 

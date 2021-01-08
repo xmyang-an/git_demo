@@ -1,0 +1,81 @@
+{include file=header.html}
+<script type="text/javascript">
+$(function(){
+	var  holder = $(".J_FixedButtonBottom"),
+		oTop = holder.offset().top;
+
+    $(window).unbind('scroll').bind('scroll', function(){
+		var dTop = $(document).scrollTop(),
+    		wHeight = $(window).height();
+    	if (dTop < (oTop - wHeight + 74)) {
+    		holder.addClass('fixed');
+    	} else {
+    		holder.removeClass('fixed');
+    	}
+	});
+});
+</script>
+<div id="page-meal" class="w-full">
+	<div class="w clearfix">
+		<div class="mt10">
+    		{include file=curlocal.html}
+		</div>
+    	<div class="mealinfo">
+        	<div class="title title_top clearfix">
+				<div class="price clearfix">
+					<p><span class="txt">{$lang.yh_meal}{$lang.colon}</span><span>{$lang.old_price}{$lang.colon}<del>{$meal.price_old_total.min|price}~{$meal.price_old_total.max|price}</del></span></p>
+                	<p><strong>{$meal.price|price}</strong></p>
+                </div>
+                <div class="sale"><b class="J_TotalSave"> {$meal.default_save}</b></div>
+                <div class="desc">{$lang.select_meal_note}</div>
+            </div>
+            <div class="content clearfix">
+				<form name="meal_form">
+            	<div class="box clearfix">
+					<h3>{$lang.select_goods_spec}{$lang.colon}</h3>
+                    <!--{foreach from=$meal.meal_goods item=goods name=fe_goods}-->
+                    <dl class="goodsbox {if $smarty.foreach.fe_goods.last} goodsbox-last{/if} clearfix">
+      					<dt class="pic big_pic float-left"><a href="{url app=goods&id=$goods.goods_id}" target="_blank"><img width="160" height="160" src="{$goods.default_image}" /></a></dt>
+						<dd class="desc float-left">
+     						<h2><strong>[{$lang.meal_goods}{$smarty.foreach.fe_goods.iteration}]</strong><a class="fs14 f66" href="{url app=goods&id=$goods.goods_id}" target="_blank">{$goods.goods_name|escape}</a></h2>
+   							<div class="rate"><span>{$lang.price}{$lang.colon}</span><b class="price J_SpecPrice" price="{$goods.price}">{$goods.price|price}</b></div>
+							<div class="handle">
+								<!--{if $goods.spec_qty gt 0}-->
+								<ul class="clearfix">
+									<li class="handle_title">{$goods.spec_name_1|escape}{$lang.colon} </li>
+									<!--{foreach from=$goods.spec_1 item=spec key=id}-->
+                                	<li onclick="selectSpec(1, this,{$goods.spec_qty},{$goods.goods_id},{$meal.price})" class="dotted"><a href="javascript:;">
+                                    <!--{if $spec.image}-->
+                                    <img src="{$spec.image}" width="25" height="25" style="vertical-align:middle" />
+                                   	<!--{/if}-->
+                                    <span>{$spec.name}</span></a></li>
+                                	<!--{/foreach}-->
+                           	 	</ul>
+                           	 	<!--{/if}-->
+                            	<!--{if $goods.spec_qty gt 1}-->
+                            	<ul class="clearfix">
+                            		<li class="handle_title">{$goods.spec_name_2|escape}{$lang.colon}</li>
+                                	<!--{foreach from=$goods.spec_2 item=spec key=id}-->
+                                	<li onclick="selectSpec(2, this,{$goods.spec_qty},{$goods.goods_id},{$meal.price})" class="{if $id eq $goods.default_spec}solid{else}dotted{/if}"><a href="javascript:;"><span>{$spec.name}</span></a></li>
+                                	<!--{/foreach}-->
+                            	</ul>
+                            	<!--{/if}-->
+							</div>
+							<input type="hidden" name="specs[]" value="{$goods.default_spec}" />
+						</dd>
+					</dl>
+					<!--{/foreach}-->
+                </div>
+				<div class="title btitle J_FixedButtonBottom clearfix">
+					<div class="price clearfix">
+                		<p><span class="txt">{$lang.yh_meal}{$lang.colon}</span><span>{$lang.old_price}{$lang.colon}<del>{$meal.price_old_total.min|price}~{$meal.price_old_total.max|price}</del></span></p>
+                		<p><strong>{$meal.price|price}</strong> <span class="sale">{$lang.lisheng}{$lang.colon}<b class="J_TotalSave"> {$meal.default_save}</b></p>
+					</div>
+                	<div class="buy"><input type="button" class="btn_c1 J_SubmitMealOrder" value="" meal_id="{$meal.meal_id}" /></div>
+            	</div>
+				</form>
+            </div>
+        </div>
+	</div>
+</div>
+{include file=footer.html}

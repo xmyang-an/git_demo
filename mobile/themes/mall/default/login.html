@@ -1,0 +1,88 @@
+{include file=header.html}
+<div id="main" class="pb20">
+  <div id="page-login" class="page-auth">
+    <form method="POST" class="fun-form-style">
+      <div class="form pb20">
+      	<!--{if $smarty.get.type eq 'phone'}-->
+        <dl>
+          <dd class="webkit-box"> <span>{$lang.phone_mob}</span>
+            <input type="text" name="phone_mob" id="phone_mob" class="input flex1 w-full"  placeholder="{$lang.phone_mob}" />
+          </dd>
+        </dl>
+        <dl class="J_PhoneCaptcha">
+          <dd class="captchaCode webkit-box clearfix"> <span>验<s style="margin:0 7px">证</s>码</span>
+            <input type="text" name="code" id="code" class="input flex1 w-full" placeholder="{$lang.phone_captcha}" />
+            <s class="line"></s>
+            <input type="button" id="send_phonecode" class="btn-captcha" value="{$lang.get_captcha}" />
+          </dd>
+        </dl>
+        <!--{else}-->
+        <dl>
+          <dd class="webkit-box"> <span>用户名</span>
+            <input type="text" id="user_name" name="user_name" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="用户名/手机号/邮箱" />
+            <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+        </dl>
+        <dl>
+          <dd class="webkit-box"> <span>密<s style="margin:0 7px"></s>码</span>
+            <input type="password" name="password" id="password" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.input_password}" />
+            <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+        </dl>
+        <!--{if $captcha}-->
+        <dl>
+          <dd class="webkit-box captcha"> <span>{$lang.captcha}</span>
+            <input type="text" name="captcha" class="input clearInput flex1" id="captcha1" oninput="javascript:clearInput(this)" placeholder="{$lang.input_captcha}" />
+            <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> <img id="captcha" src="{url app=captcha&amp;$random_number}" onclick="javascript:change_captcha($('#captcha'));" /> </dd>
+        </dl>
+        <!--{/if}-->
+        <!--{/if}-->
+        
+        <div class="extra">
+          <p style="display:none">
+            <label class="switch-checkbox-radio w-full block mb20 box-align-center J_SwtcherInput checked" for="switcher"> <em class="block flex1 gray">七日内免登录</em> <span class="switcher-style block"></span> </label>
+            <input name="AutoLogin" class="autoLogin hidden" id="switcher" value="1" type="checkbox" checked="checked">
+          </p>
+          <p>
+            <input type="hidden" class="J_AjaxFormRetUrl" name="ret_url" value="{$ret_url}" />
+            <input type="submit" class="J_AjaxFormSubmit btn-alipay mt10" value="{$lang.login}" />
+          </p>
+        </div>
+      </div>
+    </form>
+    <!--{if $smarty.get.type neq 'phone'}-->
+    <div class="partner pl10 pr10">
+      <div class="mt webkit-box"> <ins class="vleft vline flex1"></ins><span class="fs14 gray">合作账号登录</span><ins class="vright vline flex1"></ins> </div>
+      <div class="mc webkit-box"> <a href="{url app=qqconnect&act=login&ret_url=$ret_url}" class="flex1"><i class="qq psmb-icon-font">&#xe6bd;</i></a> 
+        <!--{if !$isWeixin}--> 
+        <a href="{url app=alipayconnect&act=login&ret_url=$ret_url}" class="flex1"><i class="alipay psmb-icon-font">&#xe6bb;</i></a> 
+        <!--{/if}--> 
+        <!--{if $isWeixin}--> 
+        <a href="{url app=weixinconnect&act=login&ret_url=$ret_url}" class="flex1"><i class="weixin psmb-icon-font">&#xe6f4;</i></a> 
+        <!--{/if}--> 
+        <a href="{url app=xwbconnect&act=login&ret_url=$ret_url}" class="flex1"><i class="xwb psmb-icon-font">&#xe6b7;</i></a> </div>
+    </div>
+    <!--{/if}-->
+    <div class="auth-fixed webkit-box"> <a class="fs14 center flex1" href="{url app=member&act=register&ret_url=$ret_url}">{$lang.register}</a> 
+    <!--{if $smarty.get.type neq 'phone'}-->
+    <a class="fs14 center flex1" href="{url app=member&act=login&type=phone&ret_url=$ret_url}">手机短信登录</a>
+    <!--{else}-->
+    <a class="fs14 center flex1" href="{url app=member&act=login&ret_url=$ret_url}">账号密码登录</a> 
+    <!--{/if}-->
+    <a class="fs14 center flex1" href="{url app=find_password}" style="border-right:0;">{$lang.find_password}</a> </div>
+  </div>
+</div>
+ <!--{if $smarty.get.type eq 'phone'}-->
+<script type="text/javascript">
+$(function(){
+	$('#send_phonecode').click(function(){
+		var phone_mob = $.trim($("input[name='phone_mob']").val());
+		if(phone_mob=='' || !is_mobile(phone_mob)){
+			layer.open({content: "{$lang.phone_mob_invalid}", className:'layer-popup', time: 3});
+			return;
+		}
+		$(this).attr("disabled", true);
+		send_phonecode($(this), {from: "login", phone_mob: phone_mob}, 120);
+	});
+});
+</script>
+<!--{/if}-->
+{include file=footer.html}

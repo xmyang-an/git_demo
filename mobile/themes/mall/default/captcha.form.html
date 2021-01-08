@@ -1,0 +1,89 @@
+<script type="text/javascript">
+//<!CDATA[
+$(function(){
+	$('.J_Tab li').click(function(){
+		$('.J_CodeType').val($(this).attr('codeType'));
+		$(this).parent().find('li').removeClass('active');
+		$('.J_TabForm').find('.each').hide();		
+		$(this).addClass('active');
+		$('.J_TabForm').find('.each:eq('+$(this).parent().children('li').index(this)+')').fadeIn();		
+	});
+	
+	/* 点击弹出的层有点击，先解除绑定click再绑定click */
+	$(document.body).find('#send_phonecode').unbind('click').on('click', function(){
+		$(this).attr("disabled", true);
+		send_phonecode($(this), {from: "{$captcha.from}", user_id: "{$user.user_id}"}, 120);
+	});
+	$(document.body).find('#send_emailcode').unbind('click').on('click', function(){
+		$(this).attr("disabled", true);
+		send_emailcode($(this), {from: "{$captcha.from}", user_id: "{$user.user_id}"}, 120);
+	});
+	$(document.body).find('#gs_submit').unbind('click').on('click', function(){
+		var codeType = $('.J_CodeType').val();
+		if($.trim($('input[name="'+codeType+'_code"]').val()) == '') {
+			layer.open({content:'请输入验证码'});
+		}
+		else {
+			gs_callback('{$smarty.get.id}', codeType, $.trim($('input[name="'+codeType+'_code"]').val()));
+		}
+	});
+	$("input,select").blur(function(){
+        setTimeout(function(){
+			const scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+			window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+        }, 100);
+    })
+});
+//]]>
+</script>
+<form method="post" action="{$action_url}" id="captcah_form" target="iframe_post">
+  <div class="dialog-form scroll captcha-form">
+    <div class="dialog_content_scroll">
+      <ul class="tab J_Tab clearfix hidden">
+        <li class="active" codeType="phone"><span>手机短信验证</span></li>
+        <li codeType="email"><span>邮箱验证</span></li>
+      </ul>
+      <div class="eject_con">
+        <div class="add">
+          <div id="warning"></div>
+          <div class="dialog-form-bd captcha-fields J_TabForm">
+            <ul class="each">
+              <li class="clearfix">
+                <p class="first">手机号码</p>
+                <p>
+                  <input type="hidden" name="phone_mob" value="{$user.phonb_mob}" />
+                  <!--{if $user.phone_mob}-->{$user.phone_mob}<!--{else}-->该账号未设置手机号<!--{/if}--></p>
+              </li>
+              <li class="clearfix">
+                <p class="first">验<s style="margin:0 7px">证</s>码</p>
+                <p class="clearfix">
+                  <input type="text" name="phone_code" class="input" maxlength="10" />
+                  <input type="button" value="{$lang.get_captcha}" id="send_phonecode" class="btn" />
+                </p>
+              </li>
+            </ul>
+            <ul class="each hidden">
+              <li class="clearfix">
+                <p class="first">电子邮箱</p>
+                <p>
+                  <input type="hidden" name="email" value="{$user.email}" />
+                  {$user.email}</p>
+              </li>
+              <li class="clearfix">
+                <p class="first">验<s style="margin:0 7px">证</s>码</p>
+                <p>
+                  <input type="text" name="email_code" class="input" maxlength="10" />
+                  <input type="button" value="{$lang.get_captcha}" id="send_emailcode" class="btn" />
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <input type="hidden" value="phone" class="J_CodeType" />
+      <input type="button" value="{$lang.submit}" id="gs_submit" class="btn-alipay" />
+    </div>
+  </div>
+</form>

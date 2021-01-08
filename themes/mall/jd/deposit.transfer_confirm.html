@@ -1,0 +1,58 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public table deposit">
+          <div class="deposit-withdraw-confirm">
+            <div class="notice-word">
+              <p>转入成功后，对方会立即收到账款</p>
+            </div>
+            <form method="post">
+              <div class="title"> 确认转账信息 </div>
+              <div class="form">
+                <div class="confirm-info">
+                  <dl class="clearfix">
+                    <dt>收款人信息：</dt>
+                    <dd> <strong>{$party.real_name}</strong> {$party.account} </dd>
+                  </dl>
+                  <dl class="clearfix">
+                    <dt>转账金额：</dt>
+                    <dd> <span class="money">{$transfer.money}</span> 元 </dd>
+                  </dl>
+                  <!--{if $transfer.fee gt 0}-->
+                  <dl class="clearfix">
+                    <dt>手续费：</dt>
+                    <dd> <span>{$transfer.fee}</span> 元 </dd>
+                  </dl>
+                  <!--{/if}--> 
+                </div>
+                <div class="confirm-form">
+                  <dl class="clearfix">
+                    <dt>支付密码：</dt>
+                    <dd>
+                      <input type="password"  placeholder="默认密码为123456"  name="password" class="text" value="" />
+                    </dd>
+                  </dl>
+                  <dl class="clearfix">
+                    <dt>验证码：</dt>
+                    <dd class="captcha">
+                      <input type="text" name="captcha" class="text" id="captcha1" />
+                      <a href="javascript:change_captcha($('#captcha'));" class="renewedly"><img id="captcha" src="index.php?app=captcha&amp;{$random_number}" /></a> </dd>
+                  </dl>
+                  <dl class="clearfix">
+                    <dt>&nbsp;</dt>
+                    <dd class="submit"> <span class="btn-alipay">
+                      <input type="submit" value="确认转账" />
+                      </span> </dd>
+                  </dl>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

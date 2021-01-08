@@ -1,0 +1,55 @@
+{include file=member.header.html} 
+<script type="text/javascript" src="{lib file=jquery.plugins/jquery.validate.js}" charset="{$charset}"></script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="eject_btn_two eject_pos1" style="width:120px; left:130px;" ><b class="ico4" ectype="dialog" dialog_id="my_partner_add" dialog_width="460" dialog_title="{$lang.add_partner}" uri="index.php?app=my_partner&amp;act=add">{$lang.add_partner}</b></div>
+        <div class="public table">
+          <table>
+            <!--{if $partners}-->
+            <tr class="gray">
+              <th width="30" ><input id="all" type="checkbox" class="checkall" /></th>
+              <th class="align1">{$lang.title}</th>
+              <th class="align1">{$lang.link}</th>
+              <th>{$lang.logo}</th>
+              <th>{$lang.sort_order}</th>
+              <th>{$lang.handle}</th>
+            </tr>
+            <!--{/if}--> 
+            <!-- {foreach from=$partners item=partner name=v} -->
+            <tr class="line {if $smarty.foreach.v.last}line_bold{/if}">
+              <td class="align2"><input type="checkbox" class="checkitem" value="{$partner.partner_id}" /></td>
+              <td>{$partner.title|escape}</td>
+              <td class="color1">{$partner.link}</td>
+              <td class="align2"><!--{if $partner.logo}--> 
+                <img src="{$partner.logo}" height="30"/> 
+                <!--{/if}--></td>
+              <td class="align2"><span>{$partner.sort_order}</span></td>
+              <td class="width13"><div class=""> <a href="javascript:void(0);" uri="index.php?app=my_partner&amp;act=edit&partner_id={$partner.partner_id}" dialog_id="my_partner_edit" dialog_title="{$lang.edit}" dialog_width="460" ectype="dialog" class="edit1">{$lang.edit}</a><a href="javascript:drop_confirm('{$lang.drop_confirm}', 'index.php?app=my_partner&amp;act=drop&id={$partner.partner_id}');" class="delete">{$lang.drop}</a> </div></td>
+            </tr>
+            <!-- {foreachelse} -->
+            <tr>
+              <td colspan="6"><div class="notice-word">
+                  <p>{$lang.no_records}</p>
+                </div></td>
+            </tr>
+            <!--{/foreach}--> 
+            <!--{if $partners}-->
+            <tr class="btion">
+              <th><input id="all2" type="checkbox" class="checkall" /></th>
+              <th colspan="5"> <p class="position1"> <span class="all">
+                  <label for="all2">{$lang.checkall}</label>
+                  </span> <a href="javascript:void(0);" class="delete" uri="index.php?app=my_partner&act=drop" name="id" presubmit="confirm('{$lang.drop_confirm}')" ectype="batchbutton">{$lang.drop}</a> </p>
+                <div class="position2 clearfix"> {include file=member.page.bottom.html} </div>
+              </th>
+            </tr>
+            <!--{/if}-->
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<iframe name="my_partner" style="display:none"></iframe>
+{include file=member.footer.html} 

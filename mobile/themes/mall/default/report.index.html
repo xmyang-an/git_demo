@@ -1,0 +1,97 @@
+{include file=member.header.html}
+<script type="text/javascript">
+$(function(){
+	$('.filePicker').compressUpload({
+		server: REAL_SITE_URL + '/index.php?app=report&act=uploadImages&item_id={$smarty.get.id}',
+		pick: '.filePicker',
+		crop: false,
+		callback: function(file, response, pick, target) {
+			if(response.done){
+				add_uploadedfile(response.retval);
+			}else{
+				alert(response.msg);
+			}
+		}
+	});
+})
+
+function add_uploadedfile(file_data)
+{	$('.J-pic-list').append('<div file_id="'+ file_data.file_id +'" class="mt5"><div class="add-image-btn"><img src="{$site_url}/'+ file_data.file_path +'" width="80" height="80" alt="" /><input type="hidden" value="'+ file_data.file_id +'" name="file_id[]"/><ins class="drop-image psmb-icon-font" onclick="drop_image('+ file_data.file_id +');">&#xe671;</ins></div></div>');
+
+}
+function drop_image(file_id)
+{
+  layer.open({
+    content: lang.uploadedfile_drop_confirm
+    ,btn: ['确定', '取消']
+    ,yes: function(index){
+	  layer.close(index);
+	  var url = SITE_URL + '/index.php?app=report&act=drop_image';
+      $.getJSON(url, {'id':file_id}, function(data){
+          if (data.done)
+          {
+             $('*[file_id="' +file_id + '"]').remove();
+          }
+          else
+          {
+             layer.open({content: data.msg, time: 3});
+          }
+       });
+    }
+	,no : function(index){
+		layer.close(index);
+	}
+  });
+}
+</script>
+<div id="main" class="report w-full">
+    <div class="content mb20 mt10 w">
+        <form method="post" id="reportForm">
+        	<h3>被举报人</h3>
+        	<p class="padding10"><a href="{url app=store&id=$goods.store_id}">{$goods.store_name|escape}</a></p>
+            <h3>被举报商品</h3>
+            <div class="goods clearfix webkit-box">
+                 <div class="info-img mr10">
+                      <a href="{url app=goods&id=$goods.goods_id}">
+                         <img src="{$goods.default_image}" width="60" height="60">
+                       </a>
+                 </div>
+                 <ul class="info-label">
+                     <li class="l1">
+                        <label>商品ID:</label>
+                        <span>{$goods.goods_id}</span>
+                     </li>
+                     <li class="l2 line-clamp-2">
+                         <label>商品名称:</label>
+                         <a href="{url app=goods&id=$goods.goods_id}">{$goods.goods_name|escape}</a>
+                     </li>
+                </ul>
+            </div>
+            <h3 class="title">举报描述: </h3>
+            <div class="textarea pt10 pb10">
+            <textarea name="content" placeholder="请描叙该商品,或者该店铺存在的问题。注意：被举报人能且只能看到此框中的内容，请您注意不要在此框填写会员名、订单号、运单号等任何可能泄露身份的信息"></textarea>
+            <div class="J-pic-list pic-list webkit-box flex-wrap">
+            	<div class="mt5">
+                	<div class="add-image-btn">
+                        <div class="filePicker filePicker-{$goods.rec_id}" rec_id="{$goods.rec_id}"></div>
+                        <i class="psmb-icon-font">&#xe6e8;</i> 
+                    </div>
+                </div>
+                 <!--{foreach from=$images item=image}-->
+                 <div class="mt5" file_id="{$image.file_id}">
+                 	<div class="add-image-btn">
+                        <input type="hidden" name="file_id[]" value="{$image.file_id}">
+                        <img src="{$site_url}/{$image.file_path}" width="50" height="50" />
+                        <ins class="drop-image psmb-icon-font" onclick="drop_image({$image.file_id});">&#xe671;</ins>
+                    </div>
+                 </div>
+                 <!--{/foreach}-->
+            </div>
+          </div>
+            <div class="extra mt20 ml10 mr10">
+              <input type="submit" class="J_AjaxFormSubmit btn-alipay mt10" value="{$lang.submit}" />
+            </div>
+        </form>
+    </div>
+</div>
+{include file=footer.html}

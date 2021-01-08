@@ -1,0 +1,79 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.goods_recommended}</p>
+  <ul class="subnav">
+    <li><a class="btn1" href="index.php?app=recommend">{$lang.recommend}</a></li>
+    <li><span>{$lang.goods_recommended}</span></li>
+  </ul>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+var id = '{$smarty.get.id}';
+$(function(){
+    $("#flexigrid").flexigrid({
+    	url: 'index.php?app=recommend&act=get_xml_goods&id='+id,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 100, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.sort_order}', name : 'sort_order', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.recom_name}', name : 'recom_name', width: 100, sortable : true, align : 'center'},
+			{display: '{$lang.goods_name}', name : 'goods_name', width : 250, sortable : true, align: 'center'},
+			{display: '{$lang.price}', name : 'price', width : 50, sortable : true, align: 'center'},
+    		{display: '{$lang.store_name}', name : 'store_name', width : 100, sortable : true, align: 'center'},
+			{display: '{$lang.brand}', name : 'brand', width : 100, sortable : true, align: 'center'},
+    		{display: '{$lang.cate_name}', name : 'cate_name', width : 250, sortable : true, align: 'center'},    		
+			{display: '{$lang.if_show}', name : 'if_show', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.closed}', name : 'closed', width: 50, sortable : true, align : 'center'},  
+			{display: '{$lang.views}', name : 'views', width: 50, sortable : true, align : 'center'} 		
+    		],
+        buttons : [
+            {display: '<i class="fa fa-ban"></i>{$lang.batch_cancel_recommend}', name : 'cancel_recommend', bclass : 'del', title : '{$lang.batch_cancel_recommend2}', onpress : fg_operate }
+        ],
+
+    	sortname: "sort_order",
+    	sortorder: "asc",
+    	title: '{$lang.recommend_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	if($('.trSelected',bDiv).length>0){
+        var itemlist = new Array();
+		$('.trSelected',bDiv).each(function(){
+			itemlist.push($(this).attr('data-id'));
+		});
+		if(name == 'cancel_recommend'){
+			cancel_recommend(itemlist,id);
+		}
+    } else {
+		parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+        return false;
+    }
+}
+
+function cancel_recommend(itemlist,id)
+{
+	if (typeof itemlist == 'number') {
+    	var itemlist = new Array(itemlist.toString());
+	};
+	var url = 'index.php?app=recommend&act=drop_goods_from';
+	parent.layer.confirm('确认将这 ' + itemlist.length + ' 个商品取消推荐吗？',{icon: 3, title:'{$lang.notice}'},function(index){
+		itemlist = itemlist.join(',');
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: url,
+			data: "id="+id+"&goods_id="+itemlist,
+			success: function(data){
+				if (data.done){
+					$("#flexigrid").flexReload();
+				} else {
+					parent.layer.alert(data.msg);
+				}
+			},
+		});
+		parent.layer.close(index);
+	},function(index){
+		parent.layer.close(index);
+	});
+}
+</script>
+{include file="footer.html"} 

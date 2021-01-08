@@ -1,0 +1,929 @@
+2017-12-01 09:48:19 pid:29373 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] -d 
+2017-12-01 09:48:19 pid:29373 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] not run
+2017-12-01 09:52:50 pid:29765 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] -d 
+2017-12-01 09:52:50 pid:29765 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] not run
+2017-12-01 10:05:32 pid:30837 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DAEMON mode
+2017-12-01 10:19:07 pid:31890 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] stop 
+2017-12-01 10:19:07 pid:31890 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] is stoping ...
+2017-12-01 10:19:07 pid:30839 Workerman[start.php] Stopping ...
+2017-12-01 10:19:07 pid:30839 Workerman[start.php] has been stopped
+2017-12-01 10:19:07 pid:31890 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] stop success
+2017-12-01 10:19:15 pid:31901 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 10:20:01 pid:31901 Workerman[start.php] Stopping ...
+2017-12-01 10:20:01 pid:31901 Workerman[start.php] has been stopped
+2017-12-01 10:20:07 pid:31975 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DAEMON mode
+2017-12-01 10:20:46 pid:32041 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] stop 
+2017-12-01 10:20:46 pid:32041 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] is stoping ...
+2017-12-01 10:20:46 pid:31977 Workerman[start.php] Stopping ...
+2017-12-01 10:20:46 pid:31977 Workerman[start.php] has been stopped
+2017-12-01 10:20:46 pid:32041 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] stop success
+2017-12-01 10:20:52 pid:32052 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 10:44:51 pid:32052 Workerman[start.php] Stopping ...
+2017-12-01 10:44:51 pid:32052 Workerman[start.php] has been stopped
+2017-12-01 11:10:20 pid:3515 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:12:31 pid:3515 Workerman[start.php] Stopping ...
+2017-12-01 11:12:31 pid:3515 Workerman[start.php] has been stopped
+2017-12-01 11:12:38 pid:3723 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:13:45 pid:3723 Workerman[start.php] Stopping ...
+2017-12-01 11:13:45 pid:3723 Workerman[start.php] has been stopped
+2017-12-01 11:13:50 pid:3850 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:14:44 pid:3850 Workerman[start.php] Stopping ...
+2017-12-01 11:14:44 pid:3850 Workerman[start.php] has been stopped
+2017-12-01 11:14:52 pid:3950 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:16:04 pid:3950 Workerman[start.php] Stopping ...
+2017-12-01 11:16:04 pid:3950 Workerman[start.php] has been stopped
+2017-12-01 11:16:08 pid:4071 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:16:40 pid:4071 Workerman[start.php] Stopping ...
+2017-12-01 11:16:40 pid:4071 Workerman[start.php] has been stopped
+2017-12-01 11:16:46 pid:4146 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:17:02 pid:4146 Workerman[start.php] Stopping ...
+2017-12-01 11:17:02 pid:4146 Workerman[start.php] has been stopped
+2017-12-01 11:17:09 pid:4200 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:20:15 pid:4200 Workerman[start.php] Stopping ...
+2017-12-01 11:20:15 pid:4200 Workerman[start.php] has been stopped
+2017-12-01 11:20:20 pid:4473 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:20:55 pid:4473 Workerman[start.php] Stopping ...
+2017-12-01 11:20:55 pid:4473 Workerman[start.php] has been stopped
+2017-12-01 11:20:58 pid:4567 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:27:41 pid:4567 Workerman[start.php] Stopping ...
+2017-12-01 11:27:41 pid:4567 Workerman[start.php] has been stopped
+2017-12-01 11:27:44 pid:5164 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:29:54 pid:5164 Workerman[start.php] Stopping ...
+2017-12-01 11:29:54 pid:5164 Workerman[start.php] has been stopped
+2017-12-01 11:29:58 pid:5372 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:33:27 pid:5372 Workerman[start.php] Stopping ...
+2017-12-01 11:33:27 pid:5372 Workerman[start.php] has been stopped
+2017-12-01 11:33:51 pid:5697 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 11:36:29 pid:5697 Workerman[start.php] Stopping ...
+2017-12-01 11:36:29 pid:5697 Workerman[start.php] has been stopped
+2017-12-01 11:36:32 pid:5948 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DAEMON mode
+2017-12-01 12:00:58 pid:7885 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DAEMON mode
+2017-12-01 12:00:58 pid:7885 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] already running
+2017-12-01 12:01:09 pid:7902 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 12:01:09 pid:7902 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] already running
+2017-12-01 12:01:20 pid:7915 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] stop 
+2017-12-01 12:01:20 pid:7915 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] is stoping ...
+2017-12-01 12:01:20 pid:5950 Workerman[start.php] Stopping ...
+2017-12-01 12:01:20 pid:5950 Workerman[start.php] has been stopped
+2017-12-01 12:01:20 pid:7915 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] stop success
+2017-12-01 12:01:23 pid:7921 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DEBUG mode
+2017-12-01 12:02:18 pid:7921 Workerman[start.php] Stopping ...
+2017-12-01 12:02:18 pid:7921 Workerman[start.php] has been stopped
+2017-12-01 12:02:46 pid:8071 Workerman[/home/wwwroot/weigoushangcheng.com/im/start.php] start in DAEMON mode
+2017-12-05 13:06:15 pid:8077 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2017-12-05 13:06:23 pid:8079 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2017-12-05 13:06:34 pid:8076 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2017-12-05 13:07:03 pid:31544 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:07:21 pid:8078 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2017-12-05 13:07:44 pid:31547 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:08:21 pid:31546 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:08:32 pid:31549 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:08:47 pid:31548 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:09:35 pid:31552 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:09:38 pid:31551 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:10:18 pid:31554 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:10:35 pid:31545 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:10:48 pid:31553 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:11:59 pid:31569 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:14:21 pid:31550 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:14:39 pid:31570 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:16:39 pid:31572 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:17:34 pid:31571 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:17:38 pid:31566 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:17:59 pid:31574 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:18:31 pid:31573 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:19:07 pid:31575 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:19:12 pid:31577 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:20:30 pid:31580 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:20:31 pid:31576 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:21:36 pid:31578 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:22:32 pid:31581 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:22:33 pid:31582 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:22:38 pid:31579 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:22:53 pid:31583 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:23:28 pid:31588 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:23:46 pid:31592 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:24:35 pid:31594 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:24:39 pid:31591 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:25:12 pid:31593 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:25:16 pid:31589 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:25:18 pid:31595 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:25:55 pid:31597 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:27:03 pid:31600 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:27:10 pid:31596 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:27:10 pid:31599 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:27:31 pid:31598 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:29:20 pid:31616 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:29:27 pid:31606 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:30:00 pid:31612 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:31:35 pid:31620 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2017-12-05 13:31:43 pid:31611 process_timeout:
+#1 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/weigoushangcheng.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/weigoushangcheng.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-01-11 00:14:41 pid:8067 Workerman[start.php] start in DAEMON mode
+2018-01-14 21:39:29 pid:22660 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] satart 
+2018-01-14 21:39:29 pid:22660 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] not run
+2018-01-14 21:39:58 pid:22704 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] resatart 
+2018-01-14 21:39:58 pid:22704 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] not run
+2018-01-14 21:54:34 pid:24094 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-01-14 22:52:03 pid:30384 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] stop 
+2018-01-14 22:52:03 pid:30384 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] is stoping ...
+2018-01-14 22:52:03 pid:24096 Workerman[start.php] Stopping ...
+2018-01-14 22:52:03 pid:24096 Workerman[start.php] has been stopped
+2018-01-14 22:52:03 pid:30384 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] stop success
+2018-01-14 22:52:13 pid:30406 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-01-14 23:33:10 pid:3157 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-01-14 23:33:10 pid:3157 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] already running
+2018-01-14 23:56:53 pid:7206 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-01-15 00:03:40 pid:7307 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-01-15 00:03:40 pid:7307 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] already running
+2018-01-17 18:10:39 pid:23823 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] stop 
+2018-01-17 18:10:39 pid:23823 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] is stoping ...
+2018-01-17 18:10:39 pid:7208 Workerman[start.php] Stopping ...
+2018-01-17 18:10:39 pid:7208 Workerman[start.php] has been stopped
+2018-01-17 18:10:39 pid:23823 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] stop success
+2018-01-17 18:13:37 pid:23830 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-02-24 22:50:34 pid:23836 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-03-07 13:30:59 pid:23833 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-03-09 11:17:47 pid:18268 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-09 12:04:06 pid:23834 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-03-19 10:10:44 pid:3998 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-19 10:25:05 pid:23835 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-03-25 18:00:53 pid:4697 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 10:34:06 pid:1590 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 10:44:17 pid:16913 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 19:47:21 pid:646 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 19:48:17 pid:11278 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 19:48:17 pid:13538 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 20:14:16 pid:11296 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 20:14:21 pid:743 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-03-26 20:27:45 pid:11770 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-04-25 10:14:46 pid:30636 Workerman[/home/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-04-25 10:28:55 pid:30639 process_timeout:
+#1 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /home/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /home/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-05-23 14:56:21 pid:14873 Workerman[/www/wwwroot/www.yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-06-17 13:10:36 pid:12701 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-06-23 15:40:30 pid:11574 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-09-27 17:45:08 pid:11580 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-09-27 17:45:24 pid:11578 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-09-27 17:46:19 pid:14990 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-09-27 17:46:19 pid:11579 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-09-27 17:46:30 pid:14989 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-09-27 17:46:56 pid:11577 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(427): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#8 {main}
+
+2018-10-13 03:52:50 pid:14993 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-10-27 13:29:11 pid:15850 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-10-27 13:30:52 pid:14994 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-10-27 13:35:31 pid:30488 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-11-03 17:35:20 pid:30502 process_timeout:
+#1 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Events/Select.php(231): pcntl_signal_dispatch()
+#2 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1521): Workerman\Events\Select->loop()
+#3 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/gateway-worker/src/BusinessWorker.php(175): Workerman\Worker->run()
+#4 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(932): GatewayWorker\BusinessWorker->run()
+#5 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(895): Workerman\Worker::forkOneWorker(Object(GatewayWorker\BusinessWorker))
+#6 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(1046): Workerman\Worker::forkWorkers()
+#7 /www/wwwroot/yihuiyougou.com/im/vendor/workerman/workerman/Worker.php(430): Workerman\Worker::monitorWorkers()
+#8 /www/wwwroot/yihuiyougou.com/im/start.php(37): Workerman\Worker::runAll()
+#9 {main}
+
+2018-12-23 10:43:03 pid:3193 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-12-23 10:43:03 pid:3207 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-12-23 10:43:03 pid:3207 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] already running
+2018-12-23 10:43:06 pid:3226 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] start in DAEMON mode
+2018-12-23 10:43:06 pid:3226 Workerman[/www/wwwroot/yihuiyougou.com/im/start.php] already running
+2019-05-29 23:15:16 pid:5517 Workerman[/www/wwwroot/mfroad.shop/im/start.php] start in DAEMON mode
+2019-05-30 01:50:21 pid:2149 Workerman[/www/wwwroot/mfroad.shop/im/start.php] start in DAEMON mode
+2019-06-01 01:30:01 pid:5748 Workerman[/www/wwwroot/mfroad.shop/im/start.php] start in DAEMON mode
+2019-06-01 01:30:01 pid:5748 Workerman[/www/wwwroot/mfroad.shop/im/start.php] already running
+2019-06-29 21:37:05 pid:19511 Workerman[/www/wwwroot/you_ypmc888_cn/im/start.php] start in DAEMON mode
+2019-07-03 01:30:01 pid:18967 Workerman[/www/wwwroot/you_ypmc888_cn/im/start.php] start in DAEMON mode
+2019-07-03 01:30:01 pid:18967 Workerman[/www/wwwroot/you_ypmc888_cn/im/start.php] already running
+2019-08-03 01:30:01 pid:6925 Workerman[/www/wwwroot/you_ypmc888_cn/im/start.php] start in DAEMON mode
+2019-08-03 01:30:01 pid:6925 Workerman[/www/wwwroot/you_ypmc888_cn/im/start.php] already running
+2020-04-27 16:01:06 pid:7946 Workerman[/var/www/html/im/start.php] start in DAEMON mode
+2020-04-27 16:45:01 pid:30262 Workerman[/var/www/html/im/start.php] start in DAEMON mode
+2020-04-27 16:45:01 pid:30262 Workerman[/var/www/html/im/start.php] already running
+2020-04-27 17:34:01 pid:22131 Workerman[/var/www/html/im/start.php] start in DAEMON mode

@@ -1,0 +1,138 @@
+<?php echo $this->fetch('header.html'); ?>
+<link href="themes/mall/jd/styles/default/css/xunjia.css" rel="stylesheet" type="text/css">
+
+<div class="fangan_content_r f_l">
+ 
+    <p class="f_title">
+      壹点网-帮助中心		</p>
+        <div class="f_bianhao clearfix">
+              </div>
+        <p class="f_content clearfix">
+          
+      </p><p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><a href="shop.yatdim.com" target="_blank"><strong>壹点</strong></a>网<a href="shop.yatdim.com" target="_blank"><strong></strong></a><strong><a href="shop.yatdim.com" target="_blank"><strong>工业品</strong></a>商城</strong>上所有展示信息全部免费。包括提供免费价格信息(资源单社区)、行情频道等，浏览下载此类信息全部免费!我们的模式是：免费帮助客户线上、线下找货!</span> 
+  </p>
+  
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><br>
+  </span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>1.如何注册？</strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：在商城的任何页面左上角，都有会员登录、会员注册按钮，点击即可注册；</span> 
+  </p>
+ 
+ <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>2.网站登录比较卡，或者登不上去怎么办？</strong></span> 
+    </p>
+    <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：建议您检查当前网络情况，或尝试刷新页面、更换浏览器试试，如火狐、谷歌等，如果是商城网络问题可以咨询前台客服详情。</span> 
+</p>
+<p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>3.用户名和密码都不记得了怎么办？</strong></span> 
+    </p>
+    <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：建议您联系对应您的销售或客服，或者拨打400-659-9859，我们将在和您核实相关信息后为您找回密码</span> 
+ </p>
+<p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>4.用户名有，密码不记得了怎么办？</strong></span> 
+    </p>
+    <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：建议您在登录页面使用“忘记密码”功能，输入您注册时使用的手机号或邮箱帐号，将您手机（邮箱）上收到的验证码填写到网站后，即可在线重置密码</span> 
+</p>  
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><br>
+  </span> 
+  </p>
+  <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>订单相关</strong></span> 
+    </p>
+    <p>
+      <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>1.如何购物？</strong></span> 
+      </p>
+      <p>
+      <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：简单4步，让企业采购更简单！更快捷！更方便！注册=>询价=>付款=>收货；</span> 
+  </p>  
+  <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>2.如何付款？</strong></span> 
+    </p>
+    <p>
+    <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：广西壹点支持线上线下2种方式付款，线上可以通过支付宝或网银、壹点商城会员余额进行支付，线下可以通过银行转账。付款账户请联系客服QQ：943962050，或相关销售人员。</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>3.如何查找下过的订单？</strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：请您在网站顶部【用户中心】-->【订单中心】，即可查询订单</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>4.客户订单是否可以打印合同，如何操作？</strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：请您在网站顶部【用户中心】-->【订单中心】，即可查询订单</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>5.网站上没有找到对应的产品该如何采购呢？</strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：您好，您可以试试我们的我要询价功能，填写产品信息就可以提交询价单，壹点会第一时间处理您的询价需求。或咨询我们的在线客服，进行在线询盘。</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>6.贵公司销售的产品可提供代理证或产品出厂证明吗？</strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：可以的,但是产地证明是需要付费的,具体费用每个商家不一样,具体以国外商家回复为准.</span> 
+</p>
+<p style="margin-top: 20px;">
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>付款问题</strong></span> 
+  </p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>1.可以私对公付款吗？</strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：可以，但是需要贵司提供一份委托当事人付款的授权书</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>2.广西壹点支持货到付款吗？
+    
+    </strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答:暂不支持.</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>3.广西壹点有哪些付款方式？
+    
+    </strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：目前支持的支付方式有：1.银联在线支付（包括信用卡） 2.线下支付 3.支付宝支付 4.账户余额</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>4.广西壹点的在线支付安全吗？
+    
+    </strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：广西壹点的在线支付与国内最大的第三方支付工具支付宝和京东钱包合作，可以确保支付安全。</span> 
+</p>
+<p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><strong>5.线下转账的账户是什么？
+    
+    </strong></span> 
+  </p>
+  <p>
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;">答：您可以在您的订单详情页或咨询相关销售查看广西壹点银行信息。</span> 
+</p>
+
+<p>    
+  <span style="font-family:Verdana, Arial, Helvetica, sans-serif, 宋体;line-height:2;"><br>
+  </span> 
+  </p>
+    <div class="artilce_updown clearfix">
+      
+            
+      </div>
+  </div>
+<?php echo $this->fetch('footer.html'); ?>

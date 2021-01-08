@@ -1,0 +1,79 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+	$("#add_time_from").datetimePicker({
+        title: '开始时间',
+		times: function () {return false;}
+     });
+	 $("#add_time_to").datetimePicker({
+        title: '结束时间',
+		times: function () {return false;}
+     });
+})
+</script>
+<div id="main">
+  <div id="page-coupon">
+    <div class="my-coupon">
+      <form method="post" class="fun-form-style">
+        <div class="form">
+          <dl>
+            <dd class="webkit-box"> <span>{$lang.coupon_name}</span>
+              <input type="text" id="coupon_name" name="coupon_name" value="{$coupon.coupon_name|escape}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.coupon_name}" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"> <span>{$lang.coupon_value}</span>
+              <input type="text" id="coupon_value" name="coupon_value" value="{$coupon.coupon_value|default:10}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.coupon_value}" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"> <span>{$lang.coupon_total}</span>
+              <input type="text" id="coupon_value" name="total" value="{$coupon.total|default:0}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="默认0为不限制" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <!--
+          <dl>
+            <dd class="webkit-box"> <span>{$lang.use_times}</span>
+              <input type="text" id="use_times" name="use_times" value="{$coupon.use_times|default:1}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.use_times}" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>-->
+          <dl>
+            <dd class="webkit-box"> <span>{$lang.min_amount}</span>
+              <input type="text" class="input clearInput flex1"  name="min_amount" value="{$coupon.min_amount}" id="min_amount" oninput="javascript:clearInput(this)" placeholder="一次购物满多少元可使用" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dt><span>{$lang.time_limit}</span></dt>
+          </dl>
+          <dl class="time_limit">
+            <dd class="webkit-box"> <span>开始时间</span>
+              <input type="text" class="input center" name="start_time" value="{if $coupon.start_time}{$coupon.start_time|date:Y-m-d} {else}{$today|date:Y-m-d} {/if}" id="add_time_from" readonly="readonly" style="text-align:left" />
+            </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"><span>结束时间</span>
+              <input type="text" class="input center" name="end_time" value="{if $coupon.end_time}{$coupon.end_time|date} {/if}" id="add_time_to" readonly="readonly" style="text-align:left" />
+            </dd>
+          </dl>
+          <div class="extra">
+            <p>
+              <label class="w-full switch-checkbox-radio block box-align-center J_SwtcherInput {if $coupon.clickreceive}checked{/if}" for="switcher1"> <em class="block flex1 gray fs14">{$lang.clickreceive}</em> <span class="switcher-style block"></span> </label>
+              <input name="clickreceive" class="hidden" id="switcher1" value="1" type="checkbox" {if $coupon.clickreceive}checked="checked"{/if}>
+            </p>
+          </div>
+          <div class="clearfix bgf pl10 pr10 pt10 pb10">
+            <p>
+              <label class="w-full switch-checkbox-radio block box-align-center J_SwtcherInput {if $coupon.if_issue}checked{/if}" for="switcher2"> <em class="block flex1 gray fs14">{$lang.yes_issue}</em> <span class="switcher-style block"></span> </label>
+              <input name="if_issue" class="hidden" id="switcher2" value="1" type="checkbox" {if $coupon.if_issue}checked="checked"{/if}>
+            </p>
+          </div>
+          <div class="extra">
+            <p class="fixed-gap"></p>
+            <input type="submit" class="J_AjaxFormSubmit btn-alipay mt10 btn-alipay-fixed" value="{$lang.submit}" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

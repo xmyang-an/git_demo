@@ -1,0 +1,29 @@
+<script type="text/javascript">
+$(function(){
+	$('body').on('touchend click', '.masker', function(){
+		DialogManager.close("{$smarty.get.dialog_id}");
+	});
+	$('form').submit(function(){
+		setTimeout(function() {
+			DialogManager.close("{$smarty.get.dialog_id}");
+		}, 1000);
+	});
+});
+</script>
+<div class="dialog-form">
+  <form method="POST" class="fun-form-style" action="{url app=seller_coupon&act=export&id=$smarty.get.id}">
+    <div class="form">
+      <div class="dialog-form-bd">
+        <dl>
+          <dd class="webkit-box">
+          	<span>{$lang.amount}</span>
+          	<input type="text" id="amount" name="amount" class="input flex1" placeholder="{$lang.amount_desc}" />
+          </dd>
+        </dl>
+        <div class="extra">
+          <input type="submit" class="btn-alipay" value="{$lang.confirm}" />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

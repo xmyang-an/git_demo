@@ -1,0 +1,90 @@
+{include file=member.header.html}
+<script>
+$(function(){
+	$('#refund_form').submit(function(){
+		if($('textarea[name="content"]').val()==''){
+			alert('留言内容不能为空！');
+			return false;
+		}
+	});
+});
+</script>
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public refund_form refund_view">
+          <ul class="refund_info">
+            <li>退款编号：{$refund.refund_sn}</li>
+            <li>申请时间：{$refund.created|date:Y-m-d H:i:s}</li>
+            <li>退款状态：{$refund.status_label}</li>
+            <li>订单总额：{$refund.total_fee|price} <span class="gray">(含运费)</span></li>
+            <div class="refund_fee_detail">
+              <h3>该订单退款总额 {$refund.refund_total_fee|price}</h3>
+              <p>
+              <li class="first">退款金额：{$refund.refund_goods_fee|price} <span class="gray">(商品总额：{$refund.goods_fee|price})</span></li>
+              <li>退<ins style="margin:0 6px">运</ins>费：{$refund.refund_shipping_fee|price} <span class="gray">(运费总额：{$refund.shipping_fee|price})</span></li>
+              </p>
+            </div>
+            <li>收货情况：{$refund.shipped_text}</li>
+            <li>退款原因：{$refund.refund_reason}</li>
+            <li>退款说明：{$refund.refund_desc}</li>
+          </ul>
+          <div class="refund_btn"> 
+            <!--{if $refund.status neq 'SUCCESS' && $refund.status neq 'CLOSED' && $refund.status neq 'WAIT_ADMIN_AGREE'}--> 
+            <!--{if $refund.buyer_id==$visitor.user_id}--> 
+            <a class="btn-alipay pl20 pr20 btn-alipay-white" href="{url app=refund&act=cancel&refund_id=$refund.refund_id}" onclick="return confirm('您确定要取消退款么？')">取消退款</a> <a class="btn-alipay pl20 pr20" href="{url app=refund&act=edit&refund_id=$refund.refund_id}">修改退款</a> 
+            <!--{else}--> 
+            <a class="btn-alipay pl20 pr20" href="{url app=refund&act=agree&refund_id=$refund.refund_id}" onclick="return confirm('点击“同意退款”按钮，相关货款将退还给买家，是否继续？')">同意退款</a> <a class="btn-alipay pl20 pr20 btn-alipay-white" href="{url app=refund&act=refuse&refund_id=$refund.refund_id}">拒绝退款</a> 
+            <!--{/if}--> 
+            <!--{if !$refund.ask_customer}--> 
+            <a class="btn-alipay pl20 pr20" onclick="return confirm('您确定需要平台客服介入处理么？');" href="{url app=refund&act=ask_customer&refund_id=$refund.refund_id}">要求客服介入处理</a> 
+            <!--{else}--> 
+            <span class="btn-alipay btn-alipay-white pl20 pr20">客服已介入处理</span> 
+            <!--{/if}--> 
+            <!--{/if}--> 
+          </div>
+          <div class="refund_message"> 
+            <!--{if $refund.status neq 'SUCCESS' && $refund.status neq 'CLOSED'}-->
+            <form method="post" enctype="multipart/form-data" id="refund_form">
+              <ul class="message_form clearfix">
+                <li>
+                  <textarea name="content" class="text border"></textarea>
+                </li>
+                <li class="float-left mt10">上传凭证：
+                  <input type="file" name="refund_cert" />
+                </li>
+                <li class="float-right mt10">
+                  <input type="submit"  value="{$lang.submit}" class="btn-alipay" style="margin:0;" />
+                </li>
+              </ul>
+            </form>
+            <!--{/if}-->
+            <div class="message_list"> 
+              <!--{foreach from=$refund.message item=message name=fe_message}-->
+              <div class="title clearfix">
+                <h3> {if $message.owner_id==$visitor.user_id}
+                  自己
+                  {elseif $message.owner_role eq 'buyer'}
+                  买家
+                  {elseif $message.owner_role eq 'seller'}
+                  卖家
+                  {elseif $message.owner_role eq 'admin'}
+                  商家客服
+                  {/if} </h3>
+                <span>{$message.created|date:Y-m-d H:i:s}</span> </div>
+              <div class="content" {if $smarty.foreach.fe_message.last} style="border-bottom:1px #ddd solid"{/if}> {$message.content} 
+                <!--{if $message.pic_url}-->
+                <p style="margin-top:10px;"><img src="{$message.pic_url}" width="200" /></p>
+                <!--{/if}--> 
+              </div>
+              <!--{/foreach}--> 
+            </div>
+            <div class="page-bottom mt10 clearfix"> {include file=member.page.bottom.html} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

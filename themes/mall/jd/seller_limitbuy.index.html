@@ -1,0 +1,89 @@
+{include file=member.header.html}
+<div id="main" class="clearfix"> {include file=member.menu.html}
+  <div id="right"> {include file=member.curlocal.html}
+    <div class="wrapful"> {include file=member.submenu.html}
+      <div class="wrap">
+        <div class="public_select table">
+          <div class="promotool">
+            <div class="bundle bundle-list"> 
+              <!--{if $appAvailable neq 'TRUE'}-->
+              <div class="notice-word">
+                <p>{$appAvailable.msg}</p>
+              </div>
+              <!--{else}-->
+              <div class="notice-word">
+                <p class="yellow-big">{$lang.note_for_create}</p>
+              </div>
+              <table>
+                <tr class="line_bold">
+                  <th colspan="9"> <div class="search_div clearfix">
+                      <form method="get" class="clearfix">
+                        <div class="float-left">
+                          <input type="hidden" name="app" value="seller_limitbuy" />
+                          <input type="hidden" name="act" value="index" />
+                          <label>{$lang.limitbuy_name}{$lang.colon}</label>
+                          <input type="text" name="pro_name" value="{$smarty.get.pro_name|escape}"/>
+                          <input type="submit" class="btn" value="{$lang.search}" />
+                        </div>
+                        <!--{if $filtered}--> 
+                        <a class="detlink" href="{url app=seller_limitbuy}">{$lang.cancel_query}</a> 
+                        <!--{/if}-->
+                        <div class="clear"></div>
+                      </form>
+                    </div>
+                  </th>
+                </tr>
+                <tr class="sep-row" height="20">
+              <td colspan="9"></td>
+            </tr>
+                <!--{if $limitbuy_list}-->
+                <tr class="gray">
+                  <th width="50">{$lang.goods_image}</th>
+                  <th width="140">{$lang.goods_name}</th>
+                  <th width="60"><span>{$lang.limitbuy_name}</span></th>
+                  <th width="100"><span>{$lang.start_time}</span></th>
+                  <th width="100"><span>{$lang.end_time}</span></th>
+                  <th width="80"><span>{$lang.price}</span></th>
+                  <th width="80"><span>{$lang.limitbuy_price}</span></th>
+                  <th ><span>{$lang.status}</span></th>
+                  <th width="100"><span>{$lang.handle}</span></th>
+                </tr>
+                <!--{/if}--> 
+                <!--{foreach from=$limitbuy_list item=limitbuy name=_limitbuy_f}-->
+                <tr class="line<!--{if $smarty.foreach._limitbuy_f.last}--> last_line<!--{/if}-->">
+                  <td width="50" class="align2"><a href="{url app=goods&id=$limitbuy.goods_id}" target="_blank"><img src="{$site_url}/{$limitbuy.default_image}" width="50" height="50"  /></a></td>
+                  <td width="140"><a href="{url app=goods&id=$limitbuy.goods_id}" target="_blank">{$limitbuy.goods_name|escape|truncate:30}</a></td>
+                  <td width="60" align="align2"><a target="_blank" href="{url app=goods&id=$limitbuy.goods_id}">{$limitbuy.pro_name|escape}</a></td>
+                  <td width="100" class="align2">{$limitbuy.start_time|date:Y-m-d H:i:s}</td>
+                  <td width="100" class="align2">{$limitbuy.end_time|date:Y-m-d H:i:s}</td>
+                  <td width="80" class="align2">{$limitbuy.price}</td>
+                  <td width="80" class="align2">{$limitbuy.pro_price}</td>
+                  <td width="80" class="align2">{$limitbuy.status}</td>
+                  <td width="100" class="align2 last"><div class="btn"><a class="mr5" style="border:1px #f60 solid; border-radius:4px; padding:3px 5px; background:#fff; color:#f60;" href="{url app=seller_limitbuy&act=edit&id=$limitbuy.pro_id}">{$lang.edit}</a><a class="ml5" href="{url app=seller_limitbuy&act=drop&id=$limitbuy.pro_id}" style="border:1px #19ACF7 solid; border-radius:4px; padding:3px 5px; background:#fff; color:#19ACF7;" >{$lang.drop}</a> </div></td>
+                </tr>
+                <!--{foreachelse}-->
+                <tr>
+                  <td class="align2" colspan="9"><div class="notice-word">
+                      <p>{$lang.no_records}</p>
+                    </div></td>
+                </tr>
+                <!--{/foreach}--> 
+                <!--{if $limitbuy_list}-->
+                <tr class="line_bold line_bold_bottom">
+                  <td colspan="9"></td>
+                </tr>
+                <tr>
+                  <th colspan="9"> <div class="position2 clearfix"> {include file=member.page.bottom.html} </div>
+                  </th>
+                </tr>
+                <!--{/if}-->
+              </table>
+              <!--{/if}--> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html}

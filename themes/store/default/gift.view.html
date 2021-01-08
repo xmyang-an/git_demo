@@ -1,0 +1,26 @@
+{include file=header.html}
+<div id="page-gift"> {include file=curlocal.html}
+	<div class="w-shop mt10 clearfix">
+		<div class="col-sub w210"> {include file=left.html} </div>
+		<div class="col-main ml10 w980">
+			<div class="gift-detail mb20 clearfix">
+				<div class="default-image float-left"><img width="300" src="{$goods.default_image}" /></div>
+				<ul class="gift-info float-left">
+					<li>
+						<h3>{$goods.goods_name}</h3>
+					</li>
+					<li><span class="first">{$lang.market_price}{$lang.colon}</span><span class="price">{$goods.price|price}</span></li>
+				</ul>
+			</div>
+			<div class="attr-tabs">
+				<ul class="user-menu">
+					<li class="active"> <a style="border-left:1px solid #ddd;" href="javascript:;"> <span> {$lang.gift_detail} </span> </a> </li>
+				</ul>
+			</div>
+			<div class="option_box">
+				<div class="default fs14"> {$goods.description|escape:editor} </div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file=footer.html}

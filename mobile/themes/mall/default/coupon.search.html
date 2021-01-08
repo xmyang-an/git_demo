@@ -1,0 +1,37 @@
+<script type="text/javascript">
+$(function(){
+	$('body').on('touchend click', '.masker', function(){
+		DialogManager.close("{$smarty.get.dialog_id}");
+	});
+	$(document.body).find('#gs_submit').unbind('click').on('click', function(){
+		DialogManager.close("{$smarty.get.dialog_id}");
+	});
+});
+</script>
+<!--{if $coupons}-->
+<div class="dialog-form coupons-pop-layer" style="background:#fff;">
+  <div class="dialog_content_scroll wraper">
+    <ul class="dialog-form-bd">
+      <!--{foreach from=$coupons item=coupon}-->
+      <li class="webkit-box {if !$coupon.store_id}general{/if}">
+        <div class="lp flex1">
+          <p class="mb10">&yen;<em class="fs18">{$coupon.coupon_value}</em></p>
+          <p>满{$coupon.min_amount}元使用</p>
+          <p>有效期 {$coupon.end_time|date:Y-m-d H:i:s}</p>
+          <p class="t"><ins class="t1">店铺券</ins><ins class="t2 hidden">通用券</ins></p>
+        </div>
+        <div class="rp"> <a href="javascript:;" class="J_AjaxRequest" action="{url app=coupon&act=receive&id=$coupon.coupon_id}">立即领取</a> 
+          <!-- OR use <a href="javascript:couponReceive({$coupon.coupon_id});">立即领取</a>-->
+        </div>
+      </li>
+      <!--{/foreach}-->
+    </ul>
+  </div>
+  <div class="dialog-form-ft">
+    <p class="fixed-gap"></p>
+    <input type="button" value="完成" id="gs_submit" class="btn-alipay" />
+  </div>
+</div>
+<!--{else}-->
+<div class="notice-word padding10 mt20 mb20"><p class="yellow padding10 mt20 mb20">{$lang.no_records}</p></div>
+<!--{/if}--> 

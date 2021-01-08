@@ -1,0 +1,42 @@
+{include file=header.html} 
+<script type="text/javascript">
+$(function(){
+ //询问框
+  layer.open({
+    content: '订单是否已经支付成功？'
+    ,btn: ['成功支付', '重新支付']
+    ,yes: function(index){
+      window.location.href = '{$link.backLink}' ;
+    },
+	no : function(){
+		 window.location.href = '{$link.repayLink}' ;
+	}
+  });
+})
+</script>
+<div id="page-cashier">
+	<div class="page-main wxpay">
+		<div class="payment-desc">
+			<div class="title">
+				<p class="gray">付款金额</p>
+				<p class="price">{$tradeInfo.amount|price}</p>
+			</div>
+			<div class="detail yahei padding10 mt10">
+				<dl class="mb5 clearfix mb10">
+					<dt class="float-left">收款方</dt>
+					<dd class="float-right">{$site_title}</dd>
+				</dl>
+				
+				<dl class="mb10 webkit-box">
+					<dt class="flex1">商<s style="padding:0 7px 0 7px;"></s>品</dt>
+					<dd class="ml20" style="text-align:right;">{$tradeInfo.title|escape}</dd>
+				</dl>
+				<dl class="mb10 webkit-box">
+					<dt class="flex1">订单号</dt>
+					<dd class="ml20">{$tradeInfo.bizOrderId|escape}</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
+{include file=footer.html} 

@@ -1,0 +1,32 @@
+{include file=member.header.html}
+<style>
+.bar-wrap .top-bar .barbtn li a,.bar-wrap .top-bar .barbtn .curlocal-title,.bar-wrap .top-bar .barbtn input{ opacity:1 !important}
+.bar-wrap .top-bar .barbtn input{ background:none;}
+.bar-wrap .top-bar .barbtn form,#footer{ display:none}
+</style>
+<div id="main">
+<div class="showMessage">
+  <div class="{if $icon eq 'notice'}successMsg{else}defeatedMsg{/if}"> <span class="icon"><i class="psmb-icon-font fff"></i></span>
+    <h2>{$lang.operation_notice}</h2>
+    <div class="msgDesc"> {$message} 
+      <!--{if $err_file}-->
+      <p>Error File: <strong>{$err_file}</strong> at <strong>{$err_line}</strong> line.</p>
+      <!--{/if}--> 
+    </div>
+    
+    <!--{if $icon neq 'notice' && $links}-->
+    <div class="padding10 mt10"> 
+      <!--{foreach from=$links item=item name=fe_item}--> 
+      <a href="{$item.href}" class="btn-alipay {if $smarty.foreach.fe_item.first}btn-alipay-green{else}btn-alipay-gray mt10{/if}">{$item.text}</a> 
+      <!--{/foreach}--> 
+    </div>
+    <!--{/if}--> 
+  </div>
+  <script type="text/javascript">
+	<!--{if $redirect}-->
+	window.setTimeout("{$redirect}", 5000);
+	<!--{/if}-->
+	</script> 
+</div>
+</div>
+{include file=footer.html}

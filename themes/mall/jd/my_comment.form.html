@@ -1,0 +1,53 @@
+<script type="text/javascript">
+$(function(){
+     $('#message').validate({
+        errorLabelContainer: $('#warning'),
+        invalidHandler: function(form, validator) {
+           var errors = validator.numberOfInvalids();
+           if(errors)
+           {
+               $('#warning').show();
+           }
+           else
+           {
+               $('#warning').hide();
+           }
+        },
+        rules : {
+                     content : {
+                         required : true,
+                         rangelength : [0,255,'{$charset}']
+                     }
+                  },
+        messages : {
+                     content : {
+                         required : '{$lang.content_not_null}',
+                         rangelength: '{$lang.max_script}'
+                        }
+                     }
+         })
+})
+</script>
+<style type="text/css">
+.height26 { line-height:26px; }
+.eject_con .add_float { width:340px; }
+</style>
+<div class="eject_con">
+    <div class="add_float">
+        <form id="message" target="pop_warning" method="post" action="index.php?app=my_comment&act=reply">
+        <div id="warning"></div>
+        <ul>
+            <li>
+                <h3>{$lang.comment_content}:</h3>
+                 <p><label class="height26">{$my_comment_data.comment|escape|nl2br}</label></p>
+            </li>
+            <li>
+                <h3>{$lang.reply_comment_form}:</h3>
+                <p><textarea class="text width11" name="content">{$my_comment_data.reply_content}</textarea><br /></p>
+                <input type="hidden" name="rec_id" value="{$my_comment_data.rec_id}" />
+            </li>
+        </ul>
+        <div class="submit"><input type="submit" class="btn" value="{$lang.confirm}" /></div>
+        </form>
+    </div>
+</div>

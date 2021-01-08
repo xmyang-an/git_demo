@@ -1,0 +1,93 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+#api接口
+RewriteRule ^server/([^/]+)/([^/]+).do/?$ server/index.php?app=$1&act=$2 [L]
+
+RewriteRule ^index.html$ index.php [L]
+RewriteRule ^coupon.html/?$ index.php?app=coupon [L]
+
+#商品详情
+RewriteRule ^goods/([0-9]+)/?$ index.php?app=goods&id=$1 [L]
+RewriteRule ^goods/([0-9]+)/([^/]+)/?$ index.php?app=goods&id=$1&act=$2 [L]
+RewriteRule ^goods/([0-9]+)/([^/]+)/page_([^/]+)/?$ index.php?app=goods&id=$1&act=$2&page=$3 [L]
+
+
+RewriteRule ^mobile/goods/([0-9]+)/?$ mobile/index.php?app=goods&id=$1 [L]
+RewriteRule ^mobile/goods/([0-9]+)/([^/]+)/?$ mobile/index.php?app=goods&id=$1&act=$2 [L]
+RewriteRule ^mobile/goods/([0-9]+)/([^/]+)/page_([^/]+)/?$ mobile/index.php?app=goods&id=$1&act=$2&page=$3 [L]
+
+
+
+#分类
+RewriteRule ^category/goods/?$ index.php?app=category [L]
+RewriteRule ^category/(.*)/?$ index.php?app=category&act=$1 [L]
+
+RewriteRule ^mobile/category/goods/?$ mobile/index.php?app=category [L]
+RewriteRule ^mobile/category/(.*)/?$ mobile/index.php?app=category&act=$1 [L]
+
+#搜索商品
+RewriteRule ^category-([0-9]+).html$ index.php?app=search&cate_id=$1 [L]
+RewriteRule ^category-([0-9]+)-([0-9]+).html$ index.php?app=search&cate_id=$1&page=$2 [L]
+
+RewriteRule ^mobile/category-([0-9]+).html$ mobile/index.php?app=search&cate_id=$1 [L]
+RewriteRule ^mobile/category-([0-9]+)-([0-9]+).html$ mobile/index.php?app=search&cate_id=$1&page=$2 [L]
+
+RewriteRule ^mobile/search/(.*) mobile/index.php?app=search&act=$1 [L]
+
+#频道页
+RewriteRule ^channel-([0-9]+).html/?$ index.php?app=channel&id=$1 [L]
+
+#积分商城
+RewriteRule ^integral.html/?$ index.php?app=integral [L]
+RewriteRule ^integral-list-([0-9]+).html$ index.php?app=integral&page=$1 [L]
+
+RewriteRule ^mobile/integral.html/?$ mobile/index.php?app=integral [L]
+RewriteRule ^mobile/integral-([0-9]+).html$ mobile/index.php?app=integral&page=$1 [L]
+
+RewriteRule ^limitbuy.html$ index.php?app=limitbuy [L]
+RewriteRule ^limitbuy-([0-9]+).html$ index.php?app=limitbuy&cate_id=$1 [L]
+RewriteRule ^limitbuy-([0-9]+)-([0-9]+).html$ index.php?app=limitbuy&cate_id=$1&page=$2 [L]
+
+RewriteRule ^mobile/limitbuy.html$ mobile/index.php?app=limitbuy [L]
+RewriteRule ^mobile/limitbuy-([0-9]+).html$ mobile/index.php?app=limitbuy&cate_id=$1 [L]
+RewriteRule ^mobile/limitbuy-([0-9]+)-([0-9]+).html$ mobile/index.php?app=limitbuy&cate_id=$1&page=$2 [L]
+
+#品牌
+RewriteRule ^brand/?$ index.php?app=brand [L]
+RewriteRule ^mobile/brand/?$ mobile/index.php?app=brand [L]
+
+RewriteRule ^seller/?$ index.php?app=seller_admin [L]
+RewriteRule ^mobile/seller/?$ mobile/index.php?app=seller_admin [L]
+
+#文章
+RewriteRule ^article/?$ index.php?app=article [L]
+RewriteRule ^mobile/article/?$ mobile/index.php?app=article [L]
+RewriteRule ^article/([0-9]+).html$ index.php?app=article&act=view&article_id=$1 [L]
+RewriteRule ^mobile/article/([0-9]+).html$ mobile/index.php?app=article&act=view&article_id=$1 [L]
+
+#店铺页面
+RewriteRule ^store/([0-9]+)/?$ index.php?app=store&id=$1 [L]
+RewriteRule ^store/article/([0-9]+).html$ index.php?app=store&act=article&id=$1 [L]
+RewriteRule ^store/([0-9]+)/credit/?$ index.php?app=store&id=$1&act=credit [L]
+RewriteRule ^store/([0-9]+)/credit/page_([^/]+)/?$ index.php?app=store&id=$1&act=credit&page=$2 [L]
+RewriteRule ^store/([0-9]+)/credit/([0-9]+)/?$ index.php?app=store&id=$1&act=credit&eval=$2 [L]
+RewriteRule ^store/([0-9]+)/credit/([0-9]+)/page_([^/]+)/?$ index.php?app=store&id=$1&act=credit&eval=$2&page=$3 [L]
+RewriteRule ^store/([0-9]+)/goods/?$ index.php?app=store&id=$1&act=search [L]
+RewriteRule ^store/([0-9]+)/goods/page_([^/]+)/?$ index.php?app=store&id=$1&act=search&page=$2 [L]
+RewriteRule ^store/([0-9]+)/category/([0-9]+)/?$ index.php?app=store&id=$1&act=search&cate_id=$2 [L]
+RewriteRule ^store/([0-9]+)/category/([0-9]+)/page_([^/]+)/?$ index.php?app=store&id=$1&act=search&cate_id=$2&page=$3 [L]
+
+RewriteRule ^mobile/store/([0-9]+)/?$ mobile/index.php?app=store&id=$1 [L]
+RewriteRule ^mobile/store/article/([0-9]+).html$ mobile/index.php?app=store&act=article&id=$1 [L]
+RewriteRule ^mobile/store/([0-9]+)/credit/?$ mobile/index.php?app=store&id=$1&act=credit [L]
+RewriteRule ^mobile/store/([0-9]+)/credit/page_([^/]+)/?$ mobile/index.php?app=store&id=$1&act=credit&page=$2 [L]
+RewriteRule ^mobile/store/([0-9]+)/credit/([0-9]+)/?$ mobile/index.php?app=store&id=$1&act=credit&eval=$2 [L]
+RewriteRule ^mobile/store/([0-9]+)/credit/([0-9]+)/page_([^/]+)/?$ mobile/index.php?app=store&id=$1&act=credit&eval=$2&page=$3 [L]
+RewriteRule ^mobile/store/([0-9]+)/goods/?$ mobile/index.php?app=store&id=$1&act=search [L]
+RewriteRule ^mobile/store/([0-9]+)/goods/page_([^/]+)/?$ mobile/index.php?app=store&id=$1&act=search&page=$2 [L]
+RewriteRule ^mobile/store/([0-9]+)/category/([0-9]+)/?$ mobile/index.php?app=store&id=$1&act=search&cate_id=$2 [L]
+RewriteRule ^mobile/store/([0-9]+)/category/([0-9]+)/page_([^/]+)/?$ mobile/index.php?app=store&id=$1&act=search&cate_id=$2&page=$3 [L]
+
+RewriteRule ^mobile/store/([0-9]+)/category/goods/?$ mobile/index.php?app=store&act=category&id=$1 [L]
+</IfModule>

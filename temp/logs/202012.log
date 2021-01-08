@@ -1,0 +1,5 @@
+Wed, 09 Dec 2020 21:37:02 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Sun, 13 Dec 2020 09:43:16 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106
+Wed, 16 Dec 2020 18:30:56 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106
+Sat, 19 Dec 2020 05:44:16 +0800	[2]extract() expects parameter 1 to be array, null given	/app/qqconnect.app.php	117
+Tue, 22 Dec 2020 13:00:39 +0800	[2]extract() expects parameter 1 to be array, null given	/app/weixinconnect.app.php	106

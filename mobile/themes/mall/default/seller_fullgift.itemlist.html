@@ -1,0 +1,110 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="seller-fullgift"> 
+      <!--{if $appAvailable neq 'TRUE'}-->
+      <div class="notice-word mt10">
+        <p>{$appAvailable.msg}</p>
+      </div>
+      <!--{else}--> 
+      
+      <!--TAB-->
+      <div class="listTab">
+        <div class="fixed-gap"></div>
+        <div class="fixed-bd bgf border-bottom">
+          <ul class="items webkit-box">
+            <li class="flex1 center"><a href="{url app=seller_fullgift}">活动列表</a></li>
+            <li class="flex1 center"><a class="active" href="{url app=seller_fullgift&act=itemlist}">赠品列表</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <li class="item mb10">
+            <div class="goods-list">
+              <div item_id="{1}" class="goods-list-item border-bottom" style="background:#fff;"> <a class="block webkit-box">
+                <div class="lp mr5"><img src="{2}" class="block" width="60" height="60" /></div>
+                <div class="rp flex1">
+                  <p class="title fs13">{3}</p>
+                  <dl class="mt10 fs12">
+                    <span>市面价：</span><span class="price">{4}</span>
+                  </dl>
+                </div>
+                <p class="status fs12">{5}</p>
+                </a> </div>
+            </div>
+          </li>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已加载完，赠品太少啦<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      <div class="clearfix">
+        <p class="fixed-gap"></p>
+        <a href="{url app=seller_fullgift&act=itemadd}" class="btn-alipay btn-alipay-fixed">添加赠品</a> </div>
+      <!--{/if}--> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('body').on('touchend', '.weui_actions_mask', function(){
+		$.closeActions();
+	});
+	
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '', items = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, goods) {
+				items += sprintf(template.find('.goods-list').html(), goods.goods_id, goods.default_image, goods.goods_name, price_format(goods.price), goods.if_show == 1 ? '<em class="gray">正常</em>' : '<em class="f60">已下架</em>');
+			});
+			if(items) {
+				template.find('.goods-list').html(items);
+			} else template.find('.goods-list').parent().remove();
+			html = template.html();
+			
+			if(html) {
+				target.find('.infinite-result').append(html).show();
+				actions(target);
+			}
+		}
+	});
+});
+
+function actions(target)
+{
+	target.find('.goods-list-item').each(function(index, element) {
+		var o = $(this);
+		var item_id = o.attr('item_id');
+		o.unbind('click');
+		o.click(function(){
+			$.actions({
+				title: "选择操作",
+				actions: [
+				{
+					text: "{$lang.edit}",
+					onClick: function() {
+						$.closeActions();
+						setTimeout(function(){ // 确保点击后关闭弹层，避免返回后弹出还在无法关闭
+							window.location.href = REAL_SITE_URL+"/index.php?app=seller_fullgift&act=itemedit&id="+item_id;
+						}, 500);
+					}
+				},
+				{
+					text: "{$lang.drop}",
+					onClick: function() {
+						ajaxRequest('GET', REAL_SITE_URL+"/index.php?app=seller_fullgift&act=itemdrop&id="+item_id, null, '', o);
+					}
+				}]
+			});
+		})
+	});
+}
+</script> 
+{include file=footer.html}

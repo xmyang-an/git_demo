@@ -1,0 +1,83 @@
+{include file=member.header.html}
+<div id="main">
+  <div class="deposit">
+    <div class="deposit-withdraw deposit-recharge">
+      <form method="post" id="deposit-recharge" class="fun-form-style">
+      	<div class="title">
+        <a class="fs14  webkit-box" href="{url app=deposit&act=rechargelist}"><span class="flex1">充值记录</span><i class="psmb-icon-font fs12">&#xe629;</i></a>
+      </div>
+      <div class="title border-top">
+        <a class="fs14  webkit-box" href="{url app=deposit&act=cardrecharge}"><span class="flex1">充值卡充值</span><i class="psmb-icon-font fs12">&#xe629;</i></a>
+      </div>
+        <div class="form">
+          <dl class="mt10 J_PopLayer" data-PopLayer="{popLayer:'.J_PaymentPopLayer',top:'35%', fixedBody: false}">
+            <dd class="webkit-box"> <span>渠道</span>
+              <p class="flex1 pr5 J_GetSelectPayment"></p>
+              <i class="psmb-icon-font mr10 f99 box-align-center">&#xe629;</i>
+          </dl>
+          <div class="pop-layer-common pop-wrap-b payment-pop-layer J_PaymentPopLayer">
+            <div class="wraper has-title no-ft">
+              <div class="hd"><i class="closed popClosed"></i>选择付款方式</div>
+              <div class="bd">
+                <ul class="ui-list-icons clearfix radioUiWraper">
+                  <!--{foreach from=$payments item=payment name=fe_payment}-->
+                  <li class="pt5 pl10 webkit-box popClosed radioUiStyle radioUiStyle1 border-bottom {if $smarty.foreach.fe_payment.first}active{/if}" {if $smarty.foreach.fe_payment.last} style="border-bottom:0"{/if}>
+                    <div class="lp flex1 webkit-box"> <span class="icon-payment icon-payment-{$payment.payment_code}"></span> <span class="block flex1 ml10 mr10 {if $payment.payment_desc}two-col{/if}">
+                      <p class="name fs13">{$payment.payment_name}</p>
+                      <p class="fs12 desc hidden">{$payment.payment_desc}</p>
+                      </span> </div>
+                    <div class="input rp box-align-center">
+                      <input type="radio" name="payment_code" id="payment_{$payment.payment_code}" value="{$payment.payment_code}" {if $smarty.foreach.fe_payment.first} checked="checked"{/if} />
+                    </div>
+                  </li>
+                  <!--{/foreach}-->
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <dl>
+            <dd class="webkit-box"> <span>金额</span>
+              <input type="text" name="money" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="请输入充值金额" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"> <span>备注</span>
+              <input type="text" name="remark" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="请输入充值备注" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+        </div>
+        <div class="extra padding10 mt10">
+          <input class="btn-alipay btn-alipay-gray" type="submit" value="下一步" />
+          </dd>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+$(function(){
+	$('#deposit-recharge').submit(function(){
+		if($('input[type="submit"]').hasClass('btn-alipay-gray')) {
+			return false;
+		}
+		else {
+			var money = $.trim($(this).find('input[name="money"]').val());
+			if(money =='' || money <= 0 || isNaN(money)) {
+				layer.open({content:'{$lang.recharge_money_error}', time: 5});
+				return false;
+			}
+		}
+	});
+	$('input[name="money"]').keyup(function(){
+		if($.trim($(this).val()) != '') {
+			$('input[type="submit"]').removeClass('btn-alipay-gray');
+		} else $('input[type="submit"]').addClass('btn-alipay-gray');
+	});
+	$('.J_GetSelectPayment').html($('.J_PaymentPopLayer li:first').find('.lp .name').html());
+	$('.J_PaymentPopLayer li').click(function(){
+		$('.J_GetSelectPayment').html($(this).find('.lp .name').html());
+	});
+})
+</script> 
+{include file=footer.html} 

@@ -1,0 +1,73 @@
+{include file=member.header.html}
+<div id="page-deposit-refund-form" class="clearfix">
+  <div class="refund-form">
+    <form method="post" class="fun-form-style">
+      <div class="form pb20">
+      <dl>
+        <dd class="webkit-box"> <span>退款金额</span>
+          <input type="text" id="refund_goods_fee" name="refund_goods_fee" value="{$refund.refund_goods_fee}" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="最多{$refund.goods_fee}元" />
+          <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+      </dl>
+      <dl>
+        <dd class="webkit-box"> <span>退<s style="margin:0 7px">运</s>费</span>
+          <input type="text" id="refund_shipping_fee" name="refund_shipping_fee" value="{$refund.refund_shipping_fee}" class="input  clearInput flex1" oninput="javascript:clearInput(this)" placeholder="最多{$refund.shipping_fee}元" />
+          <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+      </dl>
+      <dl class="J_Shipped J_PopLayer J_PopLayer__INIT" data-PopLayer="{popLayer:'.J_ShippedPopLayer',top:'35%', fixedBody: true}">
+        <dt><span>退款详情</span></dt>
+        <dd class="webkit-box"> <span>收货情况</span>
+          <p class="flex1"></p>
+          <i class="psmb-icon-font mr10 f99 box-align-center">&#xe629;</i> </dd>
+      </dl>
+      <div class="pop-layer-common shipped-pop-layer J_ShippedPopLayer">
+        <div class="wraper has-title no-ft">
+          <div class="hd"><i class="closed popClosed"></i>收货情况</div>
+          <ul class="bd radioUiWraper">
+            
+            <!--{foreach from=$refund.shippeds item=item key=key name=fe_item}-->
+            <li class="webkit-box radioUiStyle radioUiStyle1 border-bottom popClosed {if $refund.shipped eq $key || ($smarty.get.act eq 'add' && $smarty.foreach.fe_item.first)}active{/if}">
+              <div class="lp flex1 webkit-box"><span class="pl10">{$item}</span></div>
+              <div class="input rp box-align-center" style="margin-right:0;padding-right:10px;">
+                <input type="radio" name="shipped" value="{$key}" {if $refund.shipped eq $key || (!$refund && $smarty.foreach.fe_item.first)}checked="checked"{/if}>
+              </div>
+            </li>
+            <!--{/foreach}-->
+            
+          </ul>
+        </div>
+      </div>
+      <dl class="J_Reason J_PopLayer J_PopLayer__INIT" data-PopLayer="{popLayer:'.J_ReasonPopLayer',top:'35%', fixedBody: true}">
+        <dd class="webkit-box"> <span>退款原因</span>
+          <p class="flex1"></p>
+          <i class="psmb-icon-font mr10 f99 box-align-center">&#xe629;</i> </dd>
+      </dl>
+      <div class="pop-layer-common reason-pop-layer J_ReasonPopLayer">
+        <div class="wraper has-title no-ft">
+          <div class="hd"><i class="closed popClosed"></i>请选择退款原因</div>
+          <ul class="bd radioUiWraper">
+            
+            <!--{foreach from=$refund.reasons item=item key=key name=fe_item}-->
+            <li class="webkit-box radioUiStyle radioUiStyle1 border-bottom popClosed {if $refund.refund_reason eq $item || ($smarty.get.act eq 'add' && $smarty.foreach.fe_item.first)}active{/if}">
+              <div class="lp flex1 webkit-box"><span class="pl10">{$item}</span></div>
+              <div class="input rp box-align-center" style="margin-right:0;padding-right:10px;">
+                <input type="radio" name="refund_reason" value="{$item}" {if $refund.refund_reason eq $item || ($smarty.get.act eq 'add' && $smarty.foreach.fe_item.first)}checked="checked"{/if}>
+              </div>
+            </li>
+            <!--{/foreach}-->
+            
+          </ul>
+        </div>
+      </div>
+      <dl>
+        <dt><span>退款说明</span></dt>
+        <dd class="webkit-box textarea">
+          <textarea name="refund_desc" class="flex1">{$refund.refund_desc}</textarea>
+        </dd>
+      </dl>
+      <div class="extra">
+        <input type="submit" value="{$lang.submit}" class="btn-alipay" />
+      </div>
+    </form>
+  </div>
+</div>
+{include file=footer.html} 

@@ -1,0 +1,116 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.store_manage}</p>
+  <ul class="subnav">
+    <!--{if $smarty.get.wait_verify}-->
+    <li><a class="btn1" href="index.php?app=store">{$lang.manage}</a></li>
+    <!--{else}-->
+    <li><span>{$lang.manage}</span></li>
+    <!--{/if}-->
+    <li><a class="btn1" href="index.php?app=store&amp;act=test">{$lang.add}</a></li>
+    <!--{if $smarty.get.wait_verify eq 1}-->
+    <li><span>{$lang.wait_verify}</span></li>
+    <!--{else}-->
+    <li><a class="btn1" href="index.php?app=store&amp;wait_verify=1">{$lang.wait_verify}</a></li>
+    <!--{/if}-->
+	<!--{if $smarty.get.wait_verify eq 3}-->
+	<li><span>已拒绝</span></li>
+	<!--{else}-->
+    <li><a class="btn1" href="index.php?app=store&amp;wait_verify=3">已拒绝</a></li>
+    <!--{/if}-->
+  </ul>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+      <input type="hidden" name="app" value="store" />
+      <!--{if $smarty.get.wait_verify}-->
+      <input type="hidden" name="wait_verify" value="{$smarty.get.wait_verify}" />
+      <!--{/if}-->
+      {$lang.owner_name} : 
+      <input class="queryInput" type="text" name="owner_name" value="{$smarty.get.owner_name|escape}" />
+      {$lang.store_name} : 
+      <input class="queryInput" type="text" name="store_name" value="{$smarty.get.store_name|escape}" />
+      {$lang.sgrade} : 
+      <select class="querySelect" name="sgrade">
+        <option value="">{$lang.select_pls}</option>
+        {html_options options=$sgrades selected=$smarty.get.sgrade}
+      </select>
+      <input type="submit" class="formbtn" value="{$lang.query}" />
+      <!--{if $filtered}-->
+      <a class="formbtn formbtn1" href="index.php?app=store<!--{if $smarty.get.wait_verify}-->&amp;wait_verify={$smarty.get.wait_verify}<!--{/if}-->">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var wait_verify = '{$smarty.get.wait_verify}';
+	var data_url = 'index.php?app=store&act=get_xml&'+$("#formSearch").serialize();
+	if(wait_verify == '1'){
+		data_url += '&wait_verify=1';
+	}
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 150, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.user_name}', name : 'user_name', width : 50, sortable : true, align: 'center'},
+			{display: '{$lang.owner_name}', name : 'owner_name', width : 100, sortable : true, align: 'center'},
+    		{display: '{$lang.store_name}', name : 'store_name', width : 100, sortable : true, align: 'center'},
+			{display: '{$lang.region_name}', name : 'region_name', width : 200, sortable : true, align: 'center'},
+    		{display: '{$lang.sgrade}', name : 'sgrade', width : 100, sortable : true, align: 'center'},
+			{display: '{$lang.add_time}', name : 'add_time', width: 100, sortable : true, align : 'center'},    		
+
+			{display: '{$lang.state}', name : 'state', width: 50, sortable : true, align : 'center'},  
+			{display: '{$lang.sort_order}', name : 'sort_order', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.recommended}', name : 'recommended', width: 50, sortable : true, align : 'center'},
+			{display: '{$lang.enable_distribution}', name : 'enable_distribution', width: 80, sortable : true, align : 'center'}	
+    		],
+        buttons : [
+            {display: '<i class="fa fa-plus"></i>{$lang.add_data}', name : 'add', bclass : 'add', title : '{$lang.add_data}', onpress : fg_operate },
+			{display: '<i class="fa fa-edit"></i>{$lang.batch_edit}', name : 'edit', bclass : 'csv', title : '{$lang.batch_edit}', onpress : fg_operate },
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate },
+			{display: '<i class="fa fa-file-excel-o"></i>{$lang.export_data}', name : 'csv', bclass : 'csv', title : '{$lang.export_data_to_CVS}', onpress : fg_operate }
+        ],
+    	sortname: "sort_order",
+    	sortorder: "asc",
+    	title: '{$lang.store_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	if(name == 'add'){
+		window.location.href = 'index.php?app=store&act=test';
+		return false;
+	}
+	var itemlist = new Array();
+	$('.trSelected',bDiv).each(function(){
+		itemlist.push($(this).attr('data-id'));
+	});
+	if (name == 'edit') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+       window.location.href = 'index.php?app=store&act=batch_edit&id='+itemlist;
+	}
+	if (name == 'del') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+       fg_delete(itemlist,'store');
+	}
+	if(name == 'csv'){
+		if($('.trSelected',bDiv).length==0){
+		   parent.layer.confirm('{$lang.download_all_data}',{icon: 3, title:'{$lang.notice}'},function(index){
+				fg_csv(itemlist);
+				parent.layer.close(index);
+			},function(index){
+				parent.layer.close(index);
+			});
+	   }else{
+		   fg_csv(itemlist);
+	   }
+	}
+}
+</script>
+{include file="footer.html"} 

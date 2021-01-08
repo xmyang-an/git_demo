@@ -1,0 +1,50 @@
+{include file=member.header.html}
+<div id="main">
+  <div class="deposit">
+    <div class="recordlist">
+      <div class="list">
+        <div class="wraper">
+          <div class="pl10 pr10 hd clearfix"> <span class="J_Total gray fs12"></span> 
+            <!--<span class="float-right"><a href="{url app=deposit&act=monthbill}"><i class="psmb-icon-font fs18">&#xe64d;</i>月账单</a></span>--> 
+          </div>
+          
+          <!--AJAX记录数据显示区域-->
+          <div class="clearfix J_InfiniteList">
+            <div class="infinite-result list clearfix hidden"> </div>
+            <div class="infinite-template">
+              <div class="item clearfix">
+                <div class="detail"> <a href="{1}" class="it webkit-box">
+                  <div class="lp flex1 fs13" style="padding-left:10px;"> {2} <span class="gray block fs12 mt5"> 余额：{3}</span> </div>
+                  <div class="rp mr10">
+                    <p class="gray mr20 fs12">{$4}</p>
+                    <span>{5}{6}</span>  </div>
+                  </a> </div>
+              </div>
+            </div>
+            <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+            <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+            <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+              <p>{$lang.no_records}</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_InfiniteList').infinite({pageper: 15, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data.retval.list, function(k, record) {		
+				html += sprintf(template.html(), "{url app=deposit&act=record&tradeNo="+record.tradeNo+"}", record.tradeTypeName, record.balance, record.add_time, record.flow == 'income' ? '+' : '-', record.amount);
+			});
+			target.find('.infinite-result').append(html).show();
+			$('.J_Total').html('收入'+data.retval.total_income+'元， 支出'+data.retval.total_outlay+'元');
+		}
+	});
+});
+</script> 
+{include file=footer.html}

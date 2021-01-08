@@ -1,0 +1,63 @@
+{include file=header.html}
+<div id="page-goods-index">
+    {include file=curlocal.html} 
+    {include file=goodsinfo.html}
+    <div class="w-shop clearfix">
+        <div class="col-sub w210">
+            {include file=left.html}
+        </div>
+        <div style="overflow:hidden;" class="col-main float-right w980">
+			{include file=goods.meal.html}
+            <div class="attr-tabs">
+                <ul class="user-menu">
+                    <li class="active">
+                        <a style="border-left:1px solid #ddd;" href="{url app=goods&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.goods_detail}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{url app=goods&act=comments&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.goods_comment}({$goods.sys_comment})
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{url app=goods&act=saleslog&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.sales_log}
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{url app=goods&act=qa&id=$goods.goods_id}#module">
+                            <span>
+                                {$lang.qa}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- sku psmb  -->
+            <!--{if $props}-->
+            <div class="mb20 clearfix" style="padding:5px 0px;">
+               <!--{foreach from=$props item=prop}-->
+               <div style="float:left;width:23%;padding:0px 5px; height:25px; line-height:25px;color:#666">
+                  <span title="{$prop.value|escape}">{$prop.name}{$lang.colon}{$prop.value|escape|truncate:20}</span>
+               </div>
+               <!--{/foreach}-->
+            </div>
+            <!--{/if}-->
+            <!-- sku psmb -->
+            <div class="option_box">
+                <div class="default">
+                    {$goods.description|escape:editor}
+                </div>
+            </div>
+            {include file=comments.html}
+        </div>
+    </div>
+</div>
+{include file=footer.html}

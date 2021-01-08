@@ -1,0 +1,73 @@
+{include file="header.html"}
+<script type="text/javascript">
+var template_name = '{$curr_template_name}';
+var style_name = '{$curr_style_name}';
+var type = '{$smarty.get.type}' ? '{$smarty.get.type}' : '';
+function use_theme(template, style){
+    if (template != template_name)
+    {
+		parent.layer.confirm('{$lang.set_theme_warning}',{icon: 3, title:'{$lang.notice}'},function(index){
+			parent.layer.close(index);
+			window.location.href = 'index.php?app=theme&act=set&template_name=' + template + '&style_name=' + style+'&type='+type;
+			return false;	
+		},function(index){
+			parent.layer.close(index);
+			return false;
+		});
+    }
+    
+}
+function preview_theme(template, style,type){
+    $('#template_name').val(template);
+    $('#style_name').val(style);
+	$('#type').val(type);	
+    $('#preview_form').submit();
+}
+function go_index(client){
+    $('#go_'+client+'index').submit();
+}
+</script>
+<style type="text/css">
+#rightCon { list-style:none; width:100%; border:0; }
+#rightCon h3{ font-weight:normal;}
+#rightCon h3 em{ font-size:14px; font-weight:normal; color:#E4393C;}
+#rightCon li { float:left; margin:10px; }
+#rightCon .title_name { font-size:15px; font-weight:bold; color:#4DA1E0; text-align:center; }
+#rightCon .templet_style { margin:5px; background:#eee; border:#ddd 1px solid; padding:3px; }
+#rightCon .templet_btn { text-align:center; }
+.formbtn{ width:60px; font-size:12px; margin:0; float:none; display:inline;}
+</style>
+<div id="rightTop">
+  <p>{$lang.theme_setting}</p>
+  <ul class="subnav">
+    <li><span>{$lang.theme_list}</span></li>
+  </ul>
+</div>
+<div class="info">
+<ul id="rightCon">
+    <h3> {$lang.current_theme} : <em>{$curr_template_name}&nbsp;&nbsp;{$curr_style_name}</em> </h3>
+    <!--{foreach from=$theme_list key=template_name item=styles}-->
+    <!--{foreach from=$styles item=style_name}-->
+    <li>
+        <div class="title_name">{$template_name}&nbsp;{$style_name}</div>
+        <div class="templet_style"><img width="115" src="{$site_url}/{$smarty.get.type}/themes/mall/{$template_name}/styles/{$style_name}/preview.jpg" onclick="preview_theme('{$template_name}', '{$style_name}','{$smarty.get.type}');" /></div>
+        <div class="templet_btn">
+        <!--{if ($curr_template_name neq $template_name) or ($curr_style_name neq $style_name)}-->
+        <input type="submit" value="{$lang.use}" onclick="goConfirm('{$lang.set_theme_warning}', 'index.php?app=theme&act=set&template_name={$template_name}&style_name={$style_name}&type={$smarty.get.type}',true);" class="formbtn" />&nbsp;&nbsp;
+        <input type="button" value="{$lang.preview}" onclick="preview_theme('{$template_name}', '{$style_name}');" class="formbtn" />
+        <!--{else}-->
+        <input type="button" value="{$lang.go_index}" onclick="go_index('{$smarty.get.type}')" class="formbtn" />
+        <!--{/if}--> 
+        </div>
+    </li>
+    <!--{/foreach}-->
+    <!--{/foreach}-->
+</ul>
+<form id="preview_form" method="POST" action="index.php?app=theme&act=preview" target="_blank">
+	<input type="hidden" name="template_name" id="template_name" />
+	<input type="hidden" name="style_name" id="style_name" /><input type="hidden" name="type" id="type" />
+</form>
+<form id="go_index" method="GET" action="{$site_url}" target="_blank"></form>
+<form id="go_mobileindex" method="GET" action="{$site_url}/mobile" target="_blank"></form>
+</div>
+{include file="footer.html"}

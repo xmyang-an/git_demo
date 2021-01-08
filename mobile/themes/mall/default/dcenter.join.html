@@ -1,0 +1,81 @@
+{include file=member.header.html}
+<script type="text/javascript">
+$(function(){
+	$('#form').submit(function(){
+		if($('input[name="real_name"]').val() == '' || $('input[name="phone_mob"]').val()=='') {
+			layer.open({content:'{$lang.name_or_phone_empty}'});
+			return false;
+		}
+		else if(!is_mobile($('input[name="phone_mob"]').val())) {
+			layer.open({content:'{$lang.input_phone_mob}'});
+			return false;
+		}
+		else return true;
+	});
+});
+</script>
+<div class="dcenter">
+  <div class="jointo">
+    <div class="banner"> <img  src="{res file=images/member/banner_bg.jpg}"></div>
+    <div class="join-form" >
+      <div class="tit">您将申请成为 <a class="red" href="{url app=store&id=$store.store_id}">{$store.store_name|escape}</a> 的分销商</div>
+      <form class="fun-form-style" method="POST" id="form">
+        <div class="form">
+          <dl>
+            <dd class="webkit-box"> <span>微店店名</span>
+              <input type="text" id="real_name" name="real_name" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.input_user_name}" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <dl>
+            <dd class="webkit-box"> <span>联系手机</span>
+              <input type="text" id="phone_mob" name="phone_mob" class="input clearInput flex1" oninput="javascript:clearInput(this)" placeholder="{$lang.input_phone}" />
+              <i class="input-del J_InputDel psmb-icon-font hidden">&#xe66e;</i> </dd>
+          </dl>
+          <div class="extra">
+            <input type="submit" class="btn-alipay" value="提交申请" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="join-desc">
+      <div class="tit">分销商特权</div>
+      <div class="wrap1">
+        <div class="item webkit-box"> <i class="psmb-icon-font" style="color:#33cd32;">&#xe6ec;</i>
+          <div class="info flex1">
+            <p class="fs14 mb5">独立微店</p>
+            <p class="fs12 gray">拥有自己的微店及推广二维码</p>
+          </div>
+        </div>
+        <div class="item webkit-box"> <i class="psmb-icon-font" style="color:#fece00;">&#xe794;</i>
+          <div class="info flex1">
+            <p class="fs14 mb5">销售拿佣金</p>
+            <p class="fs12 gray">微店卖出商品，您可以获得佣金</p>
+          </div>
+        </div>
+        <div class="item webkit-box"> <i class="psmb-icon-font" style="color:#36F">&#xe64a;</i>
+          <div class="info flex1">
+            <p class="fs14 mb5">统一发货</p>
+            <p class="fs12 gray">分销商的商品销售统一由供货商直接发货，并提供产品的售后服务</p>
+          </div>
+        </div>
+        <div class="item webkit-box"> <i class="psmb-icon-font" style="color:#F90">&#xe65e;</i>
+          <div class="info flex1">
+            <p class="fs14 mb5">分销佣金比率</p>
+            <p class="fs12 gray"> 
+              <!--{if $store.enable_distribution}--> 
+              分销佣金由供货商统一设置： <br />
+              一级分销佣金： <span class="red">{$store.distribution_1}%</span> <br />
+              二级分销佣金： <span class="red">{$store.distribution_2}%</span> <br />
+              三级分销佣金： <span class="red">{$store.distribution_3}%</span> <br />
+              交易完成后，系统自动根据对应比率给分销商返佣。 
+              <!--{else}--> 
+              <a class="red" href="{url app=store&id=$store.store_id}">{$store.store_name|escape}</a> 未开启分销功能，用户购买将不计佣金。 
+              <!--{/if}--> 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

@@ -1,0 +1,44 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){  
+	$('.J_SignIntegral').click(function(){
+		$.getJSON(REAL_SITE_URL + '/index.php?app=my_integral&act=sign_in_integral', function(data){
+			if(data.done) {
+				$('.J_IntegralAmount').html(data.retval.amount);
+				$('.J_SignIntegral').html('已领过，明天再来哦');
+			}
+			layer.open({content: data.msg, className:'layer-popup', time: 3});
+		});	
+	});
+});
+</script>
+<div id="main">
+  <div id="page-integral" class="my-integral">
+  	<div class="fixed-gap"></div>
+    <div class="tp">
+      <p class="eq-money fs12">可用积分</p>
+      <a class="amount block J_IntegralAmount" href="{url app=my_integral&act=logs}">{$integral.amount|default:0}</a> 
+      <!--{if $integral.frozen_integral}-->
+      <p class="frozen mb20 fs12"><a href="{url app=my_integral&act=logs&type=integral_frozen}"> {$integral.frozen_integral|default:0}个积分被冻结<i class="psmb-icon-font">&#xe634;</i></a> </p>
+      <!--{/if}--> 
+      <!--{if $integral.sign_in_integral}-->
+      <p class="sign mt10"> 
+        <!--{if $integral.can_sign}--> 
+        <span class="J_SignIntegral"><i class="psmb-icon-font ico">&#xe69d;</i><i>签到可获得{$integral.signIntegral}个积分</i></span> 
+        <!--{else}--> 
+        <span>今日已签到，获得{$integral.signIntegral}个积分</span> 
+        <!--{/if}--> 
+      </p>
+      <!--{/if}--> 
+    </div>
+    <div class="ls">
+      <ul class="clearfix">
+        <li> <a href="{url app=my_integral&act=logs}" class="webkit-box"> <i class="psmb-icon-font all">&#xe69e;</i> <span class="flex1">所有明细</span> <i class="psmb-icon-font mr10">&#xe634;</i> </a> </li>
+        <li> <a href="{url app=my_integral&act=logs&type=integral_income}" class="webkit-box"> <i class="psmb-icon-font income">&#xe69f;</i> <span  class="flex1">收入明细</span> <i class="psmb-icon-font mr10">&#xe634;</i> </a></li>
+        <li> <a href="{url app=my_integral&act=logs&type=integral_pay}" class="webkit-box"> <i class="psmb-icon-font outlay">&#xe6a0;</i> <span class="flex1">支出明细</span> <i class="psmb-icon-font mr10">&#xe634;</i> </a> </li>
+        <li> <a href="{url app=my_integral&act=logs&type=integral_frozen}" class="webkit-box"> <i class="psmb-icon-font frozen">&#xe65e;</i> <span class="flex1">冻结明细</span> <i class="psmb-icon-font mr10">&#xe634;</i> </a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{include file=footer.html} 

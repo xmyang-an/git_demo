@@ -1,0 +1,39 @@
+.webuploader-container {
+	position: relative;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+	opacity:0;
+}
+.webuploader-pick {
+	/*position: relative;*/
+	display: inline-block;
+	cursor: pointer;
+	/*background: #00b7ee;*/
+	padding: 0px 15px;
+	/*color: #fff;*/
+	text-align: center;
+	border-radius: 3px;
+	overflow: hidden;
+	z-index:99;
+
+}
+.webuploader-pick-hover {
+	/*background: #00a2d4;*/
+}
+
+.webuploader-pick-disable {
+	/*opacity: 0.6;*/
+	pointer-events:none;
+}
+
+.webuploader-upload-item{ border:1px #CEE2F2 solid; background:#F0F5FF; margin-top:5px;}
+.webuploader-upload-item:after{ content:'\20'; display:block; height:0; overflow:hidden; clear:both;}
+.webuploader-upload-item. upload-state-done{}
+.webuploader-upload-item .info, .webuploader-upload-item .state{float:left; padding:3px 5px; margin:0;}
+.webuploader-upload-item .progress-bar{ height:1px; clear:both; background:blue;}
+
+.webuploader-container{width: 86px;height: 28px; line-height:28px; text-align: center;background: url(images/btn.gif) no-repeat 0 -803px;overflow: hidden;}
+

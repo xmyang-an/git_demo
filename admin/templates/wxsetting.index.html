@@ -1,0 +1,100 @@
+{include file="header.html"}
+<script type="text/javascript">
+$(function(){
+    $('#weixin_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('.field_notice').hide();
+            $(element).after(error);
+        },
+        success       : function(label){
+            label.addClass('right').text('OK!');
+        },
+        onkeyup    : false,
+        rules : {
+            appid: {
+                required : true
+            },
+            appsecret   : {
+                required : true
+            },
+			token   : {
+                required : true
+            }
+        },
+        messages : {
+            appid : {
+                required : '{$lang.not_empty}'
+            },
+            appsecret : {
+                required : '{$lang.not_empty}'
+            },
+			token   : {
+                required : '{$lang.not_empty}'
+            }
+        }
+    });
+});
+</script>
+<div id="rightTop">
+  <p>{$lang.wxsetting}</p>
+</div>
+<div class="info">
+  <form method="post" id="weixin_form">
+    <table class="infoTable">
+      <tr>
+        <th class="paddingT15"> {$lang.name}:</th>
+        <td class="paddingT15 wordSpacing5">
+          <input class="infoTableInput" type="text" name="name" value="{$weixin.name|escape}" />
+          <label class="field_notice">{$lang.name_desc}</label>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.appid}:</th>
+        <td class="paddingT15 wordSpacing5">
+          <input class="infoTableInput" id="appid" type="text" name="appid" value="{$weixin.appid|escape}" />
+          <label class="field_notice">{$lang.appid_desc}</label>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.appsecret}:</th>
+        <td class="paddingT15 wordSpacing5">
+          <input class="infoTableInput" name="appsecret" type="text" id="appsecret" value="{$weixin.appsecret|escape}"  />
+          <label class="field_notice">{$lang.appsecret_desc}</label>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.url}:</th>
+        <td class="paddingT15 wordSpacing5">
+        	<input class="infoTableInput" name="url" type="text" id="url" value="{$weixin.url|escape}" readonly />
+            <label class="field_notice">{$lang.url_desc}</label>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.token}:</th>
+        <td class="paddingT15 wordSpacing5">
+        	<input class="infoTableInput" name="token" type="text" id="token" value="{$weixin.token|escape}" />
+            <label class="field_notice">{$lang.token_desc}</label>
+        </td>
+      </tr>
+      <tr>
+        <th class="paddingT15"> {$lang.auto_login}:</th>
+        <td class="paddingT15">
+          <span class="onoff">
+          	<label class="cb-enable {if $weixin.auto_login}selected{/if}">{$lang.open}</label>
+          	<label class="cb-disable {if !$weixin.auto_login}selected{/if}">{$lang.close}</label>
+            <input name="auto_login" value="1" type="radio" {if $weixin.auto_login}checked{/if}>
+            <input name="auto_login" value="0" type="radio" {if !$weixin.auto_login}checked{/if}>
+          </span>
+          <span class="grey notice">{$lang.auto_login_desc}</span>      
+          </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="ptb20"><input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+          <input class="formbtn" type="reset" name="Reset" value="{$lang.reset}" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+{include file="footer.html"}

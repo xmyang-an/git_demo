@@ -1,0 +1,143 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+	$('#fullprefer_form').validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('li');
+            error_td.find('label').hide();
+            error_td.append(error);
+        },
+        success       : function(label){
+            label.remove();
+        },
+		submitHandler:function(form) {
+			if($('input[name="prefer[amount]"]').val()=='') {
+				alert('{$lang.not_allempty}');
+				$(form).find('input[name="prefer[amount]"]').focus().addClass('error');
+				return;
+			}
+			if($('input[name="prefer[type]"]:checked').length > 1) {
+				alert('{$lang.type_select_two}');
+				return;
+			}
+			if($('input[name="prefer[type]"]:checked').length < 1) {
+				alert('{$lang.pls_select_type}');
+				return;
+			}
+			if($('input[name="prefer[type]"]:checked').val() == 'discount' && ($.trim($('input[name="prefer[discount]"]').val())=='')){
+				$('input[name="prefer[discount]"]').focus();
+				alert('{$lang.discount_invalid}');
+				return;
+			}
+			if($('input[name="prefer[type]"]:checked').val() == 'decrease' && ($.trim($('input[name="prefer[decrease]"]').val())=='')){
+				$('input[name="prefer[decrease]"]').focus();
+				alert('{$lang.decrease_number_only}');
+				return;
+			}
+			else form.submit();
+		},
+        onkeyup: false,
+        rules : {
+			"prefer[amount]" : {
+				number     : true,
+				min		   : 0.01
+			},
+            "prefer[discount]" : {
+                number     : true,
+				min		   : 0.01,
+				max  	   : 9.99
+            },
+			"prefer[decrease]" : {
+				number     : true,
+				min        : 0.01
+			}
+        },
+        messages : {
+			"prefer[amount]" : {
+				number     : '{$lang.amount_number_only}',
+				min        : '{$lang.price_ge_0}',
+			},
+            "prefer[discount]"  : {
+                number     : '{$lang.discount_invalid}',
+                min : '{$lang.discount_invalid}',
+				max : '{$lang.discount_invalid}'
+            },
+			"prefer[decrease]" : {
+				number     : '{$lang.decrease_number_only}',
+				min        : '{$lang.decrease_ge_0}',
+			}
+        }
+    });
+	$('input[name="prefer[type]"]').click(function(){
+		if($(this).prop('checked') == true) {
+			$(this).parent().parent().find('input[name="prefer[type]"]').prop('checked', false);
+			$(this).prop('checked', true);
+		} else {
+			$(this).parent().parent().find('input[name="prefer[type]"]').prop('checked', false);
+		}
+		
+		$('input[name="prefer[discount]"], input[name="prefer[decrease]"').attr('disabled', true);
+		$(this).parent().find('input[type="text"]').attr('disabled', !$(this).prop('checked'));
+		//$(this).parent().find('input[type="text"]').val('');
+	});
+	
+});
+</script>
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="promotool">
+              <div class="bundle bundle-list"> 
+                <!--{if $appAvailable neq 'TRUE'}-->
+                <div class="notice-word">
+                  <p>{$appAvailable.msg}</p>
+                </div>
+                <!--{else}-->
+                <div class="notice-word">
+                  <p class="yellow-big">{$lang.note_for_create}</p>
+                </div>
+                <div class="promotool-form fullprefer">
+                  <form id="fullprefer_form" method="post">
+                    <ul class="form">
+                      <li>
+                        <h3>{$lang.fullprefer_setting}</h3>
+                      </li>
+                      <li class="mb10"> <span>{$lang.order_full}</span>
+                        <input type="text" name="prefer[amount]" id="prefer[amount]" class="input" value="{$fullprefer.rules.amount}" />
+                        <span>{$lang.yuan}</span> </li>
+                      <li class="mb10">
+                        <input type="checkbox" style="margin-left:12px;" name="prefer[type]" value="discount" {if $fullprefer.rules.type eq 'discount'} checked="checked"{/if} />
+                        <span>{$lang.da}</span>
+                        <input type="text" style="width:80px;" name="prefer[discount]" id="prefer[discount]" class="input" value="{$fullprefer.rules.discount}" {if $fullprefer.rules.type neq 'discount'}disabled="disabled" {/if} />
+                        <span>{$lang.zhe}</span> </li>
+                      <li class="mb10">
+                        <input type="checkbox" style="margin-left:12px;" name="prefer[type]" value="decrease"  {if $fullprefer.rules.type eq 'decrease'} checked="checked"{/if}/>
+                        <span>{$lang.jianshao}</span>
+                        <input type="text" style="width:80px;" name="prefer[decrease]" id="prefer[decrease]" class="input" value="{$fullprefer.rules.decrease}" {if $fullprefer.rules.type neq 'decrease'}disabled="disabled" {/if} />
+                        <span>{$lang.yuan}</span> </li>
+                      <li>
+                        <h3>{$lang.launch}</h3>
+                      </li>
+                      <li class="clearfix">
+                        <label class="switch-checkbox-radio inline-block box-align-center J_SwtcherInput {if $fullprefer.status || !$fullprefer}checked{/if}" for="switcher"><span class="switcher-style block"></span></label>
+                        <input name="status" class="hidden" id="switcher" value="1" type="checkbox" {if $fullprefer.status || !$fullprefer} checked="checked" {/if}>
+                      </li>
+                      <li>
+                        <input type="submit" value="{$lang.submit}" class="submit" />
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+                <!--{/if}--> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

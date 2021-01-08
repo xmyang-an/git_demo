@@ -1,0 +1,70 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>{$lang.evaluation_manage}</p>
+  <ul class="subnav">
+    <li><span>{$lang.manage}</span></li>
+    <li><a class="btn1" href="index.php?app=evaluation&act=setting">{$lang.setting}</a></li>
+    <li><a class="btn1" href="index.php?app=evaluation&amp;act=auto">{$lang.evaluation_auto}</a></li>
+  </ul>
+</div>
+<div class="search-form clearfix">
+    <form method="get" id="formSearch">
+          <input type="hidden" name="app" value="evaluation" />
+          <select class="querySelect" name="field_name">{html_options options=$query_fields selected=$smarty.get.field_name}
+          </select>
+          <input class="queryInput" type="text" name="field_value" value="{$smarty.get.field_value|escape}" />
+          {$lang.evaluation_grade} ： 
+          <select class="querySelect" name="evaluation">
+              <option>{$lang.no_limit}</option>
+              <option value="3" {if $smarty.get.evaluation eq '3'}selected{/if}>{$lang.evaluation_3}</option>
+              <option value="2" {if $smarty.get.evaluation eq '2'}selected{/if}>{$lang.evaluation_2}</option>
+              <option value="1" {if $smarty.get.evaluation eq '1'}selected{/if}>{$lang.evaluation_1}</option>
+          </select>
+          {$lang.has_comment} : 
+          <select class="querySelect" name="comment">
+              <option>{$lang.all}</option>
+              <option value="1" {if $smarty.get.comment eq '1'}selected{/if}>{$lang.no}</option>
+              <option value='2' {if $smarty.get.comment eq '2'}selected{/if}>{$lang.yes}</option>
+          </select>
+          <input type="submit" class="formbtn" value="{$lang.query}" />
+      <!--{if $filtered}-->
+      <a class="formbtn formbtn1" href="index.php?app=evaluation">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+	var data_url = 'index.php?app=evaluation&act=get_xml&'+$("#formSearch").serialize();
+    $("#flexigrid").flexigrid({
+    	url: data_url,
+    	colModel : [
+    		{display: '{$lang.operation}', name : 'operation', width : 200, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.evaluation_time}', name : 'evaluation_time', width : 150, sortable : true, align: 'center'},
+			{display: '{$lang.buyer_name}', name : 'buyer_name', width : 100, sortable : true, align: 'center'},
+    		{display: '{$lang.store_name}', name : 'store_name', width : 100, sortable : true, align: 'center'},
+			{display: '{$lang.goods_name}', name : 'goods_name', width : 200, sortable : true, align: 'center'},
+			{display: '{$lang.evaluation_grade}', name : 'evaluation', width: 100, sortable : true, align : 'center'},    		
+			{display: '{$lang.comment}', name : 'comment', width: 200, sortable : true, align : 'center'}		
+    		],
+        buttons : [
+            {display: '<i class="fa fa-trash"></i>{$lang.batch_del}', name : 'del', bclass : 'del', title : '{$lang.batch_del_for_selected}', onpress : fg_operate }	
+        ],
+    	title: '{$lang.evaluation_list}'
+    });
+});
+function fg_operate(name, bDiv) {
+	var itemlist = new Array();
+	$('.trSelected',bDiv).each(function(){
+		itemlist.push($(this).attr('data-id'));
+	});
+	if (name == 'del') {
+	   if($('.trSelected',bDiv).length==0){
+		   parent.layer.alert('{$lang.no_selected_item}',{icon: 0});
+			return false;
+	   }
+       fg_delete(itemlist,'evaluation');
+	}
+}
+</script>
+{include file="footer.html"} 

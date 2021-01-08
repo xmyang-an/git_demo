@@ -1,0 +1,45 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p><strong>{$lang.plugin_manage}</strong></p>
+  <ul class="subnav">
+    <li><span>{$lang.manage}</span></li>
+  </ul>
+</div>
+<div class="info2">
+  <table class="distinction">
+    <!--{if $plugins}-->
+    <thead>
+      <tr>
+        <th width="15%" align="left" style="padding-left:15px;">{$lang.plugin_name}</th>
+        <th align="left">{$lang.plugin_description}</th>
+        <th width="15%">{$lang.author}</th>
+        <th width="10%">{$lang.version}</th>
+        <th class="handler">{$lang.handler}</th>
+      </tr>
+    </thead>
+    <!--{/if}-->
+    <tbody>
+      <!--{foreach from=$plugins item=plugin}-->
+      <tr>
+        <td style="padding-left:15px;">{$plugin.name|escape}</td>
+        <td align="left">{$plugin.desc|escape}</td>
+        <td align="center"><a href="{$plugin.website}" target="_blank" title="{$lang.author_website}">{$plugin.author|escape}</a></td>
+        <td align="center">{$plugin.version|escape}</td>
+        <td class="handler"><!--{if !$plugin.enabled}--> 
+          <a href="index.php?app=plugin&amp;act=enable&amp;id={$plugin.id}">{$lang.enable}</a> 
+          <!--{else}--> 
+          <a href="javascript:goConfirm('{$lang.disable_confirm}','index.php?app=plugin&act=disable&id={$plugin.id}',true);">{$lang.disable}</a> 
+          <!--{if $plugin.config}--> 
+          | <a href="index.php?app=plugin&amp;act=config&id={$plugin.id}">{$lang.config}</a> 
+          <!--{/if}--> 
+          <!--{/if}--></td>
+      </tr>
+      <!--{foreachelse}-->
+      <tr class="no_data">
+        <td class="no-data" colspan="5">{$lang.no_installed_plugin}</td>
+      </tr>
+      <!--{/foreach}-->
+    </tbody>
+  </table>
+</div>
+{include file="footer.html"}

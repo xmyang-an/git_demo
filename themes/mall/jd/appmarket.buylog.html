@@ -1,0 +1,39 @@
+{include file=member.header.html}
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="appmarket apprenewal appbuylog">
+              <div class="bundle bundle-list">
+                <div class="applist"> 
+                  <!--{if $appbuylog}-->
+                  <ul class="list-each clearfix">
+                    <!--{foreach from=$appbuylog item=item name=fe_item}-->
+                    <li class="clearfix">
+                      <div class="pic"><a href="{url app=appmarket&act=view&id=$item.aid}" target="_blank"><img height="70"  src="{$item.logo}" /></a></div>
+                      <div class="info">
+                        <p class="title"><font class="f60">[{$lang.$item.appid}]</font> {$item.title}</p>
+                        <p class="price fs14 clearfix"> <span class="gray">{$lang.submit_at}{$lang.colon}</span> <span class="f60">{$item.add_time|date:Y-m-d}</span> <span class="gray ml10">{$lang.buyperiod}{$lang.colon}</span> <span class="f60">{$item.period}</span> <span class="gray">{$lang.per_month}</span> <span class="gray ml10">{$lang.amount}{$lang.colon}</span> <span class="f60">{$item.amount|price}</span> </p>
+                        <p class="btn-fields mt10 clearfix"> <a {if $item.status eq ORDER_PENDING}class="btn-buy" href="{url app=appmarket&act=cashier&id=$item.bid}"{/if}>{$item.status|modifier:order_status}</a> </p>
+                      </div>
+                    </li>
+                    <!--{/foreach}-->
+                  </ul>
+                  <div class="mt20 clearfix">{include file=member.page.bottom.html}</div>
+                  <!--{else}-->
+                  <div class="notice-word">
+                    <p>{$lang.no_records}</p>
+                  </div>
+                  <!--{/if}--> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

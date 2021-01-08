@@ -1,0 +1,87 @@
+{include file=member.header.html}
+<div id="main">
+  <div class="my-store">
+    <form method="post" id="my-store" class="fun-form-style" enctype="multipart/form-data">
+      <div class="form">
+        <div class="store-slides bgf"> 
+          <!--{foreach from=$store.store_slides item=item name=fe_item}-->
+          <div class="item">
+            <p class="webkit-box"> <img src="{$item.url}" class="flex1" />
+              <input type="hidden" name="store_slides[url][]" value="{$item.url}" />
+            </p>
+            <div class="webkit-box border-bottom">
+              <span class="mt fs14 ml10 gray">{$lang.link_url}</span>
+              <input type="text" class="input flex1" name="store_slides[link][]" value="{$item.link}" placeholder="http://" />
+              <!--<i class="psmb-icon-font fs14 btn mr10 gray mt">&#xe667;</i>
+              <i class="psmb-icon-font fs14 btn mr10 gray mt">&#xe666;</i>-->
+              <i class="psmb-icon-font fs14 btn mr10 gray mt J_Del">&#xe670;</i>
+              <div class="gray fs13 mr5 relative modify mt">
+                <div class="filePicker" id="filePicker{$smarty.foreach.fe_item.iteration}"></div>
+                <i class="psmb-icon-font fs14 gray">&#xe6f6;</i>
+              </div>
+            </div>
+          </div>
+          <!--{/foreach}--> 
+        </div>
+        <div ectype="template" class="hidden">
+          <div class="item">
+            <p class="webkit-box"> <img src="{1}" class="flex1" />
+              <input type="hidden" ecname="store_slides[url][]" value="{2}" />
+            </p>
+            <div class="webkit-box border-bottom">
+              <span class="mt fs14 ml10 gray">{$lang.link_url}</span>
+              <input type="text" class="input flex1" name="store_slides[link][]" value="" placeholder="http://" />
+              <!--<i class="psmb-icon-font fs14 btn mr10 gray mt">&#xe667;</i>
+              <i class="psmb-icon-font fs14 btn mr10 gray mt">&#xe666;</i>-->
+              <i class="psmb-icon-font fs14 btn mr10 gray mt J_Del">&#xe670;</i>
+              <div class="gray fs13 mr5 relative modify mt">
+                <div class="filePicker"></div>
+                <i class="psmb-icon-font fs14 gray">&#xe6f6;</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="webkit-box relative bgf pt10 pb10">
+          <div class="filePicker multiple" id="filePicker"></div>
+          <div class="flex1 title ml10">
+            <h3>{$lang.store_slides}</h3>
+            <span class="gray mt5 mr10 block">{$lang.change_store_slides_des}</span> </div>
+          <i class="psmb-icon-font mr10 gray mt10 fs14">&#xe629;</i> </div>
+        <div class="extra">
+          <p class="fixed-gap"></p>
+          <input type="submit" class="btn-alipay J_AjaxFormSubmit btn-alipay-fixed" value="{$lang.submit}" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.filePicker').compressUpload({
+		server: REAL_SITE_URL + '/index.php?app=my_store&act=upload',
+		pick: '.filePicker',
+		fileVal: 'store_slides',
+		compressWidth: 640,
+		compressHeight:250,
+		callback: function(file, response, pick, target) {
+			if(target.parent().hasClass('modify')) {
+				target.parents('.item').find('img').attr('src', response);
+				target.parents('.item').find('input[name="store_slides[url][]"]').val(response);
+				ajaxRequest($('form').attr('method'), window.location.href+'&from=modify', $('form'), '', null);
+			}
+			else 
+			{
+				var template = $('[ectype="template"]').clone(true);
+				template.find('.filePicker').attr('id', 'filePicker'+Math.random()).parent().addClass('modify');
+				$('.store-slides').append(sprintf(replace_all(template.html(), 'ecname', 'name'), response, response));
+				ajaxRequest($('form').attr('method'), window.location.href+'&from=upload', $('form'), '', null);
+			}
+			
+		}
+	});
+	$('body').on('click', '.J_Del', function(){
+		$(this).parents('.item').remove();
+	});
+});
+</script> 
+{include file=footer.html}

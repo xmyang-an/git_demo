@@ -1,0 +1,30 @@
+<link type="text/css" href="{res file=css/global.css}" rel="stylesheet" />
+<link type="text/css" href="{lib file=layui/css/modules/layim/layim.css}" rel="stylesheet" />
+<style type="text/css">
+body {
+	min-width: 300px;
+	padding-bottom: 30px;
+}
+.layim-chat-main {
+	height: auto
+}
+</style>
+<div class="layim-chat-main clearfix">
+  <ul>
+    <!--{foreach from=$imlog item=log name=fe_item}-->
+    <li class="{if $visitor.user_id eq $log.fromid}layim-chat-mine{/if}">
+      <div class="layim-chat-user"><img src="{$log.avatar}"> <cite> 
+        <!--{if $visitor.user_id eq $log.fromid}--> 
+        <i>{$log.add_time|date:Y-m-d H:i:s}</i>{$log.fromName}
+        <!--{else}--> 
+        {$log.fromName}<i>{$log.add_time|date:Y-m-d H:i:s}</i> 
+        <!--{/if}--> 
+        </cite> </div>
+      <div class="layim-chat-text">{$log.formatContent}</div>
+    </li>
+    <!--{/foreach}-->
+  </ul>
+  <!--{if $imlog}--> 
+  {include file=page.bottom.html} 
+  <!--{/if}--> 
+</div>

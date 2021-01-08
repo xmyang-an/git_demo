@@ -1,0 +1,45 @@
+{include file=member.header.html} 
+<div id="main">
+  <div class="my-store">
+    <form method="post" id="my-store" class="fun-form-style" enctype="multipart/form-data">
+      <div class="form">
+      	<div class="store-banner relative bgf webkit-box"> 
+        	<!--{if $store.store_banner}-->
+        	<img src="{$store.store_banner}" class="flex1" />
+            <!--{/if}-->
+        </div>
+        <div class="webkit-box relative bgf pt10 pb10"> 
+          	<input type="hidden" name="store_banner" value="{$store.store_banner}" />
+            <div class="filePicker"></div>
+          	<div class="flex1 title ml10">
+            	<h3>{$lang.store_banner}</h3>
+            	<span class="gray mt5 mr10 block">{$lang.change_store_banner_des}</span>
+            </div>
+          	<i class="psmb-icon-font mr10 gray mt10 fs14">&#xe629;</i> 
+        </div>
+        <div class="extra">
+          <p class="fixed-gap"></p>
+          <input type="submit" class="btn-alipay J_AjaxFormSubmit btn-alipay-fixed" value="{$lang.submit}" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.filePicker').compressUpload({
+		server: REAL_SITE_URL + '/index.php?app=my_store&act=upload',
+		pick: '.filePicker',
+		fileVal: 'store_banner',
+		compressWidth:550,
+		compressHeight:200,
+		callback: function(file, response, pick, target) {
+			if($('.store-banner').find('img').length > 0) {
+				$('.store-banner').find('img').attr( 'src', response+"?"+Math.random());
+			} else $('.store-banner').html('<img src="'+response+"?"+Math.random()+'" class="flex1 border-bottom" />');
+			$('input[name="store_banner"]').val(response);
+		}
+	});
+});
+</script>
+{include file=footer.html}

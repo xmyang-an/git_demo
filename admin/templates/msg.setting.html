@@ -1,0 +1,45 @@
+{include file="header.html"}
+<div id="rightTop">
+	<p>{$lang.msg_manage}</p>
+    <ul class="subnav" style="margin-left:0px;">
+        <li><a class="btn1" href="index.php?app=msg">{$lang.msglog}</a></li>
+        <li><a class="btn1" href="index.php?app=msg&act=user">{$lang.user}</a></li>
+        <li><a class="btn1" href="index.php?app=msg&act=add">{$lang.addmsg}</a></li>
+        <li><a class="btn1" href="index.php?app=msg&act=send">{$lang.sendmsg}</a></li>
+        <li><span>{$lang.setting}</span></li>
+    </ul>
+</div>
+<div class="info">
+	<form method="post">
+  		<table class="infoTable">
+            <tr>
+                <th class="paddingT15">{$lang.msg_pid}:</th>
+                <td class="paddingT15 wordSpacing5">
+				<input name="msg_pid" type="text" value="{$setting.msg_pid}" size="20">
+				</td>
+            </tr>
+            <tr>
+                <th class="paddingT15">{$lang.msg_key}:</th>
+              <td class="paddingT15 wordSpacing5">
+				<input name="msg_key" type="password" value="" style="width:200px;">
+				<label class="field_notice">{$lang.msg_key_desc}</label>
+				</td>
+            </tr>
+            <tr>
+                <th class="paddingT15">{$lang.on_status}:</th>
+              <td class="paddingT15 wordSpacing5">
+					<input id="msg_status1" type="checkbox" name="msg_status[register]" value="1" {if $setting.msg_status.register}checked{/if}/> <label for="msg_status1">{$lang.frontend_register}</label>
+                    <input id="msg_status2" type="checkbox" name="msg_status[find_password]" value="1" {if $setting.msg_status.find_password}checked{/if}/> <label for="msg_status2">{$lang.find_password}</label>
+				</td>
+            </tr>
+            <tr>
+            <th></th>
+            <td class="ptb20">
+                <input class="formbtn J_FormSubmit" type="submit" name="Submit" value="{$lang.submit}" />
+                <input class="formbtn" type="reset" name="Submit2" value="{$lang.reset}" />
+            </td>
+            </tr>
+      </table>	
+      </form>
+</div>
+{include file="footer.html"}

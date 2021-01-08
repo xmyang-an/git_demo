@@ -1,0 +1,134 @@
+{include file=header.html} 
+<script type="text/javascript">
+$(function(){
+	TouchSlide({slideCell:"#slides",titCell:".hd",mainCell:".bd",effect:"leftLoop", autoPlay:true,autoPage:true, titOnClassName:"active", delayTime:1000, interTime: 5000});
+	
+	<!--{if $signPackage} // 微信分享-->
+	wxshare({signPackage: {$signPackage}, content: {desc: '{$site_title}', imgUrl:'{$site_url}/{$store.store_logo}'}});
+	<!--{/if}-->
+});
+</script>
+<div id="main">
+  <div class="page-store page J_page">
+    <div class="store-info">
+      <div class="store-banner"> 
+        <!--{if $store.wap_store_banner}--> 
+        <img src="{$store.wap_store_banner}" height="150" />
+        <!--{/if}--> 
+      </div>
+      <div class="d-info clearfix">
+        <h3 class="float-left ml5"><a class="block" href="{if $my_store}{url app=dcenter&act=edit&did=$smarty.get.did}{else}javascript:;{/if}"><img src="{$store.store_logo}" /></a></h3>
+        <div class="name-and-credit float-left">
+          <p class="name" style="margin-top:8px;"><a href="{if $my_store}{url app=dcenter&act=edit&did=$smarty.get.did}{else}javascript:;{/if}">{$store.store_name}</a></p>
+          <p><!--{if $store.credit_value ge 0}--><img src="{$store.credit_image}" alt="" /><!--{/if}--></p>
+        </div>
+        <div class="collect clearfix"> 
+          <!--{if $store.collected}-->
+          <div class="collect-btn collected">已收藏</div>
+          <!--{else}-->
+          <div class="collect-btn J_AjaxRequest" action="{url app=my_favorite&act=add&type=store&item_id=$store.store_id&ajax=1}">收藏</div>
+          <!--{/if}-->
+          <div class="collect-cn">
+            <p class="num">{$store.be_collect|default:0}</p>
+            <p class="txt">粉丝</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="store-menus">
+      <ul class="webkit-box">
+        <li class="flex1"><a class="block center active fs14" href="{url app=store&id=$store.store_id}"><span>首页</span></a></li>
+        <li class="flex1"><a class="block center fs14" href="{url app=store&act=search&id=$store.store_id}"><span>全部商品</span></a></li>
+        <li class="flex1"><a class="block center fs14" href="{url app=store&act=search&id=$store.store_id&new=1}"><span>上新</span></a></li>
+        <li class="flex1"><a class="block center fs14" href="{url app=store&act=limitbuy&id=$store.store_id}"><span>促销</span></a></li>
+      </ul>
+    </div>
+    
+    <!--{if $store.wap_store_slides}-->
+    <div class="store-index-slide">
+      <div id="slides" class="scroller J_Slides">
+        <ul class="bd clearfix">
+          <!--{foreach from=$store.wap_store_slides item=slide name=fe_slide}--> 
+          <!--{if $slide.url && $slide.link}-->
+          <li><a href="{$slide.link}"><img src="{$slide.url}" /></a></li>
+          <!--{/if}--> 
+          <!--{/foreach}-->
+        </ul>
+        <ul class="hd">
+        </ul>
+      </div>
+    </div>
+    <!--{/if}--> 
+    
+    <!--{if $store.recommended_goods}-->
+    <div class="rec-goods goods-model-si mt5"> 
+      <!--<h3 class="mt5"><span><em>推荐</em></span></h3>-->
+      <ul class="clearfix">
+        <!--{foreach from=$store.recommended_goods item=goods name=fe_goods}-->
+        <li class="item"> <a href="{url app=goods&id=$goods.goods_id}">
+          <div class="pic"><img src="{$goods.default_image}" /></div>
+          <p class="goods-name line-clamp-2">{$goods.goods_name|escape}</p>
+          <div class="webkit-box pb5">
+            <p class="price flex1">{$goods.price|price}</p>
+            <p class="sales fs10 gray">已售{$goods.sales|default:0}</p>
+          </div>
+          </a> </li>
+        <!--{/foreach}-->
+      </ul>
+    </div>
+    <!--{/if}--> 
+    <!--{if $store.new_goods}-->
+    <div class="new-goods goods-model-si">
+      <h3><span><em>新品</em></span></h3>
+      <ul class="clearfix">
+        <!--{foreach from=$store.new_goods item=goods name=fe_goods}-->
+        <li class="item"> <a href="{url app=goods&id=$goods.goods_id}">
+          <div class="pic"><img src="{$goods.default_image}" /></div>
+          <p class="goods-name line-clamp-2">{$goods.goods_name|escape}</p>
+          <div class="webkit-box pb5">
+            <p class="price flex1">{$goods.price|price}</p>
+            <p class="sales fs10 gray">已售{$goods.sales|default:0}</p>
+          </div>
+          </a> </li>
+        <!--{/foreach}-->
+      </ul>
+    </div>
+    <!--{/if}--> 
+    <!--{if $store.sales_goods}-->
+    <div class="hot-goods goods-model-si">
+      <h3><span><em>热卖</em></span></h3>
+      <ul class="clearfix">
+        <!--{foreach from=$store.sales_goods item=goods name=fe_goods}-->
+        <li class="item"> <a href="{url app=goods&id=$goods.goods_id}">
+          <div class="pic"><img src="{$goods.default_image}" /></div>
+          <p class="goods-name line-clamp-2">{$goods.goods_name|escape}</p>
+          <div class="webkit-box pb5">
+            <p class="price flex1">{$goods.price|price}</p>
+            <p class="sales fs10 gray">已售{$goods.sales|default:0}</p>
+          </div>
+          </a> </li>
+        <!--{/foreach}-->
+      </ul>
+    </div>
+    <!--{/if}--> 
+    <!--{if $store.hot_goods}-->
+    <div class="new-goods goods-model-si">
+      <h3><span><em>人气</em></span></h3>
+      <ul class="clearfix">
+        <!--{foreach from=$store.hot_goods item=goods name=fe_goods}-->
+        <li class="item"> <a href="{url app=goods&id=$goods.goods_id}">
+          <div class="pic"><img src="{$goods.default_image}" /></div>
+          <p class="goods-name line-clamp-2">{$goods.goods_name|escape}</p>
+          <div class="webkit-box pb5">
+            <p class="price flex1">{$goods.price|price}</p>
+            <p class="sales fs10 gray">已售{$goods.sales|default:0}</p>
+          </div>
+          </a> </li>
+        <!--{/foreach}-->
+      </ul>
+    </div>
+    <!--{/if}-->
+    <div class="view-all"> <a href="{url app=store&act=search&id=$store.store_id}">查看全部商品<i class="psmb-icon-font fs13">&#xe629;</i></a> </div>
+  </div>
+</div>
+{include file=footer.html} 

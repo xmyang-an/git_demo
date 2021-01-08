@@ -1,0 +1,32 @@
+<script type="text/javascript">
+$(function(){
+	var url = "{url app=default&act=getInfinite&cate_id=$widget_data.cate_id&recom_id=$widget_data.recom_id&order=$widget_data.sort_by}";
+	$('.J_S{$widget_data.model_id}').infinite({url: url, paeper: 4, maxshow: "{$widget_data.maxShow|default:100}", callback: function(data, page, target, TEMP){
+			var html = '';
+			var template = TEMP.clone(true);
+			$.each(data, function(k, v) {
+				html += sprintf(template.html(), "{url app=goods&id="+v.goods_id+"}", v.default_image, "{url app=goods&id="+v.goods_id+"}", v.goods_name, price_format(v.price));
+				
+			});
+			target.find('.infinite-result').append(html).show();
+		}
+	});
+});
+</script>
+<div class="product-interest floor"> 
+	<!--{if $widget_data.model_name}-->
+  	<div class="mt mt5" style="color:{$widget_data.model_color};">
+    	<em style="border-color:{$widget_data.model_color};" class="vline vleft"></em>
+    	<span class="fs14">{$widget_data.model_name|escape}</span>
+    	<em  style="border-color:{$widget_data.model_color};" class="vline vright"></em>
+    </div>
+	<!--{/if}-->
+  <div class="product-list J_S{$widget_data.model_id}">
+  	<ul class="infinite-result clearfix hidden"></ul>
+    <div class="infinite-template">
+    	<li><div class="product-div"><a href="{1}"><img src="{2}"></a><div class="product-text"><h4><a class="line-clamp-2" href="{3}">{4}</a></h4><p class="price">{5}</p></div></div></li>
+    </div>
+    <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+    <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已经到底了<ins class="vline vright"></ins></div>
+  </div>
+</div>

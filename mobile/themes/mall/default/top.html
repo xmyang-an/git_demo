@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="{$site_url}/" />
+<meta charset="{$charset}" />
+<meta name="author" content="MiMall.NET" />
+<meta name="generator" content="MiMall.NET {$mimall_version}" />
+<meta name="copyright" content="MiMall.NET All Rights Reserved" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Expires" CONTENT="-1">           
+<meta http-equiv="Cache-Control" CONTENT="no-cache">        
+<meta http-equiv="Pragma" CONTENT="no-cache">           
+<!--{if !$in_wxmp}-->
+{$page_seo}
+<!--{/if}-->
+
+<!--<link rel="icon" href="favicon.ico" type="image/x-icon" />-->
+<link type="text/css" href="{res file=css/header.css}" rel="stylesheet" />
+<link type="text/css" href="{res file=css/main.css}" rel="stylesheet"  />
+<link type="text/css" href="{res file=css/footer.css}" rel="stylesheet" />
+<!--{if $in_wxmp}-->
+<link type="text/css" href="{res file=css/fit.css}" rel="stylesheet" />
+<!--{/if}-->
+<script type="text/javascript">
+//<!CDATA[
+var SITE_URL = "{$site_url}";
+var REAL_SITE_URL = "{$real_site_url}";
+var PRICE_FORMAT = '{$price_format}';
+//]]>
+</script>
+<script type="text/javascript" src="mobile/index.php?act=jslang"></script>
+<script type="text/javascript" src="{lib file=mobile/jquery.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=mobile/layer.m/layer.m.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=mobile/SuperSlide/TouchSlide.1.1.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=mobile/base.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=mobile/jquery.plugins/jquery.lazyload.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=mobile/jquery.plugins/jquery.form.min.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{res file=js/main.js}" charset="utf-8"></script>
+{$_head_tags}
+<!--<editmode></editmode>--> 
+</head>
+<body id="page-layout-{$smarty.get.app|default:default}-{$smarty.get.act|default:index}">
+<div id="site-nav" class="w-full"></div>

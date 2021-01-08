@@ -1,0 +1,115 @@
+{include file="header.html"}
+<style type="text/css">
+.flexigrid .bDiv{ min-height:35px;}
+</style>
+<script type="application/ecmascript">
+$(function(){
+	$('.J_slide').click(function(){
+		var closeImg = 'templates/style/images/treetable/tv-expandable.gif';
+		var openImg = 'templates/style/images/treetable/tv-collapsable.gif';
+		var key = $(this).attr('data-id');
+		if($(this).attr('src') == openImg){
+			$(this).attr('src',closeImg);
+			$('.child_'+key).hide();
+		}else{
+			$(this).attr('src',openImg);
+			$('.child_'+key).show();
+		}
+	});
+	$('.J_update').click(function(){
+		$.getJSON(REAL_BACKEND_URL + '/index.php?app=wxmenu&act=update',function(data){
+			parent.layer.msg(data.msg);	
+		});
+	});
+})
+</script>
+<div id="rightTop">
+    <p>{$lang.wxmenu}</p>
+    <ul class="subnav">
+        <li><span>{$lang.menus_list}</span></li>
+        <li><a class="btn1" href="index.php?app=wxmenu&amp;act=add">{$lang.add}</a></li>
+    </ul>
+</div>
+<div class="explanation" id="explanation">
+  <div class="title" id="checkZoom">
+  	<i class="fa fa-lightbulb-o"></i>
+    <h4 title="{$lang.operation_tip}">{$lang.operation_tip}</h4>
+  </div>
+  <ul>
+    <li><i class="fa fa-angle-double-right"></i> {$lang.wxmenu_desc_1}</li>
+    <li><i class="fa fa-angle-double-right"></i> {$lang.wxmenu_desc_2}</li>
+  </ul>
+</div>
+<div class="info2 flexigrid">
+    <table  class="distinction">
+        <!--{if $menus}-->
+        <thead>
+        <tr class="tatr1">
+        	<th class="w30"><input id="checkall_1" type="checkbox" class="checkall" /></th>
+            <th><span class="all_checkbox">
+                    <label for="checkall_1">{$lang.checkall}</label>
+                    </span>{$lang.menu_name}</td>
+            <th width="10%">{$lang.menu_type}</th>
+            <th width="20%">{$lang.menu_value}</th>
+            <th width="10%">{$lang.sort_order}</th>
+            <th class="handler">{$lang.handler}</th>
+        </tr>
+        </thead>
+        <!--{/if}-->
+        <!-- {if $menus} --><tbody id="treet1"><!-- {/if} -->
+        <!--{foreach from=$menus item=menu key=key}-->
+        <tr>
+        	<td class="align_center w30"><input type="checkbox" class="checkitem" value="{$menu.id}" /></td>
+            <td><!--{if $menu.child}--><img src="templates/style/images/treetable/tv-collapsable.gif" data-id="{$key}" class="J_slide"><!--{else}--><img src="templates/style/images/treetable/tv-item.gif" class="ttimage" id="treet12"><!--{/if}--> <span>{$menu.name|escape}</span></td>
+            <td class="align_center"><span>{if $menu.type eq 'view'}{$lang.to_url}{else}{$lang.send_msg}{/if}</span></td>
+            <td class="align_center">{if $menu.type eq 'view'}{$menu.link|default:-}{else}-{/if}</td>
+            <td class="align_center"><span>{$menu.sort_order}</span></td>
+            <td class="handler bDiv" style=" background:none; width:250px; text-align:left;">
+                <a href="index.php?app=wxmenu&amp;act=edit&amp;id={$menu.id}" class="btn blue"><i class="fa fa-pencil-square-o"></i>{$lang.edit}</a>
+                <a href="javascript:goConfirm('{$lang.drop_confirm}', 'index.php?app=wxmenu&amp;act=drop&amp;id={$menu.id}',true);" class="btn red"><i class="fa fa-trash-o"></i>{$lang.drop}</a>
+                <a href="index.php?app=wxmenu&amp;act=add&amp;parent_id={$menu.id}" class="btn green"><i class="fa fa-plus"></i>{$lang.add_child}</a>
+                </td>
+        </tr>
+        <!--{if $menu.child}-->
+        <!--{foreach from=$menu.child item=child}-->
+        <tr class="child_{$key}">
+        	<td class="align_center w30"><input type="checkbox" class="checkitem" value="{$child.id}" /></td>
+            <td style="padding-left:20px;"><img src="templates/style/images/treetable/tv-item.gif" class="ttimage" id="treet12"> <span>{$child.name|escape}</span></td>
+            <td class="align_center"><span>{if $child.type eq 'view'}{$lang.to_url}{else}{$lang.send_msg}{/if}</span></td>
+            <td class="align_center">{if $child.type eq 'view'}{$child.link|default:-}{else}-{/if}</td>
+            <td class="align_center"><span>{$child.sort_order}</span></td>
+            <td class="handler bDiv" style=" background:none; width:250px; text-align:left;">
+                <a href="index.php?app=wxmenu&amp;act=edit&amp;id={$child.id}" class="btn blue"><i class="fa fa-pencil-square-o"></i>{$lang.edit}</a>
+                <a href="javascript:goConfirm('{$lang.drop_confirm}', 'index.php?app=wxmenu&amp;act=drop&amp;id={$child.id}',true);" class="btn red"><i class="fa fa-trash-o"></i>{$lang.drop}</a>
+                </td>
+        </tr>
+        <!--{/foreach}-->
+        <!--{/if}-->
+        <!--{foreachelse}-->
+        <tr class="no_data">
+            <td colspan="6">{$lang.no_data}</td>
+        </tr>
+        <!--{/foreach}-->
+        <!-- {if $menus} --></tbody><!-- {/if} -->
+        <tfoot>
+            <tr class="tr_pt10">
+            <!-- {if $menus} -->
+            	<td class="align_center">
+                	<label for="checkall1">
+                    	<input id="checkall_2" type="checkbox" class="checkall">
+                    </label>
+                </td>
+                <td colspan="5" id="batchAction">
+                	<span class="all_checkbox mt5">
+                    <label for="checkall_2">{$lang.checkall}</label>
+                    </span>&nbsp;&nbsp;
+                    <div class="fbutton JBatchDel" uri="index.php?app=wxmenu&act=drop" name="id"><div class="del" title="{$lang.batch_del_for_selected}"><span><i class="fa fa-trash"></i>{$lang.batch_del}</span></div></div>
+                    <div class="fbutton J_update" style="border:0;"><div class="add"><span><i class="fa fa-trash"></i>{$lang.update_menu}</span></div></div>
+                </td>
+            <!--{/if}-->
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+{include file="footer.html"}

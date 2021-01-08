@@ -1,0 +1,278 @@
+<!--{if $smarty.get.app neq 'goods'}-->
+<div class="store-info border mb10">
+	<h3 class="border-b"><span>{$store.store_name|escape}</span></h3>
+    <div class="content">
+    	<dl class="border-b total_evaluation w-full clearfix">
+        	<dt>{$lang.all_evaluation}{$lang.colon}</dt>
+            <dd>
+            	<div class="raty">
+                	<span style="width:{$store.evaluation_rate|default:0};"></span>
+                </div>
+                <b>{$store.avg_evaluation|default:0}</b>
+                {$lang.fen}
+            </dd>
+        </dl>
+        <div class="rate-info">
+        	<p>
+                <strong>{$lang.store_evaluation}</strong>
+                {$lang.compare_insdusty}
+            </p>
+            <ul>
+            	<li>
+                	{$lang.goods_evaluation}
+                	<span class="credit">{$store.avg_goods_evaluation}</span>
+                    <span class="{$store.industy_compare.goods_compare.class}">
+                    	<i></i>
+                        {$store.industy_compare.goods_compare.name}
+                    	<em><!--{if $store.industy_compare.goods_compare.value eq 0}-->----<!--{else}-->{$store.industy_compare.goods_compare.value}%<!--{/if}--></em>
+                    </span>
+                </li>
+                <li>
+                	{$lang.service_evaluation}
+                	<span class="credit">{$store.avg_service_evaluation}</span>
+                    <span class="{$store.industy_compare.service_compare.class}">
+                    	<i></i>
+                        {$store.industy_compare.service_compare.name}
+                    	<em><!--{if $store.industy_compare.service_compare.value eq 0}-->----<!--{else}-->{$store.industy_compare.goods_compare.value}%<!--{/if}--></em>
+                    </span>
+                </li>
+                <li>
+                	{$lang.shipped_evaluation}
+                	<span class="credit">{$store.avg_shipped_evaluation}</span>
+                    <span class="{$store.industy_compare.shipped_compare.class}">
+                    	<i></i>
+                        {$store.industy_compare.shipped_compare.name}
+                    	<em><!--{if $store.industy_compare.shipped_compare.value eq 0}-->----<!--{else}-->{$store.industy_compare.shipped_compare.value}%<!--{/if}--></em>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <dl class="border-b contact_us dl-c-s clearfix">
+        	<dt>{$lang.contact_style}{$lang.colon}</dt>
+            <dd>
+                <a href="javascript:;" class="J_StartLayim" data-toid="{$store.store_id}"><img src="{$site_url}/static/images/myim2.png" width="17" height="17" /></a>
+            </dd>
+        </dl>
+        <dl class="dl-c-s w-full clearfix">
+        	<dt>卖家名称{$lang.colon}</dt>
+            <dd><a style="color: #005EA6;font-family:Georgia, 'Times New Roman', Times, serif;" target="_blank" href="{url app=message&act=send&to_id=$store.store_owner.user_id|escape}" title="给他（她）发站内信？">{$store.store_owner.user_name|escape}</a></dd>
+        </dl>
+         <dl style="padding-top:2px;" class="dl-c-s w-full clearfix">
+        	<dt>{$lang.credit_value}{$lang.colon}</dt>
+            <dd><!--{if $store.credit_value ge 0}--><img src="{$store.credit_image}" alt="" align="absmiddle"/><!--{/if}--></dd>
+        </dl>
+        <!--{if $store.certifications}-->
+        <dl style="padding-top:1px;" class="dl-c-s w-full clearfix">
+        	<dt style="margin-top:2px;">{$lang.certification}{$lang.colon}</dt>
+            <dd>
+            	<!--{foreach from=$store.certifications item=cert}-->
+                <!--{if $cert eq "autonym"}-->
+                <a href="{url app=article&act=system&code=cert_autonym}" target="_blank" title="{$lang.cert_autonym}"><img src="{res file=images/cert_autonym.gif}" /></a>
+                <!--{elseif $cert eq "material"}-->
+                <a href="{url app=article&act=system&code=cert_material}" target="_blank" title="{$lang.cert_material}"><img src="{res file=images/cert_material.gif}" /></a>
+                <!--{/if}-->
+                <!--{/foreach}-->
+            </dd>
+        </dl>
+        <!--{/if}-->
+        <!--{if $store.tel}-->
+        <dl style="padding-top:1px;" class="dl-c-s w-full clearfix">
+        	<dt>{$lang.store_add_time}{$lang.colon}</dt>
+            <dd>{$store.add_time|date}</dd>
+        </dl>
+        <dl style="padding-top:2px;" class="dl-c-s w-full clearfix">
+        	<dt>{$lang.tel}{$lang.colon}</dt>
+            <dd>{$store.tel|escape}</dd>
+        </dl>
+        <!--{/if}-->
+        <!--{if $store.address}-->
+        <dl style="padding-top:2px;padding-bottom:10px;" class="dl-c-s border-b w-full clearfix">
+        	<dt>{$lang.address}{$lang.colon}</dt>
+            <dd>{$store.address|escape}</dd>
+        </dl>
+        <!--{/if}-->
+        <div class="go2store">
+        	<a href="{url app=store&id=$store.store_id}">{$lang.go2store}</a>
+            <a href="javascript:collect_store({$store.store_id})">{$lang.collect_the_store}</a>
+        </div>
+    </div>
+</div>
+<!--{/if}-->
+
+<!--{if $goods.qrcode}-->
+<div class="store-search goods-qrcode border mb10">
+	<h3 class="border-b title"><span>{$lang.goods_qrcode}</span></h3>
+	<div class="content">
+		<img width="188" src="{$goods.qrcode}" />
+	</div>
+</div>
+<!--{/if}-->
+
+<div class="store-search mb10 border">
+	<h3 class="border-b"><span>{$lang.search}</span></h3>
+	<div class="content">
+    	<form id="" name="" method="get" action="index.php">
+             <input type="hidden" name="app" value="store" />
+             <input type="hidden" name="act" value="search" />
+             <input type="hidden" name="id" value="{$store.store_id}" />
+             <input class="text border" type="text" name="keyword"  placeholder="输入搜索关键字"/>
+             <input class="btn" type="submit" value="{$lang.search}" />
+       </form>
+    </div>
+</div>
+
+<div class="gcategroy mb10 border">
+	<h3 class="border-b title"><span>{$lang.gcategory}</span></h3>
+    <div class="content">
+         <div class="sort-by">
+         	 <p><a class="icon" href="{url app=store&id=$store.store_id&act=search}">查看全部商品</a></p>
+             <div class="order_type"><a href="{url app=store&id=$store.store_id&act=search&order=sales desc}">按销量</a><a href="{url app=store&id=$store.store_id&act=search&order=add_time desc}">按新品</a><a href="{url app=store&id=$store.store_id&act=search&order=price asc}">按价格</a><a href="{url app=store&id=$store.store_id&act=search&order=views asc}" style="margin-right:0px;">按人气</a></div>
+         </div>     
+         <ul class="list">
+             <!--{foreach from=$store.store_gcates item=gcategory}-->
+             <li class="each">
+                <h3><a  href="{url app=store&id=$store.store_id&act=search&cate_id=$gcategory.id}">{$gcategory.value|escape}</a><i class="{if $gcategory.children}expand{else}close{/if}"></i></h3>
+                <ul class="sub_gcate {if $smarty.get.cate_id neq $gcategory.id}hidden{/if}">
+                <!--{foreach from=$gcategory.children item=child_gcategory}-->
+                	<li><a href="{url app=store&id=$store.store_id&act=search&cate_id=$child_gcategory.id}">{$child_gcategory.value|escape}</a></li>
+                <!--{/foreach}-->
+          		</ul>
+             </li>
+            <!--{/foreach}-->
+            <!--{if $store.store_gcates}-->
+                   <script type="text/javascript">
+					   $(function(){
+					   		$('.gcategroy .content .list li h3 i').click(function(){
+								var c=$(this).attr('class');
+								if(c == 'expand')
+								{
+									$(this).attr('class','close');
+								}else{
+									$(this).attr('class','expand');
+								}
+								$(this).parent('h3').parent('li').children('.sub_gcate').toggle();
+							})
+							$('.current').parent('.sub_gcate').show();
+					   });
+				   </script>
+                   <!--{/if}-->
+       </ul>
+    </div>
+ </div>
+
+<div class="store-search store-qrcode mb10">
+	<ul class="title border clearfix">
+		<li class="float-left" type="map">{$lang.store_map}</li>
+		<li class="float-left" type="qrcode">{$lang.store_qrcode}</li>
+    </ul>
+	<div class="wrap">
+		<div class="content border" style="padding:0;">
+			<div id="allmap" class="allmap"></div>
+		</div>
+		<div class="content border hidden">
+			<img width="188" src="{$store.qrcode}" />
+		</div>
+	</div>
+</div>
+<!--{if $baidukey.browser}-->
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak={$baidukey.browser}"></script>
+<!--{/if}-->
+<script type="text/javascript">
+$(function(){
+	$(".store-qrcode .title li").hover(function(){
+		$(".store-qrcode").find(".content").hide();
+		$(".store-qrcode").find(".content:eq("+$(this).index()+")").show();
+		
+	});
+	<!--{if $baidukey.browser}-->
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	<!--{if $store.lat}-->
+	var point = new BMap.Point({$store.lng},{$store.lat});
+	<!--{else}-->
+	var point = new BMap.Point(116.400244,39.92556);
+	<!--{/if}-->
+	map.centerAndZoom(point, 15);
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+	map.addControl(new BMap.NavigationControl());// 左上角，添加比例尺   
+	var marker = new BMap.Marker(point);  // 创建标注
+	map.addOverlay(marker);               // 将标注添加到地图中
+	marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+	<!--{/if}-->
+});
+</script>
+<!--{if $store.hot_saleslist or $store.collect_goodslist}-->
+<div class="hotsale border mb10 J_StoreLeftHotsale">
+ 	<h3 class="border-b"><span>{$lang.rank}</span></h3>
+    <div class="content">
+        <ul class="rank-nav">
+            <li class="curr"><a><span>热门销售排行</span></a></li>
+	        <li><a><span>热门收藏排行</span></a></li>
+        </ul>
+        <ul class="rank-c clearfix">
+            <!--{foreach from=$store.hot_saleslist item=h_goods name=fe_saleslist}-->
+            <li {if $smarty.foreach.fe_saleslist.last}style="border:0;"{/if} class="clearfix">
+                <div class="pic border"><a target="_blank" href="{url app=goods&id=$h_goods.goods_id}">
+                    <img width="40" height="40"  src="{$h_goods.default_image}"alt="{$h_goods.goods_name|truncate:20|escape}" title="{$h_goods.goods_name|escape}" /></a>
+                </div>
+		   	    <div class="desc">
+                	<a target="_blank" href="{url app=goods&id=$h_goods.goods_id}">{$h_goods.goods_name|escape}</a>
+                </div>
+		   		<div class="price"><strong>{$h_goods.price}元</strong></div>
+		   		<div class="sale">已售出 <strong>{$h_goods.sales}</strong> 件</div>
+            </li>
+            <!--{/foreach}-->
+       </ul>
+       <ul class="rank-c clearfix" style="display:none;">
+            <!--{foreach from=$store.collect_goodslist item=c_goods name=fe_collectlist}-->
+            <li {if $smarty.foreach.fe_collectlist.last}style="border:0;"{/if} class="clearfix">
+                <div class="pic border"><a target="_blank" href="{url app=goods&id=$c_goods.goods_id}">
+                      <img width="40" height="40"  src="{$c_goods.default_image}" alt="{$c_goods.goods_name|truncate:20|escape}" title="{$c_goods.goods_name|escape}" /></a>
+                </div>
+		   		<div class="desc"><a target="_blank" href="{url app=goods&id=$c_goods.goods_id}">{$c_goods.goods_name|escape}</a></div>
+		   		<div class="price"><strong>{$c_goods.price}元</strong></div>
+		   		<div class="collecter">收藏人气&nbsp;&nbsp;{$c_goods.collects}</div>
+          </li>
+          <!--{/foreach}-->
+      </ul>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('.J_StoreLeftHotsale .rank-nav li').hover(function(){
+		var index= $(this).parent().children("li").index(this);
+		$(this).parent().find('li').removeClass('curr');
+		$(this).parent().find('li:eq('+index+')').addClass('curr');
+		
+		$('.J_StoreLeftHotsale .rank-c').hide();
+		$('.J_StoreLeftHotsale').find('.rank-c:eq('+index+')').show();
+	});
+});
+</script>
+<!--{/if}-->
+
+<!-- {if $smarty.get.app eq "store" and $smarty.get.act eq "index" and $partners} -->
+<div class="partner mb10 border">
+	<h3 class="border-b"><span>{$lang.partner}</span></h3>
+	<div class="content">
+		<ul class="w-full clearfix">
+           <!--{foreach from=$partners item=partner}-->
+           <li><a href="{$partner.link}" target="_blank">{$partner.title|escape}</a></li>
+           <!--{/foreach}-->
+       </ul>
+    </div>
+</div>
+<!-- {/if} -->
+
+<!-- {if $goods_history and $smarty.get.app eq 'goods'} -->
+<div class="goods-history mb10 border">
+	<h3 class="border-b"><span>{$lang.goods_history}</span></h3>
+	<div class="content">
+	 	<ul class="clearfix">
+            <!--{foreach from=$goods_history item=gh_goods}-->
+            <li><a href="{url app=goods&id=$gh_goods.goods_id}"><img src="{$gh_goods.default_image}" alt="{$gh_goods.goods_name|truncate:20|escape}" title="{$gh_goods.goods_name|escape}" /></a></li>
+            <!--{/foreach}-->
+        </ul>
+    </div>
+</div>
+<!-- {/if} -->

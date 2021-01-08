@@ -1,0 +1,29 @@
+{include file=member.header.html}
+<style>body{ background:#E7284A}</style>
+<div id="page-member">
+  <div class="main dcenter">
+    <div>
+      <div><img src="{$site_url}/mobile/static/images/top_header.jpg" width="100%" alt=""></div>
+      <div class="top-title">
+        <div>我的佣金<span>{$my_rank.amount|price}</span>元，当前排名：<span>{$my_rank.rank|default:-}</span></div>
+      </div>
+      <ul class="member-list">
+      	<!--{if $ranks}-->
+      	<!--{foreach from=$ranks item=rank name=fe_rank}-->
+        <li class="clearfix">
+        	<span class="num"><b>{$smarty.foreach.fe_rank.iteration}</b></span><span class="header-pic"><img src="{$rank.logo}" alt=""></span> <span class="nickname">
+          <div>{$rank.real_name}</div>
+          <div class="desc">{$rank.teams|default:0}个伙伴</div>
+          </span><span class="price">{$rank.amount|price}</span>
+          </li>
+        <!--{/foreach}-->  
+        <!--{else}-->
+            <div class="list-empty"> <i class="psmb-icon-font">&#xe65f;</i>
+              <p class="fs12">亲，您暂无排名信息！</p>
+            </div>
+       <!--{/if}-->
+      </ul>
+    </div>
+  </div>
+</div>
+{include file=footer.html}

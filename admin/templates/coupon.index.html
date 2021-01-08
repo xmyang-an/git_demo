@@ -1,0 +1,45 @@
+{include file=header.html}
+<div id="rightTop">
+    <p>{$lang.coupon}</p>
+    <ul class="subnav">
+        <li><span>{$lang.manage}</span></li>
+        <li><a class="btn1" href="index.php?app=coupon&amp;act=add">{$lang.add}</a></li>
+    </ul>
+</div>
+<div id="flexigrid"></div>
+<script type="text/javascript">
+$(function(){
+    $("#flexigrid").flexigrid({
+    	url: 'index.php?app=coupon&act=get_coupon_xml',
+    	colModel : [
+    		{display: '操作', name : 'operation', width : 80, sortable : false, align: 'center', className: 'handle'},
+			{display: '{$lang.coupon_name}', name : 'coupon_name', width : 200, sortable : true, align: 'center'},
+    		{display: '{$lang.coupon_value}', name : 'coupon_value', width :80, sortable : true, align: 'center'},
+			{display: '优惠券数量', name : 'total', width : 80, sortable : true, align: 'left'},
+    		{display: '剩余数量', name : 'surplus', width : 80, sortable : true, align: 'center'},    		
+			{display: '{$lang.time_limit}', name : 'time_limit', width: 150, sortable : true, align : 'center'},  
+			{display: '{$lang.min_amount}', name : 'min_amount', width: 150, sortable : true, align : 'center'} 		
+    		],
+    	title: '优惠券列表'
+    });
+});
+function fg_operate(name, bDiv) {
+	if(name == 'add'){
+		window.location.href = 'index.php?app=brand&act=add';
+		return false;
+	}
+	if($('.trSelected',bDiv).length>0){
+        var itemlist = new Array();
+		$('.trSelected',bDiv).each(function(){
+			itemlist.push($(this).attr('data-id'));
+		});
+		if (name == 'del') {	
+            fg_delete(itemlist,'brand');
+		}
+    } else {
+		parent.layer.alert('没有选择操作项',{icon: 0});
+       return false;
+    }
+}
+</script>
+{include file=footer.html}

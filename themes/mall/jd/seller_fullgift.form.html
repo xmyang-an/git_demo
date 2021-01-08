@@ -1,0 +1,131 @@
+{include file=member.header.html} 
+<script type="text/javascript">
+$(function(){
+	$('#fullgift_form').validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('li');
+            error_td.find('label').hide();
+            error_td.append(error);
+        },
+        success       : function(label){
+            label.remove();
+        },
+		submitHandler:function(form) {
+			if($('input[name="fullgift[amount]"]').val()=='') {
+				alert('{$lang.amount_empty}');
+				$(form).find('input[name="fullgift[amount]"]').focus().addClass('error');
+				return;
+			}
+			if($('input[name="fullgift[selected_ids][]"').length > 10) {
+				$('.J_RecordError').show();
+				return;
+			}
+			if($('input[name="fullgift[selected_ids][]"').length < 1) {
+				$('.J_RecordError').show();
+				return;
+			}
+			else form.submit();
+		},
+        onkeyup: false,
+        rules : {
+			"fullgift[amount]" : {
+				number     : true,
+				min		   : 0.01
+			}
+        },
+        messages : {
+			"fullgift[amount]" : {
+				number     : '{$lang.amount_number_only}',
+				min        : '{$lang.price_ge_0}'
+			}
+        }
+    });	
+});
+</script>
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool clearfix"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="promotool">
+              <div class="bundle bundle-list"> 
+                <!--{if $appAvailable neq 'TRUE'}-->
+                <div class="notice-word">
+                  <p>{$appAvailable.msg}</p>
+                </div>
+                <!--{else}-->
+                <div class="notice-word">
+                  <p class="yellow-big">{$lang.note_for_create}</p>
+                </div>
+                <!--{if !$hasGift && $smarty.get.act eq 'add'}-->
+                <div class="notice-word">
+                  <p>{$lang.note_for_item_empty}</p>
+                </div>
+                <!--{/if}-->
+                <div class="promotool-form fullgift">
+                  <form id="fullgift_form" method="post">
+                    <ul class="form">
+                      <li>
+                        <h3>{$lang.order_full}</h3>
+                      </li>
+                      <li>
+                        <input type="text" name="fullgift[amount]" id="fullgift[amount]" class="input" value="{$fullgift.rules.amount}" />
+                        <span>{$lang.yuan}</span></li>
+                      <li>
+                        <h3>{$lang.give_gift}</h3>
+                      </li>
+                      <li>
+                        <div class="lst-products clearfix">
+                          <div class="th clearfix">
+                            <p class="cell-thumb float-left">{$lang.giftImage}</p>
+                            <p class="cell-title float-left">{$lang.giftTitle}</p>
+                            <p class="cell-price float-left">{$lang.marketPrice}</p>
+                            <p class="cell-action float-left">{$lang.handle}</p>
+                          </div>
+                          <div class="entity">
+                            <ul ectype="goods_list">
+                              <!--{foreach from=$fullgift.rules.items item=goods}-->
+                              <li class="clearfix">
+                                <p class="cell-input">
+                                  <input type="hidden" name="fullgift[selected_ids][]" value="{$goods.goods_id}" />
+                                </p>
+                                <p class="cell-thumb float-left"> <a href="{url app=gift&id=$goods.goods_id}" target="_blank"><img src="{$goods.default_image}" width="50" height="50" /></a> </p>
+                                <p class="cell-title float-left"><a href="{url app=gift&id=$goods.goods_id}" target="_blank">{$goods.goods_name}</a></p>
+                                <p class="J_getPrice cell-price float-left" price="{$goods.price}">{$goods.price}</p>
+                                <p class="cell-action float-left"><a class="J_MealDel" href="javascript:;">{$lang.drop}</a></p>
+                              </li>
+                              <!--{foreachelse}-->
+                              <div class="pt5 pb5 align2 gray-color">{$lang.add_gift_records}</div>
+                              <!--{/foreach}-->
+                            </ul>
+                          </div>
+                          <p> <a href="javascript:;" gs_id="gselector-gift" gs_name="goods_name" gs_callback="gs_callback" gs_title="{$lang.gselector}" gs_width="690"  gs_type="gift" gs_store_id="{$store_id}" ectype="gselector" gs_opacity="0.05" gs_class="simple-blue" name="gselector-gift" id="gselector-gift" class="btn-add-product">{$lang.gselector}</a> </p>
+                          <div class="notice-word mt10 hidden J_RecordError">
+                            <p>{$lang.records_error}</p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <h3>{$lang.launch}</h3>
+                      </li>
+                      <li class="clearfix">
+                        <label class="switch-checkbox-radio inline-block box-align-center J_SwtcherInput {if $fullgift.status || !$fullgift}checked{/if}" for="switcher"><span class="switcher-style block"></span></label>
+                        <input name="status" class="hidden" id="switcher" value="1" type="checkbox" {if $fullgift.status || !$fullgift} checked="checked" {/if}>
+                      </li>
+                      <li>
+                        <input type="submit" value="{$lang.submit}" class="submit" />
+                      </li>
+                    </ul>
+                  </form>
+                </div>
+                <!--{/if}--> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

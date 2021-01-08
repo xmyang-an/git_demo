@@ -1,0 +1,183 @@
+{include file="member.header.html"} 
+<script type="text/javascript">
+$(function(){
+	$('.ratyItem').each(function(){
+		
+		var iconId = $(this).find('.ratyIcon').attr('id');
+		var targetId = $(this).find('.ratyTarget').attr('id');
+		var scoreName = $(this).attr('scoreName');
+		
+		$('#'+iconId).raty({
+			score: 5,
+            target : '#'+targetId,
+			cancel    : false,
+			targetType: 'hint',
+			targetKeep: true,
+			scoreName: scoreName
+       });
+	   
+	});
+	
+	$('.eval-tip li').click(function(){
+		$(this).toggleClass('active');
+		if($(this).attr('class') == 'active'){
+			var value = $(this).find('span').text();
+			$(this).find('input').val(value);
+		}else{
+			$(this).find('input').val('');
+		}
+	})
+	
+	$('.filePicker').each(function(){
+		var rec_id = $(this).attr('rec_id');
+		var obj = '.filePicker-'+rec_id;
+		$(obj).compressUpload({
+			server: REAL_SITE_URL + '/index.php?app=buyer_order&act=uploadEvaluationImages&item_id='+rec_id,
+			pick: obj,
+			crop: false,
+			callback: function(file, response, pick, target) {
+				if(response.done){
+					add_uploadedfile(response.retval);
+				}else{
+					alert(response.msg);
+				}
+			}
+		});
+	})
+	
+	$(document).on('mouseover','*[ectype="J-handle_pic"]',function(){
+		$(this).find('*[ectype="handler"]').show();
+	})
+	
+	$(document).on('mouseout','*[ectype="J-handle_pic"]',function(){
+		$(this).find('*[ectype="handler"]').hide();
+	})
+});
+function add_uploadedfile(file_data)
+{
+    $('#eval_images_'+file_data.item_id).append('<li style="z-index:4" ectype="J-handle_pic" file_id="'+ file_data.file_id +'" file_path="{$site_url}/'+ file_data.file_path +'"><input type="hidden" value="'+ file_data.file_path +'" name="evaluations['+ file_data.item_id +'][eval_file_id][]"/><div class="pic"><img src="{$site_url}/'+ file_data.file_path +'" width="80" height="80" alt="" /><div ectype="handler" class="bg"><p class="operation"><span class="delete" onclick="drop_image('+ file_data.file_id +');" ecm_title="{$lang.drop}"></span></p></div></div></li>');
+}
+function drop_image(file_id)
+{
+    if (confirm(lang.uploadedfile_drop_confirm))
+        {
+            var url = SITE_URL + '/index.php?app=buyer_order&act=drop_image';
+            $.getJSON(url, {'id':file_id}, function(data){
+                if (data.done)
+                {
+                    $('*[file_id="' +file_id + '"]').remove();
+                }
+                else
+                {
+                    alert(data.msg);
+                }
+            });
+        }
+}
+</script>
+<div id="main" class="w-full">
+  <div id="page-buyer-order" class="w auto clearfix">
+    <div class="particular mt10 clearfix">
+      <div class="particular_wrap">
+        <form method="POST">
+          <h2>{$lang.credit_evaluate}</h2>
+          <!--{foreach from=$goods_list item=goods name=fe_goods}-->
+          <div class="evaluate_obj">
+            <dl class="info">
+              <dd>{$lang.store_name}: <a href="{url app=store&id=$order.seller_id}">{$order.seller_name|escape}</a></dd>
+            </dl>
+            <div class="ware_line">
+              <div class="ware">
+                <div class="ware_list">
+                  <div class="ware_pic"><img src="{$goods.goods_image}" width="50" height="50"  /></div>
+                  <div class="ware_text">
+                    <div class="ware_text4"> <a href="{url app=goods&id=$goods.goods_id}">{$goods.goods_name|escape}</a><br />
+                      <span>{$goods.specification|escape}</span> </div>
+                    <div class="ware_text3"> <span>{$lang.quantity}&nbsp;:&nbsp;<strong>{$goods.quantity}</strong></span> <span>{$lang.price}&nbsp;:&nbsp;<strong>{$goods.price|price}</strong></span> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="evaluate_wrap">
+              <div class="my_evaluate">
+                <div class="w-full clearfix">
+                  <div class="fill_in">
+					  <div class="mb10"><span class="mr10">{$lang.my_evaluation}</span> <b>
+                      <label for="g{$goods.rec_id}_op1">
+                        <input id="g{$goods.rec_id}_op1" type="radio" name="evaluations[{$goods.rec_id}][evaluation]" value="3" checked  />
+                        {$lang.evaluation_good}<span>({$lang.increase_credit})</span></label>
+                      </b> <b>
+                      <label for="g{$goods.rec_id}_op2">
+                        <input id="g{$goods.rec_id}_op2" type="radio" name="evaluations[{$goods.rec_id}][evaluation]" value="2" />
+                        {$lang.evaluation_acceptable}<span>({$lang.no_increase_credit})</span></label>
+                      </b> <b>
+                      <label for="g{$goods.rec_id}_op3">
+                        <input id="g{$goods.rec_id}_op3" type="radio" name="evaluations[{$goods.rec_id}][evaluation]" value="1" />
+                        {$lang.evaluation_bad}<span>({$lang.decrease_credit})</span></label>
+                      </b> </div>
+                    <div class="textarea clearfix">
+                      <textarea name="evaluations[{$goods.rec_id}][comment]"></textarea>
+                      <dl>
+                        <dt>{$lang.notice}&nbsp;:&nbsp;</dt>
+                        <dd> {$lang.evaluate_notice} </dd>  
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full clearfix mt10 mb10">
+                	<div class="i-want-show multimage-wrapper">
+                		<div class="upload_btn filePicker filePicker-{$goods.rec_id}" rec_id="{$goods.rec_id}" >
+                             <div class="btn-upload-image open_uploader"><b class="hide">点击晒图</b></div>
+                        </div>
+                        <div class="multimage-piclist clearfix" style="padding:14px 0;margin:0;">
+                          <div class="small_pic">
+                            <ul id="eval_images_{$goods.rec_id}">
+                              <!--{foreach from=$goods.eval_images item=image}-->
+                              <li ectype="J-handle_pic" file_id="{$image.file_id}" file_path="{$site_url}/{$image.file_path}">
+                                <input type="hidden" name="evaluations[{$goods.rec_id}][eval_file_id][]" value="{$image.file_path}">
+                                <div class="pic"> <img src="{$site_url}/{$image.file_path}" width="80" height="80" />
+                                  <div ectype="handler" class="bg">
+                                    <p class="operation"> <span class="delete" onclick="drop_image({$image.file_id});" ecm_title="{$lang.drop}"></span> </p>
+                                  </div>
+                                </div>
+                              </li>
+                              <!--{/foreach}-->
+                            </ul>
+                            <div class="clear"></div>
+                          </div>
+                        </div>
+                    </div>
+                	<!--{if $goods.eval_tips}-->
+					<div class="eval-tip mt20">
+						<h4>{$lang.eval_tip}</h4>
+						<ul class="clearfix">
+							<!--{foreach from=$goods.eval_tips key=key item=tip}-->
+							<li><input type="hidden" name="evaluations[{$goods.rec_id}][tips][]" value=""/> <span>{$tip}</span></li>
+							<!--{/foreach}-->
+						</ul>   
+					</div>
+                    <!--{/if}-->
+				</div>
+                <div style="width:800px;margin:0;" class="fill_in">
+                  <h4>{$lang.store_evaluation}</h4>
+                  <ul class="raty pb10">
+                    <li class="mb10 w-full clearfix ratyItem"  scoreName="evaluations[{$goods.rec_id}][goods_evaluation]"> <span  class="float-left mr10 t">{$lang.goods_evaluation}：</span> <span id="gIcon{$smarty.foreach.fe_goods.iteration}" class="float-left mr10 ratyIcon"></span> <span id="gTarget{$smarty.foreach.fe_goods.iteration}" class="float-left ratyTarget hint"></span> </li>
+                    <li class="mb10 w-full clearfix ratyItem"  scoreName="evaluations[{$goods.rec_id}][service_evaluation]"> <span class="float-left mr10 t">{$lang.service_evaluation}：</span> <span id="svIcon{$smarty.foreach.fe_goods.iteration}" class="float-left mr10 ratyIcon"></span> <span id="svTarget{$smarty.foreach.fe_goods.iteration}" class="float-left ratyTarget  hint"></span> </li>
+                    <li class="mb10 w-full clearfix ratyItem"  scoreName="evaluations[{$goods.rec_id}][shipped_evaluation]"> <span class="float-left mr10 t">{$lang.shipped_evaluation}：</span> <span id="shIcon{$smarty.foreach.fe_goods.iteration}" class="float-left mr10 ratyIcon"></span> <span id="shTarget{$smarty.foreach.fe_goods.iteration}" class="float-left ratyTarget  hint" ></span> </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--{/foreach}-->
+          <div class="evaluate_footer mt10">
+            <input type="submit" value="{$lang.submit}" class="btn1" />
+            <input type="button" onclick="window.close();" value="{$lang.evaluate_later}" class="btn2" />
+          </div>
+          <div class="particular_bottom"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="footer.html"}

@@ -1,0 +1,106 @@
+{include file=member.header.html}
+<div id="main">
+  <div id="page-promotool" class="page-promotool">
+    <div class="seller-growbuy"> 
+      <!--{if $appAvailable neq 'TRUE'}-->
+      <div class="notice-word mt10">
+        <p>{$appAvailable.msg}</p>
+      </div>
+      <!--{else}-->
+     
+      <!--AJAX数据显示区域-->
+      <div class="list clearfix J_InfiniteList">
+        <ul class="infinite-result clearfix hidden">
+        </ul>
+        <div class="infinite-template">
+          <li item_id="{1}" class="item">
+            <h2 class="webkit-box">
+              <p class="name pl10 flex1 fs13">加金额 <span class="price">{2}</span> 可购买以下商品</p>
+              <p class="status mr10 fs13 {3}">{4}</p>
+            </h2>
+            <div class="goods-list">
+              <div class="goods-list-item"> <a class="block webkit-box">
+                <div class="lp mr5"><img src="{1}" class="block" width="60" height="60" /></div>
+                <div class="rp flex1 pr10">
+                  <p class="title fs12"><em class="f60">[{2}]</em> {3}</p>
+                  <dl class="mt10 fs12">
+                    <span>价格：</span><span class="price">{4}</span>
+                  </dl>
+                </div>
+                </a> </div>
+            </div>
+          </li>
+        </div>
+        <div class="infinite-loading hidden"><ins class="vline vleft"></ins><span class="loading clearfix"><i></i><em>加载中...</em></span><ins class="vline vright"></ins></div>
+        <div class="infinite-bottom f99 fs12 hidden"><ins class="vline vleft"></ins>已加载完，别扯喽<ins class="vline vright"></ins></div>
+        <div class="infinite-empty notice-empty hidden"><i>&#xe715;</i>
+          <p>{$lang.no_records}</p>
+        </div>
+      </div>
+      
+      <div class="clearfix">
+      	<p class="fixed-gap"></p>
+      	<a href="{url app=seller_growbuy&act=add}" class="btn-alipay btn-alipay-fixed">添加加价购</a>
+       </div>
+      <!--{/if}--> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('body').on('touchend', '.weui_actions_mask', function(){
+		$.closeActions();
+	});
+	
+	$('.J_InfiniteList').infinite({pageper: 10, params: {$infiniteParams}, callback: function(data, page, target, TEMP){
+			var html = '';
+			$.each(data, function(k, growbuy) {
+				var items = '';
+				var template = TEMP.clone(true);
+				$.each(growbuy.rules.items, function(k1, goods) {
+					items += sprintf(template.find('.goods-list').html(), goods.default_image, growbuy.rules.title, goods.goods_name, price_format(goods.price));
+				});
+				if(items) {
+					template.find('.goods-list').html(items);
+				} else template.find('.goods-list').parent().remove();
+				html += sprintf(template.html(), growbuy.psid, price_format(growbuy.rules.money), growbuy.status == 1 ? 'green' : 'f60', growbuy.status == 1 ? '{$lang.available}' : '{$lang.unavailable}');
+			});
+			if(html) {
+				target.find('.infinite-result').append(html).show();
+				actions(target);
+			}
+		}
+	});
+});
+
+function actions(target)
+{
+	target.find('.item').each(function(index, element) {
+		var o = $(this);
+		var item_id = o.attr('item_id');
+		o.unbind('click');
+		o.click(function(){
+			$.actions({
+				title: "选择操作",
+				actions: [
+				{
+					text: "{$lang.edit}",
+					onClick: function() {
+						$.closeActions();
+						setTimeout(function(){ // 确保点击后关闭弹层，避免返回后弹出还在无法关闭
+							window.location.href = REAL_SITE_URL+"/index.php?app=seller_growbuy&act=edit&id="+item_id;
+						}, 500);
+					}
+				},
+				{
+					text: "{$lang.drop}",
+					onClick: function() {
+						ajaxRequest('GET', REAL_SITE_URL+"/index.php?app=seller_growbuy&act=drop&id="+item_id, null, '', o);
+					}
+				}]
+			});
+		})
+	});
+}
+</script> 
+{include file=footer.html}

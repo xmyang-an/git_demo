@@ -1,0 +1,73 @@
+{include file=member.header.html}
+<div id="main" class="clearfix">
+  <div id="page-promotool" class="page-promotool clearfix"> {include file=member.menu.html}
+    <div id="right"> {include file=member.curlocal.html}
+      <div class="wrapful"> {include file=member.submenu.html}
+        <div class="wrap">
+          <div class="public_select">
+            <div class="promotool">
+              <div class="bundle bundle-list"> 
+                <!--{if $appAvailable neq 'TRUE'}-->
+                <div class="notice-word">
+                  <p>{$appAvailable.msg}</p>
+                </div>
+                <!--{else}-->
+                <div class="notice-word">
+                  <p class="yellow-big">{$lang.note_for_create}</p>
+                </div>
+                <!--{if !$hasGift}-->
+                <div class="notice-word">
+                  <p>{$lang.note_for_item_empty}</p>
+                </div>
+                <!--{/if}-->
+                <div class="promotool-list fullgift">
+                  <div class="lst-meal">
+                    <div class="data-list-item">
+                      <div class="hd traderates-index-col">
+                        <ul class="clearfix">
+                          <li class="col-1"><span class="pl5">{$lang.order_full}</span></li>
+                          <li class="col-2">{$lang.fullgift_itemlist}</li>
+                          <li class="col-3 center">{$lang.status}</li>
+                          <li class="col-4 center">{$lang.handle}</li>
+                        </ul>
+                      </div>
+                      <div class="bd traderates-index-content">
+                        <div class="item-list traderates-index-col"> 
+                          <!--{foreach from=$fullgift_list item=list}-->
+                          
+                          <ul class="clearfix">
+                            <li class="col-1"><span class="pl5 fs14 price f60">{$list.rules.amount|price}</span></li>
+                            <li class="col-2"> 
+                              <!--{foreach from=$list.rules.items item=goods}-->
+                              <p> <a href="{url app=gift&id=$goods.goods_id}" target="_blank"> {$goods.goods_name} 
+                                <!--{if !$goods.if_show}--> 
+                                <span class="f60">[{$lang.invalid}]</span> 
+                                <!--{/if}--> 
+                                </a> </p>
+                              <!--{/foreach}--> 
+                            </li>
+                            <li class="col-3 center">{if $list.status eq 1}{$lang.available}{else}<span class="f60">{$lang.unavailable}</span>{/if}</li>
+                            <li class="col-4 center"> <a href="{url app=seller_fullgift&act=edit&id=$list.psid&ret_page=$page_info.curr_page}">{$lang.edit}</a> <a href="javascript:;" confirm="{$lang.drop_confirm}" class="J_Del" uri="{url app=seller_fullgift&act=drop&id=$list.psid}">{$lang.drop}</a> </li>
+                          </ul>
+                          
+                          <!--{foreachelse}-->
+                          <div class="notice-word mt10">
+                            <p>{$lang.no_records}</p>
+                          </div>
+                          <!--{/foreach}--> 
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt20 clearfix">{include file=member.page.bottom.html}</div>
+                  </div>
+                </div>
+                <!--{/if}--> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file=member.footer.html} 

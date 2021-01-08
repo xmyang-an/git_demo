@@ -1,0 +1,189 @@
+<div {if !$smarty.get.act}style="border-top:2px solid #999999;"{/if} class="statistics clearfix">
+	<div class="clearfix">
+        <div class="rate">
+            <p>
+                <strong>
+                    {$statistics.goods_rate|default:0}
+                </strong>
+                <span>
+                    %
+                </span>
+                <i>
+                    {$lang.good_eval}
+                </i>
+            </p>
+            <em>
+                {$lang.all_user}{$statistics.total_count}{$lang.had_eval}
+            </em>
+        </div>
+        <div class="per-evaluation">
+            <dl class="clearfix">
+                <dt>
+                   {$lang.good_eval}
+                    <em>
+                        ({$statistics.goods_rate|default:0}%)
+                    </em>
+                </dt>
+                <dd>
+                    <b style="width:{$statistics.goods_rate|default:0}%;">
+                    </b>
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>
+                    {$lang.normal_eval}
+                    <em>
+                        ({$statistics.middle_rate|default:0}%)
+                    </em>
+                </dt>
+                <dd>
+                    <b style="width:{$statistics.middle_rate|default:0}%;">
+                    </b>
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>
+                    {$lang.bad_eval}
+                    <em>
+                        ({$statistics.bad_rate|default:0}%)
+                    </em>
+                </dt>
+                <dd>
+                    <b style="width:{$statistics.bad_rate|default:0}%;">
+                    </b>
+                </dd>
+            </dl>
+        </div>
+        <div class="i-want-comment">
+            <span>
+                {$lang.go_to_eval}
+            </span>
+            <p class="mt5">
+                <a href="{url app=buyer_order}">
+                    {$lang.i_want_eval}
+                </a>
+            </p>
+        </div>
+    </div>
+    <p style="margin:10px 0;" class="tips">
+    	<span style="color:#E4393C;">{$lang.buyer_see}：</span>
+        <!-- {foreach from=$eval_tips item=tip} -->
+        <a {if $smarty.get.tip eq $tip.tip}class="active"{/if} href="{url app=goods&act=comments&id=$smarty.get.id&tip=}{$tip.tip|escape:url}#module">{$tip.tip|escape} ({$tip.count})</a>
+        <!--{/foreach}-->
+    </p>
+</div>
+<div class="attr-tabs">
+    <ul class="user-menu">
+        <li {if $smarty.get.eval eq ''}class="active" {/if}>
+            <a style="border-left:1px solid #ddd;" href="{url app=goods&act=comments&id=$goods.goods_id}#module">
+                <span>
+                    {$lang.total}（{$statistics.total_count}）
+                </span>
+            </a>
+        </li>
+        <li {if $smarty.get.eval eq 4}class="active" {/if}>
+            <a href="{url app=goods&act=comments&id=$goods.goods_id&eval=4}#module">
+                <span>
+                    有图（{$statistics.share_count}）
+                </span>
+            </a>
+        </li>
+        <li {if $smarty.get.eval eq 3}class="active" {/if}>
+            <a href="{url app=goods&act=comments&id=$goods.goods_id&eval=3}#module">
+                <span>
+                    {$lang.good_eval}（{$statistics.goods_count}）
+                </span>
+            </a>
+        </li>
+        <li {if $smarty.get.eval eq 2}class="active" {/if}>
+            <a href="{url app=goods&act=comments&id=$goods.goods_id&eval=2}#module">
+                <span>
+                    {$lang.normal_eval}（{$statistics.middle_count}）
+                </span>
+            </a>
+        </li>
+        <li {if $smarty.get.eval eq 1}class="active" {/if}>
+            <a href="{url app=goods&act=comments&id=$goods.goods_id&eval=1}#module">
+                <span>
+                    {$lang.bad_eval}（{$statistics.bad_count}）
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="eval-list">
+    <!-- {foreach from=$goods_comments item=comment name=fe_comment} -->
+    <script type="text/javascript">
+        $(function() {
+            $('#comment_evaluation_{$smarty.foreach.fe_comment.iteration}').raty({
+                readOnly: true,
+                score: '{$comment.goods_evaluation}'
+            });
+        });
+    </script>
+    <div class="list mt10">
+        <div class="user_avatar">
+            <a href="javascrip:;">
+                <img src="{$comment.portrait}" />
+            </a>
+        </div>
+        <dl class="comment-detail">
+            <dt class="clearfix">
+                <a href="javascrip:;" class="name">
+                    {$comment.buyer_name}
+                </a>
+            </dt>
+            <dd>
+                <span>
+                    {$lang.user_eval_val}：
+                </span>
+                <span id="comment_evaluation_{$smarty.foreach.fe_comment.iteration}">
+                </span>
+                <!--{foreach from=$comment.tips item=tip}-->
+                <span style="background:#f5f5f5; color:#888; padding:5px; margin-right:5px;">{$tip|escape}</span>
+                <!--{/foreach}-->
+            </dd>
+            <!--{if $comment.comment}-->
+            <dd>
+                <span class="content">
+                    {$comment.comment|escape|nl2br}
+                </span>
+            </dd>
+            <!--{/if}-->
+            <!--{if $comment.reply_content}-->
+            <dd class="reply w-full clearfix">
+                <span>
+                    {$lang.seller_reply}：
+                </span>
+                <span class="content">
+                    {$comment.reply_content|escape}
+                </span>
+            </dd>
+            <!--{/if}-->
+            <!--{if $comment.share_images}-->
+            <dd class="share">
+            	<div class="image-list clearfix">
+                    <!--{foreach from=$comment.share_images item=image}-->
+                    <img class="J-showBigImage" src="{$image}" width="60" height="60"/>
+                    <!--{/foreach}-->
+                </div>
+                <div class="J-bigImage clearfix">
+                	
+                </div>
+            </dd>
+            <!--{/if}-->
+            <dd class="clearfix sp">
+            	<i>{$comment.evaluation_time|date:complete}</i>
+            	<span>{$comment.specification|escape}</span>
+            </dd>
+        </dl>
+    </div>
+    <!-- {foreachelse} -->
+    <div class="no-access">
+        {$lang.no_records}
+    </div>
+    <!-- {/foreach} -->
+</div>
+{if $goods_comments}{include file=page.bottom.html}{/if}
+
+

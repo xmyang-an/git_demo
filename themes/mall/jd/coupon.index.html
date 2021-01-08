@@ -1,0 +1,60 @@
+{include file=header.html}
+<script type="text/javascript">
+$(function(){
+	$('.GetCoupon').click(function(){
+		var id = $(this).attr('coupon_id');
+		$.getJSON(REAL_SITE_URL+'/index.php?app=coupon_list&act=get_coupon',{'id': id},function(data){
+			if(data.done){
+				layer.alert(data.msg, {icon: 6});
+			}else{
+				layer.alert(data.msg, {icon: 5});
+			}
+		})
+	})
+})
+</script>
+<div id="main" class="w-full">
+	<div class="voucher_center w">
+    	{include file=curlocal.html}
+		<div class="ads" area="ads" widget_type="area">
+        <!--{widgets page=coupon_list area=ads}-->
+        </div>
+        <div class="list w">
+            <ul class="clearfix">
+                <!--{foreach from=$coupons item=coupon}-->
+                <li class="clearfix float-left">
+                    <div class="lp float-left">
+                       <!--{if $coupon.store_id}-->
+                        <a href="{url app=store&id=$coupon.store_id}" target="_blank"><img src="{$coupon.store_logo}" /></a>
+                        <!--{else}-->
+                        <a href="javascript:;"><img src="data/files/mall/settings/default_store_logo.png" /></a>
+                        <!--{/if}-->
+                    </div>
+                    <div class="mp float-left">
+                        <div class="value"><i>&yen;</i><span>{$coupon.coupon_value}</span><em>满{$coupon.min_amount}元可用</em></div>
+                        <div class="type">{if $coupon.store_id gt 0}{$coupon.store_name}店内可用{else}全场通用券{/if}</div>
+                        <div class="count">{if $coupon.total gt 0}<em class="f66 mr5">已抢{$coupon.get}%</em> <span><i style="width:{$coupon.get}%;"></i></span>{/if}</div>
+                    </div>
+                    <div class="rp float-right">
+                    	<div class="wp">
+                            <a href="javascript:;" class="GetCoupon" coupon_id="{$coupon.coupon_id}">
+                                <span class="line"></span>
+                                <em class="text" onclick="couponReceive({$coupon.coupon_id});">立即领取</em>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ins float-right">
+                    	<i class="i1"></i>
+                        <i class="i2"></i>
+                    </div>
+                </li>
+                <!--{/foreach}-->
+            </ul>
+            <!--{if !$coupons}-->
+            <div class="notice-word"><p class="yellow-big">还没有优惠券数据</p></div>
+            <!--{/if}-->
+            <div class="clearfix pb10">{include file = page.bottom.html}</div>
+        </div>
+    </div>
+</div>
+{include file=footer.html} 
